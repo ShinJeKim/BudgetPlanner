@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"> 
+        <beans:property name="order" value="1"/> 
+    </beans:bean>
+    
+ 	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> 
+	    <beans:property name="definitions"> 
+	        <beans:list> 
+	            <beans:value>/WEB-INF/views/tiles.xml</beans:value> 
+	        </beans:list> 
+	    </beans:property> 
+	</beans:bean>
+	
+	  <!-- BeanNameViewResolver : view 와 동일한 이름을 갖는 bean을 view 객체로 사용
+                                custom view 클래스인 UtilFile을 view로 사용해야 하기 때문에 mapping함 -->
+                                      
+    <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+        <beans:property name="order" value="3" />
+    </beans:bean>
+    
+    <!-- FileDownload -->
+    <beans:bean id="downloadView" class="com.apps.common.DownloadView" />
+       
+    <!-- JSon View -->   
+    <beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	
+	<context:component-scan base-package="com.apps" />
+	
+	
+	
+</beans:beans>
