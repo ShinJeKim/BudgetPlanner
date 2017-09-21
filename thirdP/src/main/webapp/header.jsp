@@ -9,14 +9,29 @@
 <style type="text/css">
 .block{
 	width: 100%;
-	height: 60px;
-	background-color: blue;
+	font-size: 0px;
+}
+.select{
+	width: 33.3%;
+	background-color: green;
+	display: inline-block;;
+	height: 60px;	
 }
 </style>
 </head>
 <body>
 	<div class="block">
-		
+		<ul>
+			<li class="select">
+				<input type="radio" name="1">1
+			</li>
+			<li class="select">
+				<input type="radio" name="1">2
+			</li>
+			<li class="select">
+				<input type="radio" name="1">3
+			</li>
+		</ul>
 	</div>
 </body>
 </html>
