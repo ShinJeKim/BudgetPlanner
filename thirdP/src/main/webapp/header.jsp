@@ -10,12 +10,34 @@
 .block{
 	width: 100%;
 	font-size: 0px;
+	text-align: center;
 }
 .select{
 	width: 33.3%;
-	background-color: green;
+	background-color: aqua;
 	display: inline-block;;
 	height: 60px;	
+}
+.linkbox{ 
+	font-size: 14px;
+	width: 100%;
+	background-color: yellow;
+	display: table;
+	height: 100%;
+}
+.linkbox>a{
+	display: table-cell;
+	vertical-align: middle;
+}
+.radio:checked+ .linkbox{
+	background-color: aqua;
+	box-shadow: inset 0 0 10px blue;
+}
+.radio:checked~ a{
+	color: red;
+}
+.radio{
+	display: none;
 }
 </style>
 </head>
@@ -23,13 +45,22 @@
 	<div class="block">
 		<ul>
 			<li class="select">
-				<input type="radio" name="1">1
+				
+				<input class="radio" type="radio" name="1" id="1" checked="checked">
+				<label class="linkbox" for="1"><a href="#">1</a></label>
+				
 			</li>
 			<li class="select">
-				<input type="radio" name="1">2
+				<label class="linkbox">
+				<input class="radio" type="radio" name="1">
+				<a href="#">2</a>
+				</label>
 			</li>
 			<li class="select">
-				<input type="radio" name="1">3
+				<label class="linkbox">
+				<input class="radio" type="radio" name="1">
+				<a href="#">3</a>
+				</label>
 			</li>
 		</ul>
 	</div>
