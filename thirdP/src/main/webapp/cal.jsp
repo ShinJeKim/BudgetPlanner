@@ -66,8 +66,7 @@ $(document).ready(function(){
 	calendar += "<th>월</th>";
 	calendar += "<th>화</th>";
 	calendar += "<th>수</th>";
-	calendar += "<th>목</th>";
-	calendar += "<th>금</th>";
+	calendar += "<th>목</th>";	calendar += "<th>금</th>";
 	calendar += "<th>토</th>";
 	calendar += "</tr>";
 	
