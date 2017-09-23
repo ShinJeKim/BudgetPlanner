@@ -13,5 +13,7 @@
 		    <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
 	
-	
+	<definition name="head" template="/WEB-INF/views/template/head.jsp">
+		
+	</definition>
 </tiles-definitions>

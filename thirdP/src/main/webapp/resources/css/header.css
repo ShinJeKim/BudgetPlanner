@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+.block{
+	width: 100%;
+	font-size: 0px;
+	text-align: center;
+}
+.menu{
+	width: 33.3%;
+	display: inline-block;;
+	height: 60px;	
+}
+.menu-label{ 
+	font-size: 14px;
+	width: 100%;
+	background-color: aqua;
+	display: table;
+	height: 100%;
+}
+.menu-label>a{
+	display: table-cell;
+	vertical-align: middle;
+}
+.selector:checked+ .menu-label{
+	background-color: aqua;
+	box-shadow: inset 0 0 10px blue;
+}
+.selector:checked~ a{
+	color: red;
+}
+.selector{
+	display: none;
+}
