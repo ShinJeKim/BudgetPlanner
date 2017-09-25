@@ -11,6 +11,7 @@
 		<div>
 			ID <input type="text" placeholder="ID" required autofocus
 				name="id" id="id" maxlength="15"/>
+				수정
 		</div>
 	</div>
 </body>
