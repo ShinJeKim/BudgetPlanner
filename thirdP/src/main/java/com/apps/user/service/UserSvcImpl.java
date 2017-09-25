@@ -101,11 +101,20 @@ public class UserSvcImpl implements UserSvc {
 
 	@Override
 	public int do_check_passwd(DTO dto) {
-		log.debug("2============do_update=============");
+		log.debug("2=========do_check_passwd==========");
 		log.debug(dto.toString());
 		log.debug("2==================================");
 		
 		return userDao.do_check_passwd(dto);
+	}
+
+	@Override
+	public DTO do_login(DTO dto) {
+		log.debug("2============do_login=============");
+		log.debug(dto.toString());
+		log.debug("2==================================");
+		
+		return userDao.do_login(dto);
 	}
 
 }

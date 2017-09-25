@@ -40,6 +40,8 @@ public class UserDaoImpl implements UserDao {
 	//Mappers의 user.xml의 namespace 설정
 	private final String namespace = "com.sist.repository.mappers.user";
 	
+	int flag = 0;
+	
 	//Default constructor
 	public UserDaoImpl() {
 		
@@ -157,7 +159,6 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public int do_delete(DTO dto) {
-		int flag = 0;
 		
 		String statement = namespace + ".do_delete";
 		UserVO inUserVO = (UserVO)dto;
@@ -205,7 +206,9 @@ public class UserDaoImpl implements UserDao {
 		log.debug("userID : "+userID); 
 		log.debug("******************************************");
 		
-		return sqlSession.update(statement, userID);
+		flag = sqlSession.selectOne(statement, userID);
+		
+		return flag;
 	}
 
 	@Override
@@ -219,7 +222,56 @@ public class UserDaoImpl implements UserDao {
 		log.debug("inUserVO.toString() : "+inUserVO.toString()); 
 		log.debug("******************************************");
 		
-		return sqlSession.update(statement, inUserVO);
+		flag = sqlSession.selectOne(statement, inUserVO);
+		
+		return flag;
+	}
+
+	@Override
+	public DTO do_login(DTO dto) {
+		
+		String statement = namespace + ".do_login";
+		
+		UserVO userVO = new UserVO();
+		
+		//Param
+		UserVO param = (UserVO)dto;
+		Hashtable<String, String> message = new Hashtable<String, String>();
+		
+		//Id Check
+		int idFlag = do_check_id(param.getId());
+		
+		//////////////////////////////////////////////////////
+		//id check failed
+		//////////////////////////////////////////////////////
+		if(idFlag == 0) {
+			message.put("message", "ID를 확인 하세요.");
+			message.put("message_div", "LOGIN.ID");
+			userVO.setParam(message);
+			log.debug("ID CHECK : "+userVO.getParam());
+			return userVO;
+		}
+		
+		//Password Check
+		int passwordFlag = do_check_passwd(param);
+		
+		//////////////////////////////////////////////////////
+		//password check failed
+		//////////////////////////////////////////////////////
+		if(passwordFlag == 0) {
+			message.put("message", "비밀번호를 확인하세요.");
+			message.put("message_div", "LOGIN.PASSWORD");
+			userVO.setParam(message);
+			log.debug("PW CHECK : "+userVO.getParam());
+			return userVO;
+		}
+		
+		log.debug("****************do_update*****************");
+		log.debug("statement : "+statement);
+		log.debug("inUserVO.toString() : "+param.toString()); 
+		log.debug("******************************************");
+		
+		return sqlSession.selectOne(statement, param);
 	}
 
 }

@@ -116,4 +116,23 @@
  			WHERE ID = #{id}
  			AND   PASSWORD = #{password}
  	</select>
+ 	
+ 	<select id="do_login"
+ 			parameterType="UserVO"
+ 			resultType="UserVO">
+ 			SELECT ID,
+			       PASSWORD,
+			       NAME,
+			       EMAIL,
+			       FIXED_INCOME,
+			       BALANCE,
+			       TO_CHAR(REG_DT, 'YYYY-MM-DD') AS REG_DT,
+			       TO_CHAR(MOD_DT, 'YYYY-MM-DD') AS MOD_DT,
+			       DELETE_FLAG,
+			       ADMIN_FLAG
+			FROM   USERS
+			WHERE  ID = #{id}
+			  AND  PASSWORD = #{password}
+ 			
+ 	</select>
  </mapper>

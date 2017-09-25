@@ -89,4 +89,12 @@ public interface UserSvc {
 	 * @return int
 	 */
 	public int do_check_passwd(DTO dto);
+	
+	/**
+	 * login 수행
+	 * 사용자 정보를 객체로 가져옴
+	 * @param dto
+	 * @return
+	 */
+	public DTO do_login(DTO dto);
 }
