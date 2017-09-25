@@ -27,6 +27,22 @@
 	
 	
 	<dependencies>
+		
+		<!-- xml debug 프로젝트 완료하면 지우기 -->
+		<!-- https://mvnrepository.com/artifact/org.lazyluke/log4jdbc-remix -->
+		<dependency>
+		    <groupId>org.lazyluke</groupId>
+		    <artifactId>log4jdbc-remix</artifactId>
+		    <version>0.2.7</version>
+		</dependency>
+		
+		 <!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
+		<dependency>
+		    <groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+	
 		  <!-- MyBatis -->
 	     <dependency>
 	         <groupId>org.mybatis</groupId>
