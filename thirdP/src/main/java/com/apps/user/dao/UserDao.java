@@ -1,5 +1,6 @@
 package com.apps.user.dao;
 
+import com.apps.common.DTO;
 import com.apps.common.WorkDiv;
 
 /**
@@ -11,4 +12,7 @@ import com.apps.common.WorkDiv;
 
 public interface UserDao extends WorkDiv {
 
+	public DTO do_selectOne(DTO dto);
+	public int do_check_id(String id);
+	public int do_check_passwd(DTO dto);
 }

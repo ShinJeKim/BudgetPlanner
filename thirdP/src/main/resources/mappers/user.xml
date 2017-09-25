@@ -4,83 +4,116 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.sist.repository.mappers.user">
  	
- 	<!-- 
- 		메인기능
- 		: 유저등록, 유저정보조회, 유저정보 수정, 유저삭제, 유저목록조회
- 	 -->
-	 	<!-- 유저정보조회  -->
-		 	<select id="do_searchOne" parameterType="String" resultType="UserVO">
-		 		
-		 		SELECT * FROM users WHERE id = #{id}
-		 	
-		 	</select>
-			
-			<!-- 유저등록  -->
-			<insert id="do_save" parameterType="UserVO">
-			
-				INSERT INTO 
-					users(id,name,password,mail,reg_date)
-					VALUES(#{id},#{name},#{password},#{mail},SYSDATE)
-			
-			</insert>
-		
-		<!-- 유저정보 수정  -->
-			<update id="do_update" parameterType="UserVO">
-			
-				UPDATE users 
-				SET		 name = #{name}				
-						,password  = #{password}	
-						,mail = #{mail}	 			
-				WHERE id = #{id}			
-			
-			</update>
-		
-		<!-- 유저목록 조회 -->
-			<select id="do_search" parameterType="UserVO" resultType="UserVO">
-				SELECT tt1.no,tt1.id, tt1.name,tt1.u_level,tt1.login,tt1.mail ,tt1.total_cnt	
-						FROM (SELECT t1.*, ROWNUM as no			  								
-			       			  FROM (SELECT COUNT(*)over() AS total_cnt								
-					  	  				  ,t0.* FROM users t0 ORDER BY reg_date ASC)t1						
-				<where>
-					<choose>
-						<when test="SDiv == 'All'">
-							AND ((id LIKE '%'||#{SWord}||'%') OR (name LIKE '%'||#{SWord}||'%') OR (u_level LIKE '%'||#{SWord}||'%'))
-						</when>
-						<when test="SDiv == 'id'" >
-							AND id LIKE '%'||#{SWord}||'%'
-						</when>
-						<when test="SDiv == 'name'" >
-							AND name LIKE '%'||#{SWord}||'%'
-						</when>
-						<when test="SDiv == 'level'" >
-							AND u_level LIKE '%'||#{SWord}||'%'
-						</when>
-					</choose>
-				</where>
-				)tt1
-				WHERE tt1.no BETWEEN #{start_NO} and #{end_NO}
-			</select>
-	
-	<!-- 
-		
-		테스트용 기능
-		: 전체삭제, 전체조회
-	 -->
-		<!-- 전체조회  -->
-			<select id="do_searchAll" parameterType="UserVO" resultType="UserVO">
-				
-				select tt1.no,tt1.id, tt1.name,tt1.u_level,tt1.login,tt1.mail ,tt1.t_cnt	
-						from (select t1.*, ROWNUM as no			  								
-			       			  from (select COUNT(*)over() as t_cnt								
-					  	  				  ,t0.* from users t0 order by REG_DATE asc)t1			
-				       	where 1=1)tt1			  		                                                      
-		
-			</select>
-	
-		<!-- 전체삭제  -->
-			<delete id="do_deleteAll">
-			
-				DELETE FROM users
-			
-			</delete>
+ 	<sql id="userSearchCondition">
+		<where>                                           
+				<choose>
+					<when test="searchDiv == '10'">
+						AND A.ID LIKE '%' || #{searchWord} || '%'
+					</when>
+					<when test="searchDiv == '20'">
+						AND A.NAME LIKE '%' || #{searchWord} || '%'
+					</when>
+					<when test="searchDiv == '30'">
+						AND A.U_LEVEL LIKE '%' || #{searchWord} || '%'
+					</when>
+					<otherwise>
+					
+					</otherwise>
+				</choose>
+		</where>
+	</sql>
+ 	
+ 	<!-- 전체조회 -->
+ 	<select id="do_search"
+ 			parameterType="String"
+ 			resultType="UserVO">
+ 			SELECT T1.ID,
+			       T1.PASSWORD,
+			       T1.NAME,
+			       T1.EMAIL,
+			       T1.FIXED_INCOME,
+			       T1.BALANCE,
+			       TO_CHAR(T1.REG_DT, 'YYYY-MM-DD') AS REG_DT,
+			       TO_CHAR(T1.MOD_DT, 'YYYY-MM-DD') AS MOD_DT,
+			       T1.DELETE_FLAG,
+			       T1.ADMIN_FLAG,
+			       T1.NO,
+			       T1.TOTAL_CNT
+			FROM ( SELECT A.*,
+			       ROW_NUMBER() OVER(ORDER BY A.REG_DT DESC) AS NO,
+			       COUNT(*) OVER() AS TOTAL_CNT
+			       FROM USERS A
+ 				   <include refid="userSearchCondition" />
+ 			<![CDATA[
+				   ORDER BY REG_DT DESC
+				  ) T1                                                       
+			WHERE NO BETWEEN (#{page_size} * (#{page_num}-1)+1) AND (#{page_size} * (#{page_num}-1)+#{page_size}) 
+			]]>
+ 	</select>
+ 	
+ 	<!-- 단건조회 -->
+ 	<select id="do_selectOne"
+ 			parameterType="UserVO"
+ 			resultType="UserVO">
+			SELECT ID,
+			       PASSWORD,
+			       NAME,
+			       EMAIL,
+			       FIXED_INCOME,
+			       BALANCE,
+			       REG_DT,
+			       MOD_DT,
+			       DELETE_FLAG,
+			       ADMIN_FLAG,
+			       1 NO,
+			       1 TOTAL_CNT
+			FROM USERS
+			WHERE ID = #{id}
+ 	</select>
+ 	
+ 	<!-- 저장 -->
+ 	<update id="do_save"
+ 			parameterType="UserVO">
+ 			INSERT INTO USERS (ID, PASSWORD, NAME, EMAIL, FIXED_INCOME, BALANCE, REG_DT, MOD_DT, DELETE_FLAG, ADMIN_FLAG)
+			VALUES (#{id}, #{password}, #{name}, #{email}, #{fixed_income}, #{balance}, SYSDATE, null, 0, 0);
+ 	</update>
+ 	
+ 	<!-- 업데이트 -->
+ 	<update id="do_update"
+ 			parameterType="UserVO">
+ 			UPDATE USERS
+			   SET PASSWORD     = #{password},
+			       NAME         = #{name},
+			       EMAIL        = #{email},
+			       FIXED_INCOME = #{fixed_income},
+			       BALANCE      = #{balance},
+			       MOD_DT       = SYSDATE,
+			       DELETE_FLAG  = #{delete_flag},
+			       ADMIN_FLAG   = #{admin_flag}
+			WHERE  ID = #{id}
+ 	</update>
+ 	
+ 	<!-- 삭제 -->
+ 	<delete id="do_delete"
+ 			parameterType="UserVO">
+ 			DELETE FROM USERS WHERE ID = #{id}		
+ 	</delete>
+ 	
+ 	<!-- ID 체크 -->
+ 	<select id="do_check_id"
+ 			parameterType="String"
+ 			resultType="int">
+ 			SELECT COUNT(*) AS CNT
+ 			FROM USERS
+ 			WHERE ID = #{id}
+ 	</select>
+ 	
+ 	<select id="do_check_passwd"
+ 			parameterType="UserVO"
+ 			resultType="int">
+ 			SELECT COUNT(*) AS CNT
+ 			FROM USERS
+ 			WHERE ID = #{id}
+ 			AND   PASSWORD = #{password}
+ 	</select>
  </mapper>

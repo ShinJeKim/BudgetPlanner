@@ -3,5 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- TypeAliases -->
+	<typeAliases>
+		<!-- UserVO typeAliases -->
+		<typeAlias type="com.apps.user.domain.UserVO" alias="UserVO"/>
+	</typeAliases>
 	
 </configuration>
