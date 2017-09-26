@@ -9,7 +9,7 @@ import com.apps.common.WorkDiv;
 public interface CategoryDao extends WorkDiv{
 
 	/**
-	 * 단건조회
+	 * 단건 조회
 	 * @param dto
 	 * @return
 	 */
