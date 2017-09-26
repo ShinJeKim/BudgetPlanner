@@ -49,9 +49,6 @@
 <body>
 	<form id="loginFrm" name="loginFrm" action="do_login.do">
 		<div>
-			ID <input type="text" placeholder="ID" required autofocus
-				name="id" id="id" maxlength="15"/>
-				수정
 			<div>
 				ID <input type="text" placeholder="ID" required autofocus
 					name="id" id="id" maxlength="15" />
