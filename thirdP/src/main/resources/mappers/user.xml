@@ -75,7 +75,7 @@
  	<update id="do_save"
  			parameterType="UserVO">
  			INSERT INTO USERS (ID, PASSWORD, NAME, EMAIL, FIXED_INCOME, BALANCE, REG_DT, MOD_DT, DELETE_FLAG, ADMIN_FLAG)
-			VALUES (#{id}, #{password}, #{name}, #{email}, #{fixed_income}, #{balance}, SYSDATE, null, 0, 0);
+			VALUES (#{id}, #{password}, #{name}, #{email}, #{fixed_income}, #{balance}, SYSDATE, null, 0, 0)
  	</update>
  	
  	<!-- 업데이트 -->
