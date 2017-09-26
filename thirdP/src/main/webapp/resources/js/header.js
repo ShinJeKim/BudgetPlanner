@@ -1,7 +1,7 @@
 
-$(document).ready(function(){
+(function($){
 		$("#daily").attr('checked', true) ;
 	
-});
+})(jQuery);
 
 	 

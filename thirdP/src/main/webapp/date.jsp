@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="/apps/resources/js/jquery-3.2.1.min.js"></script>
-<script src="/apps/resources/js/date.js"></script>
+
 <script>
 	(function($){
 	$.fn.dpicker = function(){
@@ -211,7 +211,7 @@ function dati(y,m,d){
 	}
 	
 	if($(this).attr('id') == 'ping'){
-	  	return datepicker.monthly(y,m);
+	  	return dati(y,m);
 	}
 
 };
