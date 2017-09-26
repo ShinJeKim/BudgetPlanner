@@ -233,6 +233,7 @@ public class UserDaoImpl implements UserDao {
 		String statement = namespace + ".do_login";
 		
 		UserVO userVO = new UserVO();
+		UserVO outVO = new UserVO();
 		
 		//Param
 		UserVO param = (UserVO)dto;
@@ -271,7 +272,12 @@ public class UserDaoImpl implements UserDao {
 		log.debug("inUserVO.toString() : "+param.toString()); 
 		log.debug("******************************************");
 		
-		return sqlSession.selectOne(statement, param);
+		outVO = sqlSession.selectOne(statement, param);
+		
+		message.put("message", "정상 로그인 되었습니다.");
+		message.put("message_div", "LOGIN.SUCCESS");
+		
+		return outVO;
 	}
 
 }
