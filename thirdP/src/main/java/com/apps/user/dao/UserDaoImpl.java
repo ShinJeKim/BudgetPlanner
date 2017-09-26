@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Hashtable;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -208,6 +209,8 @@ public class UserDaoImpl implements UserDao {
 		
 		flag = sqlSession.selectOne(statement, userID);
 		
+		log.debug("flag : "+flag);
+		
 		return flag;
 	}
 
@@ -232,52 +235,26 @@ public class UserDaoImpl implements UserDao {
 		
 		String statement = namespace + ".do_login";
 		
-		UserVO userVO = new UserVO();
+		UserVO userVO = (UserVO)dto;
 		UserVO outVO = new UserVO();
 		
-		//Param
-		UserVO param = (UserVO)dto;
-		Hashtable<String, String> message = new Hashtable<String, String>();
-		
 		//Id Check
-		int idFlag = do_check_id(param.getId());
-		
-		//////////////////////////////////////////////////////
-		//id check failed
-		//////////////////////////////////////////////////////
-		if(idFlag == 0) {
-			message.put("message", "ID를 확인 하세요.");
-			message.put("message_div", "LOGIN.ID");
-			userVO.setParam(message);
-			log.debug("ID CHECK : "+userVO.getParam());
-			return userVO;
-		}
-		
-		//Password Check
-		int passwordFlag = do_check_passwd(param);
-		
-		//////////////////////////////////////////////////////
-		//password check failed
-		//////////////////////////////////////////////////////
-		if(passwordFlag == 0) {
-			message.put("message", "비밀번호를 확인하세요.");
-			message.put("message_div", "LOGIN.PASSWORD");
-			userVO.setParam(message);
-			log.debug("PW CHECK : "+userVO.getParam());
-			return userVO;
-		}
+		int idFlag = do_check_id(userVO.getId());
 		
 		log.debug("****************do_update*****************");
 		log.debug("statement : "+statement);
-		log.debug("inUserVO.toString() : "+param.toString()); 
+		log.debug("inUserVO.toString() : "+userVO.toString()); 
 		log.debug("******************************************");
 		
-		outVO = sqlSession.selectOne(statement, param);
-		
-		message.put("message", "정상 로그인 되었습니다.");
-		message.put("message_div", "LOGIN.SUCCESS");
+		outVO = sqlSession.selectOne(statement, userVO);
 		
 		return outVO;
+	}
+
+	@Override
+	public void do_logout(HttpSession session) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

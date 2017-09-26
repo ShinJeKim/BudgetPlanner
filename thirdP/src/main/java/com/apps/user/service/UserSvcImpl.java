@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,6 +116,14 @@ public class UserSvcImpl implements UserSvc {
 		log.debug("2==================================");
 		
 		return userDao.do_login(dto);
+	}
+
+	@Override
+	public void do_logout(HttpSession session) {
+		log.debug("2============do_logout=============");
+		log.debug("");
+		log.debug("2==================================");
+		session.invalidate();
 	}
 
 }

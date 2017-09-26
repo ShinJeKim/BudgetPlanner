@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.dao.DataAccessException;
 
@@ -97,4 +98,10 @@ public interface UserSvc {
 	 * @return
 	 */
 	public DTO do_login(DTO dto);
+	
+	/**
+	 * 로그아웃
+	 * @param session
+	 */
+	public void do_logout(HttpSession session);
 }
