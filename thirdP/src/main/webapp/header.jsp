@@ -17,7 +17,7 @@
 		 type	: 'ymd',
 		 lang	: 'ko'
 	 });
-	
+	$('#daily').attr('checked', true);
  });
 </script>
 </head>
@@ -28,17 +28,17 @@
 		<div class="block">
 			<ul>
 				<li class="menu">
-					<input class="selector" type="radio" name="menu" id="daily">
+					<input class="sub_selector" type="radio" name="menu" id="daily">
 					<label class="menu-label" for="daily"><a href="/apps/header.jsp">일별</a></label>
 					
 					
 				</li>
 				<li class="menu">
-					<input class="selector" type="radio" name="menu"  id="monthly">
+					<input class="sub_selector" type="radio" name="menu"  id="monthly">
 					<label class="menu-label" for="monthly"><a href="monthly.jsp">월별</a></label>
 				</li>
 				<li class="menu">
-					<input class="selector" type="radio" name="menu" id="category">
+					<input class="sub_selector" type="radio" name="menu" id="category">
 					<label class="menu-label" for="category"><a href="??">카테고리</a></label>
 				</li>
 			</ul>

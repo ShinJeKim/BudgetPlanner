@@ -28,9 +28,10 @@
 	display: table-cell;
 	vertical-align: middle;
 }
-.selector:checked~ a{
+.sub_selector:checked+.menu-label>a{
 	color: red;
+	background-color: yellow;
 }
-.selector{
+.sub_selector{
 	display: none;
 }
