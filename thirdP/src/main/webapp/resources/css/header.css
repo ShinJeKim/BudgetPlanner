@@ -1,14 +1,21 @@
 @CHARSET "UTF-8";
 
-.block{
+.header{
 	width: 100%;
 	font-size: 0px;
 	text-align: center;
+	background-color: aqua;
 }
+#date {
+ 	width: 20%;
+    height: 60px;
+}
+
 .menu{
 	width: 33.3%;
 	display: inline-block;;
 	height: 60px;	
+	background-color: aqua;
 }
 .menu-label{ 
 	font-size: 14px;
@@ -20,10 +27,6 @@
 .menu-label>a{
 	display: table-cell;
 	vertical-align: middle;
-}
-.selector:checked+ .menu-label{
-	background-color: aqua;
-	box-shadow: inset 0 0 10px blue;
 }
 .selector:checked~ a{
 	color: red;
