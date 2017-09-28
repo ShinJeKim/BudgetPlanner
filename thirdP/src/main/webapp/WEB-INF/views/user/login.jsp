@@ -49,6 +49,9 @@
 <body>
 	<form id="loginFrm" name="loginFrm" action="do_login.do">
 		<div>
+<body>
+	<form id="loginFrm" name="loginFrm" method="post" action="do_login.do">
+		<div>
 			<div>
 				ID <input type="text" placeholder="ID" required autofocus
 					name="id" id="id" maxlength="15" />
