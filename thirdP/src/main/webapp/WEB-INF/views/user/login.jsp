@@ -47,7 +47,7 @@
 </script>
 </head>
 <body>
-	<form id="loginFrm" name="loginFrm" action="do_login.do">
+	<form id="loginFrm" name="loginFrm" method="post" action="do_login.do">
 		<div>
 			<div>
 				ID <input type="text" placeholder="ID" required autofocus
