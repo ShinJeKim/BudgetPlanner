@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <title>:::: Login ::::</title>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -48,9 +48,6 @@
 </head>
 <body>
 	<form id="loginFrm" name="loginFrm" action="do_login.do">
-		<div>
-<body>
-	<form id="loginFrm" name="loginFrm" method="post" action="do_login.do">
 		<div>
 			<div>
 				ID <input type="text" placeholder="ID" required autofocus
