@@ -25,6 +25,7 @@ public class CategoryController {
 	@Autowired
 	CategorySvc catSvc;
 
+	
 	@RequestMapping(value = "items/category.do")
 	public ModelAndView do_searchOne(HttpServletRequest req) {
 
