@@ -2,6 +2,7 @@ package com.apps.user;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -61,14 +62,14 @@ public class UserTest {
 	 *  ADMIN_FLAG		NUMBER(1,0)
 	 */
 	
-	//@Test
+	@Test
 	public void do_check_id() throws Exception{
 		MockHttpServletRequestBuilder createMessage = 
 				post("/user/do_check_id.do")
 				.param("id", "Testcase");
 		
 		mockMvc.perform(createMessage).andDo(print())
-		.andExpect(status().is(0));
+		.andExpect(status().is2xxSuccessful());
 	}
 	
 	@Test
@@ -87,5 +88,15 @@ public class UserTest {
 		
 	}
 	
-	
+	@Test
+	public void do_login() throws Exception{
+		MockHttpServletRequestBuilder createMessage = 
+				post("/user/do_login.do")
+				.param("id", "test")
+				.param("password", "1234");
+		
+		mockMvc.perform(createMessage).andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(model().attribute("message", "success"));
+	}
 }

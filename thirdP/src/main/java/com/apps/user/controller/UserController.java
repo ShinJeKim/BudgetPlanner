@@ -66,7 +66,7 @@ public class UserController {
 		return flag+"";
 	}
 	
-	@RequestMapping(value="user/do_login.do")
+	@RequestMapping(value="user/do_login.do", method=RequestMethod.POST)
 	public ModelAndView do_login(HttpServletRequest request) {
 		
 		log.debug("1======================================");
