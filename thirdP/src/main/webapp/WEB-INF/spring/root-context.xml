@@ -5,17 +5,27 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-    <bean id="dataSource" 
+    <bean id="dataSourceSpied" 
         class="org.apache.commons.dbcp.BasicDataSource"  
         destroy-method="close"
         p:driverClassName="oracle.jdbc.driver.OracleDriver"
         p:url="jdbc:oracle:thin:@211.238.142.156:1521:orcl"
-        p:username="ssb90225"
-        p:password="sist"
+        p:username="thirdP"
+        p:password="1234"
         p:maxActive="10"
         p:maxIdle="5"
         p:maxWait="-1" 
     />
+    
+    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+    <constructor-arg ref="dataSourceSpied" />
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE" />
+                <property name="sqlPrefix" value="SQL]         :  "/>
+            </bean>  
+        </property>
+    </bean> 
     
     <!-- SqlSessionFactoryBean 생성 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
