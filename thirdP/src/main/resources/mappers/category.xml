@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sist.repository.mappers.user">
+<mapper namespace="com.sist.repository.mappers.category">
 
 	<!-- 메인기능 : 유저등록, 유저정보조회, 유저정보 수정, 유저삭제, 유저목록조회 -->
 	<!-- 유저정보조회 -->
