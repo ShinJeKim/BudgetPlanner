@@ -28,7 +28,7 @@ public class CategoryController {
 	
 	@RequestMapping(value = "items/category.do")
 	public ModelAndView do_searchOne(HttpServletRequest req) {
-
+		log.debug("=================================");
 		CategoryVO catVO = new CategoryVO();
 		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 

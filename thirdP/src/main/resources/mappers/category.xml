@@ -5,8 +5,16 @@
 <mapper namespace="com.sist.repository.mappers.category">
 
 	<!-- 메인기능 : 유저등록, 유저정보조회, 유저정보 수정, 유저삭제, 유저목록조회 -->
-	<!-- 유저정보조회 -->
-	<select id="do_searchOne" parameterType="String" resultType="UserVO">
+	
+	<!-- 하위 카테고리 목록 조회 -->
+	<select id="do_searchCategory" parameterType="String" resultType="String">
+		SELECT DTL_CT_NM
+		  FROM CATEGORY 
+		WHERE MST_CT_ID = #{mst_ct_id}
+	</select>
+	
+	<!--  -->
+	<select id="do_searchOne" parameterType="String" resultType="CategoryVO">
 
 		SELECT T1.*
         FROM(
@@ -36,5 +44,32 @@
 				]]><!-- CDATA: 특수문자를 문자열로 인식 -->  
 	</select>
 
-
+	<!-- 유저목록 조회 -->
+	<select id="do_search" parameterType="String" resultType="CategoryVO">
+		SELECT T1.*
+        FROM(
+                  SELECT ROW_NUMBER() OVER(ORDER BY F.REG_DT DESC) AS RNUM, 
+	                            F.ID,
+	                            F.DAILY_CODE,
+	                            F.USAGE,
+	                            C.MST_CT_NM,
+	                            C.DTL_CT_NM,
+	                            F.CONTENT,
+	                            F.REG_DT,
+	                            F.MOD_DT,
+	                            COUNT(*) OVER() AS TOTAL_CNT
+	                     FROM 
+	                            FINANCE F,
+	                            CATEGORY C
+	                  WHERE F.MST_CT_ID = C.MST_CT_ID
+	                      AND F.DTL_CT_ID = C.DTL_CT_ID
+	                      AND (F.REG_DT BETWEEN #{start_date} AND #{end_date})
+	                      AND ID=#{id}
+                )T1
+            <![CDATA[    
+			WHERE T1.RNUM BETWEEN (#{page_size}*(#{page_num}-1)+1)
+			                    AND (#{page_size}*(#{page_num}-1)+#{page_size})
+				]]><!-- CDATA: 특수문자를 문자열로 인식 -->  
+	</select>
+	
 </mapper>

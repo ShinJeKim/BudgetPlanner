@@ -7,6 +7,9 @@
 	<typeAliases>
 		<!-- UserVO typeAliases -->
 		<typeAlias type="com.apps.user.domain.UserVO" alias="UserVO"/>
+		
+		<!-- CategoryVO typeAliases -->
+		<typeAlias type="com.apps.category.domain.CategoryVO" alias="CategoryVO"/>
 	</typeAliases>
 	
 </configuration>

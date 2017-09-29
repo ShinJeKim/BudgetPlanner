@@ -6,15 +6,18 @@
 	//for default element
 	String page_num = "1";
 	String page_size = "10";
-	String search_word = "";
-	String search_div = "";
 	int totalCnt = 0;
+	String mst_ct_id = "";
+	String dtl_ct_id = "";
+	String start_date = "";
+	String end_date = "";
+	String id = "";
 	
 	//initializing default element
 	page_num = StringUtil.nvl(request.getParameter("page_num"), "1");
 	page_size = StringUtil.nvl(request.getParameter("page_size"), "10");
-	search_word = StringUtil.nvl(request.getParameter("search_word"), "");
-	search_div = StringUtil.nvl(request.getParameter("search_div"), "");
+	mst_ct_id = StringUtil.nvl(request.getParameter("mst_ct_id"), "");
+	dtl_ct_id = StringUtil.nvl(request.getParameter("dtl_ct_id"), "");
 	
 	//parseInt for paging
 	int oPage_size = Integer.parseInt(page_size);
@@ -46,6 +49,23 @@
 
 <title>카테고리별 조회</title>
 
+<script>
+	$(document).ready(function(){
+		console.log("ready: ");
+		
+		// do_searchOne
+		function do_searchOne(id){
+			console.log("id: "+id);
+			if(id == null)
+				return;
+			var fm = document.frm;
+			fm.action = "do_searchOne.do"
+			fm.id.value = id;
+			fm.submit();
+		}
+	});
+</script>
+
 <!-- Head Div -->
 <div>
 </div>
@@ -61,6 +81,31 @@
 				<span class="glyphicon glyphicon-th"></span>
 			</div>
 		</div>
+		
+		<!-- form -->
+		<form name="frm" method="post" action="do_searchOne.do">
+			<input type="hidden" name="page_num" id="page_num" value="<%=page_num %>" />
+			<!-- Search table -->
+			<table>
+				<tr>
+					<td>수입
+						<select name="">
+						
+						</select>
+					</td>
+					<td>지출</td>
+					<td>전체</td>
+				</tr>
+				
+				<tr>
+				</tr>
+				
+				<tr>
+				</tr>
+			</table>
+			<!--// Search table closed-->
+		</form>
+		<!--// form closed-->
 	</div>
 	<!--// Body Div closed-->
 </body>
@@ -69,21 +114,5 @@
 </div>
 <!--// Footer Div closed-->
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
