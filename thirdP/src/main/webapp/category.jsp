@@ -10,7 +10,7 @@
 <body>
 	<div align="center">
 	<div style="width: 700px; border: 5px solid graytext;">
-		<tiles:insertDefinition name="monthly"></tiles:insertDefinition>
+		<tiles:insertDefinition name="category"></tiles:insertDefinition>
 	</div>
 	</div>
 </body>

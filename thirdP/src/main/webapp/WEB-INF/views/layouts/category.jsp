@@ -8,10 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
-	<div style="width: 700px; border: 5px solid graytext;">
-		<tiles:insertDefinition name="monthly"></tiles:insertDefinition>
+	<div>
+		<tiles:insertAttribute name="header"></tiles:insertAttribute>
 	</div>
+	<div style="height: 480px;">	
+		<tiles:insertAttribute name="body"></tiles:insertAttribute>
+	</div>
+	<div>	
+		<tiles:insertAttribute name="footer"></tiles:insertAttribute>
 	</div>
 </body>
 </html>

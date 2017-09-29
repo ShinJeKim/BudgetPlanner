@@ -6,20 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="/apps/resources/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/apps/resources/js/header.js" ></script>
 <script src="/apps/resources/js/datepicker.js"></script>
+<script type="text/javascript" src="/apps/resources/js/monthly_header.js"></script>
 <link rel="stylesheet" type="text/css" href="/apps/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/apps/resources/css/header.css">
 <link rel="stylesheet" type="text/css" href="/apps/resources/css/datepicker.css">
-<script type="text/javascript">
-$(document).ready(function(){
-	 $('#date').datepicker({
-		 type	: 'ymd',
-		 lang	: 'ko'
-	 });
-	$('#daily').attr('checked', true);
-});
-</script>
 </head>
 <body>
 	<div class="header">
@@ -32,7 +23,7 @@ $(document).ready(function(){
 			<ul>
 				<li class="sub_menu">
 					<input class="sub_selector" type="radio" name="menu" id="daily">
-					<label class="sub_menu-label" for="daily"><a href="/apps/header.jsp">일별</a></label>
+					<label class="sub_menu-label" for="daily"><a href="daily.jsp">일별</a></label>
 				</li>
 				<li class="sub_menu">
 					<input class="sub_selector" type="radio" name="menu"  id="monthly">
@@ -40,7 +31,7 @@ $(document).ready(function(){
 				</li>
 				<li class="sub_menu">
 					<input class="sub_selector" type="radio" name="menu" id="category">
-					<label class="sub_menu-label" for="category"><a href="??">카테고리</a></label>
+					<label class="sub_menu-label" for="category"><a href="category.jsp">카테고리</a></label>
 				</li>
 			</ul>
 		</div>

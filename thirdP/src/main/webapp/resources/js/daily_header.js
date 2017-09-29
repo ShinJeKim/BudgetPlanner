@@ -4,4 +4,6 @@ $(document).ready(function(){
 		 lang	: 'ko'
 	 });
 	$('#daily').attr('checked', true);
+	$('#BudgetPlanner').attr('checked', true);
+	
 });
