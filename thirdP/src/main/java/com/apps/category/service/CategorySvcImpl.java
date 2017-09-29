@@ -25,9 +25,12 @@ public class CategorySvcImpl implements CategorySvc {
 	 * @return 하위 카테고리 list
 	 */
 	@Override
-	public List<String> do_searchCategory(int param) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> do_searchCategory(String param) {
+		log.debug("=========================");
+		log.debug("SvcImpl param: "+param);
+		log.debug("=========================");
+		
+		return categoryDao.do_searchCategory(param);
 	}
 	
 	/**
@@ -37,13 +40,13 @@ public class CategorySvcImpl implements CategorySvc {
 	 * @return
 	 */
 	@Override
-	public List<CategoryVO> do_searchOne(DTO dto) {
+	public List<CategoryVO> do_searchList(DTO dto) {
 		
 		log.debug("=========================");
 		log.debug("do_searchOne dto: "+dto.toString());
 		log.debug("=========================");
 		
-		return categoryDao.do_searchOne(dto);
+		return categoryDao.do_searchList(dto);
 	}
 
 	

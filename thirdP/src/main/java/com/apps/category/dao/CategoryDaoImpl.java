@@ -2,6 +2,7 @@ package com.apps.category.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.apps.category.domain.CategoryVO;
+import com.apps.category.service.CategorySvcImpl;
 import com.apps.common.DTO;
 
 @Repository
@@ -54,8 +56,8 @@ public class CategoryDaoImpl implements CategoryDao{
 			catVO.setContent(rs.getString("content"));
 			catVO.setReg_dt(rs.getString("reg_dt"));
 			catVO.setMod_dt(rs.getString("mod_dt"));
-			catVO.setMst_ct_id(rs.getInt("mst_ct_id"));
-			catVO.setDtl_ct_id(rs.getInt("dtl_ct_id"));
+			catVO.setMst_ct_id(rs.getString("mst_ct_id"));
+			catVO.setDtl_ct_id(rs.getString("dtl_ct_id"));
 			
 			return catVO;
 		}	
@@ -67,32 +69,26 @@ public class CategoryDaoImpl implements CategoryDao{
 	 * @return 하위 카테고리 list
 	 */
 	@Override
-	public ModelAndView do_searchCategory(String param){
+	public List<String> do_searchCategory(String param){
 		String statement = namespace+".do_searchCategory";
 		
 		log.debug("==================================");
 		log.debug("statement= "+statement);
-		log.debug("param.toString()= "+param.toString());
+		log.debug("DaoImpl param= "+param);
 		log.debug("==================================");
 		
-		List<String> catList = null;
-		catList.add(param);
-		log.debug("param.toString()= "+param.toString());
-		log.debug("==================================");
-		log.debug("list.toString()= "+catList.toString());
-		log.debug("==================================");
-		
-		return sqlSession.selectOne(statement, catList);
+		return sqlSession.selectList(statement, param);
 	}
 	
 	/**
 	 * 단건조회
 	 * 조건: id, 기간, 카테고리
+	 * => mst_ct_id, dtl_ct_id, start_date, end_date, id
 	 * @param dto
 	 * @return
 	 */
 	@Override
-	public List<CategoryVO> do_searchOne(DTO dto) {
+	public List<CategoryVO> do_searchList(DTO dto) {
 		String statement = namespace+".do_searchOne";
 		
 		CategoryVO param = (CategoryVO)dto;
@@ -113,9 +109,13 @@ public class CategoryDaoImpl implements CategoryDao{
 		
 		String mst_ct_id = searchParam.get("mst_ct_id").toString();
 		String dtl_ct_id = searchParam.get("dtl_ct_id").toString();
+		String start_date = searchParam.get("start_date").toString();
+		String end_date = searchParam.get("end_date").toString();
 		
 		searchParam.put("mst_ct_id", mst_ct_id);
 		searchParam.put("dtl_ct_id", dtl_ct_id);
+		searchParam.put("start_date", start_date);
+		searchParam.put("end_date", end_date);
 		
 		return sqlSession.selectList(statement, searchParam);
 	}

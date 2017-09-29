@@ -12,7 +12,7 @@ public interface CategorySvc {
 	 * @param mst_ct_id
 	 * @return 하위 카테고리 list
 	 */
-	public List<String> do_searchCategory(int param);
+	public List<String> do_searchCategory(String param);
 	
 	/**
 	 * 단건조회
@@ -20,5 +20,5 @@ public interface CategorySvc {
 	 * @param dto
 	 * @return
 	 */
-	public List<CategoryVO> do_searchOne(DTO dto);
+	public List<CategoryVO> do_searchList(DTO dto);
 }

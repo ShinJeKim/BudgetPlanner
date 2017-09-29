@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.repository.mappers.category">
 
-	<!-- 메인기능 : 유저등록, 유저정보조회, 유저정보 수정, 유저삭제, 유저목록조회 -->
+	<!-- 메인기능 : 하위카테고리 목록 조회, 유저의 카테고리별 내역 조회, 유저의 전체내역 조회 -->
 	
 	<!-- 하위 카테고리 목록 조회 -->
 	<select id="do_searchCategory" parameterType="String" resultType="String">
@@ -14,7 +14,7 @@
 	</select>
 	
 	<!--  -->
-	<select id="do_searchOne" parameterType="String" resultType="CategoryVO">
+	<select id="do_searchList" parameterType="String" resultType="CategoryVO">
 
 		SELECT T1.*
         FROM(
@@ -45,7 +45,7 @@
 	</select>
 
 	<!-- 유저목록 조회 -->
-	<select id="do_search" parameterType="String" resultType="CategoryVO">
+	<select id="do_searchAll" parameterType="String" resultType="CategoryVO">
 		SELECT T1.*
         FROM(
                   SELECT ROW_NUMBER() OVER(ORDER BY F.REG_DT DESC) AS RNUM, 

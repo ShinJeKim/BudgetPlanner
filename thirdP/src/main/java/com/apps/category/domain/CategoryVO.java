@@ -10,8 +10,8 @@ public class CategoryVO extends DTO {
 	private String content; // 내용
 	private String reg_dt; // 등록일
 	private String mod_dt; // 수정일
-	private int mst_ct_id; // (상위 카테고리)수입or지출
-	private int dtl_ct_id; // 하위카테고리
+	private String mst_ct_id; // (상위 카테고리)수입or지출
+	private String dtl_ct_id; // 하위카테고리
 
 	private String start_date;
 	private String end_date;
@@ -33,7 +33,7 @@ public class CategoryVO extends DTO {
 	 * @param end_date
 	 */
 	public CategoryVO(String id, String daily_code, String usage, String content, String reg_dt, String mod_dt,
-			int mst_ct_id, int dtl_ct_id, String start_date, String end_date) {
+			String mst_ct_id, String dtl_ct_id, String start_date, String end_date) {
 		super();
 		this.id = id;
 		this.daily_code = daily_code;
@@ -72,11 +72,11 @@ public class CategoryVO extends DTO {
 		this.mod_dt = mod_dt;
 	}
 
-	public void setMst_ct_id(int mst_ct_id) {
+	public void setMst_ct_id(String mst_ct_id) {
 		this.mst_ct_id = mst_ct_id;
 	}
 
-	public void setDtl_ct_id(int dtl_ct_id) {
+	public void setDtl_ct_id(String dtl_ct_id) {
 		this.dtl_ct_id = dtl_ct_id;
 	}
 
@@ -113,11 +113,11 @@ public class CategoryVO extends DTO {
 		return mod_dt;
 	}
 
-	public int getMst_ct_id() {
+	public String getMst_ct_id() {
 		return mst_ct_id;
 	}
 
-	public int getDtl_ct_id() {
+	public String getDtl_ct_id() {
 		return dtl_ct_id;
 	}
 
