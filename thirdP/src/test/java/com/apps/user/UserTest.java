@@ -32,7 +32,7 @@ public class UserTest {
 	private WebApplicationContext ctx;
 	
 	private MockMvc mockMvc;
-	
+	  
 	@Before
 	public void setUp() {
 		log.debug("========================");
