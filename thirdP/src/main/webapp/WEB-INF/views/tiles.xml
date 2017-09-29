@@ -16,4 +16,10 @@
 	<definition name="head" template="/WEB-INF/views/template/head.jsp">
 		
 	</definition>
+	
+	<definition name="daily" template="/WEB-INF/views/layouts/daily.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/daily.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	</definition>
 </tiles-definitions>
