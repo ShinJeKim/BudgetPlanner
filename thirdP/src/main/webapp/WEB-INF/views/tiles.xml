@@ -5,31 +5,29 @@
 			"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="base" template="/WEB-INF/views/layouts/defaultlayout.jsp"> 
-			<put-attribute name="title" value="" />
-		    <put-attribute name="header" value="/WEB-INF/views/template/header.jsp" />
-		    <put-attribute name="menu" value="/WEB-INF/views/template/menu.jsp" />
-		    <put-attribute name="body" value="" />
-		    <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
-	</definition>
-	
-	<definition name="head" template="/WEB-INF/views/template/head.jsp">
-		
-	</definition>
-	
-	<definition name="daily" template="/WEB-INF/views/layouts/daily.jsp">
+	<definition name="budget" template="/WEB-INF/views/layouts/budget.jsp">
+		<put-attribute name="script" value="" />
+		<put-attribute name="style" value="" />
 		<put-attribute name="header" value="/WEB-INF/views/template/header/daily_header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/items/daily.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer/footer.jsp" />
 	</definition>
-	<definition name="monthly" template="/WEB-INF/views/layouts/monthly.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/template/header/monthly_header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/items/daily.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	
+	<definition name="daily" extends="budget">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/daily_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/daily_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/budget/daily.jsp" />
 	</definition>
-	<definition name="category" template="/WEB-INF/views/layouts/category.jsp">
-		<put-attribute name="header" value="/WEB-INF/views/template/header/category_header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/items/daily.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
+	
+	<definition name="monthly" extends="budget">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/monthly_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/monthly_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/budget/monthly.jsp" />
+	</definition>
+	
+	<definition name="category" extends="budget">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/category_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/category_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/budget/category.jsp" />
 	</definition>
 </tiles-definitions>

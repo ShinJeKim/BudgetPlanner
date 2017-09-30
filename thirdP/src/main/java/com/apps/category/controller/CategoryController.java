@@ -28,9 +28,30 @@ public class CategoryController {
 	
 	@Autowired
 	CategorySvc catSvc;
-
 	
-	@RequestMapping(value="items/do_searchCategory.do", method=RequestMethod.GET
+	//헤더없는 페이지
+	@RequestMapping(value="org/category.do") 
+	public String orgcategory(HttpServletRequest request) {
+		
+		log.debug("0=====================================");
+		log.debug("main()");
+		log.debug("0=====================================");
+		
+		return "items/budget/category";
+	}
+	
+	//헤더적용 페이지
+	@RequestMapping(value="budget/category.do") 
+	public String category(HttpServletRequest request) {
+		
+		log.debug("0=====================================");
+		log.debug("main()");
+		log.debug("0=====================================");
+		
+		return "category";
+	}
+	
+	@RequestMapping(value="do_searchCategory.do", method=RequestMethod.GET
 			)
 	public ModelAndView do_searchCategory(HttpServletRequest req){
 		log.debug("=================================");
@@ -42,13 +63,13 @@ public class CategoryController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("catList", catList);
-		modelAndView.setViewName("items/category");
+		modelAndView.setViewName("items/budget/category");
 		
 		return modelAndView;
 	}
 	
 	
-	@RequestMapping(value = "items/do_searchOne.do", method=RequestMethod.GET)
+	@RequestMapping(value = "do_searchOne.do", method=RequestMethod.GET)
 	public ModelAndView do_searchOne(HttpServletRequest req) {
 		log.debug("=================================");
 		log.debug("do_searchOne.do");
@@ -93,7 +114,7 @@ public class CategoryController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("list", catSvc.do_searchList(catVO));
 		modelAndView.addObject("totalCnt", totalCnt);
-		modelAndView.setViewName("items/category");
+		modelAndView.setViewName("items/budget/category");
 		
 		return modelAndView;
 	}

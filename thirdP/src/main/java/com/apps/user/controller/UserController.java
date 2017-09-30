@@ -33,7 +33,7 @@ public class UserController {
 		log.debug("main()");
 		log.debug("0=====================================");
 		
-		return "user/login";
+		return "itmes/user/login";
 	}
 	
 	@RequestMapping(value="user/createUser.do")
@@ -42,7 +42,7 @@ public class UserController {
 		log.debug("goCreateUser()");
 		log.debug("0=====================================");
 		
-		return "user/createUser";
+		return "itmes/user/createUser";
 	}
 
 	@RequestMapping(value="user/do_check_id.do")
@@ -100,7 +100,7 @@ public class UserController {
 				modelAndView.addObject("message", "passwordFailure");
 			}
 			
-			modelAndView.setViewName("user/login");
+			modelAndView.setViewName("itmes/user/login");
 		}
 		
 		return modelAndView;
@@ -132,7 +132,7 @@ public class UserController {
 		
 		log.debug("flag : "+flag);
 		
-		modelAndView.setViewName("user/login");
+		modelAndView.setViewName("itmes/user/login");
 		
 		return modelAndView;
 	}
