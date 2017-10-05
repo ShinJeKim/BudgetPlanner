@@ -3,3 +3,4 @@
 <script type="text/javascript" src="/apps/resources/js/common/jquery-3.2.1.min.js"></script>
 <script src="/apps/resources/js/common/datepicker.js"></script>
 <script type="text/javascript" src="/apps/resources/js/budget/daily.js"></script>
+<script type="text/javascript" src="/apps/resources/js/budget/budget_style.js"></script>

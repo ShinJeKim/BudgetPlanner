@@ -1,0 +1,100 @@
+@CHARSET "UTF-8";
+
+/*header 부분*/
+	.header{
+		width: 100%;
+		font-size: 0px;
+		text-align: center;
+		background-color: aqua;
+		position: absolute;
+		top: 0px;
+	}
+	#date {
+	 	width: 40%;
+	    float: left;
+	}
+	#balance{
+		height: 60px;
+	    float: right;
+	    width: 20%;
+	    display: table;
+	    margin-right: 10%;
+	}
+	#balance>label{
+		font-size: 3rem;
+	    vertical-align: middle;
+	    display: table-cell;
+	    text-align: right;
+	}
+	.sub_menu{
+		width: 33.3%;
+		display: inline-block;;
+		height: 60px;	
+		background-color: aqua;
+	}
+	.sub_menu-label{ 
+		font-size: 4rem;
+		width: 100%;
+		background-color: aqua;
+		display: table;
+		height: 100%;
+	}
+	.sub_menu-label>a{
+		display: table-cell;
+		vertical-align: middle;
+		text-decoration: none;
+	}
+	.sub_selector:checked+.sub_menu-label>a{
+		box-shadow: inset 0 0 20px blue; 
+		font-weight: bold;
+	}
+	.sub_selector{
+		display: none;
+	}
+/*body 부분*/
+	.bodyCover{
+		width: 100%;
+		overflow: hidden;
+		position: absolute;
+	}
+	.body{
+		overflow-y: scroll;
+		position: relative;
+		height: inherit;
+	}
+
+/*footer 부분*/
+	.footer{
+		position: absolute;
+		width: 100%;
+	}
+	.main_menus{
+		font-size: 0px;
+		text-align: center;
+	}
+	.menu{
+		width: 25%;
+		display: inline-block;;
+		height: inherit;	
+		background-color: gray;
+	}
+	.menu-label{ 
+		font-size: 4rem;
+		width: 100%;
+		background-color: gray;
+		display: table;
+		height: 100%;
+	}
+	.menu-label>a{
+		color: white;
+		display: table-cell;
+		vertical-align: middle;
+		text-decoration: none;
+	}
+	.main_selector:checked+.menu-label>a{
+		color: yellow;
+		box-shadow: inset 0 0 20px black; 
+	}
+	.main_selector{
+		display: none;
+	}	

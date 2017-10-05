@@ -5,5 +5,4 @@ $(document).ready(function(){
 	 });
 	$('#daily').attr('checked', true);
 	$('#BudgetPlanner').attr('checked', true);
-	
 });
