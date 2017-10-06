@@ -8,6 +8,9 @@
 		<!-- UserVO typeAliases -->
 		<typeAlias type="com.apps.user.domain.UserVO" alias="UserVO"/>
 		
+		<!-- DailyVO typeAliases -->
+		<typeAlias type="com.apps.daily.domain.DailyVO" alias="DailyVO"/>
+		
 		<!-- CategoryVO typeAliases -->
 		<typeAlias type="com.apps.category.domain.CategoryVO" alias="CategoryVO"/>
 	</typeAliases>

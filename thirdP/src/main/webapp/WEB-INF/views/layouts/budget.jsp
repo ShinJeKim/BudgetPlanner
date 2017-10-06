@@ -8,6 +8,25 @@
 <tiles:insertAttribute name="script" />
 <tiles:insertAttribute name="style" />
 </head>
+<script type="text/javascript">
+	$(document).ready(function(){
+	
+	$('#dailyData').css('width',$('.bodyCover').width());
+	$(window).resize(function(){
+		$('#dailyData').css('width',$('.bodyCover').width());
+	});
+	//$('#txt').css("font-size",'4rem');
+	//$('#txt').val("<p>이거 값나오는건가?<br>설마하니 그냥나오나?</p>");
+	//$('#bt').click(function(){
+	//var txt = $('#txt').val()
+	//var ltxt = txt.replace(/\n/g,"<br>")
+	//console.log(ltxt);
+	//var oritxt = ltxt.replace(/<br>/,"\n").replace("<p>","").replace("</p>","");
+	//$('#sub').html(ltxt);
+	//$('#txt').val(oritxt);
+	//});
+	});
+</script>
 <body>
 	<div class="header">
 		<tiles:insertAttribute name="header" />

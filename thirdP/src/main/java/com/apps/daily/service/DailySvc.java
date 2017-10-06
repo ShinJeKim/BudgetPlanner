@@ -1,5 +1,9 @@
 package com.apps.daily.service;
 
-public interface DailySvc {
+import org.springframework.dao.DataAccessException;
 
+import com.apps.common.DTO;
+
+public interface DailySvc {
+	public int do_save(DTO dto)throws DataAccessException;
 }
