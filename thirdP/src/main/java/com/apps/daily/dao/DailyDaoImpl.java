@@ -3,6 +3,8 @@ package com.apps.daily.dao;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -12,6 +14,7 @@ import com.apps.daily.domain.DailyVO;
 
 @Repository
 public class DailyDaoImpl implements DailyDao{
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
@@ -20,14 +23,19 @@ public class DailyDaoImpl implements DailyDao{
 	
 	@Override
 	public List<?> do_search(DTO dto){
+		String statement = namespace +".do_search";
+		DailyVO inVO = (DailyVO)dto;
 		
-		return null;
+		
+		return sqlSession.selectList(statement, inVO);
 	}
 	
 	@Override
-	public DTO do_searchOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+	public DTO do_searchOne(DTO dto){
+		String statement = namespace +".do_searchOne";
+		DailyVO inVO = (DailyVO)dto;
+		
+		return sqlSession.selectOne(statement, inVO);
 	}
 	
 	@Override
@@ -35,7 +43,7 @@ public class DailyDaoImpl implements DailyDao{
 		int flag = 0;
 		String statement = namespace +".do_save";
 		DailyVO inVO = (DailyVO)dto;
-		flag = sqlSession.update(statement, inVO);
+		flag = sqlSession.insert(statement, inVO);
 		
 		return flag;
 	}
@@ -43,23 +51,29 @@ public class DailyDaoImpl implements DailyDao{
 	
 	@Override
 	public int do_delete(DTO dto){
+		int flag = 0;
+		String statement = namespace +".do_save";
+		DailyVO inVO = (DailyVO)dto;
+		flag = sqlSession.delete(statement, inVO);
 		
-		return 0;
+		return flag;
 	}
 	
 	@Override
 	public int do_update(DTO dto){
+		int flag = 0;
+		String statement = namespace +".do_save";
+		DailyVO inVO = (DailyVO)dto;
+		flag = sqlSession.update(statement, inVO);
 		
-		return 0;
+		return flag;
 	}
+
 	
 	
 	
 	
-	
-	
-	
-	//안쓸거다
+	//밑에있는 메소드는 확장성을 위해 만든 공통 메소드
 	@Override
 	public List<?> do_excelDown() {
 		return null;

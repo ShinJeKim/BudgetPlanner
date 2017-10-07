@@ -25,6 +25,16 @@
 	//$('#sub').html(ltxt);
 	//$('#txt').val(oritxt);
 	//});
+	
+	$('#subb').click(function(){
+		$('#frm').attr("action","do_save.do");
+		$('#frm').attr("method","post");
+		$('#frm').submit();
+	});
+	$('#currentDate').change(function(){
+		$('#reg_dt').val($('#currentDate').val()).trigger('change');
+	});
+	
 	});
 </script>
 <body>

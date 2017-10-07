@@ -278,7 +278,7 @@
 						$('.btncal').css('height',height*0.04);
 						
 						var d = "";
-						if(options.day.length == 2){
+						if(options.day.toString().substring(1,0) == 0){
 							d = options.day.replace('0','');
 						}else{
 							d = options.day
@@ -618,11 +618,20 @@
 			}
 			
 			$('#currentDate').val(options.year+"."+options.month+"."+options.day).trigger('change');
-
+			
+			if(($('#reg_dt').val() != "") && ($('#reg_dt').val() != undefined)){
+				$('#currentDate').val($('#reg_dt').val()).trigger('change');
+			}else if(($('#reg_dt').val() == "" ) && ($('#reg_dt').val() != undefined)){
+				$('#reg_dt').val($('#currentDate').val()).trigger('change');
+			}
+			
 			var seperate = element.find('#currentDate').val().split('.');
 				var y = seperate[0];
+				options.year = y;
 				var m = seperate[1];
+				options.month = m;
 				var d = seperate[2];
+				options.day = d;
 				if(options.type == 'y'){
 					element.find('.currentDate').html('&emsp;'+y).trigger('change');
 				}else if(options.type == 'm'){

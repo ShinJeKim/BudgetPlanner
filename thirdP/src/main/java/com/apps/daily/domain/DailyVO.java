@@ -5,7 +5,7 @@ import com.apps.common.DTO;
 public class DailyVO extends DTO {
 	private String 	id; 		//유저 아이디
 	private String 	daily_code; //식별코드
-	private String 	usage; 		//금액
+	private int 	usage; 		//금액
 	private String	content; 	//내용
 	private String 	reg_dt; 	//등록일
 	private String 	mod_dt; 	//수정일
@@ -22,7 +22,7 @@ public class DailyVO extends DTO {
 	public void setDaily_code(String daily_code) {
 		this.daily_code = daily_code;
 	}
-	public void setUsage(String usage) {
+	public void setUsage(int usage) {
 		this.usage = usage;
 	}
 	public void setContent(String content) {
@@ -55,7 +55,7 @@ public class DailyVO extends DTO {
 	public String getDaily_code() {
 		return daily_code;
 	}
-	public String getUsage() {
+	public int getUsage() {
 		return usage;
 	}
 	public String getContent() {
