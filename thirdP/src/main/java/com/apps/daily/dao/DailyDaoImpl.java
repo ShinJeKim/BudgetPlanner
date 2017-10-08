@@ -25,7 +25,9 @@ public class DailyDaoImpl implements DailyDao{
 	public List<?> do_search(DTO dto){
 		String statement = namespace +".do_search";
 		DailyVO inVO = (DailyVO)dto;
-		
+		log.debug("------------------");
+		log.debug("2:"+dto);
+		log.debug("------------------");
 		
 		return sqlSession.selectList(statement, inVO);
 	}
@@ -52,7 +54,7 @@ public class DailyDaoImpl implements DailyDao{
 	@Override
 	public int do_delete(DTO dto){
 		int flag = 0;
-		String statement = namespace +".do_save";
+		String statement = namespace +".do_delete";
 		DailyVO inVO = (DailyVO)dto;
 		flag = sqlSession.delete(statement, inVO);
 		

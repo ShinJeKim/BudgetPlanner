@@ -6,17 +6,40 @@
 	session.setAttribute("ID", id);
 %>
 <div id="dailyData">
-	<div style="background-color: blue; width: 98%; margin-left:1%; height: 50px;">
-		<form id="frm">		
-			<input type="button" value="갔다와" id="subb" >	
-			<input type="hidden" value="1" >
-			<input type="text" name="reg_dt" id="reg_dt" value="2017.09.22" >
-			<input type="text" name="mst_ct_nm" value="지출">
-			<input type="text" name="dtl_ct_nm" value="식비">
-			<input type="text" name="content" value="밥먹음">
-			<input type="text" name="usage" value="20000">
+	<div id="dailyTitle">
+		<form id="search">
+			<input type="hidden" id="reg_dt" name="reg_dt">
 		</form>
-		
+		<div id="sum">
+			<ul id = "total">
+				<li id="nowDate"><label>18</label></li>
+				<li id="total_in">수입&nbsp;<label>10000원</label></li>
+				<li id="total_out">지출&nbsp;<label>10000원</label></li>
+				<li id="total_sum">총계&nbsp;<label>10000원</label></li>
+			</ul>
+		</div>
 	</div>
+	<div id="dailyList">
+	<c:choose>
+            <c:when test="${list.size()>0}" >
+				<c:forEach var="dailyVO" items="${list}">
+					<form class="dailyDatas">	
+						<div class="dailyitem">
+						<ul class="itemList">
+							<li class="item_cate"><label>${dailyVO.dtl_ct_nm}</label></li>
+							<li class="item_content"><label></label>${dailyVO.content}</li>
+							<li class="add"><label>▼</label></li>
+							<li class="item_price"><label>${dailyVO.usage}</label>원</li>
+						</ul>
+						</div>
+					</form>
+				</c:forEach>
+       		</c:when>
+	        <c:otherwise>
+	        </c:otherwise>
+        </c:choose>
+		<div id="blank"></div>
+	</div>
+	<div id="plus"><label id="icon">+</label></div>
 </div>
 	

@@ -22,7 +22,9 @@ public class DailySvcImpl implements DailySvc {
 	
 	@Override
 	public List<?> do_search(DTO dto)throws DataAccessException{
-		//TODO
+		log.debug("------------------");
+		log.debug("1:"+dto);
+		log.debug("------------------");
 		return dailyDao.do_search(dto);
 	}
 	

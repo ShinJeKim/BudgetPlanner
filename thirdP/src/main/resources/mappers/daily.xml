@@ -3,20 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.sist.repository.mappers.daily">
- 	<select id="do_search">
-		SELECT t2.dtl_ct_nm
-		       ,t1.content
-		       ,t1.usage
-		       ,t2.mst_ct_id
-		       ,t1.daily_code
+ 	<select id="do_search" parameterType="DailyVO" resultType="DailyVO">
+		SELECT t2.dtl_ct_nm 
+		       ,t1.content 
+		       ,t1.usage 
+		       ,t2.mst_ct_id 
+		       ,t1.daily_code 
 		FROM finance t1, category t2
 		WHERE id = #{id}
-		AND TO_CHAR(reg_dt,'yyyy.mm.dd') = #{reg_dt}
+		AND TO_CHAR(t1.reg_dt,'yyyy.mm.dd') = #{reg_dt}
 		AND t1.mst_ct_id = t2.mst_ct_id
 		AND t1.dtl_ct_id = t2.dtl_ct_id
 		ORDER BY daily_code DESC 	
  	</select>
- 	<select id="do_searchOne">
+ 	<select id="do_searchOne" parameterType="DailyVO" resultType="DailyVO">
 		SELECT TO_CHAR(t1.reg_dt,'yyyy.mm.dd)
 		       ,t2.mst_ct_nm
 		       ,t2.dtl_ct_nm

@@ -1,1 +1,69 @@
 @CHARSET "UTF-8";
+
+#dailyTitle{
+	background-color: white; 
+	width: 100%; 
+}
+#plus{
+	position: fixed;
+    display: table;
+    background-color: yellow;
+    border-radius: 100%;
+    border: 2.5px solid;
+}
+#plus>#icon{
+	display: table-cell;
+	text-align: center;
+}
+#total{
+	list-style: none;
+	width: 100%;
+	display: inline-table;
+	height: 100%;
+}
+#total>li{
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	width: 30%;
+	font-weight: bold;
+}
+#total>#nowDate{
+	width: 10%;
+	font-weight: normal;
+}
+#total>#total_in>label{
+	color: blue;
+	font-weight: normal;
+}
+#total>#total_out>label{
+	color: red;
+	font-weight: normal;
+}
+#total>#total_sum>label{
+	color: graytext;
+	font-weight: normal;
+}
+.itemList{
+	width: 100%;
+	display: inline-table;
+	height: 100%;
+}
+.itemList>li{
+	display: table-cell;
+	text-align: center;
+	vertical-align: top;
+	width: 20%;
+	font-weight: lighter;
+}
+.itemList>.item_content{
+	width: 55%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.itemList>.item_content>label{
+	text-align: left;
+}
+.itemList>.add{
+	width: 5%;
+}   

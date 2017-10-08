@@ -1,6 +1,7 @@
 package com.apps.daily.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,14 +38,27 @@ public class DailyController {
 	
 	//헤더적용 페이지
 	@RequestMapping(value="budget/daily.do") 
-	public ModelAndView daily(HttpServletRequest request) {
+	public ModelAndView daily(HttpServletRequest req,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		log.debug("0=====================================");
-		log.debug("main()");
-		log.debug("0=====================================");
+		DailyVO inVO = new DailyVO();
+		inVO.setId(session.getAttribute("ID").toString());
+		if(req.getParameter("reg_dt") != null){
+			inVO.setReg_dt(req.getParameter("reg_dt"));
+		}else{
+			inVO.setReg_dt("2017.09.22");
+		}
+		log.debug("------------------");
+		log.debug("0: 일단 보내고");
+		log.debug("------------------");
+		List<DailyVO> list = (List<DailyVO>)dailySvc.do_search(inVO);
+		log.debug("------------------");
+		log.debug("3: 리스트 가져와"+list);
+		log.debug("------------------");
+		mav.addObject("list",list );
 		mav.setViewName("daily");
 		return mav;
 	}
+	
 	@RequestMapping(value="budget/do_save.do",method=RequestMethod.POST)
 	public void do_save(HttpServletRequest req,HttpServletResponse res,HttpSession session) throws IOException{
 			//ModelAndView mav = new ModelAndView();
