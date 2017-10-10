@@ -34,4 +34,14 @@ public class MonthlySvcImpl implements MonthlySvc {
 		return monthlyDao.get_monthly_usage(id, month);
 	}
 
+	@Override
+	public List<?> get_weekday(String month) {
+		log.debug("2============MonthlySvcImpl===============");
+		log.debug("2============get_monthly_usage===============");
+		log.debug("month : "+ month);
+		log.debug("2==================================");
+		
+		return monthlyDao.get_weekday(month);
+	}
+
 }

@@ -12,5 +12,6 @@ import java.util.List;
 public interface MonthlyDao {
 	
 	public List<?> get_monthly_usage(String id, String month);
+	public List<?> get_weekday(String month);
 	
 }

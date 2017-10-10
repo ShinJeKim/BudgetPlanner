@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.apps.montly.domain.MonthlyVO;
+import com.apps.montly.domain.WeekVO;
 
 /**
  * @since 2017-10-10
@@ -69,6 +70,24 @@ public class MonthlyDaoImpl implements MonthlyDao{
 		}
 	};
 	
+	private RowMapper<WeekVO> weekMapper = new RowMapper<WeekVO>() {
+
+		@Override
+		public WeekVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			WeekVO weekVO = new WeekVO();
+			weekVO.setSunday(rs.getString("sunday"));
+			weekVO.setMonday(rs.getString("monday"));
+			weekVO.setTuesday(rs.getString("tuesday"));
+			weekVO.setWednesday(rs.getString("wednesday"));
+			weekVO.setThursday(rs.getString("thursday"));
+			weekVO.setFriday(rs.getString("friday"));
+			weekVO.setSaturday(rs.getString("saturday"));
+			
+			return weekVO;
+		}
+	};
+	
 	@Override
 	public List<?> get_monthly_usage(String id, String month) {
 		
@@ -87,6 +106,19 @@ public class MonthlyDaoImpl implements MonthlyDao{
 		log.debug("******************************************");
 		
 		return sqlSession.selectList(statement, param);
+	}
+
+	@Override
+	public List<?> get_weekday(String month) {
+		
+		String statement = namespace + ".get_weekday";
+		
+		log.debug("*************do_selectOne*****************");
+		log.debug("statement : "+statement);
+		log.debug("month : "+month);
+		log.debug("******************************************");
+		
+		return sqlSession.selectList(statement, month);
 	}
 
 }

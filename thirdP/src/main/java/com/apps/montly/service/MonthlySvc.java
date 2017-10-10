@@ -18,4 +18,12 @@ public interface MonthlySvc {
 	 * @return list
 	 */
 	public List<?> get_monthly_usage(String id, String month);
+	
+	/**
+	 * 달력 날짜 생성
+	 * @param month
+	 * @return day list
+	 */
+	public List<?> get_weekday(String month);
+	
 }
