@@ -9,13 +9,15 @@
 <tiles:insertAttribute name="style" />
 </head>
 <body>
-	<div>
+	<div class="header">
 		<tiles:insertAttribute name="header" />
 	</div>
-	<div>
-		<tiles:insertAttribute name="body" />
+	<div class="bodyCover">
+		<div class="body">
+			<tiles:insertAttribute name="body" />
+		</div>
 	</div>
-	<div>
+	<div class="footer">
 		<tiles:insertAttribute name="footer" />
 	</div>
 </body>

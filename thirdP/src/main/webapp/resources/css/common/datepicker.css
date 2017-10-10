@@ -3,7 +3,7 @@
 .currentDate{
 	display: table-cell;	
 	vertical-align: middle;
-	font-size: 2rem;
+	font-size: 6rem;
 	text-align: left;
 }
 #selectedDate{
@@ -21,6 +21,7 @@
 	position: absolute;
 	background-color: white;
 	min-width: 200px;
+	z-index: 1;
 	
 }
 .datepicker>div{
@@ -67,6 +68,7 @@
 	display: table-cell;
 	width: 100%;
 	vertical-align: middle;
+	font-size: 2.5rem;
 
 }
 .upperselect{
@@ -86,7 +88,7 @@
 	color: blue;
 }
 .btncal{
-		display: table-cell;
+	display: table-cell;
 	width: 100%;
 	height: 30px;
 	vertical-align: middle;
@@ -94,4 +96,5 @@
 	border: 0px;
 	padding: 0px;
 	outline: 0px;
+	font-size: 2.5rem;
 }

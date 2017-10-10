@@ -59,6 +59,10 @@
 					calVal += "</div>";	
 					
 					element.find('.datepicker').html(calVal);
+					var width = window.innerWidth;
+					var height = window.innerHeight;
+					$('.btncal').css('height',height*0.04);
+					
 					$.fn.currentDate(element,options);
 					$('.picker_contents>li').contents().each(function(){
 						if($(this).val()==options.year){
@@ -152,6 +156,8 @@
 					calVal +="</ul>";
 					calVal += "</div>";	
 					element.find('.datepicker').html(calVal);
+					var height = window.innerHeight;
+					$('.btncal').css('height',height*0.04);
 					
 					$('.picker_contents>li').contents().each(function(){
 						if(parseInt($('.picker_contents>li').contents().index($(this)))+1 == options.month){
@@ -267,8 +273,12 @@
 						calVal += "</div>";	
 					
 						element.find('.datepicker').html(calVal);
+						var height = window.innerHeight;
+						$('.dayOfWeeks>li').css('height',height*0.04);
+						$('.btncal').css('height',height*0.04);
+						
 						var d = "";
-						if(options.day.length == 2){
+						if(options.day.toString().substring(1,0) == 0){
 							d = options.day.replace('0','');
 						}else{
 							d = options.day
@@ -281,7 +291,7 @@
 								$(this).css('box-shadow','');
 								$(this).css('font-weight','normal');
 							}
-							
+						
 						});	
 						
 						
@@ -548,9 +558,7 @@
 			});
 		};
 		$.fn.ymdpicker = function(element,options){
-			
 			createpicker.daypicker(element,options);
-		
 			element.on('click','#months',function(event){
 				if(event.stopImmediatePropagation){
 					event.stopImmediatePropagation();
@@ -609,22 +617,36 @@
 				options.day = '0'+options.day;
 			}
 			
-			$('#currentDate').val(options.year+"."+options.month+"."+options.day);
-
+			$('#currentDate').val(options.year+"."+options.month+"."+options.day).trigger('change');
+			if($('#reg_dt').val() != undefined){
+				if($('#reg_dt').val() != ""){
+					if($('#loadWork').val() == "reload"){
+						$('#currentDate').val($('#reg_dt').val()).trigger('change');
+						$('#loadWork').val("normal");
+					}else{
+						$('#reg_dt').val($('#currentDate').val()).trigger('change');
+					}		 
+				}else{
+					$('#reg_dt').val($('#currentDate').val()).trigger('change');
+				}
+			}
 			var seperate = element.find('#currentDate').val().split('.');
 				var y = seperate[0];
+				options.year = y;
 				var m = seperate[1];
+				options.month = m;
 				var d = seperate[2];
+				options.day = d;
 				if(options.type == 'y'){
-					element.find('.currentDate').html('&emsp;'+y);
+					element.find('.currentDate').html('&emsp;'+y).trigger('change');
 				}else if(options.type == 'm'){
-					element.find('.currentDate').html('&emsp;'+y+'.'+m);
+					element.find('.currentDate').html('&emsp;'+y+'.'+m).trigger('change');
 				}else if(options.type == 'd'){
-					element.find('.currentDate').html('&emsp;'+y+'.'+m+'.'+d);
+					element.find('.currentDate').html('&emsp;'+y+'.'+m+'.'+d).trigger('change');
 				}else if(options.type == 'ym'){
-					element.find('.currentDate').html('&emsp;'+y+'.'+m);
+					element.find('.currentDate').html('&emsp;'+y+'.'+m).trigger('change');
 				}else if(options.type == 'ymd'){
-					element.find('.currentDate').html('&emsp;'+y+'.'+m);
+					element.find('.currentDate').html('&emsp;'+y+'.'+m).trigger('change');
 				}
 			
 		
@@ -643,10 +665,11 @@
 			 }
 			 
 		    element.append("<div class='datepicker'></div>")
-			$.fn.currentDate(element,options);
+			$.fn.currentDate(element,options); 
 		    
 			
 		    element.on('click','.currentDate',function(event){
+		    	
 		    	if(event.stopImmediatePropagation){
 					event.stopImmediatePropagation();
 				}else{
@@ -663,7 +686,7 @@
 				}else if(options.type == 'ymd'){
 					return $.fn.ymdpicker(element,options);
 				}
-	    	 
+		    	
 		    });
 		    	
 		    
