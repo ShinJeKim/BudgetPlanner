@@ -4,5 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.sist.repository.mappers.monthly">
  	
+ 	<!-- 사용내역 조회 -->
+ 	<select id="get_monthly_usage"
+ 			parameterType="String"
+ 			resultType="monthlyVO">
+ 			SELECT TO_CHAR(TRUNC(REG_DT), 'YYYYMMDD') AS DAY, MST_CT_ID AS CATEGORY, SUM(USAGE) AS USAGE
+			FROM FINANCE,
+			     (SELECT SET_MONTH AS FIRST_DAY,
+			             LAST_DAY(SET_MONTH) AS LAST_DAY
+			      FROM ( SELECT TO_DATE(#{month}, 'YYYYMM') AS SET_MONTH
+			             FROM DUAL
+			           )) M
+			WHERE ID = #{id}
+			AND REG_DT BETWEEN M.FIRST_DAY AND M.LAST_DAY
+			GROUP BY ROLLUP(TRUNC(REG_DT), MST_CT_ID)
+ 	</select>
  	
  </mapper>

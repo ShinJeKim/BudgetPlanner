@@ -10,6 +10,9 @@
 		
 		<!-- CategoryVO typeAliases -->
 		<typeAlias type="com.apps.category.domain.CategoryVO" alias="CategoryVO"/>
+		
+		<!-- MonthlyVO typeAliases -->
+		<typeAlias type="com.apps.montly.domain.MonthlyVO" alias="MonthlyVO"/>
 	</typeAliases>
 	
 </configuration>
