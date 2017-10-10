@@ -72,12 +72,14 @@ public class CategoryDaoImpl implements CategoryDao{
 	public List<String> do_searchCategory(String param){
 		String statement = namespace+".do_searchCategory";
 		
+		String mst_ct_id = param.toString();
+		
 		log.debug("==================================");
 		log.debug("statement= "+statement);
-		log.debug("DaoImpl param= "+param);
+		log.debug("DaoImpl param= "+mst_ct_id);
 		log.debug("==================================");
-		
-		return sqlSession.selectList(statement, param);
+			
+		return sqlSession.selectList(statement, mst_ct_id);
 	}
 	
 	/**
@@ -89,7 +91,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	 */
 	@Override
 	public List<CategoryVO> do_searchList(DTO dto) {
-		String statement = namespace+".do_searchOne";
+		String statement = namespace+".do_searchList";
 		
 		CategoryVO param = (CategoryVO)dto;
 		
@@ -129,7 +131,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	@Override
 	public List<?> do_search(DTO dto) {
 		
-		String statement = namespace+".do_searchOne";
+		String statement = namespace+".do_searchList";
 		
 		CategoryVO param = (CategoryVO)dto;
 		

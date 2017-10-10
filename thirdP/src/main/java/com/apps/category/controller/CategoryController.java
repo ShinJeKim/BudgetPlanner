@@ -14,12 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.apps.category.domain.CategoryVO;
 import com.apps.category.service.CategorySvc;
 import com.apps.common.DTO;
 import com.apps.common.StringUtil;
+import com.google.gson.Gson;
 
 @Controller
 public class CategoryController {
@@ -51,39 +53,41 @@ public class CategoryController {
 		return "category";
 	}
 	
-	@RequestMapping(value="do_searchCategory.do", method=RequestMethod.GET
+	@RequestMapping(value="budget/do_searchCategory.do", method=RequestMethod.GET
 			)
-	public ModelAndView do_searchCategory(HttpServletRequest req){
+	@ResponseBody
+	public String do_searchCategory(HttpServletRequest req){
 		log.debug("=================================");
-
 		log.debug("do_searchCategory.do");
 		log.debug("=================================");
-		String mstCtId = StringUtil.nvl(req.getParameter("mst_ct_id"),"");
-		List<String> catList = catSvc.do_searchCategory(mstCtId);
 		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("catList", catList);
-		modelAndView.setViewName("items/budget/category");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"),"");
+		log.debug("mst_ct_id: "+mst_ct_id);
+		List<String> dtlList = catSvc.do_searchCategory(mst_ct_id);
 		
-		return modelAndView;
+		Gson gson = new Gson();
+		String dtl_ct_id = gson.toJson(dtlList);
+		log.debug("dtl_ct_id: "+dtl_ct_id);
+		
+		return dtl_ct_id;
 	}
 	
 	
-	@RequestMapping(value = "do_searchOne.do", method=RequestMethod.GET)
-	public ModelAndView do_searchOne(HttpServletRequest req) {
+	@RequestMapping(value = "budget/do_searchList.do", method=RequestMethod.GET)
+	public ModelAndView do_searchList(HttpServletRequest req) {
 		log.debug("=================================");
-		log.debug("do_searchOne.do");
+		log.debug("do_searchList.do");
 		log.debug("=================================");
 		CategoryVO catVO = new CategoryVO();
 		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 		
-		String id = StringUtil.nvl(req.getParameter("id"), "");
-		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "");
-		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "");
-		String start_date = StringUtil.nvl(req.getParameter("start_date"), "");
-		String end_date = StringUtil.nvl(req.getParameter("end_date"), "");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
-		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "");
+		String id = StringUtil.nvl(req.getParameter("id"), "id1");
+		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
+		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
+		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-07-01");
+		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-30");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
+		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
 		
 		searchParam.put("id".toString(), id);
 		searchParam.put("page_size".toString(), pageSize);
