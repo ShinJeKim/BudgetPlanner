@@ -21,6 +21,7 @@
 	position: absolute;
 	background-color: white;
 	min-width: 200px;
+	z-index: 1;
 	
 }
 .datepicker>div{

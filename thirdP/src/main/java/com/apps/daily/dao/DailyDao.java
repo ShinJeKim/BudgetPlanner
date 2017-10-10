@@ -1,5 +1,9 @@
 package com.apps.daily.dao;
 
-public interface DailyDao {
+import com.apps.common.DTO;
+import com.apps.common.WorkDiv;
 
+public interface DailyDao extends WorkDiv{
+	
+	public abstract DTO do_searchOne(DTO dto);
 }
