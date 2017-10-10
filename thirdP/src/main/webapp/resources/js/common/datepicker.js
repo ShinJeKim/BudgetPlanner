@@ -618,13 +618,18 @@
 			}
 			
 			$('#currentDate').val(options.year+"."+options.month+"."+options.day).trigger('change');
-			
-			if(($('#reg_dt').val() != "") && ($('#reg_dt').val() != undefined)){
-				$('#currentDate').val($('#reg_dt').val()).trigger('change');
-			}else if(($('#reg_dt').val() == "" ) && ($('#reg_dt').val() != undefined)){
-				$('#reg_dt').val($('#currentDate').val()).trigger('change');
+			if($('#reg_dt').val() != undefined){
+				if($('#reg_dt').val() != ""){
+					if($('#loadWork').val() == "reload"){
+						$('#currentDate').val($('#reg_dt').val()).trigger('change');
+						$('#loadWork').val("normal");
+					}else{
+						$('#reg_dt').val($('#currentDate').val()).trigger('change');
+					}		 
+				}else{
+					$('#reg_dt').val($('#currentDate').val()).trigger('change');
+				}
 			}
-			
 			var seperate = element.find('#currentDate').val().split('.');
 				var y = seperate[0];
 				options.year = y;
