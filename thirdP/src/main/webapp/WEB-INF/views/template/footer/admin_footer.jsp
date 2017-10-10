@@ -3,20 +3,16 @@
 <div class="main_menus">
 	<ul>
 		<li class="menu">
-			<input class="main_selector" type="radio" name="main_menu" id="BudgetPlanner">
-			<label class="menu-label" for="daily"><a href="#">가계부</a></label>
+			<input class="main_selector" type="radio" name="main_menu" id="category">
+			<label class="menu-label" for="category"><a href="#">카테고리</a></label>
 		</li>
 		<li class="menu">
-			<input class="main_selector" type="radio" name="main_menu"  id="chart">
-			<label class="menu-label" for="monthly"><a href="#">통계</a></label>
-		</li>
-		<li class="menu">
-			<input class="main_selector" type="radio" name="main_menu" id="mypage">
-			<label class="menu-label" for="category"><a href="#">내정보</a></label>
+			<input class="main_selector" type="radio" name="main_menu"  id="userList">
+			<label class="menu-label" for="userList"><a href="#">유저리스트</a></label>
 		</li>
 		<li class="menu">
 			<input class="main_selector" type="radio" name="main_menu" id="logout">
-			<label class="menu-label" for="category"><a href="#">logout</a></label>
+			<label class="menu-label" for="logout"><a href="#">logout</a></label>
 		</li>
 	</ul>
 </div>

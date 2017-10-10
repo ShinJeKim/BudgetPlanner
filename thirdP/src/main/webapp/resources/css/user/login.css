@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+#loginfrm{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+#loginfrm div{
+	display: inline-block;
+	width: 100%;
+}
+#logo{
+	font-size: 4rem;
+}

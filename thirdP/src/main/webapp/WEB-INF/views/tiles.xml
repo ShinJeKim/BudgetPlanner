@@ -5,6 +5,20 @@
 			"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+	<!-- 디폴트 레이아웃 -->
+	<definition name="default" template="/WEB-INF/views/layouts/default.jsp">
+		<put-attribute name="script" value="" />
+		<put-attribute name="style" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="none-header" template="/WEB-INF/views/layouts/mypage.jsp">
+		<put-attribute name="script" value="" />
+		<put-attribute name="style" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+	
 	<definition name="budget" template="/WEB-INF/views/layouts/budget.jsp">
 		<put-attribute name="script" value="" />
 		<put-attribute name="style" value="" />
@@ -13,6 +27,28 @@
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer/user_footer.jsp" />
 	</definition>
 	
+	<definition name="admin" extends="none-header">
+		<put-attribute name="script" value="" />
+		<put-attribute name="style" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer/admin_footer.jsp" />
+	</definition>
+		
+	<!-- 로그인 및 회원가입 -->
+	<definition name="login" extends="default">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/login_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/login_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/user/login.jsp" />
+	</definition>
+	
+	<definition name="createUser" extends="default">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/createUser_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/createUser_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/user/createUser.jsp" />
+	</definition>
+	
+	
+	<!--가계부기능 -->
 	<definition name="daily" extends="budget">
 		<put-attribute name="script" value="/WEB-INF/views/template/script/daily_script.jsp" />
 		<put-attribute name="style" value="/WEB-INF/views/template/style/daily_style.jsp" />
@@ -30,4 +66,34 @@
 		<put-attribute name="style" value="/WEB-INF/views/template/style/category_style.jsp" />
 		<put-attribute name="body" value="/WEB-INF/views/items/budget/category.jsp" />
 	</definition>
+	
+	<!-- 차트 -->
+	<definition name="chart" extends="budget">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/chart_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/chart_style.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header/chart_header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/budget/chart.jsp" />
+	</definition>
+	
+	<!-- 마이페이지 -->
+	<definition name="mypage" extends="none-header">
+		<put-attribute name="script" value="" />
+		<put-attribute name="style" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer/user_footer.jsp" />
+	</definition>
+	
+	<!-- 관리자페이지 -->
+	<definition name="categoryUpdate" extends="admin">
+		<put-attribute name="script" value="" />
+		<put-attribute name="style" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+	<definition name="userList" extends="admin">
+		<put-attribute name="script" value="" />
+		<put-attribute name="style" value="" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
 </tiles-definitions>

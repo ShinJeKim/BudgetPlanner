@@ -4,19 +4,19 @@
 	<ul>
 		<li class="menu">
 			<input class="main_selector" type="radio" name="main_menu" id="BudgetPlanner">
-			<label class="menu-label" for="daily"><a href="#">가계부</a></label>
+			<label class="menu-label" for="BudgetPlanner"><a href="/apps/budget/daily.do">가계부</a></label>
 		</li>
 		<li class="menu">
 			<input class="main_selector" type="radio" name="main_menu"  id="chart">
-			<label class="menu-label" for="monthly"><a href="#">통계</a></label>
+			<label class="menu-label" for="chart"><a href="/apps/chart.do">통계</a></label>
 		</li>
 		<li class="menu">
 			<input class="main_selector" type="radio" name="main_menu" id="mypage">
-			<label class="menu-label" for="category"><a href="#">내정보</a></label>
+			<label class="menu-label" for="mypage"><a href="/apps/mypage.do">내정보</a></label>
 		</li>
 		<li class="menu">
 			<input class="main_selector" type="radio" name="main_menu" id="logout">
-			<label class="menu-label" for="category"><a href="#">logout</a></label>
+			<label class="menu-label" for="logout"><a href="/apps/logout.do">logout</a></label>
 		</li>
 	</ul>
 </div>

@@ -40,46 +40,49 @@ public class DailyController {
 	
 	//헤더적용 페이지
 	@RequestMapping(value="budget/daily.do") 
-	public ModelAndView daily(HttpServletRequest req,HttpSession session) {
-		String id = "id1";
-		session.setAttribute("ID", id);
+	public ModelAndView daily(HttpServletRequest req,HttpServletResponse res,HttpSession session) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		DailyVO inVO = new DailyVO();
-		inVO.setId(session.getAttribute("ID").toString());
-		if(req.getParameter("reg_dt") != null && req.getParameter("loadWork").equals("normal")){
-			inVO.setReg_dt(req.getParameter("reg_dt"));
-			mav.addObject("loadWork", "reload");
-		}else{
-			inVO.setReg_dt("");
-			mav.addObject("loadWork", "normal");
-		}
-		mav.addObject("reg_dt",inVO.getReg_dt());
-		log.debug("------------------");
-		log.debug("0: "+inVO);
-		log.debug("------------------");
-		List<DailyVO> list = (List<DailyVO>)dailySvc.do_search(inVO);
-		log.debug("------------------");
-		log.debug("3: "+ list);
-		log.debug("------------------");
-		int total_in = 0;
-		int total_out = 0;
-		int total_sum = 0;
-		if(list.size()>0){
-			for(int i=0;i<list.size();i++){
-				int thisusage = list.get(i).getUsage();
-				if(thisusage<0){
-					total_out += (thisusage*-1);
-				}else{
-					total_in += thisusage;
-				}
+		if(session.getAttribute("ID") != null){
+			inVO.setId(session.getAttribute("ID").toString());
+			if(req.getParameter("reg_dt") != null && req.getParameter("loadWork").equals("normal")){
+				inVO.setReg_dt(req.getParameter("reg_dt"));
+				mav.addObject("loadWork", "reload");
+			}else{
+				inVO.setReg_dt("");
+				mav.addObject("loadWork", "normal");
 			}
-			total_sum = Math.abs(total_in - total_out);
-		}
-		mav.addObject("total_in",total_in);
-		mav.addObject("total_out",total_out);
-		mav.addObject("total_sum",total_sum);
-		mav.addObject("list",list );
-		mav.setViewName("daily");
+			mav.addObject("reg_dt",inVO.getReg_dt());
+			log.debug("------------------");
+			log.debug("0: "+inVO);
+			log.debug("------------------");
+			List<DailyVO> list = (List<DailyVO>)dailySvc.do_search(inVO);
+			log.debug("------------------");
+			log.debug("3: "+ list);
+			log.debug("------------------");
+			int total_in = 0;
+			int total_out = 0;
+			int total_sum = 0;
+			if(list.size()>0){
+				for(int i=0;i<list.size();i++){
+					int thisusage = list.get(i).getUsage();
+					if(thisusage<0){
+						total_out += (thisusage*-1);
+					}else{
+						total_in += thisusage;
+					}
+				}
+				total_sum = Math.abs(total_in - total_out);
+			}
+			mav.addObject("total_in",total_in);
+			mav.addObject("total_out",total_out);
+			mav.addObject("total_sum",total_sum);
+			mav.addObject("list",list );
+			mav.setViewName("daily");
+		}else{
+			res.sendRedirect("../main.do");
+			mav.setViewName("login");
+		}	
 		return mav;
 	}
 	

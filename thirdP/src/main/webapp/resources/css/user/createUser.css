@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+#createFrm{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+#createFrm>div{
+	margin-left: 40%;
+	text-align: left;
+}
