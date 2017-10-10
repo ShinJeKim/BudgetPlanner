@@ -1,30 +1,37 @@
 <%@page import="com.apps.common.StringUtil"%>
 <%
-/* 	//상수 paging bottom count
+/*
+<받아와야될 인자 List>
+1. page_num
+2. page_size
+3. mst_ct_id
+4. dtl_ct_id
+5. start_date
+6. end_date
+7. id
+*/
+ 	//상수 paging bottom count
 	int bottomCount = 10;
 
 	//for default element
 	String page_num = "1";
 	String page_size = "10";
-	int totalCnt = 0;
-	String start_date = "";
-	String end_date = "";
-	String id = "";
+	String totalCnt = "";
+	String start_date = "2017-07-01";
+	String end_date = "2017-09-28";
+	String id = "id1";
+	String mst_ct_id = "";
+	String dtl_ct_id = "";
 
 	//initializing default element
 	page_num = StringUtil.nvl(request.getParameter("page_num"), "1");
 	page_size = StringUtil.nvl(request.getParameter("page_size"), "10");
-
-
-	//parseInt for paging
-	int oPage_size = Integer.parseInt(page_size);
-	int oPage_num = Integer.parseInt(page_num);
-
-	totalCnt = Integer.parseInt(StringUtil.nvl(request.getAttribute("totalCnt").toString(), "0")); */
-	
+	//totalCnt = StringUtil.nvl(request.getAttribute("totalCnt").toString(), "");
 	
 	// 카테고리 param 받아오기
-	String mstCtId = StringUtil.nvl(request.getParameter("mst_ct_id"),"10");
+	mst_ct_id = StringUtil.nvl(request.getParameter("mst_ct_id"),""); 
+	//String dtlList = StringUtil.nvl(request.getParameter("dtlList"), "");
+	
 	
 %>
 <%
@@ -38,112 +45,137 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- 부트스트랩 -->
-<link href="<%=contextPath%>/resources/css/bootstrap.css"
-	rel="stylesheet">
-<link href="<%=contextPath%>/resources/css/bootstrap-theme.min.css"
-	rel="stylesheet">
-<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-<script type="text/javascript"
-	src="<%=contextPath%>/resources/js/jquery-3.2.1.js"></script>
-<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-<script src="<%=contextPath%>/resources/js/bootstrap.min.js"></script>
+
 
 <title>카테고리별 조회</title>
 
 <script>
+
 	$(document).ready(function(){
+		
+		 $('#date').datepicker({
+			 type	: 'y',
+			 lang	: 'ko'
+		 });
+		$('#category').attr('checked', true);
+		$('#BudgetPlanner').attr('checked', true);
+		$('#currentDate').change(function(){
+			var thisDate = $('#currentDate').val().toString().split(".");
+			var selectedDate = thisDate[0]+thisDate[1]+thisDate[2];
+			console.log(selectedDate);
+		});
+		
 		console.log("ready: ");
 		
-		// do_searchCategory
-		//master 선택시
-		$(#'masterList').change(function(){ // master 리스트값 변경시
-			onSelectChange($(this),$('#detailList')); // detail 리스트를 업데이트
-		});
-
-
-		// SelectBox 값이 변경되었을때 사용하는 이벤트.
-		// mstElement값을 보내고, dtlElement값을 업데이트함.
-		// JSON 방식으로 return data를 얻어오는 Ajax 방식
-		function onSelectChange(mstElement, dtlElement)
-		{
-			if(mstElement != null){  // mstElement null이 아니면 선택된 값을 얻어오고,
-				var selectedValue = mstElement.val(); 
-				if(selectedValue == ""){ // srcElement가 ""이면 return
-					return;
-				}
-			}
-			
-			 //modelandview를 json으로 바꿔서 아래에 넘김
-			// id의 조합으로 파일명 사용.
-			$.getJSON("action_" + mstElement.attr("id") + "_" + dtlElement.attr("id") + ".jsp",
-				{value:selectedValue},	// 전달되는 인자, 선택된 값.
-				function(data){
-					dtlElement.empty();	// detail 리스트를 일단 비운뒤,
-					
-					// 넘겨받은 data를 추가함.
-					for(cat index=0; index<data.length; index++){
-						dtlElement.append("<option value='" + data[index].id + "'>" + data[index].value + "</option>");
+			$('#mst_ct_id').change(function(){
+				var mst_ct_id = $('#mst_ct_id').val();
+				console.log("1. mst_ct_id: "+mst_ct_id);
+				$.ajax({
+					type: "GET",
+					url: "do_searchCategory.do",
+					dataType: "JSON",
+					data:{
+						"mst_ct_id" : $('#mst_ct_id').val()
+					},
+					success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
+						console.log("2. mst_ct_id: "+mst_ct_id);
+						console.log("data: "+data);
+						do_searchCategory(mst_ct_id);
+	
+						var dtlList = "${dtlList}";
+						console.log("dtlList: "+"${dtlList}");
+						var htmlval ="";
+						for(var i=0;i<data.length;i++){
+							console.log(data[i]);
+							htmlval += "<option value="+i+">"+data[i]+"</option>"
+						}
+						$('#dtlList').html(htmlval);
+					},
+					complete: function(data){// 무조건 수행
+						
+					},
+					error: function(xhr, status, error){
+						console.log("error: "+error);
 					}
-					dtlElement.removeAttr("disabled"); // detail 리스트 활성화.
-				}
-			
-		}
+				});// --ajax closed
+			});
 		
-		// do_searchOne
-		function do_searchOne(id){
-			console.log("id: "+id);
-			if(id == null)
+
+ 		// do_searchCategory
+		function do_searchCategory(){
+			console.log("3. mst_ct_id: "+mst_ct_id.value);
+			if(mst_ct_id != null){
+				var frm = document.frm;
+			}else{
 				return;
-			var fm = document.frm;
-			fm.action = "do_searchList.do"
-			fm.id.value = id;
-			fm.submit();
-		}
-	});
+			}
+		} 
+
+	});//-- jQuery closed
 </script>
 
-<!-- Head Div -->
-<div></div>
-<!--// Head Div closed-->
 </head>
 <body>
-	<!-- Body Div -->
-	<div>
-		<input data-provide="datepicker">
-		<div class="input-group date" data-provide="datepicker">
-			<input type="text" class="form-control">
-			<div class="input-group-addon">
-				<span class="glyphicon glyphicon-th"></span>
-			</div>
+<div style="background-color: white; height: 100%; width: 100%;">
+	<!-- div 1: 검색조건, 조회버튼, 엑셀다운로드 || div 2: 검색결과 list || div 3: Paging -->
+		<!-- div 1 for search condition -->
+		<div style="background-color: aliceblue; height: 20%;">
+				<div id="layout">
+					<div id="header" style="padding: 10px; margin: 10px;">
+						<div style="float: left; width: 50%;">상위분류
+							<select name="mst_ct_id" id="mst_ct_id">
+								<option value="">전체</option>
+								<option value="10" <%if(mst_ct_id.equals("10")) out.print("selected='selected'"); %>>지출</option>
+								<option value="20" <%if(mst_ct_id.equals("20")) out.print("selected='selected'"); %>>수입</option>
+							</select>하위분류
+							<select name="dtlList" id="dtlList">
+			 				<%-- <% 
+								String dtlListSplit[] = dtlList.split(", ");
+								int i = 0;				
+								for(i=0; i<dtlListSplit.length;i++){		
+								%>
+								<option value="<%=i%>"><%dtlListSplit[i].toString();%></option>
+								<%
+								} 
+								%> --%>
+							</select>
+						</div>
+						<div style="float: right; width: 40%">
+							<select name="start_date">
+								<option value="">start_date</option>
+							</select>
+							<select name="end_date">
+								<option value="">end_date</option>
+							</select>
+						</div>
+					</div>
+					<div id="content" style="padding: 10px; margin: 10px;">
+						<div style="float: left; width: 60%">param 받아서 text에 넣기</div>
+						<div style="float: right; width: 30%">
+							<button id=do_searchList onclick="javascript:do_searchList();">조회</button>
+						</div>
+					</div>
+					<div id="footer" style="padding: 10px; margin: 10px;">
+						<div style="float: left; width: 60%">엑셀 다운로드</div>
+					</div>
+				</div>
+
 		</div>
-
-		<!-- form -->
-		<form name="frm" method="post" action="do_searchList.do">
-			<%-- <input type="hidden" name="page_num" id="page_num" value="<%=page_num%>" /> --%>
-			<!-- Search table -->
-			<table>
-				<tr>
-					<td><select id="masterList" class="ui-select" name="master"></select></td>
-					<td><select id="detailList" class="ui-select" name="detail"></select></td>
-					<td>전체</td>
-				</tr>
-
-				<tr>
-				</tr>
-
-				<tr>
-				</tr>
-			</table>
-			<!--// Search table closed-->
-		</form>
-		<!--// form closed-->
-	</div>
-	<!--// Body Div closed-->
+		<!--// div 1 closed-->
+		
+		<!-- div 2 for searchList-->
+		<div style="background-color: Linen; height: 75%;">
+		
+		</div>
+		<!--// div 2 closed-->
+		
+		<!-- div 3 -->
+		<div style="background-color: LightSteelBlue; height: 5%;">
+			for PAGING
+		</div>
+		<!--// div 3 closed-->
+</div>
 </body>
-<!-- Footer Div -->
-<div></div>
-<!--// Footer Div closed-->
 </html>
 
 

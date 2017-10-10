@@ -56,10 +56,10 @@ public class CategoryTest {
 		log.debug("=================================");
 	}
 	
-	//@Test
+	@Test
 	public void do_searchCategory() throws Exception{
 		MockHttpServletRequestBuilder createMessage
-												= post("/items/do_searchCategory.do")
+												= get("/budget/do_searchCategory.do")
 														.param("mst_ct_id", "10");
 			mockMvc.perform(createMessage)
 				.andDo(print())
@@ -68,10 +68,10 @@ public class CategoryTest {
 		
 	}
 	
-	@Test
-	public void do_searchOne() throws Exception{
+	//@Test
+	public void do_searchList() throws Exception{
 		MockHttpServletRequestBuilder createMessage
-												= post("/items/do_searchOne.do")
+												= get("/budget/do_searchList.do")
 														.param("id", "id1")
 														.param("page_size", "10")
 														.param("page_num", "1")
