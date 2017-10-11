@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <form id="updateFrm" method="post" action="do_save.do">
 	<div>
 		<!-- 아이디 -->
@@ -8,7 +9,6 @@
 			<div>
 				<input type="text" class="onlyAlphabetAndNumber" id="id" name="id" data-rule-required="true"
 					placeholder="12자 이내의 알파벳, 숫자만 입력 가능합니다." maxlength="12"/>
-				<input type="button" id="checkUserId" name="checkUserId" value="중복확인"/>	
 			</div>
 		</div>
 		<!-- 비밀번호 -->
@@ -61,8 +61,9 @@
 		</div>
 		<!-- 버튼 -->
 		<div>
+			<input type="button" id="delete" value="회원탈퇴" />
 			<input type="button" id="cancle" value="취소" onclick="history.go(-1)"/>
-			<input type="button" id="doSave" value="가입" />
+			<input type="button" id="save" value="저장" />
 		</div>
 	</div>
 </form>
