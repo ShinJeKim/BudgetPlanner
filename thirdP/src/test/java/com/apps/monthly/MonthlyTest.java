@@ -57,13 +57,4 @@ public class MonthlyTest {
 		.andExpect(status().is2xxSuccessful());
 	}
 	
-	@Test
-	public void get_weekday() throws Exception{
-		MockHttpServletRequestBuilder createMessage =
-				post("/monthly/get_weekday.do")
-				.param("month", "201709");
-		
-		mockMvc.perform(createMessage).andDo(print())
-		.andExpect(status().is2xxSuccessful());
-	}
 }

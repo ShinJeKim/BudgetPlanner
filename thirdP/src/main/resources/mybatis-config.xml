@@ -16,6 +16,13 @@
 		
 		<!-- MonthlyVO typeAliases -->
 		<typeAlias type="com.apps.montly.domain.MonthlyVO" alias="MonthlyVO"/>
+		
+		<!-- WeekVO typeAliases -->
+		<typeAlias type="com.apps.montly.domain.WeekVO" alias="WeekVO"/>
+		
+		<!-- TotalDataVO typeAliases -->
+		<typeAlias type="com.apps.montly.domain.TotalDataVO" alias="TotalDataVO"/>
+		
 	</typeAliases>
 	
 </configuration>
