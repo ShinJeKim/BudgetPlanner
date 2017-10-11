@@ -63,6 +63,8 @@ $(document).ready(function(){
            	$('#dailyList').html(datahtml);	
             },
             complete: function(data){
+            	dd = $('#reg_dt').val().split(".");
+            	$('#nowDate>label').html(dd[2]);	
         	 var total_out = 0;
            	 var total_in = 0;
            	 var total_sum = 0;

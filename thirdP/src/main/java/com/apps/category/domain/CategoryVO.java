@@ -12,6 +12,8 @@ public class CategoryVO extends DTO {
 	private String mod_dt; // 수정일
 	private String mst_ct_id; // (상위 카테고리)수입or지출
 	private String dtl_ct_id; // 하위카테고리
+	private String mst_ct_nm; // (상위 카테고리)수입or지출
+	private String dtl_ct_nm; // 하위카테고리
 
 	private String start_date;
 	private String end_date;
@@ -19,6 +21,8 @@ public class CategoryVO extends DTO {
 	public CategoryVO() {
 
 	}
+
+	
 
 	/**
 	 * @param id
@@ -33,7 +37,8 @@ public class CategoryVO extends DTO {
 	 * @param end_date
 	 */
 	public CategoryVO(String id, String daily_code, String usage, String content, String reg_dt, String mod_dt,
-			String mst_ct_id, String dtl_ct_id, String start_date, String end_date) {
+			String mst_ct_id, String dtl_ct_id, String mst_ct_nm, String dtl_ct_nm, String start_date,
+			String end_date) {
 		super();
 		this.id = id;
 		this.daily_code = daily_code;
@@ -43,6 +48,8 @@ public class CategoryVO extends DTO {
 		this.mod_dt = mod_dt;
 		this.mst_ct_id = mst_ct_id;
 		this.dtl_ct_id = dtl_ct_id;
+		this.mst_ct_nm = mst_ct_nm;
+		this.dtl_ct_nm = dtl_ct_nm;
 		this.start_date = start_date;
 		this.end_date = end_date;
 	}
@@ -87,6 +94,14 @@ public class CategoryVO extends DTO {
 	public void setEnd_date(String end_date) {
 		this.end_date = end_date;
 	}
+	public void setMst_ct_nm(String mst_ct_nm) {
+		this.mst_ct_nm = mst_ct_nm;
+	}
+	public void setDtl_ct_nm(String dtl_ct_nm) {
+		this.dtl_ct_nm = dtl_ct_nm;
+	}
+
+
 
 	// Getter
 	public String getId() {
@@ -128,13 +143,19 @@ public class CategoryVO extends DTO {
 	public String getEnd_date() {
 		return end_date;
 	}
+	public String getMst_ct_nm() {
+		return mst_ct_nm;
+	}
+	public String getDtl_ct_nm() {
+		return dtl_ct_nm;
+	}
 
-	// toString
 	@Override
 	public String toString() {
 		return "CategoryVO [id=" + id + ", daily_code=" + daily_code + ", usage=" + usage + ", content=" + content
 				+ ", reg_dt=" + reg_dt + ", mod_dt=" + mod_dt + ", mst_ct_id=" + mst_ct_id + ", dtl_ct_id=" + dtl_ct_id
-				+ ", start_date=" + start_date + ", end_date=" + end_date + "]";
+				+ ", mst_ct_nm=" + mst_ct_nm + ", dtl_ct_nm=" + dtl_ct_nm + ", start_date=" + start_date + ", end_date="
+				+ end_date + "]";
 	}
 
 }
