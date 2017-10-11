@@ -144,8 +144,8 @@ public class CategoryController {
 		String id = StringUtil.nvl(req.getParameter("id"), "id1");
 		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
-		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-07-01");
-		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-30");
+		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-09-21");
+		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-22");
 		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
 		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
 		
@@ -170,10 +170,16 @@ public class CategoryController {
 
 		catVO.setParam(searchParam);
 		
+		
+//		catVO.setId(StringUtil.nvl(req.getParameter("id"), "id1"));
+//		catVO.setStart_date(StringUtil.nvl(req.getParameter("start_date"), "2017-07-01"));
+//		catVO.setEnd_date( StringUtil.nvl(req.getParameter("end_date"), "2017-09-30"));
+//		catVO.setMst_ct_id(StringUtil.nvl(req.getParameter("mst_ct_id"), "10"));
+//		catVO.setDtl_ct_id( StringUtil.nvl(req.getParameter("dtl_ct_id"), "2"));
 		List<CategoryVO> list = catSvc.do_searchList(catVO);
 		
 		Gson gson = new Gson();
-		String searchListt = gson.toJson(list.get(0));
+		String searchListt = gson.toJson(list);
 		log.debug("searchListt: "+searchListt);
 		return searchListt;
 	}

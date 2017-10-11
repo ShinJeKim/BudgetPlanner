@@ -130,34 +130,33 @@ function do_searchCategory(){
 					url:"do_searchListt.do",
 					dataType:"JSON",
 					data:{
-						"id" : 'id1',
-						"page_size" : 10,
-						"page_num" : 1,
-						"start_date" : '2017-07-01',
-						"end_date" : '2017-09-30',
-						"mst_ct_id" : 10,
-						"dtl_ct_id" : 0
+						
 					},
 					success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
 						console.log("success data: "+data);
-					
-						console.log(data.content);
+						console.log("data.length: "+data.length);
+						//console.log("data.content: "+data.content);
+						console.log("data[0].id: "+data[0].id);
+						
 						var datahtml = "";
-						//for(var i=0; data.length; i++){
-							//datahtml += "<table id='listTable'>"
-							//datahtml += "<tbody >"
-							//datahtml += "<tr >"
-							//datahtml += "<td id='c_id' >"+data[i].id+"</td>"
-							//datahtml += "<td id='c_daily_code' >"+data[i].daily_code+"</td>"
-							//datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
-							//datahtml += "<td id='c_content' >"+data[i].content+"</td>"
-							//datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_id+"</td>"
-							//datahtml += "<td id='c_dtl_ct_id' >"+data[i].dtl_ct_id+"</td>"
-							//datahtml += "<td id='c_reg_dt' >"+data[i].c_reg_dt+"</td>"
-							//datahtml += "<td id='c_mod_dt' >"+data[i].c_mod_dt+"</td>"
-							//datahtml += "</tr >"
-							//datahtml += "</tbody >"
-						//}
+						for(var i=0; i<data.length; i++){
+							
+							console.log("data[i].id: "+data[i].mst_ct_id);
+							
+							datahtml += "<tr class='dataList'>"
+							datahtml += "<td id='c_id' >"+data[i].id+"</td>"
+							datahtml += "<td id='c_daily_code' >"+data[i].daily_code+"</td>"
+							datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
+							datahtml += "<td id='c_content' >"+data[i].content+"</td>"
+							datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
+							datahtml += "<td id='c_dtl_ct_id' >"+data[i].dtl_ct_nm+"</td>"
+							datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
+							datahtml += "<td id='c_mod_dt' >"+data[i].mod_dt+"</td>"
+							datahtml += "</tr >"
+							
+						}
+						$('#tbody').html(datahtml);
+						//console.log("datahtml: "+datahtml);
 					},
 					complete: function(data){// 무조건 수행
 						
@@ -232,7 +231,7 @@ function do_searchCategory(){
 		<!-- List table -->
 		<table id="listTable" class="table table-bordered table-hover table-striped"  border="1" cellpadding="1" cellspacing="0">
 		<thead>
-			<th class="text-center">No.</th>
+			<!-- <th class="text-center">No.</th> -->
 			<th class="text-center">아이디</th>
 			<th class="text-center">식별코드</th>
 			<th class="text-center">금액</th>
@@ -242,7 +241,7 @@ function do_searchCategory(){
 			<th class="text-center">등록일</th>
 			<th class="text-center">수정일</th>
 		</thead>
-		<tbody>
+		<tbody id="tbody">
 		<c:choose>
 			<c:when test="${list.size()>0 }">
 				<c:forEach var="CategoryVO" items="${list }">
