@@ -11,7 +11,7 @@
 				name="id" id="id" maxlength="15" />
 		</div>
 		<div>		
-			<input type="text" placeholder="비밀번호" required autofocus
+			<input type="password" placeholder="비밀번호" required autofocus
 				name="password" id="password" maxlength="15"/>
 		</div>
 		<div>
@@ -24,6 +24,7 @@
 		</div>
 		<div>
 			<a href="createUser.do">회원가입</a>
+			/ <a href="missing.do">ID/PW 찾기</a>
 		</div>
 	</div>
 </form>

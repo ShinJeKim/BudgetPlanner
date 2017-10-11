@@ -61,9 +61,13 @@ public class UserController {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginUser", outVO);
 			session.setAttribute("ID", outVO.getId());
-			res.sendRedirect("budget/daily.do");
-			modelAndView.setViewName("daily");
-			
+			if(outVO.getAdmin_flag() == 1){
+				res.sendRedirect("admin/category.do");
+				modelAndView.setViewName("admin");
+			}else{
+				res.sendRedirect("budget/daily.do");
+				modelAndView.setViewName("daily");
+			}
 		} else {
 			
 			int passwordFlag = userSvc.do_check_passwd(inVO);
@@ -143,6 +147,39 @@ public class UserController {
 		res.sendRedirect("main.do");
 		
 	}
+	
+	// ID/PW 찾기
+	@RequestMapping(value="missing.do") 
+	public String missing(HttpServletRequest request) {
+		
+		log.debug("0=====================================");
+		log.debug("missing()");
+		log.debug("0=====================================");
+		
+		return "missing";
+	}
+	
+	//마이페이지 호출
+	@RequestMapping(value="mypage.do") 
+	public String identify(HttpServletRequest request) {
+		
+		log.debug("0=====================================");
+		log.debug("mypage()");
+		log.debug("0=====================================");
+		
+		return "identify";
+	}
+	
+	@RequestMapping(value="updateUser.do") 
+	public String updateUser(HttpServletRequest request) {
+		
+		log.debug("0=====================================");
+		log.debug("updateUser()");
+		log.debug("0=====================================");
+		
+		return "updateUser";
+	}
+	
 	
 	/*원본
 	@RequestMapping(value="user/login.do") 

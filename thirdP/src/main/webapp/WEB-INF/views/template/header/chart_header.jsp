@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<div id="date">
-</div>
-<div id="balance">
-	<label>잔고</label>
-</div>
+    pageEncoding="UTF-8"%>    
 <div class="sub_menus">
 	<ul>
 		<li class="sub_menu">
