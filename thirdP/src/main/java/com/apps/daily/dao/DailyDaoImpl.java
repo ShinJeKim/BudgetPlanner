@@ -64,7 +64,7 @@ public class DailyDaoImpl implements DailyDao{
 	@Override
 	public int do_update(DTO dto){
 		int flag = 0;
-		String statement = namespace +".do_save";
+		String statement = namespace +".do_update";
 		DailyVO inVO = (DailyVO)dto;
 		flag = sqlSession.update(statement, inVO);
 		
