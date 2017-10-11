@@ -61,7 +61,7 @@
 		$('#BudgetPlanner').attr('checked', true);
 		$('#currentDate').change(function(){
 			var thisDate = $('#currentDate').val().toString().split(".");
-			var selectedDate = thisDate[0]+thisDate[1]+thisDate[2];
+			var selectedDate = thisDate[0];
 			console.log(selectedDate);
 		});
 		
@@ -92,7 +92,7 @@
 						$('#dtlList').html(htmlval);
 					},
 					complete: function(data){// 무조건 수행
-						
+						console.log($('#mst_ct_id').val());
 					},
 					error: function(xhr, status, error){
 						console.log("error: "+error);
