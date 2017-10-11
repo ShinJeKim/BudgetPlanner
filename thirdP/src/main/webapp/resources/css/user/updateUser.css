@@ -1,14 +1,14 @@
 @CHARSET "UTF-8";
-
-#identifyFrm{
+#updateFrm{
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
 }
-#identifyFrm div{
-	display: inline-block;
-	width: 100%;
+#updateFrm>div{
+	margin-left: 20%;
+	text-align: left;
 }
+
 
 /*footer 부분*/
 	.footer{

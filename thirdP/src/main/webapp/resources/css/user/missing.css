@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+#missingIDFrm{
+	display: table-row;
+	text-align: center;
+}
+#missingIDFrm div{
+	display: inline-block;
+	width: 100%;
+}
+#missingIDFrm>div{
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+}
+#missingPWFrm{
+	display: table-row;
+	text-align: center;
+}
+#missingPWFrm div{
+	display: inline-block;
+	width: 100%;
+}
+#missingPWFrm>div{
+	display: table-cell;
+	vertical-align: middle;
+	width: 100%;
+}

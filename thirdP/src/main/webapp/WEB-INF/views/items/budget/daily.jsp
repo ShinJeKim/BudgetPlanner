@@ -37,6 +37,6 @@
 			<div id="blank"></div>
 		</div>
 	</form>
-	<div id="plus"><label id="icon">+</label></div>
+	<div id="plus"><label id="icon"><a href="do_save.do">+</a></label></div>
 </div>
 	

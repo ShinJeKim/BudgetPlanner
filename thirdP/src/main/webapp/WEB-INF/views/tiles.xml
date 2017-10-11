@@ -47,6 +47,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/items/user/createUser.jsp" />
 	</definition>
 	
+	<definition name="missing" extends="default">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/missing_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/missing_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/user/missing.jsp" />
+	</definition>
 	
 	<!--가계부기능 -->
 	<definition name="daily" extends="budget">
@@ -67,19 +72,33 @@
 		<put-attribute name="body" value="/WEB-INF/views/items/budget/category.jsp" />
 	</definition>
 	
+	<definition name="save" extends="budget">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/save_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/save_style.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/template/header/save_header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/budget/save.jsp" />
+	</definition>
+	
 	<!-- 차트 -->
 	<definition name="chart" extends="budget">
 		<put-attribute name="script" value="/WEB-INF/views/template/script/chart_script.jsp" />
 		<put-attribute name="style" value="/WEB-INF/views/template/style/chart_style.jsp" />
 		<put-attribute name="header" value="/WEB-INF/views/template/header/chart_header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/items/budget/chart.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/chart/chart.jsp" />
 	</definition>
 	
 	<!-- 마이페이지 -->
-	<definition name="mypage" extends="none-header">
-		<put-attribute name="script" value="" />
-		<put-attribute name="style" value="" />
-		<put-attribute name="body" value="" />
+	<definition name="identify" extends="none-header">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/mypage_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/mypage_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/user/mypage.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer/user_footer.jsp" />
+	</definition>
+	
+	<definition name="updateUser" extends="none-header">
+		<put-attribute name="script" value="/WEB-INF/views/template/script/updateUser_script.jsp" />
+		<put-attribute name="style" value="/WEB-INF/views/template/style/updateUser_style.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/items/user/updateUser.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer/user_footer.jsp" />
 	</definition>
 	

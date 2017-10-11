@@ -143,7 +143,7 @@
 				$("#balance").focus();
 				return false;
 			}
-			
+			alert("회원가입에 성공하였습니다.")
 			$("#createFrm").submit();
 		});//do_save
 	});//document
