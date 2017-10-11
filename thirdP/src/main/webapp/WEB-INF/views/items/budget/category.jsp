@@ -14,9 +14,9 @@
 	int bottomCount = 10;
 
 	//for default element
-	String page_num = "1";
-	String page_size = "10";
-	String totalCnt = "";
+	int page_num = 1;
+	int page_size = 10;
+	//int totalCnt;
 	String start_date = "2017-07-01";
 	String end_date = "2017-09-28";
 	String id = "id1";
@@ -24,9 +24,9 @@
 	String dtl_ct_id = "";
 
 	//initializing default element
-	page_num = StringUtil.nvl(request.getParameter("page_num"), "1");
-	page_size = StringUtil.nvl(request.getParameter("page_size"), "10");
-	//totalCnt = StringUtil.nvl(request.getAttribute("totalCnt").toString(), "");
+	page_num = Integer.parseInt(StringUtil.nvl(request.getParameter("page_num"), "1"));
+	page_size = Integer.parseInt(StringUtil.nvl(request.getParameter("page_size"), "10"));
+	//totalCnt = Integer.parseInt(StringUtil.nvl(request.getAttribute("totalCnt").toString(), ""));
 	
 	// 카테고리 param 받아오기
 	mst_ct_id = StringUtil.nvl(request.getParameter("mst_ct_id"),""); 
@@ -51,6 +51,26 @@
 
 <script>
 
+//paging 이동
+function do_search_page(url, PAGE_NUM) {
+	console.log(url + "\t" + PAGE_NUM);
+	var frm = document.frm;
+	frm.PAGE_NUM.value = PAGE_NUM;
+	frm.action = url;
+	frm.submit();
+}
+
+//do_searchCategory
+function do_searchCategory(){
+	console.log("3. mst_ct_id: "+mst_ct_id.value);
+	if(mst_ct_id != null){
+		var frm = document.frm;
+	}else{
+		return;
+	}
+} 
+
+
 	$(document).ready(function(){
 		
 		 $('#date').datepicker({
@@ -67,6 +87,7 @@
 		
 		console.log("ready: ");
 		
+			// change_category
 			$('#mst_ct_id').change(function(){
 				var mst_ct_id = $('#mst_ct_id').val();
 				console.log("1. mst_ct_id: "+mst_ct_id);
@@ -98,19 +119,56 @@
 						console.log("error: "+error);
 					}
 				});// --ajax closed
-			});
-		
+			});// -- change category closed
+			
+			
+			// do_searchList
+			$("#do_searchList").on("click", function(){
 
- 		// do_searchCategory
-		function do_searchCategory(){
-			console.log("3. mst_ct_id: "+mst_ct_id.value);
-			if(mst_ct_id != null){
-				var frm = document.frm;
-			}else{
-				return;
-			}
-		} 
-
+				$.ajax({
+					type:"POST",
+					url:"do_searchListt.do",
+					dataType:"JSON",
+					data:{
+						"id" : 'id1',
+						"page_size" : 10,
+						"page_num" : 1,
+						"start_date" : '2017-07-01',
+						"end_date" : '2017-09-30',
+						"mst_ct_id" : 10,
+						"dtl_ct_id" : 0
+					},
+					success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
+						console.log("success data: "+data);
+					
+						console.log(data.content);
+						var datahtml = "";
+						//for(var i=0; data.length; i++){
+							//datahtml += "<table id='listTable'>"
+							//datahtml += "<tbody >"
+							//datahtml += "<tr >"
+							//datahtml += "<td id='c_id' >"+data[i].id+"</td>"
+							//datahtml += "<td id='c_daily_code' >"+data[i].daily_code+"</td>"
+							//datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
+							//datahtml += "<td id='c_content' >"+data[i].content+"</td>"
+							//datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_id+"</td>"
+							//datahtml += "<td id='c_dtl_ct_id' >"+data[i].dtl_ct_id+"</td>"
+							//datahtml += "<td id='c_reg_dt' >"+data[i].c_reg_dt+"</td>"
+							//datahtml += "<td id='c_mod_dt' >"+data[i].c_mod_dt+"</td>"
+							//datahtml += "</tr >"
+							//datahtml += "</tbody >"
+						//}
+					},
+					complete: function(data){// 무조건 수행
+						
+					},
+					error: function(xhr, status, error){
+						console.log("error: "+error);
+					}
+				}) // --ajax closed
+			});// --do_searchList closed
+			
+			
 	});//-- jQuery closed
 </script>
 
@@ -129,30 +187,35 @@
 								<option value="20" <%if(mst_ct_id.equals("20")) out.print("selected='selected'"); %>>수입</option>
 							</select>하위분류
 							<select name="dtlList" id="dtlList">
-			 				<%-- <% 
-								String dtlListSplit[] = dtlList.split(", ");
-								int i = 0;				
-								for(i=0; i<dtlListSplit.length;i++){		
-								%>
-								<option value="<%=i%>"><%dtlListSplit[i].toString();%></option>
-								<%
-								} 
-								%> --%>
 							</select>
 						</div>
 						<div style="float: right; width: 40%">
-							<select name="start_date">
-								<option value="">start_date</option>
+							<select name="start_month" id="start_month" >
+							<% 
+							int start_month=1;
+								for(start_month=1; start_month<=12; start_month++){
+							%>
+								<option id="s_month" value="<%=start_month%>"><%=start_month%>월</option>
+							<%
+								}
+							%>
 							</select>
-							<select name="end_date">
-								<option value="">end_date</option>
+							<select name="end_month" id="end_month">
+							<% 
+							int end_month=1;
+								for(end_month=1; end_month<=12; end_month++){
+							%>
+								<option id="e_month" value="<%=end_month%>"><%=end_month%>월</option>
+							<%
+								}
+							%>
 							</select>
 						</div>
 					</div>
 					<div id="content" style="padding: 10px; margin: 10px;">
 						<div style="float: left; width: 60%">param 받아서 text에 넣기</div>
 						<div style="float: right; width: 30%">
-							<button id=do_searchList onclick="javascript:do_searchList();">조회</button>
+							<input type="button" id=do_searchList  value="조회">
 						</div>
 					</div>
 					<div id="footer" style="padding: 10px; margin: 10px;">
@@ -166,12 +229,57 @@
 		<!-- div 2 for searchList-->
 		<div style="background-color: Linen; height: 75%;">
 		
+		<!-- List table -->
+		<table id="listTable" class="table table-bordered table-hover table-striped"  border="1" cellpadding="1" cellspacing="0">
+		<thead>
+			<th class="text-center">No.</th>
+			<th class="text-center">아이디</th>
+			<th class="text-center">식별코드</th>
+			<th class="text-center">금액</th>
+			<th class="text-center">수입/지출</th>
+			<th class="text-center">카테고리</th>
+			<th class="text-center">상세설명</th>
+			<th class="text-center">등록일</th>
+			<th class="text-center">수정일</th>
+		</thead>
+		<tbody>
+		<c:choose>
+			<c:when test="${list.size()>0 }">
+				<c:forEach var="CategoryVO" items="${list }">
+					<form action="category.do" method="POST" name="${CategoryVO.id }">
+						<tr>
+							<td id="c_id" class="text-center"><c:out value="${CategoryVO.id }"></c:out></td>
+							<td id="c_daily_code" class="text-center"><c:out value="${CategoryVO.daily_code }"></c:out></td>
+							<td id="c_usage" class="text-left"><c:out value="${CategoryVO.usage }"></c:out></td>
+							<td id="c_content" class="text-left"><c:out value="${CategoryVO.content }"></c:out></td>
+							<td id="c_mst_ct_id" class="text-left"><c:out value="${CategoryVO.mst_ct_id }"></c:out></td>
+							<td id="c_dtl_ct_id" class="text-left"><c:out value="${CategoryVO.dtl_ct_id }"></c:out></td>
+							<td id="c_reg_dt" class="text-center"><c:out value="${CategoryVO.reg_dt }"></c:out></td>
+							<td id="c_mod_dt" class="text-right"><c:out value="${CategoryVO.mod_dt }"></c:out></td>
+						</tr>
+					</form>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td colspan="99">등록된 게시물이 없습니다</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		</tbody>
+	</table>
+	<!-- // List table closed-->
+		
 		</div>
 		<!--// div 2 closed-->
 		
 		<!-- div 3 -->
 		<div style="background-color: LightSteelBlue; height: 5%;">
-			for PAGING
+<%-- 			<!-- Paging -->
+			<div align="center">
+				<%=StringUtil.renderPaging(totalCnt, page_num, page_size, bottomCount, "do_searchList.do", "do_search_page")%>
+			</div>
+		<!-- // Paging closed  --> --%>
 		</div>
 		<!--// div 3 closed-->
 </div>

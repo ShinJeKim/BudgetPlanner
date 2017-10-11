@@ -2,11 +2,13 @@ package com.apps.category.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,14 +75,16 @@ public class CategoryController {
 	}
 	
 	
-	@RequestMapping(value = "budget/do_searchList.do", method=RequestMethod.GET)
-	public ModelAndView do_searchList(HttpServletRequest req) {
+	@RequestMapping(value = "budget/do_searchList.do", method=RequestMethod.POST)
+	public ModelAndView do_searchList(HttpServletRequest req, HttpSession session) throws IOException{
 		log.debug("=================================");
 		log.debug("do_searchList.do");
 		log.debug("=================================");
+		
 		CategoryVO catVO = new CategoryVO();
 		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 		
+		//catVO.setId(session.getAttribute("id").toString());
 		String id = StringUtil.nvl(req.getParameter("id"), "id1");
 		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
@@ -125,7 +129,54 @@ public class CategoryController {
 
 	
 	
-	
+	@RequestMapping(value="budget/do_searchListt.do", method=RequestMethod.POST
+			, produces="application/json;charset=utf8")
+	@ResponseBody
+	public String do_searchListt(HttpServletRequest req){
+		log.debug("=================================");
+		log.debug("do_searchListt.do");
+		log.debug("=================================");
+		
+		CategoryVO catVO = new CategoryVO();
+		Hashtable<String, String> searchParam = new Hashtable<String, String>();
+		
+		//catVO.setId(session.getAttribute("id").toString());
+		String id = StringUtil.nvl(req.getParameter("id"), "id1");
+		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
+		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
+		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-07-01");
+		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-30");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
+		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
+		
+		searchParam.put("id".toString(), id);
+		searchParam.put("page_size".toString(), pageSize);
+		searchParam.put("page_num".toString(), pageNum);
+		searchParam.put("start_date".toString(), start_date);
+		searchParam.put("end_date".toString(), end_date);
+		searchParam.put("mst_ct_id".toString(), mst_ct_id);
+		searchParam.put("dtl_ct_id".toString(), dtl_ct_id);
+
+		log.debug("searchParam: "+searchParam);
+
+		// request 이름 read
+		Enumeration<String> params = req.getParameterNames();
+		Hashtable<String, String> sParam = new Hashtable<String, String>();
+		while (params.hasMoreElements()) {
+			String name = (String) params.nextElement();
+			req.getParameter(name);
+			sParam.put(name, StringUtil.nvl(req.getParameter(name), ""));
+		}
+
+		catVO.setParam(searchParam);
+		
+		List<CategoryVO> list = catSvc.do_searchList(catVO);
+		
+		Gson gson = new Gson();
+		String searchListt = gson.toJson(list.get(0));
+		log.debug("searchListt: "+searchListt);
+		return searchListt;
+	}
 	
 	
 	
