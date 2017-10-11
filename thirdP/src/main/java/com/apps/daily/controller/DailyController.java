@@ -1,6 +1,8 @@
 package com.apps.daily.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +51,12 @@ public class DailyController {
 				inVO.setReg_dt(req.getParameter("reg_dt"));
 				mav.addObject("loadWork", "reload");
 			}else{
-				inVO.setReg_dt("");
+				Date nowdate = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+				String today = sdf.format(nowdate);
+				log.debug("now:"+nowdate.toString());
+				log.debug(today);
+				inVO.setReg_dt(today);
 				mav.addObject("loadWork", "normal");
 			}
 			mav.addObject("reg_dt",inVO.getReg_dt());
