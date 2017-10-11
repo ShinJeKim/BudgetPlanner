@@ -144,7 +144,7 @@ public class CategoryController {
 		String id = StringUtil.nvl(req.getParameter("id"), "id1");
 		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
-		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-09-21");
+		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
 		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-22");
 		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
 		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
