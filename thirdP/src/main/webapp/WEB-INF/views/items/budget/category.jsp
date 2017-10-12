@@ -15,7 +15,7 @@
 
 	//for default element
 	int page_num = 1;
-	int page_size = 10;
+	//int page_size = 10;
 	//int totalCnt;
 	String start_date = "2017-07-01";
 	String end_date = "2017-09-28";
@@ -25,8 +25,8 @@
 
 	//initializing default element
 	page_num = Integer.parseInt(StringUtil.nvl(request.getParameter("page_num"), "1"));
-	page_size = Integer.parseInt(StringUtil.nvl(request.getParameter("page_size"), "10"));
-	//totalCnt = Integer.parseInt(StringUtil.nvl(request.getAttribute("totalCnt").toString(), ""));
+	//page_size = Integer.parseInt(StringUtil.nvl(request.getParameter("page_size"), "10"));
+	//int totalCnt = Integer.parseInt(StringUtil.nvl(request.getAttribute("totalCnt").toString(), ""));
 	
 	// 카테고리 param 받아오기
 	mst_ct_id = StringUtil.nvl(request.getParameter("mst_ct_id"),""); 
@@ -46,6 +46,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!-- Pagination js 추가 -->
+<script type="text/javascript" src="<%=contextPath%>/resources/js/common/jquery.twbsPagination.js"></script>
 
 <title>카테고리별 조회</title>
 
@@ -70,9 +72,10 @@ function do_searchCategory(){
 	}
 } 
 
-
+	//jQuery Start
 	$(document).ready(function(){
 		
+		// datePicker
 		 $('#date').datepicker({
 			 type	: 'y',
 			 lang	: 'ko'
@@ -108,12 +111,12 @@ function do_searchCategory(){
 						var htmlval ="";
 						for(var i=0;i<data.length;i++){
 							console.log(data[i]);
-							htmlval += "<option value="+i+">"+data[i]+"</option>"
+							htmlval += "<option value="+data[i]+">"+data[i]+"</option>"
 						}
 						$('#dtlList').html(htmlval);
 					},
 					complete: function(data){// 무조건 수행
-						console.log($('#mst_ct_id').val());
+						console.log("mst_ct_id: "+$('#mst_ct_id').val());
 					},
 					error: function(xhr, status, error){
 						console.log("error: "+error);
@@ -124,47 +127,85 @@ function do_searchCategory(){
 			
 			// do_searchList
 			$("#do_searchList").on("click", function(){
-				console.log($('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01");
-				var st_date = $('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01";
-				var ed_date = $('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01";
 				
+				var st_date;
+				var ed_date;
+				
+				if((parseInt($('#start_month').val())<10)){
+					st_date = $('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01";
+					console.log("start_month"+$('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01");
+				}else{
+					st_date = $('.currentDate').html().toString()+"-"+$('#start_month').val()+"-01";
+					console.log("start_month"+$('.currentDate').html().toString()+"-"+$('#start_month').val()+"-01");
+				}
+
+				if((parseInt($('#end_month').val())<10)){
+					ed_date = $('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01";
+					console.log("end_month"+$('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01");
+				}else{
+					ed_date = $('.currentDate').html().toString()+"-"+$('#end_month').val()+"-01";
+					console.log("end_month"+$('.currentDate').html().toString()+"-"+$('#end_month').val()+"-01");
+				}
+					
 				$.ajax({
 					type:"POST",
 					url:"do_searchListt.do",
 					dataType:"JSON",
-					data:{
-						
-						
+					data:{			
 						"start_date": st_date.trim(),
 						"end_date": ed_date.trim(),
 						"mst_ct_id" : $('#mst_ct_id').val(),
-						"dtlList"		: $('#dtlList').val()
+						"dtl_ct_nm": $('#dtlList').val(),
+						"page_size": "10",
+						"page_num": "1"
 					},
 					success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
+						
 						console.log("success data: "+data);
 						console.log("data.length: "+data.length);
-						//console.log("data.content: "+data.content);
+
+						var totalCnt = data.length;
+						var page_size = 10;
+						var max_page = Math.ceil(totalCnt/page_size);
+					
+						/*var pageData = $('#pagination').data();
+						
+						if(typeof(pageData.twbsPagination) != 'undefined'){
+							if(pageData.twbsPagination.options.totalPages != max_page){
+								$('#pagination').twbsPagination('destroy');
+							}
+						} */
+						
+						// pagination 생성
+						$('#pagination').twbsPagination({
+							        totalPages: max_page,
+							        visiblePages: 5
+						 });
+							
+
 						if(data.length > 0){
+	
 						var datahtml = "";
 						for(var i=0; i<data.length; i++){
 							
 							console.log("data[i].id: "+data[i].mst_ct_id);
 							
 							datahtml += "<tr class='dataList'>"
-							datahtml += "<td id='c_id' >"+data[i].id+"</td>"
-							datahtml += "<td id='c_daily_code' >"+data[i].daily_code+"</td>"
+							datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
+							datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
 							datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
 							datahtml += "<td id='c_content' >"+data[i].content+"</td>"
-							datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
-							datahtml += "<td id='c_dtl_ct_id' >"+data[i].dtl_ct_nm+"</td>"
 							datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
-							datahtml += "<td id='c_mod_dt' >"+data[i].mod_dt+"</td>"
 							datahtml += "</tr >"
 							
 						}
 						$('#tbody').html(datahtml);
 						//console.log("datahtml: "+datahtml);
+						}else{
+							$('#tbody').html("<label style='font-size: 20px; color: red;'>검색결과가 없습니다.</label>");
 						}
+						
+					
 					},
 					complete: function(data){// 무조건 수행
 						
@@ -240,14 +281,11 @@ function do_searchCategory(){
 		<table id="listTable" class="table table-bordered table-hover table-striped"  border="1" cellpadding="1" cellspacing="0">
 		<thead>
 			<!-- <th class="text-center">No.</th> -->
-			<th class="text-center">아이디</th>
-			<th class="text-center">식별코드</th>
-			<th class="text-center">금액</th>
 			<th class="text-center">수입/지출</th>
 			<th class="text-center">카테고리</th>
+			<th class="text-center">금액</th>
 			<th class="text-center">상세설명</th>
-			<th class="text-center">등록일</th>
-			<th class="text-center">수정일</th>
+			<th class="text-center">날짜</th>
 		</thead>
 		<tbody id="tbody">
 		<c:choose>
@@ -255,14 +293,11 @@ function do_searchCategory(){
 				<c:forEach var="CategoryVO" items="${list }">
 					<form action="category.do" method="POST" name="${CategoryVO.id }">
 						<tr>
-							<td id="c_id" class="text-center"><c:out value="${CategoryVO.id }"></c:out></td>
-							<td id="c_daily_code" class="text-center"><c:out value="${CategoryVO.daily_code }"></c:out></td>
+							<td id="c_mst_ct_id" class="text-left"><c:out value="${CategoryVO.mst_ct_id }"></c:out></td>
+							<td id="c_dtl_ct_nm" class="text-left"><c:out value="${CategoryVO.dtl_ct_nm }"></c:out></td>
 							<td id="c_usage" class="text-left"><c:out value="${CategoryVO.usage }"></c:out></td>
 							<td id="c_content" class="text-left"><c:out value="${CategoryVO.content }"></c:out></td>
-							<td id="c_mst_ct_id" class="text-left"><c:out value="${CategoryVO.mst_ct_id }"></c:out></td>
-							<td id="c_dtl_ct_id" class="text-left"><c:out value="${CategoryVO.dtl_ct_id }"></c:out></td>
 							<td id="c_reg_dt" class="text-center"><c:out value="${CategoryVO.reg_dt }"></c:out></td>
-							<td id="c_mod_dt" class="text-right"><c:out value="${CategoryVO.mod_dt }"></c:out></td>
 						</tr>
 					</form>
 				</c:forEach>
@@ -282,11 +317,9 @@ function do_searchCategory(){
 		
 		<!-- div 3 -->
 		<div style="background-color: LightSteelBlue; height: 5%;">
-<%-- 			<!-- Paging -->
-			<div align="center">
-				<%=StringUtil.renderPaging(totalCnt, page_num, page_size, bottomCount, "do_searchList.do", "do_search_page")%>
-			</div>
-		<!-- // Paging closed  --> --%>
+		<!-- Paging -->
+			<ul id="pagination" class="pagination"></ul>
+		<!-- // Paging closed  --> 
 		</div>
 		<!--// div 3 closed-->
 </div>

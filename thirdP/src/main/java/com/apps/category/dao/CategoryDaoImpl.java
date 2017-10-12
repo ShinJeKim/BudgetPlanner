@@ -58,6 +58,7 @@ public class CategoryDaoImpl implements CategoryDao{
 			catVO.setMod_dt(rs.getString("mod_dt"));
 			catVO.setMst_ct_id(rs.getString("mst_ct_id"));
 			catVO.setDtl_ct_id(rs.getString("dtl_ct_id"));
+			catVO.setDtl_ct_nm(rs.getString("dtl_ct_nm"));
 			
 			return catVO;
 		}	
@@ -110,12 +111,12 @@ public class CategoryDaoImpl implements CategoryDao{
 		searchParam.put("page_num", pageNum+"");
 		
 		String mst_ct_id = searchParam.get("mst_ct_id").toString();
-		String dtl_ct_id = searchParam.get("dtl_ct_id").toString();
+		String dtl_ct_nm = searchParam.get("dtl_ct_nm").toString();
 		String start_date = searchParam.get("start_date").toString();
 		String end_date = searchParam.get("end_date").toString();
 		
 		searchParam.put("mst_ct_id", mst_ct_id);
-		searchParam.put("dtl_ct_id", dtl_ct_id);
+		searchParam.put("dtl_ct_nm", dtl_ct_nm);
 		searchParam.put("start_date", start_date);
 		searchParam.put("end_date", end_date);
 		

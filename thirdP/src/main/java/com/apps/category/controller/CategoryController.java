@@ -90,8 +90,8 @@ public class CategoryController {
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-07-01");
 		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-30");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
-		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
+		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
 		searchParam.put("id".toString(), id);
 		searchParam.put("page_size".toString(), pageSize);
@@ -99,7 +99,7 @@ public class CategoryController {
 		searchParam.put("start_date".toString(), start_date);
 		searchParam.put("end_date".toString(), end_date);
 		searchParam.put("mst_ct_id".toString(), mst_ct_id);
-		searchParam.put("dtl_ct_id".toString(), dtl_ct_id);
+		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
 
 		log.debug("searchParam: "+searchParam);
 
@@ -146,8 +146,8 @@ public class CategoryController {
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
 		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-22");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
-		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
+		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
 		searchParam.put("id".toString(), id);
 		searchParam.put("page_size".toString(), pageSize);
@@ -155,7 +155,7 @@ public class CategoryController {
 		searchParam.put("start_date".toString(), start_date);
 		searchParam.put("end_date".toString(), end_date);
 		searchParam.put("mst_ct_id".toString(), mst_ct_id);
-		searchParam.put("dtl_ct_id".toString(), dtl_ct_id);
+		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
 
 		log.debug("searchParam: "+searchParam);
 
