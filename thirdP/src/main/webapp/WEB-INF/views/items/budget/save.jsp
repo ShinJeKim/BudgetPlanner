@@ -13,4 +13,22 @@
 		<input type="button" id="up_save" value="저장">
 		<input type="button" id="cancle" value="취소">
 	</form>
+	<hr/><br/>
+	<h2>ui세팅중</h2>
+	<div>
+		날짜	<input type="text" placeholder="yyyy.mm.dd"><input type="button" value="데이트피커">
+	</div>
+	<div>	
+		카테고리 
+		<input type="radio" value="카테1" name="cate">식비
+		<input type="radio" value="카테2" name="cate">기타
+		<input type="radio" value="카테3" name="cate">용돈
+	</div>
+	<div>
+		금액 <label>0000원</label>
+	</div>
+	<div>
+		내용
+		<textarea style="width: 500px; height: 80px;"></textarea>
+	</div>	
 </div>

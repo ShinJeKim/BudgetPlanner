@@ -630,6 +630,11 @@
 					$('#reg_dt').val($('#currentDate').val()).trigger('change');
 				}
 			}
+			if($('#month').val() != undefined && $('#month').val() != ""){
+				$('#currentDate').val($('#month').val().substring(4,0)+"."+$('#month').val().substring(4,6)+".01").trigger('change');
+				}
+			
+			
 			var seperate = element.find('#currentDate').val().split('.');
 				var y = seperate[0];
 				options.year = y;
