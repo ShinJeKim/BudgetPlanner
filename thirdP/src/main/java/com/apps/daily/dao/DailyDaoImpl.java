@@ -40,11 +40,28 @@ public class DailyDaoImpl implements DailyDao{
 		return sqlSession.selectOne(statement, inVO);
 	}
 	
+	
 	@Override
 	public int do_save(DTO dto)throws DataAccessException{
 		int flag = 0;
 		String statement = namespace +".do_save";
+		DailyVO codeVO = (DailyVO)dto;
+		List<DailyVO> list = sqlSession.selectList(namespace+".daily_codes", codeVO);
+		String dailyCode = "";
+		String regDT = codeVO.getReg_dt().substring(2, 10).replace(".", "");
+		if(list.size()>0){
+			String origincode =  list.get(0).getDaily_code().toString();
+			String code = origincode.substring(origincode.length()-3, origincode.length());
+			String thisnum = "00"+String.valueOf(Integer.parseInt(code)+1);
+			dailyCode = regDT + thisnum.substring(thisnum.length()-3, thisnum.length()) ;
+		}else{
+			dailyCode = regDT + "001";
+		}
+		
+		
+		
 		DailyVO inVO = (DailyVO)dto;
+		inVO.setDaily_code(dailyCode);
 		flag = sqlSession.insert(statement, inVO);
 		
 		return flag;
