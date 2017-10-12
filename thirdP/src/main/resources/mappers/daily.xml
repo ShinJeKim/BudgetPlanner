@@ -17,7 +17,7 @@
 		ORDER BY daily_code DESC 	
  	</select>
  	<select id="do_searchOne" parameterType="DailyVO" resultType="DailyVO">
-		SELECT TO_CHAR(t1.reg_dt,'yyyy.mm.dd)
+		SELECT TO_CHAR(t1.reg_dt,'yyyy.mm.dd') AS reg_dt
 		       ,t2.mst_ct_nm
 		       ,t2.dtl_ct_nm
 		       ,t1.usage
@@ -31,16 +31,15 @@
 	<insert id="do_save" parameterType="DailyVO">
 	 	INSERT INTO finance (id
 		                     ,daily_code
-		                     ,usage,content
+		                     ,usage
+		                     ,content
 		                     ,mst_ct_id
 		                     ,dtl_ct_id
 		                     ,reg_dt) 
 		            VALUES (#{id}
-		                    ,(SELECT TO_CHAR(reg_dt,'yymmdd')||LPAD(COUNT(*)+1,3,'0')
-		                    FROM finance
-		                    WHERE id = #{id}
-		                    AND TO_CHAR(reg_dt,'yyyy.mm.dd') = #{reg_dt}
-		                    GROUP BY TO_CHAR(reg_dt,'yymmdd'))
+		                    ,(SELECT TO_CHAR(TO_DATE(#{reg_dt},'yyyy.mm.dd'),'yymmdd')||LPAD((SELECT COUNT(*) FROM finance WHERE id = #{id} AND TO_CHAR(reg_dt,'yyyy.mm.dd') = #{reg_dt}) +1,3,'0')
+			                    FROM finance
+			                    GROUP BY TO_CHAR(TO_DATE(#{reg_dt},'yyyy.mm.dd'),'yymmdd'))
 		                    ,#{usage}
 		                    ,#{content}
 		                    ,(SELECT DISTINCT(ct.MST_CT_ID) 
@@ -62,7 +61,7 @@
 			        ,dtl_ct_id = (SELECT ct.dtl_ct_id 
 			                       FROM category ct
 			                       WHERE ct.dtl_ct_nm = #{dtl_ct_nm})
-			        ,reg_dt = TO_DATE(#{reg_dt},'yyyy.mm.dd'))
+			        ,reg_dt = TO_DATE(#{reg_dt},'yyyy.mm.dd')
 			        ,mod_dt =SYSDATE        
 			WHERE id = #{id}
 			AND daily_code = #{daily_code}

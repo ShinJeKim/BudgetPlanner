@@ -50,16 +50,23 @@ $(document).ready(function(){
             success: function(data){
            var datahtml = "";
 	            for(var i=0;i<data.length;i++){
+	            	datahtml += "<form class='dailyDatas' action='do_searchOne.do' method='post'>	"
+	            	datahtml += "<input type='hidden' id='daily_code' name='daily_code' value='"+data[i].daily_code+"'>"	
 	            	datahtml += "<div class='dailyitem'>                                            "
 	            	datahtml += " <ul class='itemList'>                                             "
 	            	datahtml +=	"  <li class='item_cate'><label>"+data[i].dtl_ct_nm+"</label></li>  "
 	            	datahtml +=	"  <li class='item_content'><label></label>"+data[i].content+"</li> "
 	            	datahtml +=	"  <li class='add'><label>▼</label></li>                            "
 	            	datahtml +=	"  <li class='item_price'><label>"+data[i].usage+"</label>원</li>    "
-	            	datahtml += " </ul>																"		
+	            	//datahtml += " </ul>																"		
+	            	//datahtml += " <ul class='up_del'>                                             	"
+	            	datahtml += " 	<li><input type='button' id='update' value='수정'></li>					"
+	            	datahtml += " 	<li><input type='button' id='delete' value='삭제'></li>			"	
+	            	datahtml += " </ul>																"
 	            	datahtml += "</div>																"	
+	            	datahtml += "</form>																"	
 	            }
-           	datahtml += "<div id='blank'></div>"
+            datahtml += "<div id='blank'></div>"
            	$('#dailyList').html(datahtml);	
             },
             complete: function(data){
@@ -95,6 +102,19 @@ $(document).ready(function(){
            	 $('#total_sum>label').html(total_sum+"원");
            }
 		 });
+	});
+	$(document).on('click','#update',function(){
+		console.log($(this).closest('form'))
+		$(this).closest('form').submit(); //dailyDatas
+	});
+	$(document).on('click','#delete',function(){
+		
+		if (confirm("정말 삭제하시겠습니까??") == true){  
+			$(this).closest('form').attr('action','delete.do');
+			$(this).closest('form').submit(); 
+		}else{
+		    return;
+		}
 	});
 });
 

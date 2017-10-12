@@ -47,7 +47,7 @@
 .itemList{
 	width: 100%;
 	display: inline-table;
-	height: 100%;
+	height: 80%;
 }
 .itemList>li{
 	display: table-cell;
@@ -66,4 +66,18 @@
 }
 .itemList>.add{
 	width: 5%;
-}   
+}
+/*.up_del{
+	width: 100%;
+	display: inline-table;
+	height: 20%;
+}
+.up_del>li{   
+	display: table-cell;
+	text-align: center;
+	width: 50%;
+}*/
+
+
+
+

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.apps.daily.domain.DailyVO;
 import com.apps.daily.service.DailySvc;
+import com.apps.user.service.UserSvc;
 import com.google.gson.Gson;
 
 
@@ -137,32 +138,73 @@ public class DailyController {
 		
 		return retString;
 	}
-//	@RequestMapping(value="budget/do_save.do",method=RequestMethod.POST)
-//	public ModelAndView do_save(HttpServletRequest req,HttpServletResponse res,HttpSession session) throws IOException{
-//			ModelAndView mav = new ModelAndView();
-//			DailyVO inVO = new DailyVO();
-//			inVO.setId(session.getAttribute("ID").toString());
-//			inVO.setMst_ct_nm(req.getParameter("mst_ct_nm"));
-//			inVO.setDtl_ct_nm(req.getParameter("dtl_ct_nm"));
-//			inVO.setContent(req.getParameter("content"));
-//			inVO.setReg_dt(req.getParameter("reg_dt"));
-//			if(req.getParameter("mst_ct_nm").equals("지출")){
-//				inVO.setUsage(Integer.parseInt(req.getParameter("usage"))*-1);
-//			}else if(req.getParameter("mst_ct_nm").equals("수입")){
-//				inVO.setUsage(Integer.parseInt(req.getParameter("usage")));
-//			}
-//			
-//			mav.setViewName("save");
-//			return mav;
-//	}
+	@RequestMapping(value="budget/up_save.do",method=RequestMethod.POST)
+	public void do_save(HttpServletRequest req,HttpServletResponse res,HttpSession session) throws IOException{
+			DailyVO inVO = new DailyVO();
+			inVO.setId(session.getAttribute("ID").toString());
+			inVO.setMst_ct_nm(req.getParameter("mst_ct_nm"));
+			inVO.setDtl_ct_nm(req.getParameter("dtl_ct_nm"));
+			inVO.setContent(req.getParameter("content"));
+			inVO.setReg_dt(req.getParameter("reg_dt"));
+			if(req.getParameter("mst_ct_nm").equals("지출")){
+				inVO.setUsage(Integer.parseInt(req.getParameter("usage"))*-1);
+			}else if(req.getParameter("mst_ct_nm").equals("수입")){
+				inVO.setUsage(Integer.parseInt(req.getParameter("usage")));
+			}
+			log.debug("------------------");
+			log.debug("0: "+inVO);
+			log.debug("------------------");
+			if(req.getParameter("workDiv").equals("update")){
+				inVO.setDaily_code(req.getParameter("daily_code"));
+				dailySvc.do_update(inVO);
+				res.sendRedirect("daily.do");
+			}else if(req.getParameter("workDiv").equals("save")){
+				dailySvc.do_save(inVO);
+				res.sendRedirect("daily.do");
+			}
+			
+	}
 	@RequestMapping(value="budget/do_save.do") 
-	public String save(HttpServletRequest request) {
-		
+	public ModelAndView input(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
 		log.debug("0=====================================");
 		log.debug("save()");
 		log.debug("0=====================================");
-		
-		return "save";
+		mav.addObject("workDiv","save");
+		mav.addObject("daily_code",request.getParameter("daily_code"));
+		mav.setViewName("save");
+		return mav;
+	}
+	@RequestMapping(value="budget/do_searchOne.do",method=RequestMethod.POST)
+	public ModelAndView do_searchOne(HttpServletRequest req,HttpServletResponse res,HttpSession session) throws IOException{
+			ModelAndView mav = new ModelAndView();
+			DailyVO inVO = new DailyVO();
+			inVO.setId(session.getAttribute("ID").toString());
+			inVO.setDaily_code(req.getParameter("daily_code"));
+			log.debug("------------------");
+			log.debug("0: "+inVO);
+			log.debug("------------------");
+			mav.addObject("updateData", dailySvc.do_searchOne(inVO));
+			log.debug("------------------");
+			log.debug("3: "+ inVO);
+			log.debug("------------------");
+			mav.addObject("workDiv","update");
+			mav.addObject("daily_code",req.getParameter("daily_code"));
+			mav.setViewName("save");
+			return mav;
+	}
+	@RequestMapping(value="budget/delete.do",method=RequestMethod.POST)
+	public void delete(HttpServletRequest req,HttpServletResponse res,HttpSession session) throws IOException{
+			DailyVO inVO = new DailyVO();
+			inVO.setId(session.getAttribute("ID").toString());
+			inVO.setDaily_code(req.getParameter("daily_code"));
+			log.debug("------------------");
+			log.debug("0: "+inVO);
+			log.debug("------------------");
+				dailySvc.do_delete(inVO);
+				res.sendRedirect("daily.do");
+			
+			
 	}
 	
 }

@@ -7,7 +7,7 @@
  	<!-- 사용내역 조회 -->
  	<select id="get_monthly_usage"
  			parameterType="String"
- 			resultType="monthlyVO">
+ 			resultType="MonthlyVO">
  			SELECT TO_CHAR(TRUNC(REG_DT), 'YYYYMMDD') AS DAY, MST_CT_ID AS CATEGORY, SUM(USAGE) AS USAGE
 			FROM FINANCE,
 			     (SELECT SET_MONTH AS FIRST_DAY,
@@ -20,4 +20,27 @@
 			GROUP BY ROLLUP(TRUNC(REG_DT), MST_CT_ID)
  	</select>
  	
+ 	<!-- 월별 날짜 만들기 -->
+ 	<select id="get_weekday"
+ 			parameterType="String"
+ 			resultType="WeekVO">
+ 			SELECT MIN(DECODE(TO_CHAR(WEEKDAY, 'D'), 1, TO_CHAR(WEEKDAY, 'FMDD'))) SUNDAY,
+			       MIN(DECODE(TO_CHAR(WEEKDAY, 'D'), 2, TO_CHAR(WEEKDAY, 'FMDD'))) MONDAY,
+			       MIN(DECODE(TO_CHAR(WEEKDAY, 'D'), 3, TO_CHAR(WEEKDAY, 'FMDD'))) TUESDAY,
+			       MIN(DECODE(TO_CHAR(WEEKDAY, 'D'), 4, TO_CHAR(WEEKDAY, 'FMDD'))) WEDNESDAY,
+			       MIN(DECODE(TO_CHAR(WEEKDAY, 'D'), 5, TO_CHAR(WEEKDAY, 'FMDD'))) THURSDAY,
+			       MIN(DECODE(TO_CHAR(WEEKDAY, 'D'), 6, TO_CHAR(WEEKDAY, 'FMDD'))) FRIDAY,
+			       MIN(DECODE(TO_CHAR(WEEKDAY, 'D'), 7, TO_CHAR(WEEKDAY, 'FMDD'))) SATURDAY
+			FROM ( SELECT SET_MONTH + LEVEL-1 AS WEEKDAY,
+			<![CDATA[
+			              (TRUNC(SET_MONTH + LEVEL-1, 'D') - TRUNC(TRUNC(SET_MONTH + LEVEL-1, 'Y'), 'D'))/7 +1 AS WEEKGROUP
+			       FROM ( SELECT TO_DATE(#{month}, 'YYYYMM') AS SET_MONTH
+			              FROM DUAL
+			            )
+			       CONNECT BY SET_MONTH + LEVEL-1 <= LAST_DAY(SET_MONTH)
+			    )
+			GROUP BY WEEKGROUP
+			ORDER BY WEEKGROUP
+			]]>
+ 	</select>
  </mapper>
