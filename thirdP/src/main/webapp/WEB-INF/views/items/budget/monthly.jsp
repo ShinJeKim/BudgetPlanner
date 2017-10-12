@@ -6,7 +6,7 @@
 	//contextPath
 	String contextPath = request.getContextPath();
     contextPath ="http://localhost:8080/"+contextPath;
-
+    
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,6 +15,9 @@
 <title>::: Monthly Usage :::</title>
 <!-- jQuery -->
 <script type="text/javascript">
+	
+	var selectedMonth = "";
+	
 	$(document).ready(function(){
 		 $('#date').datepicker({
 			 type	: 'ym',
@@ -24,137 +27,85 @@
 		$('#BudgetPlanner').attr('checked', true);
 		$('#currentDate').change(function(){
 			var thisDate = $('#currentDate').val().toString().split(".");
-			var selectedMonth = thisDate[0] + thisDate[1];
+			selectedMonth = thisDate[0] + thisDate[1];
 			console.log(selectedMonth);
+			
+			$.ajax({
+				type:"POST",
+				url:"get_monthly_usage.do",
+				dataType:"HTML", //option default : html
+				data: {
+					"month" : selectedMonth
+				},
+				success: function(data){	//통신이 성공적으로 이루어 졌을 때 받을 함수
+					console.log(data);
+					$("#month").val(selectedMonth);
+					$("#monthlyData").submit();
+				},
+				complete: function(data){	//실패 성공 상관없이 무조건 수행
+					
+				}, 
+				error: function(xhr, status, error){
+					
+				}
+			}); //ajax
+			
 		});
+		
 	});
 </script>
 </head>
 <body>
-	<div style="height:100%; width:100%;">
-		<!-- 달력 헤더 -->
-		<div style="height:5%; width:100%; ">
-			<div align="center" style="height:100%; width:14.1%; border:1px solid black; float:left">일
+	<form id="monthlyData" method="post">
+		<input type="hidden" id="month" name="month" value="${month}"/>
+		<div style="height:100%; width:100%; ">
+			<!-- 달력 헤더 -->
+			<div style="height:5%; width:100%; ">
+				<div align="center" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">일
+				</div>
+				<div align="center" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">월
+				</div>
+				<div align="center" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">화
+				</div>
+				<div align="center" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">수
+				</div>
+				<div align="center" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">목
+				</div>
+				<div align="center" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">금
+				</div>
+				<div align="center" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">토
+				</div>
 			</div>
-			<div align="center" style="height:100%; width:14.1%; border:1px solid black; float:left">월
-			</div>
-			<div align="center" style="height:100%; width:14.1%; border:1px solid black; float:left">화
-			</div>
-			<div align="center" style="height:100%; width:14.1%; border:1px solid black; float:left">수
-			</div>
-			<div align="center" style="height:100%; width:14.1%; border:1px solid black; float:left">목
-			</div>
-			<div align="center" style="height:100%; width:14.1%; border:1px solid black; float:left">금
-			</div>
-			<div align="center" style="height:100%; width:14.1%; border:1px solid black; float:left">토
-			</div>
-		</div>
-		
+			
 			<!-- 달력 컨텐츠 영역 -->
-			<div style="height:18.5%; width:100%; ">
-				<div style="height:100%; width:14.1%; border:1px solid black; float:left">
+			<!-- 세로 : 6, 가로 : 7 -->
+			<c:forEach begin="0" end="5" step="1" varStatus="vertical">
+			<div id="monthlyVertical" style="height:15.5%; width:100%; ">
+				<c:forEach begin="${vertical.index*7}" end="${vertical.index*7+6}" step="1" varStatus="horizontal" var="List" items="${monthlyList}">
+				<div id="monthlyHorizontal" style="box-sizing:border-box; height:100%; width:14.28%; border:1px solid black; float:left">
 					<!-- 일 -->
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						1
+					<div style="height:100%; width:48.5%; float:left">
+						${List.date}
 					</div>
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
+					<div style="height:100%; width:48.5%; float:left">
 						<!-- 수입 -->
-						<div style="height:32%; width:100%; border:1px solid gold">1
+						<div style="box-sizing:border-box; height:32%; width:100%; border:1px solid gold">
+							${List.income}
 						</div>
 						<!-- 지출 -->
-						<div style="height:32%; width:100%; border:1px solid gold">2
+						<div style="box-sizing:border-box; height:32%; width:100%; border:1px solid gold">
+							${List.expense}
 						</div>
 						<!-- 합계 -->
-						<div style="height:32%; width:100%; border:1px solid gold">3
+						<div style="box-sizing:border-box; height:32%; width:100%; border:1px solid gold">
+							${List.totalUsage}
 						</div>
 					</div>
 				</div>
-				<div style="height:100%; width:14.1%; border:1px solid black; float:left">
-					<!-- 월 -->
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						2
-					</div>
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						<div style="height:32%; width:100%; border:1px solid gold">1
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">2
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">3
-						</div>
-					</div>
-				</div>
-				<div style="height:100%; width:14.1%; border:1px solid black; float:left">
-					<!-- 화 -->
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						3
-					</div>
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						<div style="height:32%; width:100%; border:1px solid gold">1
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">2
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">3
-						</div>
-					</div>
-				</div>
-				<div style="height:100%; width:14.1%; border:1px solid black; float:left">
-					<!-- 수 -->
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						4
-					</div>
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						<div style="height:32%; width:100%; border:1px solid gold">1
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">2
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">3
-						</div>
-					</div>
-				</div>
-				<div style="height:100%; width:14.1%; border:1px solid black; float:left">
-					<!-- 목 -->
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						5
-					</div>
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						<div style="height:32%; width:100%; border:1px solid gold">1
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">2
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">3
-						</div>
-					</div>
-				</div>
-				<div style="height:100%; width:14.1%; border:1px solid black; float:left">
-					<!-- 금 -->
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						6
-					</div>
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						<div style="height:32%; width:100%; border:1px solid gold">1
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">2
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">3
-						</div>
-					</div>
-				</div>
-				<div style="height:100%; width:14.1%; border:1px solid black; float:left">
-					<!-- 토 -->
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						7
-					</div>
-					<div style="height:100%; width:48.5%; border:1px solid green; float:left">
-						<div style="height:32%; width:100%; border:1px solid gold">1
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">2
-						</div>
-						<div style="height:32%; width:100%; border:1px solid gold">3
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
-	
-	</div>
+			</c:forEach>	
+		</div>
+	</form>
 </body>
 </html>
