@@ -3,7 +3,7 @@
 
 <form id="updateFrm" method="post" action="do_save.do">
 	<div>
-		<!-- 아이디 -->
+		<!-- 아이디  -->
 		<div id="div_id">
 			<label for="id">아이디</label>
 			<div>
