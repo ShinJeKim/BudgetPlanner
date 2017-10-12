@@ -1,17 +1,25 @@
-(function($){
-	$(document).ready(function(){
+$(document).ready(function(){
+	 font_size();
+	 menu_size();
+	 $('#income').attr('checked', true);
+	 $('#BudgetPlanner').attr('checked', true);
+	
+	var usage = $('#usage').val().replace("-","");
+	$('#usage').val(usage);
+	
+	$('#up_save').click(function(){
+			$('#save').submit();	
+	});
+	$('#cancle').click(function(){
+		history.go(-1);
+	});	
+	
+	$(window).resize(function() {
 		 font_size();
 		 menu_size();
-		 $('#income').attr('checked', true);
-		 $('#BudgetPlanner').attr('checked', true);
-	});
+	});	 
 	
-	$( window ).resize(function() {
-		 font_size();
-		 menu_size();
-	});
-	
-})(jQuery);
+});
 
 function font_size(){
 	var width = window.innerWidth;
