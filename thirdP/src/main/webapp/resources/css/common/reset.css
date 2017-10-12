@@ -58,6 +58,10 @@ a {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    text-decoration: none;
+}
+a:VISITED,a:LINK,a:ACTIVE{
+	color: inherit;
 }
 
 /* change colours to suit your needs */

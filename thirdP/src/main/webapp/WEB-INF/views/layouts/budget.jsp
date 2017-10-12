@@ -8,16 +8,6 @@
 <tiles:insertAttribute name="script" />
 <tiles:insertAttribute name="style" />
 </head>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#up_save').click(function(){
-			$('#save').submit();	
-		});
-		$('#cancle').click(function(){
-			history.go(-1);
-		});	
-	});
-</script>
 <body>
 	<div class="header">
 		<tiles:insertAttribute name="header" />
