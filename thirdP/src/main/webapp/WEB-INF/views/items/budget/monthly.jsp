@@ -26,6 +26,7 @@
 		$('#monthly').attr('checked', true);
 		$('#BudgetPlanner').attr('checked', true);
 		$('#currentDate').change(function(){
+			
 			var thisDate = $('#currentDate').val().toString().split(".");
 			selectedMonth = thisDate[0] + thisDate[1];
 			console.log(selectedMonth);
@@ -34,6 +35,7 @@
 				type:"POST",
 				url:"get_monthly_usage.do",
 				dataType:"HTML", //option default : html
+				async: false,
 				data: {
 					"month" : selectedMonth
 				},
