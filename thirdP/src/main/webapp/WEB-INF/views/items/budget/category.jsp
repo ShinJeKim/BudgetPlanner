@@ -124,20 +124,27 @@ function do_searchCategory(){
 			
 			// do_searchList
 			$("#do_searchList").on("click", function(){
-
+				console.log($('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01");
+				var st_date = $('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01";
+				var ed_date = $('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01";
+				
 				$.ajax({
 					type:"POST",
 					url:"do_searchListt.do",
 					dataType:"JSON",
 					data:{
 						
+						
+						"start_date": st_date.trim(),
+						"end_date": ed_date.trim(),
+						"mst_ct_id" : $('#mst_ct_id').val(),
+						"dtlList"		: $('#dtlList').val()
 					},
 					success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
 						console.log("success data: "+data);
 						console.log("data.length: "+data.length);
 						//console.log("data.content: "+data.content);
-						console.log("data[0].id: "+data[0].id);
-						
+						if(data.length > 0){
 						var datahtml = "";
 						for(var i=0; i<data.length; i++){
 							
@@ -157,6 +164,7 @@ function do_searchCategory(){
 						}
 						$('#tbody').html(datahtml);
 						//console.log("datahtml: "+datahtml);
+						}
 					},
 					complete: function(data){// 무조건 수행
 						
