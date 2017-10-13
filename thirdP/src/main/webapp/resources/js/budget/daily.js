@@ -12,9 +12,9 @@ $(document).ready(function(){
 	$(document).find('.dailyitem').each(function(){
 		var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
 		$(this).find('.itemList>li').css('padding-top',paddingTop);
-		if($(this).height()<$(this).find('.itemList').height()){
-			$(this).css('height',$(this).find('.itemList').height());
-		}
+		if($(this).height()<($(this).find('.itemList').height()+$(this).find('.up_del').height())){
+				$(this).css('height',($(this).find('.itemList').height()+$(this).find('.up_del').height()));
+			}
 	
 	});	
 	$(window).resize(function(){
@@ -23,9 +23,9 @@ $(document).ready(function(){
 		$(document).find('.dailyitem').each(function(){
 			var paddingTop = ($(this).height()-$(this).find('.itemList>li').css('font-size'))/2;
 			$(this).find('.itemList>li').css('padding-top',paddingTop);
-			if($(this).height()<$(this).find('.itemList').height()){
-				$(this).css('height',$(this).find('.itemList').height());
-			}
+			if($(this).height()<($(this).find('.itemList').height()+$(this).find('.up_del').height())){
+   				$(this).css('height',($(this).find('.itemList').height()+$(this).find('.up_del').height()));
+   			}
 		});	
 	});
 	
@@ -57,16 +57,15 @@ $(document).ready(function(){
 	            	datahtml += "<div class='dailyitem'>                                            "
 	            	datahtml += " <ul class='itemList'>                                             "
 	            	datahtml +=	"  <li class='item_cate'><label>"+data[i].dtl_ct_nm+"</label></li>  "
-	            	datahtml +=	"  <li class='item_content'><label></label>"+data[i].content+"</li> "
-	            	datahtml +=	"  <li class='add'><label>▼</label></li>                            "
-	            	datahtml +=	"  <li class='item_price'><label>"+data[i].usage+"</label>원</li>    "
-	            	//datahtml += " </ul>																"		
-	            	//datahtml += " <ul class='up_del'>                                             	"
-	            	datahtml += " 	<li><input type='button' id='update' value='수정'></li>					"
-	            	datahtml += " 	<li><input type='button' id='delete' value='삭제'></li>			"	
-	            	datahtml += " </ul>																"
-	            	datahtml += "</div>																"	
-	            	datahtml += "</form>																"	
+	            	datahtml +=	"  <li class='item_content'><label>"+data[i].content+"</label></li> "
+	                datahtml +=	"  <li class='item_price'><label>"+data[i].usage+"</label>원</li>    "
+	            	datahtml += " </ul>																"		
+	            	datahtml += "</div>																"
+            		datahtml += "<div class='up_del'>                                             	"
+	            	datahtml += "  <input type='button' id='update' value='수정'>					"
+	            	datahtml += "  <input type='button' id='delete' value='삭제'>			        "	
+	            	datahtml += "</div>														    "
+	            	datahtml += "</form>															"	
 	            }
             datahtml += "<div id='blank'></div>"
            	$('#dailyList').html(datahtml);	
@@ -82,8 +81,8 @@ $(document).ready(function(){
            	 $(document).find('.dailyitem').each(function(){
            			var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
            			$(this).find('.itemList>li').css('padding-top',paddingTop);
-           			if($(this).height()<$(this).find('.itemList').height()){
-           				$(this).css('height',$(this).find('.itemList').height());
+           			if($(this).height()<($(this).find('.itemList').height()+$(this).find('.up_del').height())){
+           				$(this).css('height',($(this).find('.itemList').height()+$(this).find('.up_del').height()));
            			}
            	 });
            	 $(document).find('.item_price').each(function(){
@@ -118,6 +117,14 @@ $(document).ready(function(){
 		    return;
 		}
 	});
+	$(document).on('click','.itemList',function(){
+		$(document).find('.up_del').hide();
+		$(document).find('.dailyitem').css('margin-bottom',$('.bodyCover').height()*0.02);
+		$(this).closest('form').find('.up_del').show();
+		$(this).parent().css('margin-bottom','0px');
+		$(this).closest('form').find('.up_del').css('margin-bottom',$('.bodyCover').height()*0.04);
+		
+	});
 });
 
 
@@ -149,15 +156,15 @@ function body_sizing(){
 	$('#sum').css('margin-top',height_body*0.01);
 	$('#sum').css('margin-bottom',height_body*0.03);
 	$('#sum').css('height',height_body*0.12);
-	$('#sum').css('border','1px solid');
-	$('#sum').css('box-sizing','border-box');
 	$('#dailyList').css('margin-top',$('#dailyTitle').height());
 	$(document).find('.dailyitem').css('width',width_body*0.99);
 	$(document).find('.dailyitem').css('margin-left',width_body*0.005);
 	$(document).find('.dailyitem').css('margin-bottom',height_body*0.02);
 	$(document).find('.dailyitem').css('height',height_body*0.1);
-	$(document).find('.dailyitem').css('border','1px solid');
-	$(document).find('.dailyitem').css('box-sizing','border-box');
+	$(document).find('.up_del').css('height',height_body*0.06);
+	$(document).find('.up_del').css('margin-left',width_body*0.005);
+    $(document).find('.up_del').css('width',width_body*0.99+1);
+    $(document).find('.up_del').css('display','none');
 	$('#blank').css('width',width_body);
 	if(window.screen.width<768){
 		$('#plus').css('height',height_body*0.1);
@@ -180,6 +187,7 @@ function body_sizing(){
 			$('#sum').css('height',height_body*0.17);
 			$('#dailyList').css('margin-top',$('#dailyTitle').height());
 			$('.dailyitem').css('height',height_body*0.14);
+			$('.up_del').css('height',height_body*0.06);
 		}
 	}else if(window.innerWidth>768 && window.screen.width>768){
 		$('#plus').css('height',height_body*0.15);

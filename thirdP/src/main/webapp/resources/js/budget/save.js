@@ -1,14 +1,20 @@
 $(document).ready(function(){
+	$("#datepick").datepicker({
+		 type	: 'ymd',
+		 lang	: 'ko'
+	});
+	
 	 font_size();
 	 menu_size();
 	 $('#income').attr('checked', true);
 	 $('#BudgetPlanner').attr('checked', true);
-	
+	 $('.currentDate').hide();
+	 
 	var usage = $('#usage').val().replace("-","");
 	$('#usage').val(usage);
 	
 	$('#up_save').click(function(){
-			$('#save').submit();	
+		$('#save').submit();	
 	});
 	$('#cancle').click(function(){
 		history.go(-1);

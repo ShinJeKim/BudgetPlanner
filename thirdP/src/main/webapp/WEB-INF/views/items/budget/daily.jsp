@@ -25,12 +25,13 @@
 							<div class="dailyitem">
 							<ul class="itemList">
 								<li class="item_cate"><label>${dailyVO.dtl_ct_nm}</label></li>
-								<li class="item_content"><label></label>${dailyVO.content}</li>
-								<li class="add"><label>▼</label></li>
+								<li class="item_content"><label>${dailyVO.content}</label></li>
 								<li class="item_price"><label>${dailyVO.usage}</label>원</li>
-								<li><input type='button' id='update' value='수정'></li>	
-								<li><input type='button' id='delete' value='삭제'></li>	
 							</ul>
+							</div>
+							<div class='up_del'>	
+								<input type='button' id='update' value='수정'>	
+								<input type='button' id='delete' value='삭제'>
 							</div>
 						</form>
 					</c:forEach>
