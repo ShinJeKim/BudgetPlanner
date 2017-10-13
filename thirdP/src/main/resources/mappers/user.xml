@@ -78,7 +78,7 @@
 			VALUES (#{id}, #{password}, #{name}, #{email}, #{fixed_income}, #{balance}, SYSDATE, null, 0, 0)
  	</update>
  	
- 	<!-- 업데이트 -->
+ 	<!-- 회원정보수정 업데이트-->
  	<update id="do_update"
  			parameterType="UserVO">
  			UPDATE USERS
@@ -92,12 +92,16 @@
 			       ADMIN_FLAG   = #{admin_flag}
 			WHERE  ID = #{id}
  	</update>
+
  	
- 	<!-- 삭제 -->
+ 	<!-- 회원탈퇴 -->
  	<delete id="do_delete"
  			parameterType="UserVO">
- 			DELETE FROM USERS WHERE ID = #{id}		
+ 			update USERS
+				set delete_flag = #{delete_flag}
+			where ID = #{id}	
  	</delete>
+
  	
  	<!-- ID 체크 -->
  	<select id="do_check_id"
