@@ -12,12 +12,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.apps.common.DTO;
 import com.apps.user.domain.UserVO;
+
 
 /**
  * @since 2017-09-22
@@ -175,7 +177,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int do_update(DTO dto) {
-		String statement = namespace + ".do_update";
+		String statement = namespace + ".do_memberupdate";
 		UserVO inUserVO = (UserVO)dto;
 		
 		log.debug("****************do_update*****************");
@@ -256,5 +258,6 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import com.apps.common.DTO;
 import com.apps.common.WorkDiv;
+import com.apps.user.domain.UserVO;
 
 /**
  * @since 2017-09-22
@@ -19,5 +20,6 @@ public interface UserDao extends WorkDiv {
 	public int do_check_passwd(DTO dto);
 	public DTO do_login(DTO dto);
 	public void do_logout(HttpSession session);
+
 	
 }

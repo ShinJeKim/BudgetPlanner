@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.dao.DataAccessException;
 
 import com.apps.common.DTO;
+import com.apps.user.domain.UserVO;
 
 /**
  * @since 2017-09-25
@@ -104,4 +105,9 @@ public interface UserSvc {
 	 * @param session
 	 */
 	public void do_logout(HttpSession session);
+
+
+	
+
+
 }
