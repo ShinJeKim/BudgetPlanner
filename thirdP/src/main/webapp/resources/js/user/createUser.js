@@ -90,22 +90,44 @@
 			}
 			
 			//ID 검사
-			if($("#id").val==""){
+			if($("#id").val()==""){
 				alert("아이디를 입력해 주시기 바랍니다.");
 				
 				$("#id").focus();
 				return false;
 			} 
+			
 			//PASSWORD 검사
-			if($("#password").val==""){
+			if($("#password").val()==""){
 				alert("패스워드를 입력해 주시기 바랍니다.");
 				
 				$("#password").focus();
 				return false;
+			} 
+			
+			//password validation check
+			if($("#password").val()!="") {
+				
+				if(password.length < 8 || password.length > 12){ //자리수가 안맞을 경우
+					alert("8자리 ~ 12자리 이내로 입력해주세요");
+					$("#password").focus();
+					return false;
+				} else { // 자리수가 맞을 때 영어+숫자+특수문자 조합 확인
+					var num = $("#password").val().search(/[0-9]/g); //number
+					var eng = $("#password").val().search(/[a-z]/ig); //eng character
+					var spe = $("#password").val().search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi); //special character
+					
+					if(num < 0 || eng < 0 || spe < 0 ){
+						  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요");
+						  $("#password").focus();
+						  return false;
+					}	
+				}
 			}
+
 			
 			//PASSWORD 확인 검사
-			if($("#password_check").val==""){
+			if($("#password_check").val()==""){
 				alert("패스워드를 입력해 주시기 바랍니다.");
 
 				$("#password_check").focus();
@@ -128,7 +150,7 @@
 				return false;
 			}
 			
-			//이름 검사
+			//고정수입 검사
 			if($("#fixed_income").val()==""){
 				alert("고정수입을 입력해 주시기 바랍니다."); 
 				
@@ -136,7 +158,7 @@
 				return false;
 			} 
 			
-			//이름 검사
+			//잔고 검사
 			if($("#balance").val()==""){
 				alert("현재잔고를 입력해 주시기 바랍니다."); 
 				
