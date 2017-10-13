@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.apps.common.DTO;
 import com.apps.user.dao.UserDao;
+import com.apps.user.domain.UserVO;
 
 /**
  * @since 2017-09-25
@@ -66,6 +67,8 @@ public class UserSvcImpl implements UserSvc {
 		log.debug("2============do_delete=============");
 		log.debug(dto.toString());
 		log.debug("2==================================");
+		
+		int flag = userDao.do_delete(dto);
 		
 		return userDao.do_delete(dto);
 	}
@@ -125,5 +128,7 @@ public class UserSvcImpl implements UserSvc {
 		log.debug("2==================================");
 		session.invalidate();
 	}
+
+
 
 }

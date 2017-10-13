@@ -180,6 +180,45 @@ public class UserController {
 		return "updateUser";
 	}
 	
+	// 회원정보수정
+	@RequestMapping(value="do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView do_update(HttpSession session, HttpServletRequest req) {
+		
+		UserVO inVO = new UserVO();
+		
+		inVO.setId(req.getParameter("id"));
+		inVO.setPassword(req.getParameter("password"));
+		inVO.setName(req.getParameter("name"));
+		inVO.setEmail(req.getParameter("email"));
+		int fixed_income = Integer.parseInt(req.getParameter("fixed_income").toString());
+		int balance = Integer.parseInt(req.getParameter("balance").toString());
+		
+		int flag = userSvc.do_update(inVO);
+		
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("logout");//List
+		modelAndView.addObject("inVO", inVO);
+		
+		return modelAndView;
+		
+	}
+	
+	//회원탈퇴
+	@RequestMapping(value="do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
+	public String do_delete(HttpServletRequest req) throws IOException {
+		
+		UserVO inVO=new UserVO();
+		
+		inVO.setId(req.getParameter("id"));
+		int delete_flag = 1;
+		inVO.setDelete_flag(delete_flag);
+		
+		int flag = userSvc.do_delete(inVO);
+		
+		return "redirect:logout.do";
+	}
+	
+	
 	
 	/*원본
 	@RequestMapping(value="user/login.do") 

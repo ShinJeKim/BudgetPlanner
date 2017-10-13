@@ -16,7 +16,7 @@
 			<label for="password">비밀번호</label>
 			<div>
 				<input type="password" id="password" name="password" data-rule-required="true"
-				placeholder="비밀번호" maxlength="12">
+				placeholder="영문+숫자+특수문자 조합" maxlength="12">
 			</div>
 		</div>
 		<!-- 비밀번호확인 -->
