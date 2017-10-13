@@ -19,6 +19,14 @@ public class DailySvcImpl implements DailySvc {
 	@Autowired 
 	private DailyDao dailyDao;
 	
+	@Override
+	public List<?> category(DTO dto){
+		log.debug("------------------");
+		log.debug("1:"+dto);
+		log.debug("------------------");
+		
+		return dailyDao.category(dto);
+	}
 	
 	@Override
 	public List<?> do_search(DTO dto)throws DataAccessException{

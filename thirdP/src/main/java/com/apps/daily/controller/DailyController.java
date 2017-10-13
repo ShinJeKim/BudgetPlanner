@@ -101,7 +101,6 @@ public class DailyController {
 		
 		String id = "id1";
 		session.setAttribute("ID", id);
-		ModelAndView mav = new ModelAndView();
 		DailyVO inVO = new DailyVO();
 		inVO.setId(session.getAttribute("ID").toString());
 		if(req.getParameter("reg_dt") != null){
@@ -109,7 +108,6 @@ public class DailyController {
 		}else{
 			inVO.setReg_dt("");
 		}
-		mav.addObject("reg_dt",inVO.getReg_dt());
 		log.debug("------------------");
 		log.debug("0: "+inVO);
 		log.debug("------------------");
@@ -207,4 +205,24 @@ public class DailyController {
 			
 	}
 	
+	@RequestMapping(value="budget/cate.do",method=RequestMethod.POST) 
+	@ResponseBody
+	public String searchCate(HttpServletRequest req,HttpSession session) {
+		
+		DailyVO inVO = new DailyVO();
+		inVO.setMst_ct_nm(req.getParameter("mst_ct_nm"));
+		log.debug("------------------");
+		log.debug("0: "+inVO);
+		log.debug("------------------");
+		List<DailyVO> list = (List<DailyVO>)dailySvc.category(inVO);
+		log.debug("------------------");
+		log.debug("3: "+ list);
+		log.debug("------------------");
+		
+		Gson gson=new Gson();
+		String retString = gson.toJson(list);
+		log.debug("4===============retString="+retString);
+		
+		return retString;
+	}
 }

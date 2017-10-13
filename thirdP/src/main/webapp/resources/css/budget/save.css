@@ -1,4 +1,5 @@
 @CHARSET "UTF-8";
+
 /*header 부분*/
 	.header{
 		width: 100%;
@@ -43,7 +44,50 @@
 		position: relative;
 		height: inherit;
 	}
-
+	#datepick{
+		width:20px; 
+		height:20px; 
+		display: inline-block;
+		background-image: url('/apps/resources/files/images/dateSelect.png'); 
+		background-size: contain;
+		vertical-align: middle;
+	}
+#datepick>#selectedDate>.currentDate{
+	display: table-cell;	
+	vertical-align: middle;
+	font-size: 0px;
+	text-align: left;
+}
+#datepick>#selectedDate{
+	display: table;
+	height: 100%;
+	width: 100%;
+}
+#datepick>#selectedDate>.currentDate:hover{
+	cursor: pointer;
+	box-shadow: inset 0 0 12px 2px aliceblue;
+    border-radius: 10%;
+}
+.input_title{
+	width: 20%;
+	display: inline-table;
+	text-align: center;
+	height: 100%;
+	vertical-align: middle;
+}
+.input_title>label{
+	display:table-cell;
+	vertical-align: middle;
+}
+.input_content{
+	width: 78%;
+	display: inline-table;
+	text-align: center;
+	height: 100%;
+}
+#ccontent{
+	vertical-align: top;
+}
 /*footer 부분*/
 	.footer{
 		position: absolute;

@@ -3,6 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.sist.repository.mappers.daily">
+ 
+ 	<select id="searchCate" parameterType="DailyVO" resultType="DailyVO">
+ 		SELECT dtl_ct_nm 
+		FROM category
+		WHERE mst_ct_nm = #{mst_ct_nm}
+ 	</select>
+ 	
  	<select id="do_search" parameterType="DailyVO" resultType="DailyVO">
 		SELECT t2.dtl_ct_nm 
 		       ,t1.content 

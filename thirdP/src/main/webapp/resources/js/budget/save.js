@@ -8,8 +8,13 @@ $(document).ready(function(){
 	 menu_size();
 	 $('#income').attr('checked', true);
 	 $('#BudgetPlanner').attr('checked', true);
-	 $('.currentDate').hide();
-	 
+	
+	var cate = $(':input[name=main_cates]:radio:checked').val();
+	
+	
+	if($('#main_cate').val() == ""){
+		$('#main_cate').val("수입")
+	} 
 	var usage = $('#usage').val().replace("-","");
 	$('#usage').val(usage);
 	
@@ -23,8 +28,47 @@ $(document).ready(function(){
 	$(window).resize(function() {
 		 font_size();
 		 menu_size();
-	});	 
+	});	
 	
+	
+	
+	function setcate(){$.ajax({
+        type:"POST",
+        url:"cate.do",
+        dataType: "JSON",
+        async: false,
+        data:{
+           "mst_ct_nm"  : $('#main_cate').val()
+        },
+        success: function(data){
+       var datahtml = "";
+            for(var i=1;i<=data.length;i++){
+            	console.log(data[i]);
+            	
+            
+            	/*datahtml += "<form class='dailyDatas' action='do_searchOne.do' method='post'>	"
+            	datahtml += "<input type='hidden' id='daily_code' name='daily_code' value='"+data[i].daily_code+"'>"	
+            	datahtml += "<div class='dailyitem'>                                            "
+            	datahtml += " <ul class='itemList'>                                             "
+            	datahtml +=	"  <li class='item_cate'><label>"+data[i].dtl_ct_nm+"</label></li>  "
+            	datahtml +=	"  <li class='item_content'><label>"+data[i].content+"</label></li> "
+                datahtml +=	"  <li class='item_price'><label>"+data[i].usage+"</label>원</li>    "
+            	datahtml += " </ul>																"		
+            	datahtml += "</div>																"
+        		datahtml += "<div class='up_del'>                                             	"
+            	datahtml += "  <input type='button' id='update' value='수정'>					"
+            	datahtml += "  <input type='button' id='delete' value='삭제'>			        "	
+            	datahtml += "</div>														    "
+            	datahtml += "</form>															"*/	
+            }/*
+        datahtml += "<div id='blank'></div>"
+       	$('#dailyList').html(datahtml);	*/
+        },
+        complete: function(data){
+        
+        }
+   	 });
+  }
 });
 
 function font_size(){
