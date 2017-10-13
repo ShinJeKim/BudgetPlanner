@@ -28,6 +28,7 @@ $(document).ready(function(){
 			}
 		});	
 	});
+	
 	var dd = $('#reg_dt').val().split("."); 
 	$('#nowDate>label').html(dd[2]);
 	$(document).find('.item_price').each(function(){
@@ -38,6 +39,7 @@ $(document).ready(function(){
 			$(this).css('color','blue');
 		}
 	});
+	
 	$('#reg_dt').change(function(){
 		 $.ajax({
             type:"POST",

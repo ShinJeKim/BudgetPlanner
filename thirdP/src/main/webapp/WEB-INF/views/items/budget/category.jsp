@@ -1,38 +1,7 @@
 <%@page import="com.apps.common.StringUtil"%>
 <%
-/*
-<받아와야될 인자 List>
-1. page_num
-2. page_size
-3. mst_ct_id
-4. dtl_ct_id
-5. start_date
-6. end_date
-7. id
-*/
- 	//상수 paging bottom count
-	int bottomCount = 10;
-
-	//for default element
-	int page_num = 1;
-	//int page_size = 10;
-	//int totalCnt;
-	String start_date = "2017-07-01";
-	String end_date = "2017-09-28";
-	String id = "id1";
-	String mst_ct_id = "";
-	String dtl_ct_id = "";
-
-	//initializing default element
-	page_num = Integer.parseInt(StringUtil.nvl(request.getParameter("page_num"), "1"));
-	//page_size = Integer.parseInt(StringUtil.nvl(request.getParameter("page_size"), "10"));
-	//int totalCnt = Integer.parseInt(StringUtil.nvl(request.getAttribute("totalCnt").toString(), ""));
-	
-	// 카테고리 param 받아오기
-	mst_ct_id = StringUtil.nvl(request.getParameter("mst_ct_id"),""); 
-	//String dtlList = StringUtil.nvl(request.getParameter("dtlList"), "");
-	
-	
+	// 상위 카테고리 param 받아오기
+	String mst_ct_id = StringUtil.nvl(request.getParameter("mst_ct_id"),""); 
 %>
 <%
 	//contextPath
@@ -71,6 +40,19 @@ function do_searchCategory(){
 		return;
 	}
 } 
+
+//font sizing
+function font_sizing(){
+	var font_size = "";
+	if(window.innerWidth > window.innerHeight){
+		font_size = window.innerHeight*0.01;
+	}else{
+		font_size = window.innerWidth*0.01
+	}
+	$('#thead>tr>th').css('font-size',font_size*3);
+	$('#tbody>tr>td').css('font-size',font_size*2.5);
+}
+
 
 	//jQuery Start
 	$(document).ready(function(){
@@ -127,10 +109,11 @@ function do_searchCategory(){
 			
 			// do_searchList
 			$("#do_searchList").on("click", function(){
-				
+
 				var st_date;
 				var ed_date;
 				
+				// month 쿼리를 위한 0 붙이기 조건
 				if((parseInt($('#start_month').val())<10)){
 					st_date = $('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01";
 					console.log("start_month"+$('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01");
@@ -149,7 +132,7 @@ function do_searchCategory(){
 					
 				$.ajax({
 					type:"POST",
-					url:"do_searchListt.do",
+					url:"do_searchList.do",
 					dataType:"JSON",
 					data:{			
 						"start_date": st_date.trim(),
@@ -208,6 +191,8 @@ function do_searchCategory(){
 					
 					},
 					complete: function(data){// 무조건 수행
+						font_sizing();
+			
 						
 					},
 					error: function(xhr, status, error){
@@ -279,13 +264,14 @@ function do_searchCategory(){
 		
 		<!-- List table -->
 		<table id="listTable" class="table table-bordered table-hover table-striped"  border="1" cellpadding="1" cellspacing="0">
-		<thead>
-			<!-- <th class="text-center">No.</th> -->
-			<th class="text-center">수입/지출</th>
-			<th class="text-center">카테고리</th>
-			<th class="text-center">금액</th>
-			<th class="text-center">상세설명</th>
-			<th class="text-center">날짜</th>
+		<thead id="thead">
+			<tr>
+				<th>수입/지출&nbsp;</th>
+				<th>카테고리&nbsp;</th>
+				<th>금액&nbsp;</th>
+				<th>상세설명&nbsp;</th>
+				<th>날짜&nbsp;</th>
+			</tr>
 		</thead>
 		<tbody id="tbody">
 		<c:choose>

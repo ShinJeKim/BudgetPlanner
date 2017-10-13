@@ -75,10 +75,10 @@ public class CategoryTest {
 														.param("id", "id1")
 														.param("page_size", "20")
 														.param("page_num", "1")
-														.param("start_date", "2017-10-12")
-														.param("end_date", "2017-10-13")
-														.param("mst_ct_id", "10")
-														.param("dtl_ct_nm", "교통비");
+														.param("start_date", "2017-10-01")
+														.param("end_date", "2017-11-01")
+														.param("mst_ct_id", "20")
+														.param("dtl_ct_nm", "전체");
 			mockMvc.perform(createMessage)
 				.andDo(print())
 				.andExpect(status().isOk())
