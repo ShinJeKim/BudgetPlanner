@@ -671,10 +671,30 @@
 			 
 		    element.append("<div class='datepicker'></div>")
 			$.fn.currentDate(element,options); 
-		    
+			
+			 if(element.attr('id') == "datepick"){
+			    	$(document).on('click','#datepick',function(event){
+			    		
+		    		if(event.stopImmediatePropagation){
+						event.stopImmediatePropagation();
+					}else{
+						event.isImmediatePropagationEnabled = false;
+					}
+			    	if(options.type == 'y'){
+						return $.fn.ypicker(element,options);
+					}else if(options.type == 'm'){
+						return $.fn.mpicker(element,options); 
+					}else if(options.type == 'd'){
+						return $.fn.dpicker(element,options);
+					}else if(options.type == 'ym'){
+						return $.fn.ympicker(element,options);
+					}else if(options.type == 'ymd'){
+						return $.fn.ymdpicker(element,options);
+					}
+			    	});
+			    }	
 			
 		    element.on('click','.currentDate',function(event){
-		    	
 		    	if(event.stopImmediatePropagation){
 					event.stopImmediatePropagation();
 				}else{
@@ -691,7 +711,6 @@
 				}else if(options.type == 'ymd'){
 					return $.fn.ymdpicker(element,options);
 				}
-		    	
 		    });
 		    	
 		    
