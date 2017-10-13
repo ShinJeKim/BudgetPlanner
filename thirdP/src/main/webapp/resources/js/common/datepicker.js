@@ -630,6 +630,11 @@
 					$('#reg_dt').val($('#currentDate').val()).trigger('change');
 				}
 			}
+			if($('#month').val() != undefined && $('#month').val() != ""){
+				$('#currentDate').val($('#month').val().substring(4,0)+"."+$('#month').val().substring(4,6)+".01").trigger('change');
+				}
+			
+			
 			var seperate = element.find('#currentDate').val().split('.');
 				var y = seperate[0];
 				options.year = y;
@@ -666,10 +671,30 @@
 			 
 		    element.append("<div class='datepicker'></div>")
 			$.fn.currentDate(element,options); 
-		    
+			
+			 if(element.attr('id') == "datepick"){
+			    	$(document).on('click','#datepick',function(event){
+			    		
+		    		if(event.stopImmediatePropagation){
+						event.stopImmediatePropagation();
+					}else{
+						event.isImmediatePropagationEnabled = false;
+					}
+			    	if(options.type == 'y'){
+						return $.fn.ypicker(element,options);
+					}else if(options.type == 'm'){
+						return $.fn.mpicker(element,options); 
+					}else if(options.type == 'd'){
+						return $.fn.dpicker(element,options);
+					}else if(options.type == 'ym'){
+						return $.fn.ympicker(element,options);
+					}else if(options.type == 'ymd'){
+						return $.fn.ymdpicker(element,options);
+					}
+			    	});
+			    }	
 			
 		    element.on('click','.currentDate',function(event){
-		    	
 		    	if(event.stopImmediatePropagation){
 					event.stopImmediatePropagation();
 				}else{
@@ -686,7 +711,6 @@
 				}else if(options.type == 'ymd'){
 					return $.fn.ymdpicker(element,options);
 				}
-		    	
 		    });
 		    	
 		    

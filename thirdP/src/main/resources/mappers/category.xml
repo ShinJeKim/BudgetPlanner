@@ -13,6 +13,31 @@
 		WHERE MST_CT_ID = #{mst_ct_id}
 	</select>
 	
+	<sql id="userSearchCondition">
+		<where>
+		    	F.MST_CT_ID = C.MST_CT_ID 
+				AND F.DTL_CT_ID = C.DTL_CT_ID                                            
+				<choose>
+					<when test=" mst_ct_id != ''  and dtl_ct_nm != '전체'        ">
+						AND F.MST_CT_ID = #{mst_ct_id}
+						AND C.DTL_CT_NM = #{dtl_ct_nm}
+					</when>
+					<when test=" mst_ct_id != ''  and  dtl_ct_nm == '전체'        ">
+						AND F.MST_CT_ID = #{mst_ct_id}
+					</when>
+					<when test=" mst_ct_id != ''  and  dtl_ct_nm == ''        ">
+						AND F.MST_CT_ID = #{mst_ct_id}
+					</when>
+					<when test=" mst_ct_id != ''    " >
+						AND F.MST_CT_ID = #{mst_ct_id}
+					</when>
+					<otherwise>
+						
+					</otherwise>
+				</choose>
+		</where>
+	</sql>
+	
 	<!--  -->
 	<select id="do_searchList" parameterType="String" resultType="CategoryVO">
 
@@ -25,16 +50,13 @@
 	                            C.MST_CT_NM,
 	                            C.DTL_CT_NM,
 	                            F.CONTENT,
-	                            F.REG_DT,
-	                            F.MOD_DT,
+	                            TO_CHAR(F.REG_DT, 'YYYY-MM-DD') AS REG_DT,
+                            	TO_CHAR(F.MOD_DT, 'YYYY-MM-DD') AS MOD_DT,
 	                            COUNT(*) OVER() AS TOTAL_CNT
 	                     FROM 
 	                            FINANCE F,
 	                            CATEGORY C
-	                  WHERE F.MST_CT_ID = C.MST_CT_ID
-	                      AND F.DTL_CT_ID = C.DTL_CT_ID
-	                      AND F.MST_CT_ID = #{mst_ct_id}
-	                      AND F.DTL_CT_ID = #{dtl_ct_id}
+	                      <include refid="userSearchCondition" />
 	                      AND (F.REG_DT BETWEEN #{start_date} AND #{end_date})
 	                      AND ID=#{id}
                 )T1
@@ -61,7 +83,7 @@
 	                     FROM 
 	                            FINANCE F,
 	                            CATEGORY C
-	                  WHERE F.MST_CT_ID = C.MST_CT_ID
+	                  WHERE   F.MST_CT_ID = C.MST_CT_ID
 	                      AND F.DTL_CT_ID = C.DTL_CT_ID
 	                      AND (F.REG_DT BETWEEN #{start_date} AND #{end_date})
 	                      AND ID=#{id}

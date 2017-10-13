@@ -56,7 +56,7 @@ public class CategoryTest {
 		log.debug("=================================");
 	}
 	
-	@Test
+	//@Test
 	public void do_searchCategory() throws Exception{
 		MockHttpServletRequestBuilder createMessage
 												= get("/budget/do_searchCategory.do")
@@ -68,17 +68,17 @@ public class CategoryTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void do_searchList() throws Exception{
 		MockHttpServletRequestBuilder createMessage
-												= get("/budget/do_searchList.do")
+												= post("/budget/do_searchList.do")
 														.param("id", "id1")
-														.param("page_size", "10")
+														.param("page_size", "20")
 														.param("page_num", "1")
-														.param("start_date", "2017-07-01")
-														.param("end_date", "2017-09-28")
-														.param("mst_ct_id", "10")
-														.param("dtl_ct_id", "2");
+														.param("start_date", "2017-10-01")
+														.param("end_date", "2017-11-01")
+														.param("mst_ct_id", "20")
+														.param("dtl_ct_nm", "전체");
 			mockMvc.perform(createMessage)
 				.andDo(print())
 				.andExpect(status().isOk())

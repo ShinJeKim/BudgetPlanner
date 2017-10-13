@@ -1,4 +1,9 @@
 @CHARSET "UTF-8";
+#sum,.dailyitem{
+	border: 1px solid transparent;
+    box-sizing: border-box;
+    box-shadow: 2px 2px 4px graytext;
+}
 
 #dailyTitle{
 	background-color: white; 
@@ -47,7 +52,8 @@
 .itemList{
 	width: 100%;
 	display: inline-table;
-	height: 80%;
+	cursor: pointer;
+	height: inherit;
 }
 .itemList>li{
 	display: table-cell;
@@ -56,28 +62,34 @@
 	width: 20%;
 	font-weight: lighter;
 }
+.itemList>li:hover{
+	cursor: pointer;
+}
+.itemList>li>label:hover{
+	cursor: pointer;
+}
 .itemList>.item_content{
-	width: 55%;
+	width: 60%;
     padding-left: 5%;
-    padding-right: 5%;
+    text-align: left;
 }
-.itemList>.item_content>label{
-	text-align: left;
-}
-.itemList>.add{
-	width: 5%;
-}
-/*.up_del{
+.up_del{
 	width: 100%;
 	display: inline-table;
-	height: 20%;
+	margin-top: 5px;
+	box-shadow: 0px 0px 4px 1px steelblue;
 }
-.up_del>li{   
+.up_del>input{   
 	display: table-cell;
 	text-align: center;
 	width: 50%;
-}*/
-
-
+	height: 100%;
+}
+.up_del>input:hover{
+	background-color: blueviolet;
+	box-shadow: inset 0px 0px 10px aliceblue;
+	color:white;
+	cursor: pointer;
+}
 
 

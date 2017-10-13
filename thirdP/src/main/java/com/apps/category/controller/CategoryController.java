@@ -75,7 +75,63 @@ public class CategoryController {
 	}
 	
 	
-	@RequestMapping(value = "budget/do_searchList.do", method=RequestMethod.POST)
+	@RequestMapping(value="budget/do_searchList.do", method=RequestMethod.POST
+			, produces="application/json;charset=utf8")
+	@ResponseBody
+	public String do_searchList(HttpServletRequest req){
+		log.debug("=================================");
+		log.debug("do_searchList.do");
+		log.debug("=================================");
+		
+		CategoryVO catVO = new CategoryVO();
+		Hashtable<String, String> searchParam = new Hashtable<String, String>();
+		
+		//catVO.setId(session.getAttribute("id").toString());
+		String id = StringUtil.nvl(req.getParameter("id"), "id1");
+		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
+		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
+		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
+		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-22");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
+		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
+		
+		searchParam.put("id".toString(), id);
+		searchParam.put("page_size".toString(), pageSize);
+		searchParam.put("page_num".toString(), pageNum);
+		searchParam.put("start_date".toString(), start_date);
+		searchParam.put("end_date".toString(), end_date);
+		searchParam.put("mst_ct_id".toString(), mst_ct_id);
+		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
+
+		log.debug("searchParam: "+searchParam);
+
+		// request 이름 read
+		Enumeration<String> params = req.getParameterNames();
+		Hashtable<String, String> sParam = new Hashtable<String, String>();
+		while (params.hasMoreElements()) {
+			String name = (String) params.nextElement();
+			req.getParameter(name);
+			sParam.put(name, StringUtil.nvl(req.getParameter(name), ""));
+		}
+
+		catVO.setParam(searchParam);
+		
+		
+//		catVO.setId(StringUtil.nvl(req.getParameter("id"), "id1"));
+//		catVO.setStart_date(StringUtil.nvl(req.getParameter("start_date"), "2017-07-01"));
+//		catVO.setEnd_date( StringUtil.nvl(req.getParameter("end_date"), "2017-09-30"));
+//		catVO.setMst_ct_id(StringUtil.nvl(req.getParameter("mst_ct_id"), "10"));
+//		catVO.setDtl_ct_id( StringUtil.nvl(req.getParameter("dtl_ct_id"), "2"));
+		List<CategoryVO> list = catSvc.do_searchList(catVO);
+		
+		Gson gson = new Gson();
+		String searchList = gson.toJson(list);
+		log.debug("do_searchList: "+searchList);
+		return searchList;
+	}
+	
+	
+	/*@RequestMapping(value = "budget/do_searchList.do", method=RequestMethod.POST)
 	public ModelAndView do_searchList(HttpServletRequest req, HttpSession session) throws IOException{
 		log.debug("=================================");
 		log.debug("do_searchList.do");
@@ -90,8 +146,8 @@ public class CategoryController {
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-07-01");
 		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-30");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
-		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
+		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
 		searchParam.put("id".toString(), id);
 		searchParam.put("page_size".toString(), pageSize);
@@ -99,7 +155,7 @@ public class CategoryController {
 		searchParam.put("start_date".toString(), start_date);
 		searchParam.put("end_date".toString(), end_date);
 		searchParam.put("mst_ct_id".toString(), mst_ct_id);
-		searchParam.put("dtl_ct_id".toString(), dtl_ct_id);
+		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
 
 		log.debug("searchParam: "+searchParam);
 
@@ -125,72 +181,10 @@ public class CategoryController {
 		modelAndView.setViewName("items/budget/category");
 		
 		return modelAndView;
-	}
+	}*/
 
 	
-	
-	@RequestMapping(value="budget/do_searchListt.do", method=RequestMethod.POST
-			, produces="application/json;charset=utf8")
-	@ResponseBody
-	public String do_searchListt(HttpServletRequest req){
-		log.debug("=================================");
-		log.debug("do_searchListt.do");
-		log.debug("=================================");
-		
-		CategoryVO catVO = new CategoryVO();
-		Hashtable<String, String> searchParam = new Hashtable<String, String>();
-		
-		//catVO.setId(session.getAttribute("id").toString());
-		String id = StringUtil.nvl(req.getParameter("id"), "id1");
-		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
-		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
-		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
-		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-22");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "10");
-		String dtl_ct_id = StringUtil.nvl(req.getParameter("dtl_ct_id"), "2");
-		
-		searchParam.put("id".toString(), id);
-		searchParam.put("page_size".toString(), pageSize);
-		searchParam.put("page_num".toString(), pageNum);
-		searchParam.put("start_date".toString(), start_date);
-		searchParam.put("end_date".toString(), end_date);
-		searchParam.put("mst_ct_id".toString(), mst_ct_id);
-		searchParam.put("dtl_ct_id".toString(), dtl_ct_id);
 
-		log.debug("searchParam: "+searchParam);
-
-		// request 이름 read
-		Enumeration<String> params = req.getParameterNames();
-		Hashtable<String, String> sParam = new Hashtable<String, String>();
-		while (params.hasMoreElements()) {
-			String name = (String) params.nextElement();
-			req.getParameter(name);
-			sParam.put(name, StringUtil.nvl(req.getParameter(name), ""));
-		}
-
-		catVO.setParam(searchParam);
-		
-		
-//		catVO.setId(StringUtil.nvl(req.getParameter("id"), "id1"));
-//		catVO.setStart_date(StringUtil.nvl(req.getParameter("start_date"), "2017-07-01"));
-//		catVO.setEnd_date( StringUtil.nvl(req.getParameter("end_date"), "2017-09-30"));
-//		catVO.setMst_ct_id(StringUtil.nvl(req.getParameter("mst_ct_id"), "10"));
-//		catVO.setDtl_ct_id( StringUtil.nvl(req.getParameter("dtl_ct_id"), "2"));
-		List<CategoryVO> list = catSvc.do_searchList(catVO);
-		
-		Gson gson = new Gson();
-		String searchListt = gson.toJson(list);
-		log.debug("searchListt: "+searchListt);
-		return searchListt;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }
