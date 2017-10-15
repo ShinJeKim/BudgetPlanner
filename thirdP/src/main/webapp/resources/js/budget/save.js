@@ -108,6 +108,11 @@ function menu_size(){
 	$('body').css('margin-left','20%');
 	$('body').css('border-left','5px solid graytext');
 	$('body').css('border-right','5px solid graytext');
+	$('.header').css('border-top','5px solid graytext');
+	$('.header').css('box-sizing','border-box');
+	$('.bodyCover').css('top',$('.header').height()+5);
+	$('.footer').css('border-bottom','5px solid graytext');
+	$('.footer').css('box-sizing','border-box');
 	$('.header').css('width','inherit');
 	$('.footer').css('width','inherit');
 	$('.bodyCover').css('width','inherit');
@@ -116,6 +121,9 @@ function menu_size(){
 		$('body').css('width','100%');
 		$('body').css('border','0px');
 		$('body').css('margin','0px');
+		$('.header').css('border','0px');
+		$('.bodyCover').css('top',$('.header').height());
+		$('.footer').css('border','0px');
 		$('.header').css('width','100%');
 		$('.footer').css('width','100%');
 	}

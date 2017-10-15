@@ -5,4 +5,5 @@ $(document).ready(function(){
 	 });
 	$('#monthly').attr('checked', true);
 	$('#BudgetPlanner').attr('checked', true);
+
 });

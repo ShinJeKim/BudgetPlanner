@@ -20,6 +20,9 @@
 	display: table-cell;
 	text-align: center;
 }
+#plus>#icon:hover{
+	cursor: pointer;
+}
 #total{
 	list-style: none;
 	width: 100%;

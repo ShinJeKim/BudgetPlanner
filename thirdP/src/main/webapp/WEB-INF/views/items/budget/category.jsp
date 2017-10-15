@@ -51,12 +51,13 @@ function font_sizing(){
 	}
 	$('#thead>tr>th').css('font-size',font_size*3);
 	$('#tbody>tr>td').css('font-size',font_size*2.5);
+	$('.currentDate').css("font-size",font_size*6);
+	$('#selectedDate').css('height',$('.header').height()*0.6);
+	$('#balance').css('height',$('.header').height()*0.6);
 }
-
 
 	//jQuery Start
 	$(document).ready(function(){
-		
 		// datePicker
 		 $('#date').datepicker({
 			 type	: 'y',
@@ -64,6 +65,7 @@ function font_sizing(){
 		 });
 		$('#category').attr('checked', true);
 		$('#BudgetPlanner').attr('checked', true);
+		font_sizing();
 		$('#currentDate').change(function(){
 			var thisDate = $('#currentDate').val().toString().split(".");
 			var selectedDate = thisDate[0];
