@@ -6,14 +6,32 @@ $(document).ready(function(){
 	 });
 	$('#daily').attr('checked', true);
 	$('#BudgetPlanner').attr('checked', true);
+	$(document).find('.item_content>label>p').each(function(){
+		var origin_text = $(this).html().toString();
+		var first_row = origin_text.split('<br>');
+		$(this).html(first_row);
+	});
+	$(document).find('.item_content>label>p').click(function(){
+		/*$(document).find('.item_content>label>p').each(function(){
+			var o_text = $(this).html().toString();
+			var f_row = o_text.split('<br>');
+			$(this).html(f_row).trigger('change');
+		});	*/
+		$(this).css('white-space','normal');
+		$(this).html($(this).closest('.dailyDatas').find('origin_cont').val()).trigger('change');
+		console.log($(this).closest('.dailyDatas').find('origin_cont').val());
+	});
+	$(document).find('.item_content>label>p').change(function(){
+	   console.log('change');
+   });
 	
 	body_sizing();
 	font_sizing();
 	$(document).find('.dailyitem').each(function(){
 		var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
 		$(this).find('.itemList>li').css('padding-top',paddingTop);
-		if($(this).height()<($(this).find('.itemList').height()+$(this).find('.up_del').height())){
-				$(this).css('height',($(this).find('.itemList').height()+$(this).find('.up_del').height()));
+		if($(this).height()<$(this).find('.itemList').height()){
+				$(this).css('height',$(this).find('.itemList').height()+20);
 			}
 	
 	});	
@@ -23,9 +41,9 @@ $(document).ready(function(){
 		$(document).find('.dailyitem').each(function(){
 			var paddingTop = ($(this).height()-$(this).find('.itemList>li').css('font-size'))/2;
 			$(this).find('.itemList>li').css('padding-top',paddingTop);
-			if($(this).height()<($(this).find('.itemList').height()+$(this).find('.up_del').height())){
-   				$(this).css('height',($(this).find('.itemList').height()+$(this).find('.up_del').height()));
-   			}
+			if($(this).height()<$(this).find('.itemList').height()){
+				$(this).css('height',$(this).find('.itemList').height()+20);
+			}
 		});	
 	});
 	
@@ -53,7 +71,9 @@ $(document).ready(function(){
            var datahtml = "";
 	            for(var i=0;i<data.length;i++){
 	            	datahtml += "<form class='dailyDatas' action='do_searchOne.do' method='post'>	"
-	            	datahtml += "<input type='hidden' id='daily_code' name='daily_code' value='"+data[i].daily_code+"'>"	
+	            	datahtml += "<input type='hidden' id='origin_cont' value='"+data[i].content+"'>"	
+	            	datahtml += "<input type='hidden' id='daily_code' name='daily_code' value='"+data[i].daily_code+"'>"
+	            	datahtml += "<input <input type='hidden' id='dt' name='reg_dt'>"
 	            	datahtml += "<div class='dailyitem'>                                            "
 	            	datahtml += " <ul class='itemList'>                                             "
 	            	datahtml +=	"  <li class='item_cate'><label>"+data[i].dtl_ct_nm+"</label></li>  "
@@ -79,11 +99,12 @@ $(document).ready(function(){
            	 body_sizing();
            	 font_sizing();
            	 $(document).find('.dailyitem').each(function(){
+           		  	$(this).parent().find('#dt').val($('#reg_dt').val());
            			var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
            			$(this).find('.itemList>li').css('padding-top',paddingTop);
-           			if($(this).height()<($(this).find('.itemList').height()+$(this).find('.up_del').height())){
-           				$(this).css('height',($(this).find('.itemList').height()+$(this).find('.up_del').height()));
-           			}
+           			if($(this).height()<$(this).find('.itemList').height()){
+           				$(this).css('height',$(this).find('.itemList').height()+20);
+        			}
            	 });
            	 $(document).find('.item_price').each(function(){
    				if($(this).children('label').html().toString().substring(1,0) == "-"){
@@ -105,7 +126,8 @@ $(document).ready(function(){
 		 });
 	});
 	$(document).on('click','#update',function(){
-		console.log($(this).closest('form'))
+		console.log($(this).closest('form'));
+		$('#loadWork').val('reload');
 		$(this).closest('form').submit(); //dailyDatas
 	});
 	$(document).on('click','#delete',function(){
@@ -124,6 +146,11 @@ $(document).ready(function(){
 		$(this).parent().css('margin-bottom','0px');
 		$(this).closest('form').find('.up_del').css('margin-bottom',$('.bodyCover').height()*0.04);
 		
+	});
+	$('#icon').click(function(){
+		$('#search').attr('method','post');
+		$('#search').attr('action','do_save.do');
+		$('#search').submit();
 	});
 });
 
