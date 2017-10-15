@@ -42,7 +42,8 @@ $(document).ready(function(){
 		$('#save').submit();	
 	});
 	$('#cancle').click(function(){
-		history.go(-1);
+		$('#save').attr('action','daily.do');
+		$('#save').submit();
 	});	
 	
 	$(window).resize(function() {

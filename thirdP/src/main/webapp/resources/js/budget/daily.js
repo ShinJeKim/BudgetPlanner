@@ -9,22 +9,8 @@ $(document).ready(function(){
 	$(document).find('.item_content>label>p').each(function(){
 		var origin_text = $(this).html().toString();
 		var first_row = origin_text.split('<br>');
-		$(this).html(first_row);
+		$(this).html(first_row[0]);
 	});
-	$(document).find('.item_content>label>p').click(function(){
-		/*$(document).find('.item_content>label>p').each(function(){
-			var o_text = $(this).html().toString();
-			var f_row = o_text.split('<br>');
-			$(this).html(f_row).trigger('change');
-		});	*/
-		$(this).css('white-space','normal');
-		$(this).html($(this).closest('.dailyDatas').find('origin_cont').val()).trigger('change');
-		console.log($(this).closest('.dailyDatas').find('origin_cont').val());
-	});
-	$(document).find('.item_content>label>p').change(function(){
-	   console.log('change');
-   });
-	
 	body_sizing();
 	font_sizing();
 	$(document).find('.dailyitem').each(function(){
@@ -98,6 +84,11 @@ $(document).ready(function(){
            	 var total_sum = 0;
            	 body_sizing();
            	 font_sizing();
+         	$(document).find('.item_content>label>p').each(function(){
+        		var origin_text = $(this).html().toString();
+        		var first_row = origin_text.split('<br>');
+        		$(this).html(first_row[0]);
+        	});
            	 $(document).find('.dailyitem').each(function(){
            		  	$(this).parent().find('#dt').val($('#reg_dt').val());
            			var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
@@ -122,7 +113,9 @@ $(document).ready(function(){
            	 $('#total_in>label').html(total_in+"원");
            	 $('#total_out>label').html(total_out+"원");
            	 $('#total_sum>label').html(total_sum+"원");
-           }
+           
+           	
+           }//complete
 		 });
 	});
 	$(document).on('click','#update',function(){
@@ -139,13 +132,36 @@ $(document).ready(function(){
 		    return;
 		}
 	});
-	$(document).on('click','.itemList',function(){
-		$(document).find('.up_del').hide();
+	$(document).on('click','.itemList',function(event){
+		if(event.stopImmediatePropagation){
+			event.stopImmediatePropagation();
+		}else{
+			event.isImmediatePropagationEnabled = false;
+		}
+		$(document).find('.item_content>label>p').each(function(){
+			var o_text = $(this).html().toString();
+			var f_row = o_text.split('<br>');
+			$(this).html(f_row[0]);
+			$(this).css('white-space','nowrap');
+		});
+		var ocont = $(this).closest('.dailyDatas').find('#origin_cont').val();
+		var cont = ocont.replace('<p>','').replace('</p>',''); 
+		$(this).find('.item_content>label>p').css('white-space','normal');
+		$(this).find('.item_content>label>p').html(cont);
+		body_sizing();
+		 $(document).find('.dailyitem').each(function(){
+			  	$(this).parent().find('#dt').val($('#reg_dt').val());
+				var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
+				$(this).find('.itemList>li').css('padding-top',paddingTop);
+				if($(this).height()<$(this).find('.itemList').height()){
+					$(this).css('height',$(this).find('.itemList').height()+20);
+			}
+		 });
+		 $(document).find('.up_del').hide();
 		$(document).find('.dailyitem').css('margin-bottom',$('.bodyCover').height()*0.02);
 		$(this).closest('form').find('.up_del').show();
 		$(this).parent().css('margin-bottom','0px');
 		$(this).closest('form').find('.up_del').css('margin-bottom',$('.bodyCover').height()*0.04);
-		
 	});
 	$('#icon').click(function(){
 		$('#search').attr('method','post');
