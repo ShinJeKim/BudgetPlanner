@@ -50,6 +50,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		public CategoryVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			CategoryVO catVO = new CategoryVO();
 			
+			catVO.setNo(rs.getInt("no"));
 			catVO.setId(rs.getString("id"));
 			catVO.setDaily_code(rs.getString("daily_code"));
 			catVO.setUsage(rs.getString("usage"));

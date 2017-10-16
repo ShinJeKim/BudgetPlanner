@@ -2,22 +2,27 @@ package com.apps.category.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
 import com.apps.category.domain.CategoryVO;
 import com.apps.category.service.CategorySvc;
@@ -32,6 +37,9 @@ public class CategoryController {
 	
 	@Autowired
 	CategorySvc catSvc;
+	
+	@Resource(name="downloadView")
+	private View downloadView;
 	
 	//헤더없는 페이지
 	@RequestMapping(value="org/category.do") 
@@ -129,6 +137,67 @@ public class CategoryController {
 		log.debug("do_searchList: "+searchList);
 		return searchList;
 	}
+	
+	
+	/**
+	 * excelDownload
+	 * @param req
+	 * @param response
+	 * @param model
+	 * @throws Exception
+	 */
+	@RequestMapping(value="budget/do_excelDown.do", method=RequestMethod.POST)
+	public ModelAndView excelDownload(HttpServletRequest req) throws IOException{
+		
+		log.debug("=================================");
+		log.debug("do_excelDown.do");
+		log.debug("=================================");
+		
+		CategoryVO catVO = new CategoryVO();
+		Hashtable<String, String> searchParam = new Hashtable<String, String>();
+		
+		//catVO.setId(session.getAttribute("id").toString());
+		String id = StringUtil.nvl(req.getParameter("id"), "id1");
+		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
+		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
+		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
+		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-22");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
+		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
+		
+		searchParam.put("id".toString(), id);
+		searchParam.put("page_size".toString(), pageSize);
+		searchParam.put("page_num".toString(), pageNum);
+		searchParam.put("start_date".toString(), start_date);
+		searchParam.put("end_date".toString(), end_date);
+		searchParam.put("mst_ct_id".toString(), mst_ct_id);
+		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
+
+		log.debug("searchParam: "+searchParam);
+		catVO.setParam(searchParam);
+		
+		String fileFullPath = this.catSvc.do_excelDown(catVO);
+		ModelAndView modelAndView = new ModelAndView();
+		log.debug("===========================");
+		log.debug("fileFullPath: "+fileFullPath);
+		log.debug("===========================");
+		modelAndView.setView(this.downloadView);
+		File downloadFile = new File(fileFullPath);
+		modelAndView.addObject("downloadFile", downloadFile);
+		
+		return modelAndView;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/*@RequestMapping(value = "budget/do_searchList.do", method=RequestMethod.POST)

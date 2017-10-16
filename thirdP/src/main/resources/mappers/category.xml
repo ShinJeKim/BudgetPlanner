@@ -43,7 +43,7 @@
 
 		SELECT T1.*
         FROM(
-                  SELECT ROW_NUMBER() OVER(ORDER BY F.REG_DT DESC) AS RNUM, 
+                  SELECT ROW_NUMBER() OVER(ORDER BY F.REG_DT DESC) AS No, 
 	                            F.ID,
 	                            F.DAILY_CODE,
 	                            F.USAGE,
@@ -61,7 +61,7 @@
 	                      AND ID=#{id}
                 )T1
             <![CDATA[    
-			WHERE T1.RNUM BETWEEN (#{page_size}*(#{page_num}-1)+1)
+			WHERE T1.No BETWEEN (#{page_size}*(#{page_num}-1)+1)
 			                    AND (#{page_size}*(#{page_num}-1)+#{page_size})
 				]]><!-- CDATA: 특수문자를 문자열로 인식 -->  
 	</select>

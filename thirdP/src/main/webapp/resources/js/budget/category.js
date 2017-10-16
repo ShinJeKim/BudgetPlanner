@@ -31,6 +31,15 @@ function font_sizing(){
 	$('#balance').css('height',$('.header').height()*0.6);
 }
 
+// 엑셀 다운로드
+function do_excelDown(){
+	var frm = document.frm;
+	frm.action = "do_excelDown.do";
+	frm.submit();
+	
+	/*window.open("/do_excelDown.do");*/
+}
+
 
 	//jQuery Start
 	$(document).ready(function(){
@@ -139,31 +148,42 @@ function font_sizing(){
 
 						if(data.length > 0){
 							
-						var datahtml = "";
-						for(var i=0; i<data.length; i++){
+							var datahtml = "";
 							
-							console.log("data[i].id: "+data[i].mst_ct_id);
+							datahtml += ""
 							
-							datahtml += "<tr class='dataList'>"
-							datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
-							datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
-							datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
-							datahtml += "<td id='c_content' >"+data[i].content+"</td>"
-							datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
-							datahtml += "</tr >"
+							for(var i=0; i<data.length; i++){
+								
+								console.log("data[i].id: "+data[i].mst_ct_id);
+								
+								datahtml += "<tr class='dataList'>"
+								datahtml += "<td id='c_no' >"+data[i].No+"</td>"
+								datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
+								datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
+								datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
+								datahtml += "<td id='c_content' >"+data[i].content+"</td>"
+								datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
+								datahtml += "</tr >"
+								
+								
+							}
 							
-						}
-						$('#tbody').html(datahtml);
-						//console.log("datahtml: "+datahtml);
-						
+								$('#tbody').html(datahtml);
+								//console.log("datahtml: "+datahtml);
+								
+									
+								/*	$('#pagination').twbsPagination({
+										        totalPages: max_page,
+										        visiblePages: 5
+									 });*/
+								
+							// do_excelDown Btn event
+								$('#do_excelDown').click(function(){
+									do_excelDown();
+								});
+								
 							
-							$('#pagination').twbsPagination({
-								        totalPages: max_page,
-								        visiblePages: 5
-							 });
-						
-						
-						
+							
 						}else{
 							$('#tbody').html("<label style='font-size: 20px; color: red;'>검색결과가 없습니다.</label>");
 						}
@@ -180,5 +200,7 @@ function font_sizing(){
 				}) // --ajax closed
 			});// --do_searchList closed
 			
+			
+				
 			
 	});//-- jQuery closed

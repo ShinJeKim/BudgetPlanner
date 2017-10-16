@@ -1,5 +1,6 @@
 package com.apps.category.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.apps.category.domain.CategoryVO;
@@ -21,4 +22,12 @@ public interface CategorySvc {
 	 * @return
 	 */
 	public List<CategoryVO> do_searchList(DTO dto);
+	
+	/**
+	 * excelDown
+	 * @param dto
+	 * @return
+	 * @throws IOException
+	 */
+	public String do_excelDown(DTO dto)throws IOException;
 }

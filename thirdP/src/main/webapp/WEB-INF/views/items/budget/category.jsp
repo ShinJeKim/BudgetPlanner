@@ -62,7 +62,8 @@
 					</div>
 					
 						<div style="float: left; width: 60%">
-							<input type="button" id=do_excelDown  value="엑셀 다운로드">
+							<input type="button" id=do_excelDown  value="엑셀 다운로드"> 
+							<!-- <button class="btn" onclick="javascript:do_excelDown()" style="margin-right: 5px" >ExcelDown</button> -->
 						</div>
 					
 				</div>
@@ -73,42 +74,45 @@
 		<!-- div 2 for searchList-->
 		<div style="background-color: Linen; height: 75%;">
 		
-		<!-- List table -->
-		<table id="listTable" class="table table-bordered table-hover table-striped"  border="1" cellpadding="1" cellspacing="0">
-		<thead id="thead">
-			<tr>
-				<th>수입/지출&nbsp;</th>
-				<th>카테고리&nbsp;</th>
-				<th>금액&nbsp;</th>
-				<th>상세설명&nbsp;</th>
-				<th>날짜&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody id="tbody">
-		<c:choose>
-			<c:when test="${list.size()>0 }">
-				<c:forEach var="CategoryVO" items="${list }">
-					<form action="category.do" method="POST" name="${CategoryVO.id }">
+			<!-- List table -->
+			<form name="frm" method="post">
+				<table id="listTable" class="table table-bordered table-hover table-striped"  border="1" cellpadding="1" cellspacing="0">
+				<thead id="thead">
+					<tr>
+						<th>No.&nbsp;</th>
+						<th>수입/지출&nbsp;</th>
+						<th>카테고리&nbsp;</th>
+						<th>금액&nbsp;</th>
+						<th>상세설명&nbsp;</th>
+						<th>날짜&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+				<c:choose>
+					<c:when test="${list.size()>0 }">
+						<c:forEach var="CategoryVO" items="${list }">
+							<form action="category.do" method="POST" name="${CategoryVO.id }">
+								<tr>
+									<td id="c_no" class="text-center"><c:out value="${CategoryVO.No }"></c:out></td>
+									<td id="c_mst_ct_id" class="text-left"><c:out value="${CategoryVO.mst_ct_id }"></c:out></td>
+									<td id="c_dtl_ct_nm" class="text-left"><c:out value="${CategoryVO.dtl_ct_nm }"></c:out></td>
+									<td id="c_usage" class="text-left"><c:out value="${CategoryVO.usage }"></c:out></td>
+									<td id="c_content" class="text-left"><c:out value="${CategoryVO.content }"></c:out></td>
+									<td id="c_reg_dt" class="text-center"><c:out value="${CategoryVO.reg_dt }"></c:out></td>
+								</tr>
+							</form>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
 						<tr>
-							<td id="c_mst_ct_id" class="text-left"><c:out value="${CategoryVO.mst_ct_id }"></c:out></td>
-							<td id="c_dtl_ct_nm" class="text-left"><c:out value="${CategoryVO.dtl_ct_nm }"></c:out></td>
-							<td id="c_usage" class="text-left"><c:out value="${CategoryVO.usage }"></c:out></td>
-							<td id="c_content" class="text-left"><c:out value="${CategoryVO.content }"></c:out></td>
-							<td id="c_reg_dt" class="text-center"><c:out value="${CategoryVO.reg_dt }"></c:out></td>
+							<td colspan="99">등록된 게시물이 없습니다</td>
 						</tr>
-					</form>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<td colspan="99">등록된 게시물이 없습니다</td>
-				</tr>
-			</c:otherwise>
-		</c:choose>
-		</tbody>
-	</table>
-	<!-- // List table closed-->
-		
+					</c:otherwise>
+				</c:choose>
+				</tbody>
+			</table>
+			<!-- // List table closed-->
+		</form>
 		</div>
 		<!--// div 2 closed-->
 		
