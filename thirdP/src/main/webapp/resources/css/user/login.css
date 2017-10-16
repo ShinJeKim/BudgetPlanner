@@ -1,14 +1,54 @@
 @CHARSET "UTF-8";
 
-#loginfrm{
+.body{
+	background-color: #2c8a7b;
+	height: 100%;
+}
+#loginFrm>div{
+	height: 7%;
+    text-align: center;	
+    display: inline-table;
+    width: 100%;
+}
+#loginFrm>#logo{
+	padding-top: 20%;
+	height: 65%;
+}
+#logo>label{
+	width: inherit;
+    height: inherit;
+}
+#logo>label>img{
+	width: 60%;
+    height: 100%;
+}
+#loginBtn{
+	width: 60%;
+    height: 100%;
+    background-color: #ecdd84;
+    font-weight: bold;
+    font-size: 3rem;	
+}
+#loginBtn:hover{
+    background-color: #fecd76;
+    color: white;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 20px cornsilk;
+}
+#id,#password{
+	width: 60%;
+    height: 90%;
+    font-size: 2.8rem;
+    padding-left: 10px;
+    color: gray;
+}
+#anchorlink>div{
 	display: table-cell;
 	vertical-align: middle;
-	text-align: center;
+	font-size: 3rem;
+    color: darkgray;
 }
-#loginfrm div{
-	display: inline-block;
-	width: 100%;
-}
-#logo{
-	font-size: 4rem;
+#anchorlink>div>a:hover{
+	cursor: pointer;
+	color: white;
 }
