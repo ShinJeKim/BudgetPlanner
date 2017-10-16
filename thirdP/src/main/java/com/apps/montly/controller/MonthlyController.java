@@ -204,9 +204,12 @@ public class MonthlyController {
 			}
 		}
 		
+		int monthlyListSize = monthlyList.size();
+		
 		log.debug(monthlyList.toString());
 		
 		modelAndView.addObject("monthlyList", monthlyList);
+		modelAndView.addObject("monthlyListSize", monthlyListSize);
 		modelAndView.setViewName("monthly");
 		
 		return modelAndView;		
@@ -378,7 +381,10 @@ public class MonthlyController {
 		
 		log.debug(monthlyList.toString());
 		
+		int monthlyListSize = monthlyList.size();
+		
 		modelAndView.addObject("monthlyList", monthlyList);
+		modelAndView.addObject("monthlyListSize", monthlyListSize);
 		modelAndView.setViewName("monthly");
 		
 //		Gson gson = new Gson();
