@@ -70,6 +70,17 @@
 	box-shadow: inset 0 0 12px 2px aliceblue;
     border-radius: 10%;
 }
+#input_division{
+	height: 80%;
+	width: 100%;
+	display: block;
+}
+#input_division>div{
+	height: 15%;
+}
+#input_division>#content_division{
+	height: 55%;
+}
 .input_title{
 	width: 20%;
 	display: inline-table;
