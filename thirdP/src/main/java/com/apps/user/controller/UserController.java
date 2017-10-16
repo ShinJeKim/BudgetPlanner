@@ -121,10 +121,8 @@ public class UserController {
 		inVO.setPassword(request.getParameter("password"));
 		inVO.setName(request.getParameter("name"));
 		inVO.setEmail(request.getParameter("email"));
-		
 		int fixed_income = Integer.parseInt(request.getParameter("fixed_income"));
 		inVO.setFixed_income(fixed_income);
-		
 		int balance = Integer.parseInt(request.getParameter("balance"));
 		inVO.setBalance(balance);
 		
@@ -169,34 +167,60 @@ public class UserController {
 		
 		return "identify";
 	}
-	
-	@RequestMapping(value="updateUser.do") 
-	public String updateUser(HttpServletRequest request) {
+	//회원정보수정화면으로 이동
+	@RequestMapping(value="do_update.do") 
+	public ModelAndView updateUser(HttpSession session, HttpServletRequest request) {
 		
-		log.debug("0=====================================");
-		log.debug("updateUser()");
-		log.debug("0=====================================");
+		UserVO inVO = new UserVO();
+		UserVO inVO2 = new UserVO();
 		
-		return "updateUser";
+		String id = (String)session.getAttribute("id");
+		
+		inVO.setId(id);
+		
+		inVO2=(UserVO) userSvc.do_selectOne(inVO);
+		
+		
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("updateUser");
+		modelAndView.addObject("inVO", inVO2);
+		
+		return modelAndView;
 	}
 	
 	// 회원정보수정
-	@RequestMapping(value="do_update.do", method= {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView do_update(HttpSession session, HttpServletRequest req) {
+	@RequestMapping(value="do_updateUser.do", method= {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView do_update(HttpSession session, HttpServletRequest request) {
 		
+		UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		UserVO inVO = new UserVO();
 		
-		inVO.setId(req.getParameter("id"));
-		inVO.setPassword(req.getParameter("password"));
-		inVO.setName(req.getParameter("name"));
-		inVO.setEmail(req.getParameter("email"));
-		int fixed_income = Integer.parseInt(req.getParameter("fixed_income").toString());
-		int balance = Integer.parseInt(req.getParameter("balance").toString());
+		//testcase
+		String id = "id4";
+		int balance = 123456;
+		int delete_flag = 0;
+		int admin_flag = 0;
+		//testcase
+		inVO.setId(id);
+		inVO.setBalance(balance);
+		inVO.setDelete_flag(delete_flag);
+		inVO.setAdmin_flag(admin_flag);
+		
+		//inVO.setId(sessionVO.getId());
+		inVO.setPassword(request.getParameter("password"));
+		inVO.setName(request.getParameter("name"));
+		inVO.setEmail(request.getParameter("email"));
+		int fixed_income = Integer.parseInt(request.getParameter("fixed_income"));
+		inVO.setFixed_income(fixed_income);
+		//inVO.setBalance(sessionVO.getBalance());
+		//inVO.setDelete_flag(sessionVO.getDelete_flag());
+		//inVO.setAdmin_flag(sessionVO.getAdmin_flag());
+		
 		
 		int flag = userSvc.do_update(inVO);
 		
 		ModelAndView modelAndView =new ModelAndView();
-		modelAndView.setViewName("logout");//List
+		modelAndView.setViewName("login");
 		modelAndView.addObject("inVO", inVO);
 		
 		return modelAndView;
@@ -205,14 +229,17 @@ public class UserController {
 	
 	//회원탈퇴
 	@RequestMapping(value="do_delete.do" ,method= {RequestMethod.POST,RequestMethod.GET})
-	public String do_delete(HttpServletRequest req) throws IOException {
+	public String do_delete(HttpSession session) throws IOException {
 		
-		UserVO inVO=new UserVO();
+		UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		
-		inVO.setId(req.getParameter("id"));
-		int delete_flag = 1;
-		inVO.setDelete_flag(delete_flag);
+		//testcase
+		UserVO inVO = new UserVO();
+		String id = "id4";
+		inVO.setId(id);
 		
+		
+
 		int flag = userSvc.do_delete(inVO);
 		
 		return "redirect:logout.do";

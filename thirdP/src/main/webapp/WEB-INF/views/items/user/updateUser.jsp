@@ -2,18 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<%
-	UserVO userVO = null;
-	String id = "";
-	
-	if(session.getAttribute("id")!=null){
-		userVO = (UserVO)session.getAttribute("id");
-	}else{
-		userVO = new UserVO();
-		userVO.setId("id");
-	}
-	id = userVO.getId();
+
+<%  
+UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
+
 %>
+
 
 <script type="text/javascript">
 	//JQuery
@@ -25,7 +19,7 @@
 			
 			$.ajax({
 				type: "POST",
-				url: "update.do",
+				url: "do_update.do",
 				dataType: "html",
 				async: false,
 				data:{
@@ -56,7 +50,7 @@
 			
 			$.ajax({
 				type:"POST",
-				url:"delete.do",
+				url:"do_delete.do",
 				dataType:"html",
 				async:false,
 				data:{
@@ -83,13 +77,13 @@
 </script>
 
 
-<form id="updateFrm" method="post" action="do_save.do">
+<form id="updateFrm" method="post" action="do_update.do">
 	<div>
 		<!-- 아이디  -->
 		<div id="div_id">
 			<label for="id">아이디</label>
 			<div>
-				<input type="text" class="onlyAlphabetAndNumber" id="id" name="id"  value="<%=userVO.getId()%> data-rule-required="true"
+				<input type="text" class="onlyAlphabetAndNumber" id="id" name="id"  value="<%=sessionVO.getId()%>" data-rule-required="true"
 					placeholder="12자 이내의 알파벳, 숫자만 입력 가능합니다." maxlength="12" disabled="disabled" />
 			</div>
 		</div>
@@ -97,7 +91,7 @@
 		<div id="div_password">
 			<label for="password">비밀번호</label>
 			<div>
-				<input type="password" id="password" name="password" value="<%=userVO.getPassword()%> data-rule-required="true"
+				<input type="password" id="password" name="password" value="<%=sessionVO.getPassword()%>" data-rule-required="true"
 				placeholder="비밀번호" maxlength="12">
 			</div>
 		</div>
@@ -105,7 +99,7 @@
 		<div id="div_password_check">
 			<label for="password_check">비밀번호확인</label>
 			<div>
-				<input type="password" id="password_check" name="password_check" value="<%=userVO.getPassword()%> data-rule-required="true"
+				<input type="password" id="password_check" name="password_check" value="<%=sessionVO.getPassword()%>" data-rule-required="true"
 				placeholder="비밀번호확인" maxlength="12">
 			</div>
 		</div>
@@ -113,7 +107,7 @@
 		<div id="div_name">
 			<label for="name">이름</label>
 			<div>
-				<input type="text" id="name" name="name" value="<%=userVO.getName()%> data-rule-required="true" 
+				<input type="text" id="name" name="name" value="<%=sessionVO.getName()%>" data-rule-required="true" 
 				placeholder="이름" maxlength="30">
 			</div>
 		</div>
@@ -121,7 +115,7 @@
 		<div id="div_email">
 			<label for="email">이메일</label>
 			<div>
-				<input type="text" id="email" name="email" value="<%=userVO.getEmail()%> data-rule-required="true" 
+				<input type="text" id="email" name="email" value="<%=sessionVO.getEmail()%>" data-rule-required="true" 
 				placeholder="이메일" maxlength="50">
 			</div>
 		</div>
@@ -129,18 +123,11 @@
 		<div class="onlyNumber" id="div_fixed_income">
 			<label for="fixed_income">고정수입</label>
 			<div>
-				<input type="text" id="fixed_income" name="fixed_income" value="<%=userVO.getFixed_income()%> data-rule-required="true" 
+				<input type="text" id="fixed_income" name="fixed_income" value="<%=sessionVO.getFixed_income()%>" data-rule-required="true" 
 				placeholder="고정수입" maxlength="10">
 			</div>
 		</div>
-		<!-- 현재잔고 -->
-		<div class="onlyNumber" id="div_balance">
-			<label for="balance">현재잔고</label>
-			<div>
-				<input type="text" id="balance" name="balance" value="<%=userVO.getBalance()%> data-rule-required="true" 
-				placeholder="현재잔고" maxlength="12" disabled="disabled"/>
-			</div>
-		</div>
+
 		<!-- 버튼 -->
 		<div>
 			<input type="button" id="delete" value="회원탈퇴"/>
