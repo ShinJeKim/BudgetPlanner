@@ -65,18 +65,18 @@ public class UserTest {
 	@Test
 	public void do_check_id() throws Exception{
 		MockHttpServletRequestBuilder createMessage = 
-				post("/user/do_check_id.do")
+				post("/do_check_id.do")
 				.param("id", "Testcase");
 		
 		mockMvc.perform(createMessage).andDo(print())
-		.andExpect(status().is2xxSuccessful());
+		.andExpect(status().is3xxRedirection());
 	}
 	
 	@Test
 	public void do_save() throws Exception{
 		MockHttpServletRequestBuilder createMessage = 
-				post("/user/do_save.do")
-				.param("id", "Testcase")
+				post("/do_save.do")
+				.param("id", "abc123")
 				.param("password", "1234")
 				.param("name", "Testcase")
 				.param("email", "testcase@testcase.com")
@@ -84,19 +84,53 @@ public class UserTest {
 				.param("balance", "561233345");
 	
 		mockMvc.perform(createMessage).andDo(print())
-		.andExpect(status().is2xxSuccessful());
+		.andExpect(status().is3xxRedirection());
 		
 	}
 	
 	@Test
 	public void do_login() throws Exception{
 		MockHttpServletRequestBuilder createMessage = 
-				post("/user/do_login.do")
+				post("/do_login.do")
 				.param("id", "test")
 				.param("password", "1234");
 		
 		mockMvc.perform(createMessage).andDo(print())
 		.andExpect(status().isOk())
-		.andExpect(model().attribute("message", "success"));
+		.andExpect(model().attribute("message", "success"))
+		.andExpect(status().is3xxRedirection());
 	}
+	
+	
+	@Test
+	public void do_update() throws Exception{
+		MockHttpServletRequestBuilder createMessage = 
+				post("/do_updateUser.do")
+				.param("password", "id4id4")
+				.param("name", "김정인")
+				.param("email", "id4email@email.com")
+				.param("fixed_income", "5000");
+
+		mockMvc.perform(createMessage)
+		.andExpect(status().isOk())
+		.andExpect(status().is2xxSuccessful())
+		.andDo(print()
+		);
+	}
+	
+	@Test
+	public void do_delete() throws Exception{
+		MockHttpServletRequestBuilder createMessage = 
+				post("/do_delete.do")
+				.param("id", "id4");
+
+		mockMvc.perform(createMessage).andDo(print())
+		.andExpect(status().is3xxRedirection());
+		
+	}
+	
+	
+	
+	
+	
 }
