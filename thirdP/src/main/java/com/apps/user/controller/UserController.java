@@ -27,6 +27,8 @@ public class UserController {
 	@Autowired
 	UserSvc userSvc;
 	
+
+
 	//메인페이지 호출
 	@RequestMapping(value="main.do") 
 	public String login(HttpServletRequest request) {
@@ -168,28 +170,22 @@ public class UserController {
 		return "identify";
 	}
 	//회원정보수정화면으로 이동
-	@RequestMapping(value="do_update.do") 
+	@RequestMapping(value="updateUser.do", method= {RequestMethod.POST,RequestMethod.GET}) 
 	public ModelAndView updateUser(HttpSession session, HttpServletRequest request) {
 		
-		UserVO inVO = new UserVO();
-		UserVO inVO2 = new UserVO();
+		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
 		
-		String id = (String)session.getAttribute("id");
-		
-		inVO.setId(id);
-		
-		inVO2=(UserVO) userSvc.do_selectOne(inVO);
-		
+		log.debug("loginUser" + loginUser.toString());
 		
 		ModelAndView modelAndView =new ModelAndView();
 		modelAndView.setViewName("updateUser");
-		modelAndView.addObject("inVO", inVO2);
+		//modelAndView.addObject("inVO", inVO2);
 		
 		return modelAndView;
 	}
 	
 	// 회원정보수정
-	@RequestMapping(value="do_updateUser.do", method= {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="do_update.do")
 	public ModelAndView do_update(HttpSession session, HttpServletRequest request) {
 		
 		UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
@@ -238,13 +234,10 @@ public class UserController {
 		String id = "id4";
 		inVO.setId(id);
 		
-		
-
 		int flag = userSvc.do_delete(inVO);
 		
 		return "redirect:logout.do";
 	}
-	
 	
 	
 	/*원본
