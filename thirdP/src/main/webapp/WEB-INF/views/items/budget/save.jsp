@@ -3,31 +3,52 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
 	<form id="save" name="save" action="up_save.do" method="post">
-		<input type="hidden" id="workDiv" name="workDiv" value="${workDiv}">
-		<input type="hidden" id="daily_code" name="daily_code" value="${daily_code}">
-		<input type="hidden" id="category" name="mst_ct_nm" placeholder="상위 카테고리" value="${updateData.mst_ct_nm}">
-		<input type="hidden" id="category" name="dtl_ct_nm" placeholder="카테고리" value="${updateData.dtl_ct_nm}">
-		<div>
-			날짜	<input type="text" id="reg_dt" name="reg_dt" placeholder="날짜" value="${updateData.reg_dt}">
-			
-			<div id="datepick" style="width:50px; height:50px; background-image: url('/apps/resources/files/images/dateSelect.png'); background-size: contain;"></div>
+		<div style="height: 80%; background-color:antiquewhite;">
+			<input type="hidden" id="workDiv" name="workDiv" value="${workDiv}">
+			<input type="hidden" id="loadWork" name="loadWork" value="reload">
+			<input type="hidden" id="daily_code" name="daily_code" value="${daily_code}">
+			<input type="hidden" id="main_cate" name="mst_ct_nm" value="${updateData.mst_ct_nm}">
+			<input type="hidden" id="sub_cate" name="dtl_ct_nm" value="${updateData.dtl_ct_nm}">
+			<input type="hidden" id="content" name="content" value="${updateData.content}">
+			<div style="height: 15%; border: 1px solid; box-sizing: border-box;" >
+				<div class="input_title" id="tdate">
+					<label>날짜</label>
+				</div> 
+				<div class="input_content" id="cdate">
+					<input type="text" id="reg_dt" name="reg_dt" placeholder="날짜" value="${updateData.reg_dt}${reg_dt}">
+					<div id="datepick"></div>
+				</div>
+			</div>
+			<div style="height: 20%; border: 1px solid; box-sizing: border-box;">	
+				<div class="input_title" id="tcate">
+					<label>카테고리</label> 
+				</div> 
+				<div class="input_content" id="ccate">
+					
+				</div>
+			</div>
+			<div style="height: 15%; border: 1px solid; box-sizing: border-box;">
+				<div class="input_title" id="tusage">
+					<label>금액 </label>
+				</div> 
+				<div class="input_content" id="cusage">
+					<input type="text" id="usage" name="usage" value="${updateData.usage}"><label>원</label>
+				</div>
+			</div>
+			<div style="height: 50%; border: 1px solid; box-sizing: border-box;">
+				<div class="input_title" id="tcontent">
+					<label>내용</label>
+				</div> 
+				<div class="input_content" id="ccontent">
+					<textarea id="detail" style="width: 80%; height: 80%;"></textarea>
+				</div>
+			</div>
 		</div>
-		<div>	
-			카테고리 
-			<input type="radio" value="카테1" name="cate">식비
-			<input type="radio" value="카테2" name="cate">기타
-			<input type="radio" value="카테3" name="cate">용돈
-		</div>
-		<div>
-			금액 <input type="text" id="usage" name="usage" value="${updateData.usage}원">
-		</div>
-		<div>
-			내용
-			<textarea style="width: 500px; height: 80px;">${updateData.content}</textarea>
-		</div>	
-		<div>
-			<input type="button" id="up_save" value="저장">
-			<input type="button" id="cancle" value="취소">
+		<div style="height: 20%; display: table; width: 100%;">	
+			<div style="display: table-cell; vertical-align: middle; text-align: center;">
+				<input type="button" id="up_save" value="저장">
+				<input type="button" id="cancle" value="취소">
+			</div>
 		</div>
 	</form>
 </div>

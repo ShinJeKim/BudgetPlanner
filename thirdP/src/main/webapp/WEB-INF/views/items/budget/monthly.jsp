@@ -16,7 +16,17 @@
 <title>::: Monthly Usage :::</title>
 <!-- jQuery -->
 <script type="text/javascript">
-	
+function font_sizing(){
+	var font_size = "";
+	if(window.innerWidth > window.innerHeight){
+		font_size = window.innerHeight*0.01;
+	}else{
+		font_size = window.innerWidth*0.01
+	}
+	$('.currentDate').css("font-size",font_size*6);
+	$('#selectedDate').css('height',$('.header').height()*0.6);
+	$('#balance').css('height',$('.header').height()*0.6);
+}	
 	$(document).ready(function(){
 		 $('#date').datepicker({
 			 type	: 'ym',
@@ -24,6 +34,7 @@
 		 });
 		$('#monthly').attr('checked', true);
 		$('#BudgetPlanner').attr('checked', true);
+		font_sizing();
 		$('#currentDate').change(function(){
 			
 			//날짜 만들기
