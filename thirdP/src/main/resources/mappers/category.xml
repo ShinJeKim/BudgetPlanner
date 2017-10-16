@@ -52,7 +52,7 @@
 	                            F.CONTENT,
 	                            TO_CHAR(F.REG_DT, 'YYYY-MM-DD') AS REG_DT,
                             	TO_CHAR(F.MOD_DT, 'YYYY-MM-DD') AS MOD_DT,
-	                            COUNT(*) OVER() AS TOTAL_CNT
+	                            COUNT(*) OVER() AS totalNo
 	                     FROM 
 	                            FINANCE F,
 	                            CATEGORY C

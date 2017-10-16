@@ -18,13 +18,13 @@
 <title>카테고리별 조회</title>
 </head>
 <body>
-<div style="background-color: white; height: 100%; width: 100%;">
+<div id="body_div">
 	<!-- div 1: 검색조건, 조회버튼, 엑셀다운로드 || div 2: 검색결과 list || div 3: Paging -->
 		<!-- div 1 for search condition -->
-		<div style="background-color: aliceblue; height: 20%;">
+		<div id="search_div">
 				<div id="layout">
-					<div id="header" style="padding: 10px; margin: 10px;">
-						<div style="float: left; width: 50%;">상위분류
+					<div id="search_header">
+						<div id="cat_select" >상위분류
 							<select name="mst_ct_id" id="mst_ct_id">
 								<option value="">전체</option>
 								<option value="10" <%if(mst_ct_id.equals("10")) out.print("selected='selected'"); %>>지출</option>
@@ -33,7 +33,7 @@
 							<select name="dtlList" id="dtlList">
 							</select>
 						</div>
-						<div style="float: right; width: 40%">
+						<div id="month_select">
 							<select name="start_month" id="start_month" >
 							<% 
 							int start_month=1;
@@ -57,27 +57,24 @@
 							<input type="button" id=do_searchList  value="조회">
 						</div>
 					</div>
-					<div id="content" style="padding: 10px; margin: 10px;">
-						<div style="float: left; width: 60%"><!-- param 받아서 text에 넣기 --></div>
+					<div id="search_content">
+						<div id="result_text"><!-- param 받아서 text에 넣기 --></div>
 					</div>
 					
-						<div style="float: left; width: 60%">
+						<div id="search_footer">
 							<input type="button" id=do_excelDown  value="엑셀 다운로드"> 
-							<!-- <button class="btn" onclick="javascript:do_excelDown()" style="margin-right: 5px" >ExcelDown</button> -->
 						</div>
-					
 				</div>
-
 		</div>
 		<!--// div 1 closed-->
 		
 		<!-- div 2 for searchList-->
-		<div style="background-color: Linen; height: 75%;">
+		<div id="searchList">
 		
 			<!-- List table -->
 			<form name="frm" method="post">
-				<table id="listTable" class="table table-bordered table-hover table-striped"  border="1" cellpadding="1" cellspacing="0">
-				<thead id="thead">
+				<table id="listTable" class="table table-bordered table-hover table-striped">
+				<thead id="thead" class="align-center">
 					<tr>
 						<th>No.&nbsp;</th>
 						<th>수입/지출&nbsp;</th>
@@ -117,7 +114,7 @@
 		<!--// div 2 closed-->
 		
 		<!-- div 3 -->
-		<div style="background-color: LightSteelBlue;" align="center">
+		<div id="paging_div">
 		<!-- Paging -->
 	 	<!-- 	<ul class="pagination" align="center">
 				<li class="disabled"><a><<</a></li>
@@ -128,8 +125,7 @@
 				<li class="disabled"><a>></a></li>
 				<li class="goLastPage"><a>>></a></li>
 			</ul>  -->
-			<!-- <ul id="pagination" class="pagination_class" align="center"></ul> -->
-<!--  -->
+		<ul id="pagination" class="pagination_class" align="center"></ul>
 		<!-- // Paging closed  --> 
 		</div>
 		<!--// div 3 closed-->
