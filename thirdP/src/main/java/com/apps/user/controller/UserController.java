@@ -149,7 +149,7 @@ public class UserController {
 		
 	}
 	
-	// ID/PW 찾기
+	// ID/PW 찾기 페이지들어가기
 	@RequestMapping(value="missing.do") 
 	public String missing(HttpServletRequest request) {
 		
@@ -159,6 +159,25 @@ public class UserController {
 		
 		return "missing";
 	}
+	
+	
+	// ID 찾기
+	@RequestMapping(value="do_findID.do" , method = RequestMethod.POST) 
+	public ModelAndView missing_ID(HttpServletRequest request) {
+		
+		UserVO userVO = new UserVO();
+		userVO.setName(request.getParameter("name"));
+		userVO.setEmail(request.getParameter("email"));
+		
+		String id = userSvc.do_findID(userVO);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("missing");
+		modelAndView.addObject("id", id);
+		
+		return modelAndView;
+	}
+	
 	
 	//마이페이지 호출
 	@RequestMapping(value="mypage.do") 
@@ -188,6 +207,8 @@ public class UserController {
 		
 		return retString;
 	}
+	
+	
 	//회원정보수정화면으로 이동
 	@RequestMapping(value="updateUser.do", method= {RequestMethod.POST,RequestMethod.GET}) 
 	public ModelAndView updateUser(HttpSession session, HttpServletRequest request) {

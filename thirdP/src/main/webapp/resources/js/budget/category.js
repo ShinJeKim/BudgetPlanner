@@ -136,7 +136,7 @@ function do_excelDown(){
 						console.log("success data: "+data);
 						console.log("data.length: "+data.length);
 
-						var totalCnt = data.length;
+						var totalCnt = data[0].totalNo;
 						var page_size = 10;
 						var max_page = Math.ceil(totalCnt/page_size);
 					
@@ -172,10 +172,13 @@ function do_excelDown(){
 								//console.log("datahtml: "+datahtml);
 								
 									
-								/*	$('#pagination').twbsPagination({
+								$('#pagination').twbsPagination({
 										        totalPages: max_page,
-										        visiblePages: 5
-									 });*/
+										        visiblePages: 5,
+										        onPageClick: function(evt, page){
+										        	do_search_page();
+										        }
+									 });
 								
 							// do_excelDown Btn event
 								$('#do_excelDown').click(function(){

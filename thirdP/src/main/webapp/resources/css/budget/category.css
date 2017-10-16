@@ -1,59 +1,51 @@
-/* @CHARSET "UTF-8";
+@CHARSET "UTF-8";
 
 #body_div{
 	background-color: white; 
-	height: 100%; 
-	width: 100%;"
+	width: 800px;
+	float: center;
+	padding: 10px;
+	
 }
 
 #search_div{
-	background-color: aliceblue; 
-	height: 20%;"
+	background-color: white; 
+	height: 20%;
 }
 
 #search_header{
 	padding: 10px; 
-	margin: 10px;"
+	margin: 10px;
 }
 
 #cat_select{
 	float: left; 
-	width: 50%;"
+	width: 50%;
 }
 
 #month_select{
 	float: right; 
-	width: 40%"
+	width: 40%
 }
 
 #search_content{
 	padding: 10px; 
-	margin: 10px;"
+	margin: 10px;
 }
 
 #result_text{
 	float: left; 
-	width: 60%"
-}
-
-#searchBtn{
-	float: right; 
-	width: 30%"
+	width: 60%
 }
 
 #search_footer{
 	padding: 10px; 
-	margin: 10px;"
-}
-
-#excelBtn{
-	float: left; 
-	width: 60%"
+	margin: 10px;
 }
 
 #searchList{
-	background-color: Linen; 
-	height: 75%;"
+	background-color: white; 
+	height: 75%;
 }
 
 #listTable{
@@ -63,7 +55,12 @@
 	
 }
 
-#paging_div{
-	background-color: LightSteelBlue;
+#thead{
+	background-color: #848484;
+	align: center;
+	valign: middle;
 }
- */
+
+#paging_div{
+	background-color: white;
+}
