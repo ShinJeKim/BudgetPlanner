@@ -2,13 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-
-<%  
-UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
-
-%>
-
-
 <script type="text/javascript">
 	//JQuery
 	$(document).ready(function(){
@@ -83,7 +76,7 @@ UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		<div id="div_id">
 			<label for="id">아이디</label>
 			<div>
-				<input type="text" class="onlyAlphabetAndNumber" id="id" name="id"  value="<%=sessionVO.getId()%>" data-rule-required="true"
+				<input type="text" class="onlyAlphabetAndNumber" id="id" name="id"  value="${inVO2.id}" data-rule-required="true"
 					placeholder="12자 이내의 알파벳, 숫자만 입력 가능합니다." maxlength="12" disabled="disabled" />
 			</div>
 		</div>
@@ -91,7 +84,7 @@ UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		<div id="div_password">
 			<label for="password">비밀번호</label>
 			<div>
-				<input type="password" id="password" name="password" value="<%=sessionVO.getPassword()%>" data-rule-required="true"
+				<input type="password" id="password" name="password" value="${inVO2.password}"  data-rule-required="true"
 				placeholder="비밀번호" maxlength="12">
 			</div>
 		</div>
@@ -99,7 +92,7 @@ UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		<div id="div_password_check">
 			<label for="password_check">비밀번호확인</label>
 			<div>
-				<input type="password" id="password_check" name="password_check" value="<%=sessionVO.getPassword()%>" data-rule-required="true"
+				<input type="password" id="password_check" name="password_check" value="${inVO2.password}" data-rule-required="true"
 				placeholder="비밀번호확인" maxlength="12">
 			</div>
 		</div>
@@ -107,7 +100,7 @@ UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		<div id="div_name">
 			<label for="name">이름</label>
 			<div>
-				<input type="text" id="name" name="name" value="<%=sessionVO.getName()%>" data-rule-required="true" 
+				<input type="text" id="name" name="name"  value="${inVO2.name}"data-rule-required="true" 
 				placeholder="이름" maxlength="30">
 			</div>
 		</div>
@@ -115,7 +108,7 @@ UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		<div id="div_email">
 			<label for="email">이메일</label>
 			<div>
-				<input type="text" id="email" name="email" value="<%=sessionVO.getEmail()%>" data-rule-required="true" 
+				<input type="text" id="email" name="email"  value="${inVO2.email}"data-rule-required="true" 
 				placeholder="이메일" maxlength="50">
 			</div>
 		</div>
@@ -123,7 +116,7 @@ UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		<div class="onlyNumber" id="div_fixed_income">
 			<label for="fixed_income">고정수입</label>
 			<div>
-				<input type="text" id="fixed_income" name="fixed_income" value="<%=sessionVO.getFixed_income()%>" data-rule-required="true" 
+				<input type="text" id="fixed_income" name="fixed_income"  value="${inVO2.fixed_income}" data-rule-required="true" 
 				placeholder="고정수입" maxlength="10">
 			</div>
 		</div>

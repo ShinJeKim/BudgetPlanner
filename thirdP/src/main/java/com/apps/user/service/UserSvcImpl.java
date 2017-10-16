@@ -129,6 +129,16 @@ public class UserSvcImpl implements UserSvc {
 		session.invalidate();
 	}
 
+	@Override
+	public String do_findID(DTO dto) {
+		
+		log.debug("2============do_findID=============");
+		log.debug("");
+		log.debug("2==================================");
+		
+		return userDao.do_findID(dto);
+	}
+
 
 
 }

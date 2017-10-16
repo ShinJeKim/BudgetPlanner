@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.apps.user.domain.UserVO;
 import com.apps.user.service.UserSvc;
+import com.google.gson.Gson;
 
 @Controller
 public class UserController {
@@ -27,6 +28,8 @@ public class UserController {
 	@Autowired
 	UserSvc userSvc;
 	
+
+
 	//메인페이지 호출
 	@RequestMapping(value="main.do") 
 	public String login(HttpServletRequest request) {
@@ -146,7 +149,7 @@ public class UserController {
 		
 	}
 	
-	// ID/PW 찾기
+	// ID/PW 찾기 페이지들어가기
 	@RequestMapping(value="missing.do") 
 	public String missing(HttpServletRequest request) {
 		
@@ -157,39 +160,72 @@ public class UserController {
 		return "missing";
 	}
 	
+	
+	// ID 찾기
+	@RequestMapping(value="do_findID.do" , method = RequestMethod.POST) 
+	public ModelAndView missing_ID(HttpServletRequest request) {
+		
+		UserVO userVO = new UserVO();
+		userVO.setName(request.getParameter("name"));
+		userVO.setEmail(request.getParameter("email"));
+		
+		String id = userSvc.do_findID(userVO);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("missing");
+		modelAndView.addObject("id", id);
+		
+		return modelAndView;
+	}
+	
+	
 	//마이페이지 호출
 	@RequestMapping(value="mypage.do") 
-	public String identify(HttpServletRequest request) {
-		
+	public ModelAndView identify(HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginID",session.getAttribute("ID"));
+		mav.setViewName("identify");
 		log.debug("0=====================================");
 		log.debug("mypage()");
 		log.debug("0=====================================");
 		
-		return "identify";
+		return mav;
 	}
+	@RequestMapping(value="checkPW.do") 
+	@ResponseBody
+	public String check_pass(HttpServletRequest request) {
+		UserVO inUserVO = new UserVO();
+		log.debug("0=====================================");
+		log.debug("mypage()");
+		log.debug("0=====================================");
+		inUserVO.setId(request.getParameter("id"));
+		inUserVO.setPassword(request.getParameter("password"));
+		int flag = userSvc.do_check_passwd(inUserVO);
+		Gson gson=new Gson();
+		String retString = gson.toJson(flag);
+		log.debug("4===============retString="+retString);
+		
+		return retString;
+	}
+	
+	
 	//회원정보수정화면으로 이동
-	@RequestMapping(value="do_update.do") 
+	@RequestMapping(value="updateUser.do", method= {RequestMethod.POST,RequestMethod.GET}) 
 	public ModelAndView updateUser(HttpSession session, HttpServletRequest request) {
 		
-		UserVO inVO = new UserVO();
-		UserVO inVO2 = new UserVO();
+		UserVO loginUser = (UserVO) session.getAttribute("loginUser");
 		
-		String id = (String)session.getAttribute("id");
-		
-		inVO.setId(id);
-		
-		inVO2=(UserVO) userSvc.do_selectOne(inVO);
-		
+		log.debug("loginUser" + loginUser.toString());
 		
 		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.addObject("loginUser", loginUser);
 		modelAndView.setViewName("updateUser");
-		modelAndView.addObject("inVO", inVO2);
 		
 		return modelAndView;
 	}
 	
 	// 회원정보수정
-	@RequestMapping(value="do_updateUser.do", method= {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="do_update.do")
 	public ModelAndView do_update(HttpSession session, HttpServletRequest request) {
 		
 		UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
@@ -238,13 +274,10 @@ public class UserController {
 		String id = "id4";
 		inVO.setId(id);
 		
-		
-
 		int flag = userSvc.do_delete(inVO);
 		
 		return "redirect:logout.do";
 	}
-	
 	
 	
 	/*원본
