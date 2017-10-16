@@ -259,5 +259,21 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+	@Override
+	public String do_findID(DTO dto) {
+		String statement = namespace + ".do_findID";
+		UserVO inUserVO = (UserVO)dto;
+		
+		
+		log.debug("****************do_findID*****************");
+		log.debug("statement : "+statement);
+		log.debug("inUserVO.toString() : "+inUserVO.toString()); 
+		log.debug("******************************************");
+		
+		
+		return sqlSession.selectOne(statement, inUserVO);
+		
+	}
+
 
 }
