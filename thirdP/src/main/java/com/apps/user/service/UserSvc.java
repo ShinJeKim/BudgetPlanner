@@ -107,7 +107,9 @@ public interface UserSvc {
 	public void do_logout(HttpSession session);
 
 
-	
-
+	/**
+	 * ID 찾기
+	 */
+	public String do_findID(DTO dto);
 
 }
