@@ -8,7 +8,9 @@
 	
 		//update
 		$("#update").on("click", function(event){
-			event.preventDefalut();//연속수행방지
+			event.preventDefault();//연속수행방지
+			
+			console.log("1");
 			
 			$.ajax({
 				type: "POST",
@@ -25,8 +27,8 @@
 					
 				},
 				success: function(data){
-					$("#update").submit();
-	            	location.href="logout.do";//로그아웃시키고 다시 로그인페이지로 이동
+					$("#updateFrm").submit();
+	            	$(location).attr('href', "logout.do"); //로그아웃시키고 다시 로그인페이지로 이동
 				},
 				complete: function(data){
 					
@@ -47,14 +49,14 @@
 				dataType:"html",
 				async:false,
 				data:{
-					"id" : $("#id").val(),
-					"delete_flag" : $("#delete_flag").val()
+					"id" : $("#id").val()
 				},
 				success: function(data){
 					alert("탈퇴하시겠습니까?");
-					$("#delete").submit();
+					$("#updateFrm").submit();
 					alert("회원탈퇴 되었습니다");
-					location.href = "logout.do";//다시 로그인 페이지로 이동
+					$(location).attr('href', "logout.do"); //다시 로그인 페이지로 이동
+					
 				},
 				complete: function(data){
 					
@@ -70,13 +72,13 @@
 </script>
 
 
-<form id="updateFrm" method="post" action="do_update.do">
+<form id="updateFrm" method="post" >
 	<div>
 		<!-- 아이디  -->
 		<div id="div_id">
 			<label for="id">아이디</label>
 			<div>
-				<input type="text" class="onlyAlphabetAndNumber" id="id" name="id"  value="${inVO2.id}" data-rule-required="true"
+				<input type="text" class="onlyAlphabetAndNumber" id="id" name="id"  value="${loginUser.id}" data-rule-required="true"
 					placeholder="12자 이내의 알파벳, 숫자만 입력 가능합니다." maxlength="12" disabled="disabled" />
 			</div>
 		</div>
@@ -84,7 +86,7 @@
 		<div id="div_password">
 			<label for="password">비밀번호</label>
 			<div>
-				<input type="password" id="password" name="password" value="${inVO2.password}"  data-rule-required="true"
+				<input type="password" id="password" name="password" value="${loginUser.password}"  data-rule-required="true"
 				placeholder="비밀번호" maxlength="12">
 			</div>
 		</div>
@@ -92,7 +94,7 @@
 		<div id="div_password_check">
 			<label for="password_check">비밀번호확인</label>
 			<div>
-				<input type="password" id="password_check" name="password_check" value="${inVO2.password}" data-rule-required="true"
+				<input type="password" id="password_check" name="password_check" value="${loginUser.password}" data-rule-required="true"
 				placeholder="비밀번호확인" maxlength="12">
 			</div>
 		</div>
@@ -100,7 +102,7 @@
 		<div id="div_name">
 			<label for="name">이름</label>
 			<div>
-				<input type="text" id="name" name="name"  value="${inVO2.name}"data-rule-required="true" 
+				<input type="text" id="name" name="name"  value="${loginUser.name}"data-rule-required="true" 
 				placeholder="이름" maxlength="30">
 			</div>
 		</div>
@@ -108,7 +110,7 @@
 		<div id="div_email">
 			<label for="email">이메일</label>
 			<div>
-				<input type="text" id="email" name="email"  value="${inVO2.email}"data-rule-required="true" 
+				<input type="text" id="email" name="email"  value="${loginUser.email}"data-rule-required="true" 
 				placeholder="이메일" maxlength="50">
 			</div>
 		</div>
@@ -116,7 +118,7 @@
 		<div class="onlyNumber" id="div_fixed_income">
 			<label for="fixed_income">고정수입</label>
 			<div>
-				<input type="text" id="fixed_income" name="fixed_income"  value="${inVO2.fixed_income}" data-rule-required="true" 
+				<input type="text" id="fixed_income" name="fixed_income"  value="${loginUser.fixed_income}" data-rule-required="true" 
 				placeholder="고정수입" maxlength="10">
 			</div>
 		</div>
