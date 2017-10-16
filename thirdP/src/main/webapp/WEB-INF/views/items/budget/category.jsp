@@ -16,7 +16,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>카테고리별 조회</title>
-
 </head>
 <body>
 <div style="background-color: white; height: 100%; width: 100%;">

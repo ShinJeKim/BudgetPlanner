@@ -8,21 +8,42 @@ $(document).ready(function(){
 	 menu_size();
 	 $('#income').attr('checked', true);
 	 $('#BudgetPlanner').attr('checked', true);
+	 
+	 var without_tag_content =  $('#content').val().toString().replace("<p>","").replace("</p>","");
+	 console.log(without_tag_content);
+	 var fromDB = without_tag_content.replace(/<br>/g,"\n");
+	 console.log(fromDB);
+ 	 $('#detail').val(fromDB);
 	
-	var cate = $(':input[name=main_cates]:radio:checked').val();
-	
-	
+ 	 
 	if($('#main_cate').val() == ""){
 		$('#main_cate').val("수입")
 	} 
+	setcate();
+	 
+	 $('.sub_selector').click(function(){
+		 var cate = $(':input[name=main_cates]:radio:checked').val();
+		 $('#main_cate').val(cate); 
+		 setcate();
+	 });
+	 
+	 $('.cateSelect').click(function(){
+		 var sub_cate = $(':input[name=cate]:radio:checked').val();
+		 $('#sub_cate').val(sub_cate); 
+	 });
+	 
 	var usage = $('#usage').val().replace("-","");
 	$('#usage').val(usage);
 	
 	$('#up_save').click(function(){
+		var tag_content =  "<p>"+$('#detail').val()+"</p>";
+		var forDB = tag_content.replace(/\n/g,"<br>");
+		$('#content').val(forDB);
 		$('#save').submit();	
 	});
 	$('#cancle').click(function(){
-		history.go(-1);
+		$('#save').attr('action','daily.do');
+		$('#save').submit();
 	});	
 	
 	$(window).resize(function() {
@@ -32,7 +53,8 @@ $(document).ready(function(){
 	
 	
 	
-	function setcate(){$.ajax({
+	function setcate(){
+		$.ajax({
         type:"POST",
         url:"cate.do",
         dataType: "JSON",
@@ -42,30 +64,17 @@ $(document).ready(function(){
         },
         success: function(data){
        var datahtml = "";
-            for(var i=1;i<=data.length;i++){
-            	console.log(data[i]);
-            	
-            
-            	/*datahtml += "<form class='dailyDatas' action='do_searchOne.do' method='post'>	"
-            	datahtml += "<input type='hidden' id='daily_code' name='daily_code' value='"+data[i].daily_code+"'>"	
-            	datahtml += "<div class='dailyitem'>                                            "
-            	datahtml += " <ul class='itemList'>                                             "
-            	datahtml +=	"  <li class='item_cate'><label>"+data[i].dtl_ct_nm+"</label></li>  "
-            	datahtml +=	"  <li class='item_content'><label>"+data[i].content+"</label></li> "
-                datahtml +=	"  <li class='item_price'><label>"+data[i].usage+"</label>원</li>    "
-            	datahtml += " </ul>																"		
-            	datahtml += "</div>																"
-        		datahtml += "<div class='up_del'>                                             	"
-            	datahtml += "  <input type='button' id='update' value='수정'>					"
-            	datahtml += "  <input type='button' id='delete' value='삭제'>			        "	
-            	datahtml += "</div>														    "
-            	datahtml += "</form>															"*/	
-            }/*
-        datahtml += "<div id='blank'></div>"
-       	$('#dailyList').html(datahtml);	*/
+            for(var i=1;i<data.length;i++){
+             datahtml += "<input type='radio' class='cateSelect' value='"+data[i].dtl_ct_nm+"' name='cate'><label>"+data[i].dtl_ct_nm+"</label>"
+
+            }
+       	$('#ccate').html(datahtml);
+       	$('#ccate :input[class=cateSelect]:first-child').trigger('click');
+        var sub_cate = $(':input[name=cate]:radio:checked').val();
+		 $('#sub_cate').val(sub_cate); 
         },
         complete: function(data){
-        
+
         }
    	 });
   }
@@ -99,6 +108,11 @@ function menu_size(){
 	$('body').css('margin-left','20%');
 	$('body').css('border-left','5px solid graytext');
 	$('body').css('border-right','5px solid graytext');
+	$('.header').css('border-top','5px solid graytext');
+	$('.header').css('box-sizing','border-box');
+	$('.bodyCover').css('top',$('.header').height()+5);
+	$('.footer').css('border-bottom','5px solid graytext');
+	$('.footer').css('box-sizing','border-box');
 	$('.header').css('width','inherit');
 	$('.footer').css('width','inherit');
 	$('.bodyCover').css('width','inherit');
@@ -107,6 +121,9 @@ function menu_size(){
 		$('body').css('width','100%');
 		$('body').css('border','0px');
 		$('body').css('margin','0px');
+		$('.header').css('border','0px');
+		$('.bodyCover').css('top',$('.header').height());
+		$('.footer').css('border','0px');
 		$('.header').css('width','100%');
 		$('.footer').css('width','100%');
 	}
