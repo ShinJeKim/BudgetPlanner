@@ -65,20 +65,24 @@ function font_sizing(){
 			}); //ajax
 			
 		});
-		 
+		
 		//div 영역 클릭 event 감지
 		for(var i=0; i<${fn:length(monthlyList)}; i++){
 			(function(a){
 				$("#area"+a).click(function(){
-					console.log("date.text : "+$("#date"+a).text());
-					var selectedDate = "";
+					console.log("date.text : "+$("#date"+a).text().trim());
+					var reg_dt = "";
+					console.log("month" + $(".currentDate").html().toString());
 					if($("#date"+a).text().trim().length == 1){
-						selectedDate = $("#month").val() + "0" + $("#date"+a).text().trim();
+						reg_dt = $(".currentDate").html().toString() + "." + "0" + $("#date"+a).text().trim();
+						console.log("selectedDate : "+reg_dt);
 					} else if ($("#date"+a).text().trim().length == 2){
-						selectedDate = $("#month").val() + $("#date"+a).text().trim();
+						reg_dt = $(".currentDate").html().toString() + "." + $("#date"+a).text().trim();
+						console.log("selectedDate : "+reg_dt);
 					}
-
-					console.log("selectedDate : "+selectedDate);
+					
+					//일별 화면으로 이동
+					$(location).attr('href', "daily.do?reg_dt="+reg_dt.trim());
 
 				});
 			})(i);
@@ -90,6 +94,7 @@ function font_sizing(){
 <body>
 	<form id="monthlyData" method="post">
 		<input type="hidden" id="month" name="month" value="${month}"/>
+		<input type="hidden" id="reg_dt" name="reg_dt" value="${reg_dt}" />
 		<div style="height:100%; width:100%; ">
 			<!-- 달력 헤더 -->
 			<div style="height:5%; width:100%; ">

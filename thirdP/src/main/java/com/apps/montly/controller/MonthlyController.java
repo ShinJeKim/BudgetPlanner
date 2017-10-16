@@ -80,6 +80,7 @@ public class MonthlyController {
 			Date now = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			month = sdf.format(now);
+			modelAndView.addObject("month", month);
 		}
 
 		//월별 사용 내역 List 생성
