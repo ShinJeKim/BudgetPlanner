@@ -3,13 +3,37 @@
 		 font_size();
 		 menu_size();
 		 $('#mypage').attr('checked', true);
+		 $('#identifyBtn').click(function(){
+				console.log("클릭은 되는거냐?")
+				 $.ajax({
+		           type:"POST",
+		           url:"checkPW.do",
+		           dataType: "JSON",
+		           async: false,
+		           data:{
+		              "id"  : $('#id').val(),
+		              "password"  : $('#password').val()
+		           },
+		           success: function(data){
+		        	  if(data == 1){
+		        		  go_update();
+		        	  }
+		           },
+		           complete: function(data){
+		        	   console.log($('#id').val());
+		        	   console.log($('#password').val());
+		           }
+		        });//ajax
+			});	 
 	});
 	
 	$( window ).resize(function() {
 		 font_size();
 		 menu_size();
 	});
-	
+	function go_update(){
+		$('#identifyFrm').submit();
+	}
 })(jQuery);
 
 function font_size(){

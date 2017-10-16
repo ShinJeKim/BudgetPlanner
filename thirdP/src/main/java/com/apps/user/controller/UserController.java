@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.apps.user.domain.UserVO;
 import com.apps.user.service.UserSvc;
+import com.google.gson.Gson;
 
 @Controller
 public class UserController {
@@ -161,13 +162,31 @@ public class UserController {
 	
 	//마이페이지 호출
 	@RequestMapping(value="mypage.do") 
-	public String identify(HttpServletRequest request) {
-		
+	public ModelAndView identify(HttpServletRequest request, HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginID",session.getAttribute("ID"));
+		mav.setViewName("identify");
 		log.debug("0=====================================");
 		log.debug("mypage()");
 		log.debug("0=====================================");
 		
-		return "identify";
+		return mav;
+	}
+	@RequestMapping(value="checkPW.do") 
+	@ResponseBody
+	public String check_pass(HttpServletRequest request) {
+		UserVO inUserVO = new UserVO();
+		log.debug("0=====================================");
+		log.debug("mypage()");
+		log.debug("0=====================================");
+		inUserVO.setId(request.getParameter("id"));
+		inUserVO.setPassword(request.getParameter("password"));
+		int flag = userSvc.do_check_passwd(inUserVO);
+		Gson gson=new Gson();
+		String retString = gson.toJson(flag);
+		log.debug("4===============retString="+retString);
+		
+		return retString;
 	}
 	//회원정보수정화면으로 이동
 	@RequestMapping(value="updateUser.do", method= {RequestMethod.POST,RequestMethod.GET}) 
@@ -178,8 +197,8 @@ public class UserController {
 		log.debug("loginUser" + loginUser.toString());
 		
 		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.addObject("loginUser", loginUser);
 		modelAndView.setViewName("updateUser");
-		//modelAndView.addObject("inVO", inVO2);
 		
 		return modelAndView;
 	}
