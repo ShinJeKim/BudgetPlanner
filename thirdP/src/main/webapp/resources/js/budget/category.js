@@ -128,7 +128,10 @@ function font_sizing(){
 						var page_size = 10;
 						var max_page = Math.ceil(totalCnt/page_size);
 					
-						
+						// 기존페이지네이션 있을시 없애고 재생성
+						if($('.pagination').data("twbs-pagination")){
+		                    $('.pagination').twbsPagination('destroy');
+		                }
 							
 
 						if(data.length > 0){
@@ -150,10 +153,7 @@ function font_sizing(){
 						$('#tbody').html(datahtml);
 						//console.log("datahtml: "+datahtml);
 						
-							// 기존페이지네이션 있을시 없애고 재생성
-							if($('.pagination').data("twbs-pagination")){
-			                    $('.pagination').twbsPagination('destroy');
-			                }
+							
 							$('#pagination').twbsPagination({
 								        totalPages: max_page,
 								        visiblePages: 5
@@ -168,7 +168,6 @@ function font_sizing(){
 					
 					},
 					complete: function(data){// 무조건 수행
-						//font_sizing();
 			
 						
 					},

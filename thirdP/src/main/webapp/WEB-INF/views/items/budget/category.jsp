@@ -55,19 +55,17 @@
 								}
 							%>
 							</select>
+							<input type="button" id=do_searchList  value="조회">
 						</div>
 					</div>
 					<div id="content" style="padding: 10px; margin: 10px;">
 						<div style="float: left; width: 60%"><!-- param 받아서 text에 넣기 --></div>
-						<div style="float: right; width: 30%">
-							<input type="button" id=do_searchList  value="조회">
-						</div>
 					</div>
-					<div id="footer" style="padding: 10px; margin: 10px;">
+					
 						<div style="float: left; width: 60%">
 							<input type="button" id=do_excelDown  value="엑셀 다운로드">
 						</div>
-					</div>
+					
 				</div>
 
 		</div>
@@ -118,7 +116,7 @@
 		<!-- div 3 -->
 		<div style="background-color: LightSteelBlue;" align="center">
 		<!-- Paging -->
-	 		<ul class="pagination" align="center">
+	 	<!-- 	<ul class="pagination" align="center">
 				<li class="disabled"><a><<</a></li>
 				<li class="disabled"><a><</a></li>
 				<li class="disabled active"><a>1</a></li>
@@ -126,9 +124,9 @@
 				<li class="goPage" data-page="3"><a>3</a></li>
 				<li class="disabled"><a>></a></li>
 				<li class="goLastPage"><a>>></a></li>
-			</ul> 
+			</ul>  -->
 			<!-- <ul id="pagination" class="pagination_class" align="center"></ul> -->
-
+<!--  -->
 		<!-- // Paging closed  --> 
 		</div>
 		<!--// div 3 closed-->
