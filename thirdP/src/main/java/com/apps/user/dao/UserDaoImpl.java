@@ -165,7 +165,7 @@ public class UserDaoImpl implements UserDao {
 		
 		String statement = namespace + ".do_delete";
 		UserVO inUserVO = (UserVO)dto;
-		flag = sqlSession.delete(statement, inUserVO);
+		flag = sqlSession.update(statement, inUserVO.getId());
 		
 		log.debug("****************do_delete*****************");
 		log.debug("statement : "+statement);
@@ -177,7 +177,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int do_update(DTO dto) {
-		String statement = namespace + ".do_memberupdate";
+		String statement = namespace + ".do_update";
 		UserVO inUserVO = (UserVO)dto;
 		
 		log.debug("****************do_update*****************");

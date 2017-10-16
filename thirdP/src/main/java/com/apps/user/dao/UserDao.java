@@ -4,7 +4,6 @@ import javax.servlet.http.HttpSession;
 
 import com.apps.common.DTO;
 import com.apps.common.WorkDiv;
-import com.apps.user.domain.UserVO;
 
 /**
  * @since 2017-09-22

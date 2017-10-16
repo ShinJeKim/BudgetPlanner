@@ -78,6 +78,29 @@
 			VALUES (#{id}, #{password}, #{name}, #{email}, #{fixed_income}, #{balance}, SYSDATE, null, 0, 0)
  	</update>
  	
+ 	
+ 	<!-- 아이디찾기 -->
+ 	<select id="do_findID"
+ 			parameterType="UserVO"
+ 			resultType="UserVO">
+			SELECT ID
+			FROM USERS
+			WHERE NAME = #{NAME} 
+				AND EMAIL = #{EMAIL}
+ 	</select>
+ 	
+ 	
+ 	<!-- 비밀번호찾기 -->
+ 	<select id="do_findPW"
+ 			parameterType="UserVO"
+ 			resultType="UserVO">
+			SELECT PASSWORD
+			FROM USERS
+			WHERE ID = #{ID} 
+				AND EMAIL = #{EMAIL}
+ 	</select>
+ 	
+ 	
  	<!-- 회원정보수정 업데이트-->
  	<update id="do_update"
  			parameterType="UserVO">
@@ -98,7 +121,7 @@
  	<delete id="do_delete"
  			parameterType="UserVO">
  			update USERS
-				set delete_flag = #{delete_flag}
+				set delete_flag = 1
 			where ID = #{id}	
  	</delete>
 

@@ -6,14 +6,14 @@
 		<label>아이디찾기</label>
 		<div>
 			<input type="text" placeholder="이름" required autofocus
-				name="id" id="id" maxlength="15" />
+				name="name" id="name" value = "${userVO.name}" maxlength="15" />
 		</div>
 		<div>		
 			<input type="text" placeholder="이메일" required autofocus
-				name="password" id="password" maxlength="15"/>
+				name="email" id="email" value = "${userVO.email}" maxlength="15"/>
 		</div>
 		<div>
-			<input type="button" id="identifyBtn" value="확인" />
+			<input type="submit" id="identifyBtn" value="확인" />
 		</div>
 		<div>
 			<label id="IDresult"></label>
@@ -25,14 +25,14 @@
 		<label>비밀번호찾기</label>
 		<div>
 			<input type="text" placeholder="ID" required autofocus
-				name="id" id="id" maxlength="15" />
+				name="id" id="id" value = "${userVO.id}" maxlength="15" />
 		</div>
 		<div>		
 			<input type="text" placeholder="이메일" required autofocus
-				name="password" id="password" maxlength="15"/>
+				name="email" id=email value = "${userVO.email}" maxlength="15"/>
 		</div>
 		<div>
-			<input type="button" id="identifyBtn" value="확인" />
+			<input type="submit" id="identifyBtn" value="확인" />
 		</div>
 	</div>
 	<div>
