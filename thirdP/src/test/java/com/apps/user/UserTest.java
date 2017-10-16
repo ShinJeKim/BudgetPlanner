@@ -99,8 +99,4 @@ public class UserTest {
 		.andExpect(status().isOk())
 		.andExpect(model().attribute("message", "success"));
 	}
-	
-	
-	
-	
 }
