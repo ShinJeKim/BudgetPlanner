@@ -20,7 +20,9 @@
 		<c:choose>
 	            <c:when test="${list.size()>0}" >
 					<c:forEach var="dailyVO" items="${list}">
-						<form class="dailyDatas" action="do_searchOne.do" method="post">	
+						<form class="dailyDatas" action="do_searchOne.do" method="post">
+							<input type="hidden" id="origin_cont" value="${dailyVO.content}">	
+							<input type="hidden" id="reg_dt" name="reg_dt" value="${reg_dt}">	
 							<input type="hidden" id="daily_code" name="daily_code" value="${dailyVO.daily_code}">
 							<div class="dailyitem">
 							<ul class="itemList">
@@ -41,6 +43,6 @@
 	        </c:choose>
 			<div id="blank"></div>
 		</div>
-	<div id="plus"><label id="icon"><a href="do_save.do">+</a></label></div>
+	<div id="plus"><label id="icon">+</label></div>
 </div>
 	

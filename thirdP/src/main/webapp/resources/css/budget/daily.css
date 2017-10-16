@@ -20,6 +20,9 @@
 	display: table-cell;
 	text-align: center;
 }
+#plus>#icon:hover{
+	cursor: pointer;
+}
 #total{
 	list-style: none;
 	width: 100%;
@@ -54,6 +57,7 @@
 	display: inline-table;
 	cursor: pointer;
 	height: inherit;
+	table-layout: fixed;
 }
 .itemList>li{
 	display: table-cell;
@@ -72,6 +76,12 @@
 	width: 60%;
     padding-left: 5%;
     text-align: left;
+    line-height: 150%;
+}
+.itemList>li>label>p{
+	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .up_del{
 	width: 100%;

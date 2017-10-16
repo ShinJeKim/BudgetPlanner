@@ -20,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.apps.daily.domain.DailyVO;
 import com.apps.daily.service.DailySvc;
-import com.apps.user.service.UserSvc;
 import com.google.gson.Gson;
 
 
@@ -48,7 +47,7 @@ public class DailyController {
 		DailyVO inVO = new DailyVO();
 		if(session.getAttribute("ID") != null){
 			inVO.setId(session.getAttribute("ID").toString());
-			if(req.getParameter("reg_dt") != null && req.getParameter("loadWork").equals("normal")){
+			if(req.getParameter("reg_dt") != null){
 				inVO.setReg_dt(req.getParameter("reg_dt"));
 				mav.addObject("loadWork", "reload");
 			}else{
@@ -101,7 +100,6 @@ public class DailyController {
 		
 		String id = "id1";
 		session.setAttribute("ID", id);
-		ModelAndView mav = new ModelAndView();
 		DailyVO inVO = new DailyVO();
 		inVO.setId(session.getAttribute("ID").toString());
 		if(req.getParameter("reg_dt") != null){
@@ -109,7 +107,6 @@ public class DailyController {
 		}else{
 			inVO.setReg_dt("");
 		}
-		mav.addObject("reg_dt",inVO.getReg_dt());
 		log.debug("------------------");
 		log.debug("0: "+inVO);
 		log.debug("------------------");
@@ -157,10 +154,10 @@ public class DailyController {
 			if(req.getParameter("workDiv").equals("update")){
 				inVO.setDaily_code(req.getParameter("daily_code"));
 				dailySvc.do_update(inVO);
-				res.sendRedirect("daily.do");
+				res.sendRedirect("daily.do?reg_dt="+inVO.getReg_dt());
 			}else if(req.getParameter("workDiv").equals("save")){
 				dailySvc.do_save(inVO);
-				res.sendRedirect("daily.do");
+				res.sendRedirect("daily.do?reg_dt="+inVO.getReg_dt());
 			}
 			
 	}
@@ -171,6 +168,7 @@ public class DailyController {
 		log.debug("save()");
 		log.debug("0=====================================");
 		mav.addObject("workDiv","save");
+		mav.addObject("reg_dt",request.getParameter("reg_dt"));
 		mav.addObject("daily_code",request.getParameter("daily_code"));
 		mav.setViewName("save");
 		return mav;
@@ -202,9 +200,137 @@ public class DailyController {
 			log.debug("0: "+inVO);
 			log.debug("------------------");
 				dailySvc.do_delete(inVO);
-				res.sendRedirect("daily.do");
+				res.sendRedirect("daily.do?reg_dt="+req.getParameter("reg_dt"));;
 			
 			
 	}
 	
+	@RequestMapping(value="budget/cate.do",method=RequestMethod.POST) 
+	@ResponseBody
+	public String searchCate(HttpServletRequest req,HttpSession session) {
+		
+		DailyVO inVO = new DailyVO();
+		inVO.setMst_ct_nm(req.getParameter("mst_ct_nm"));
+		log.debug("------------------");
+		log.debug("0: "+inVO);
+		log.debug("------------------");
+		List<DailyVO> list = (List<DailyVO>)dailySvc.category(inVO);
+		log.debug("------------------");
+		log.debug("3: "+ list);
+		log.debug("------------------");
+		
+		Gson gson=new Gson();
+		String retString = gson.toJson(list);
+		log.debug("4===============retString="+retString);
+		
+		return retString;
+	}
+	
+//	@RequestMapping(value="budget/daily.do")
+//	public ModelAndView dailys_function(HttpServletRequest req,HttpServletResponse res,HttpSession session)throws IOException{
+//		ModelAndView mav = new ModelAndView();
+//		DailyVO inVO = new DailyVO();
+//		if(session.getAttribute("ID") == null){
+//			res.sendRedirect("../main.do");
+//			mav.setViewName("login");
+//		}else{
+//			inVO.setId(session.getAttribute("ID").toString());
+//			if(req.getParameter("workDiv") == "list"){
+//				if(req.getParameter("reg_dt") != null){
+//					inVO.setReg_dt(req.getParameter("reg_dt"));
+//					mav.addObject("loadWork", "reload");
+//				}else{
+//					Date nowdate = new Date();
+//					SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+//					String today = sdf.format(nowdate);
+//					log.debug("now:"+nowdate.toString());
+//					log.debug(today);
+//					inVO.setReg_dt(today);
+//					mav.addObject("loadWork", "normal");
+//				}
+//				mav.addObject("reg_dt",inVO.getReg_dt());
+//				log.debug("------------------");
+//				log.debug("0: "+inVO);
+//				log.debug("------------------");
+//				List<DailyVO> list = (List<DailyVO>)dailySvc.do_search(inVO);
+//				log.debug("------------------");
+//				log.debug("3: "+ list);
+//				log.debug("------------------");
+//				int total_in = 0;
+//				int total_out = 0;
+//				int total_sum = 0;
+//				if(list.size()>0){
+//					for(int i=0;i<list.size();i++){
+//						int thisusage = list.get(i).getUsage();
+//						if(thisusage<0){
+//							total_out += (thisusage*-1);
+//						}else{
+//							total_in += thisusage;
+//						}
+//					}
+//					total_sum = Math.abs(total_in - total_out);
+//				}
+//				mav.addObject("total_in",total_in);
+//				mav.addObject("total_out",total_out);
+//				mav.addObject("total_sum",total_sum);
+//				mav.addObject("list",list );
+//				mav.setViewName("daily");
+//				
+//			}else if(req.getParameter("workDiv") == "update"){
+//				
+//			}else if(req.getParameter("workDiv") == "save"){
+//				
+//			}else if(req.getParameter("workDiv") == "delete"){
+//				
+//			}else{
+//				if(req.getParameter("reg_dt") != null){
+//					inVO.setReg_dt(req.getParameter("reg_dt"));
+//					mav.addObject("loadWork", "reload");
+//				}else{
+//					Date nowdate = new Date();
+//					SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+//					String today = sdf.format(nowdate);
+//					log.debug("now:"+nowdate.toString());
+//					log.debug(today);
+//					inVO.setReg_dt(today);
+//					mav.addObject("loadWork", "normal");
+//				}
+//				mav.addObject("reg_dt",inVO.getReg_dt());
+//				log.debug("------------------");
+//				log.debug("0: "+inVO);
+//				log.debug("------------------");
+//				List<DailyVO> list = (List<DailyVO>)dailySvc.do_search(inVO);
+//				log.debug("------------------");
+//				log.debug("3: "+ list);
+//				log.debug("------------------");
+//				int total_in = 0;
+//				int total_out = 0;
+//				int total_sum = 0;
+//				if(list.size()>0){
+//					for(int i=0;i<list.size();i++){
+//						int thisusage = list.get(i).getUsage();
+//						if(thisusage<0){
+//							total_out += (thisusage*-1);
+//						}else{
+//							total_in += thisusage;
+//						}
+//					}
+//					total_sum = Math.abs(total_in - total_out);
+//				}
+//				mav.addObject("total_in",total_in);
+//				mav.addObject("total_out",total_out);
+//				mav.addObject("total_sum",total_sum);
+//				mav.addObject("list",list );
+//				mav.setViewName("daily");
+//			}
+//
+//			
+//			
+//			
+//		}//sessionCheck
+//		
+//		return mav;
+//		
+//		
+//	}
 }
