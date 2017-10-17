@@ -26,9 +26,11 @@ public interface CategorySvc {
 	
 	/**
 	 * excelDown
-	 * @param dto
+	 * @param list
 	 * @return
 	 * @throws IOException
 	 */
-	public String do_excelDown(DTO dto)throws IOException;
+	public String do_excelDown(List<DailyVO> list)throws IOException;
+	
+	public List<DailyVO> do_searchExcel(DTO dto);
 }

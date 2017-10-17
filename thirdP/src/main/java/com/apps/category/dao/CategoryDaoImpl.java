@@ -126,6 +126,35 @@ public class CategoryDaoImpl implements CategoryDao{
 		return sqlSession.selectList(statement, searchParam);
 	}
 	
+	
+	/**
+	 * do_excelDown
+	 * 엑셀 다운용 리스트 받아오기(페이징 처리X)
+	 */
+	@Override
+	public List<DailyVO> do_searchExcel(DTO dto) {
+		String statement = namespace+".do_searchExcel";
+		
+		CategoryVO param = (CategoryVO)dto;
+		
+		Hashtable<String, String> searchParam = null;
+		searchParam = param.getParam();
+		
+		
+		String mst_ct_id = searchParam.get("mst_ct_id").toString();
+		String dtl_ct_nm = searchParam.get("dtl_ct_nm").toString();
+		String start_date = searchParam.get("start_date").toString();
+		String end_date = searchParam.get("end_date").toString();
+		
+		searchParam.put("mst_ct_id", mst_ct_id);
+		searchParam.put("dtl_ct_nm", dtl_ct_nm);
+		searchParam.put("start_date", start_date);
+		searchParam.put("end_date", end_date);
+		
+		return sqlSession.selectList(statement, searchParam);
+	}
+	
+	
 	/**
 	 * 전체조회
 	 * 조건: id, 기간
@@ -155,6 +184,10 @@ public class CategoryDaoImpl implements CategoryDao{
 		
 		return sqlSession.selectList(statement, searchParam);
 	}
+	
+	
+	
+	
 
 	@Override
 	public int do_save(DTO dto) {
@@ -174,16 +207,13 @@ public class CategoryDaoImpl implements CategoryDao{
 		return 0;
 	}
 
-	@Override
-	public List<?> do_excelDown() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public int do_excelUp(List<?> list) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

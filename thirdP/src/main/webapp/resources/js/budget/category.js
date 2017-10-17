@@ -24,11 +24,9 @@ function font_sizing(){
 
 // 엑셀 다운로드
 function do_excelDown(){
-	var frm = document.frm;
+	var frm = document.excel_frm;
 	frm.action = "do_excelDown.do";
 	frm.submit();
-	
-	/*window.open("/do_excelDown.do");*/
 }
 
 
@@ -108,7 +106,9 @@ function do_excelDown(){
 					ed_date = $('.currentDate').html().toString()+"-"+$('#end_month').val()+"-01";
 					console.log("end_month"+$('.currentDate').html().toString()+"-"+$('#end_month').val()+"-01");
 				}
-					
+				
+
+				
 				$.ajax({
 					type:"POST",
 					url:"do_searchList.do",
@@ -217,6 +217,7 @@ function do_excelDown(){
 																
 																// do_excelDown Btn event
 																	$('#do_excelDown').click(function(){
+																		
 																		do_excelDown();
 																	});
 																	
@@ -263,6 +264,35 @@ function do_excelDown(){
 			});// --do_searchList closed
 			
 			
-				
+			$(document).on('change','#mst_ct_id',function(){
+				$('#e_mst_ct_id').val($(this).val());
+			});
+			
+			$(document).on('change','#dtlList',function(){
+				$('#e_dtl_ct_nm').val($(this).val())
+			});
+			
+			$(document).on('change','#start_month',function(){
+				var month = "";
+				if($(this).val().length == 1){
+					month = '0'+$(this).val();
+				}else{
+					month = $(this).val();
+				}
+				var st_dt = $(document).find('.currentDate').html().toString()+"-"+month+"-01";
+				$('#e_start_date').val(st_dt.trim());
+			});
+			
+			$(document).on('change','#end_month',function(){
+				var month = "";
+				if($(this).val().length == 1){
+					month = '0'+$(this).val();
+				}else{
+					month = $(this).val();
+				}
+				var ed_dt = $(document).find('.currentDate').html().toString()+"-"+month+"-01";
+				$('#e_end_date').val(ed_dt.trim());
+			});
+			
 			
 	});//-- jQuery closed

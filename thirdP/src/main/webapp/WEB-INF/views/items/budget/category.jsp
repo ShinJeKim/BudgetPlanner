@@ -18,6 +18,12 @@
 <title>카테고리별 조회</title>
 </head>
 <body>
+<form name="excel_frm" action="do_excelDown" method="post">
+	<input type="hidden" id="e_start_date" name="start_date" >
+	<input type="hidden" id="e_end_date" name="end_date">
+	<input type="hidden" id="e_mst_ct_id" name="mst_ct_id">
+	<input type="hidden" id="e_dtl_ct_nm" name="dtl_ct_nm">
+</form>
 <div id="body_div">
 	<!-- div 1: 검색조건, 조회버튼, 엑셀다운로드 || div 2: 검색결과 list || div 3: Paging -->
 		<!-- div 1 for search condition -->
@@ -68,7 +74,7 @@
 				</div>
 		</div>
 		<!--// div 1 closed-->
-		
+
 		<!-- div 2 for searchList-->
 		<div id="searchList">
 		
@@ -89,7 +95,7 @@
 				<c:choose>
 					<c:when test="${list.size()>0 }">
 						<c:forEach var="CategoryVO" items="${list }">
-							<form action="category.do" method="POST" name="frm">
+							<form action="category.do" method="POST" name="frm" >
 								<tr>
 									<td id="c_no" class="text-center"><c:out value="${CategoryVO.No }"></c:out></td>
 									<td id="c_mst_ct_id" class="text-left"><c:out value="${CategoryVO.mst_ct_id }"></c:out></td>

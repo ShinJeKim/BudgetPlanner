@@ -25,7 +25,7 @@ public interface WorkDiv {
 	public int do_delete(DTO dto);
 	public int do_update(DTO dto);
 	
-	public List<?> do_excelDown();
+
 	public int do_excelUp(List<?> list);
 	
 }

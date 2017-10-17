@@ -20,9 +20,12 @@ public interface CategoryDao extends WorkDiv{
 	
 	/**
 	 * 단건조회
-	 * 조건: id, 기간, 카테고리
+	 * 조건: id, 기간, 카테고리, 페이징
 	 * @param dto
 	 * @return
 	 */
 	public List<DailyVO> do_searchList(DTO dto);
+	
+	public List<DailyVO> do_searchExcel(DTO dto);
+	
 }

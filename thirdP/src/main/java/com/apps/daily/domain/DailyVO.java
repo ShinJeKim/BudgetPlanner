@@ -3,6 +3,7 @@ package com.apps.daily.domain;
 import com.apps.common.DTO;
 
 public class DailyVO extends DTO {
+	private int No;
 	private String 	id; 		//유저 아이디
 	private String 	daily_code; //식별코드
 	private int 	usage; 		//금액
@@ -16,6 +17,10 @@ public class DailyVO extends DTO {
 	
 	
 	//Setter
+	
+	public void setNo(int No) {
+		this.No = No;
+	}
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -49,6 +54,10 @@ public class DailyVO extends DTO {
 	
 	
 	//Getter
+	
+	public int getNo() {
+		return No;
+	}
 	public String getId() {
 		return id;
 	}
@@ -81,12 +90,13 @@ public class DailyVO extends DTO {
 	}
 	
 	
+	
 	//toString
 	@Override
 	public String toString() {
-		return "DailyVO [id=" + id + ", daily_code=" + daily_code + ", usage=" + usage + ", content=" + content
-				+ ", reg_dt=" + reg_dt + ", mod_dt=" + mod_dt + ", mst_ct_nm=" + mst_ct_nm + ", dtl_ct_nm=" + dtl_ct_nm
-				+ ", mst_ct_id=" + mst_ct_id + ", dtl_ct_id=" + dtl_ct_id + "]";
+		return "DailyVO [No=" + No + ", id=" + id + ", daily_code=" + daily_code + ", usage=" + usage + ", content="
+				+ content + ", reg_dt=" + reg_dt + ", mod_dt=" + mod_dt + ", mst_ct_nm=" + mst_ct_nm + ", dtl_ct_nm="
+				+ dtl_ct_nm + ", mst_ct_id=" + mst_ct_id + ", dtl_ct_id=" + dtl_ct_id + "]";
 	}
 
 	

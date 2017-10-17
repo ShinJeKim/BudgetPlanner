@@ -188,11 +188,6 @@ public class UserDaoImpl implements UserDao {
 		return sqlSession.update(statement, inUserVO);
 	}
 
-	@Override
-	public List<?> do_excelDown() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int do_excelUp(List<?> list) {

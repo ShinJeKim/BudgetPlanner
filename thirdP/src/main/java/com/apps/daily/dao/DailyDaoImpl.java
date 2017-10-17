@@ -114,11 +114,6 @@ public class DailyDaoImpl implements DailyDao{
 	
 	
 	
-	//밑에있는 메소드는 확장성을 위해 만든 공통 메소드
-	@Override
-	public List<?> do_excelDown() {
-		return null;
-	}
 
 	@Override
 	public int do_excelUp(List<?> list) {

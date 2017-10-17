@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -153,55 +154,45 @@ public class CategoryController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="budget/do_excelDown.do", method=RequestMethod.POST)
-	public ModelAndView excelDownload(HttpServletRequest req) throws IOException{
+	public ModelAndView excelDownload(HttpServletRequest req, HttpSession session) throws IOException{
 		
 		log.debug("=================================");
 		log.debug("do_excelDown.do");
 		log.debug("=================================");
 		
-		//CategoryVO catVO = new CategoryVO();
-/*		Hashtable<String, String> searchParam = new Hashtable<String, String>();
+		CategoryVO catVO = new CategoryVO();
+		Hashtable<String, String> searchParam = new Hashtable<String, String>();
+		ModelAndView modelAndView = new ModelAndView();
 		
-		//catVO.setId(session.getAttribute("id").toString());
-		String id = StringUtil.nvl(req.getParameter("id"), "");
-		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "");
-		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "");
+		String id = session.getAttribute("ID").toString();
+
+		log.debug("start_date" + req.getParameter("start_date"));
+		//String id = StringUtil.nvl(req.getParameter("id"), "");
+/*		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "");
+		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "");*/
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "");
 		String end_date = StringUtil.nvl(req.getParameter("end_date"), "");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_nm"), "");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
 		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
 		searchParam.put("id".toString(), id);
-		searchParam.put("page_size".toString(), pageSize);
-		searchParam.put("page_num".toString(), pageNum);
+/*		searchParam.put("page_size".toString(), pageSize);
+		searchParam.put("page_num".toString(), pageNum);*/
 		searchParam.put("start_date".toString(), start_date);
 		searchParam.put("end_date".toString(), end_date);
-		searchParam.put("mst_ct_nm".toString(), mst_ct_id);
+		searchParam.put("mst_ct_id".toString(), mst_ct_id);
 		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
+		
+		
+		
+		catVO.setParam(searchParam);
+		log.debug("catVO==============="+catVO.toString());
+		
+		List<DailyVO> list = catSvc.do_searchExcel(catVO);
 
-		log.debug("searchParam: "+searchParam);
-		catVO.setParam(searchParam);*/
+		String fileFullPath = this.catSvc.do_excelDown(list);
 		
-		DailyVO dailyVO = new DailyVO();
 		
-		Hashtable<String, String> searchParam = new Hashtable<String, String>();
-		String no = StringUtil.nvl(req.getParameter("No"), "");
-		String mst_ct_nm = StringUtil.nvl(req.getParameter("mst_ct_nm"), "");
-		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
-		String usage = StringUtil.nvl(req.getParameter("usage"), "");
-		String content = StringUtil.nvl(req.getParameter("content"), "");
-		String reg_dt = StringUtil.nvl(req.getParameter("reg_dt"), "");
-		
-		searchParam.put("No", no);
-		searchParam.put("mst_ct_nm", mst_ct_nm);
-		searchParam.put("dtl_ct_nm", dtl_ct_nm);
-		searchParam.put("usage", usage);
-		searchParam.put("content", content);
-		
-		searchParam.put("reg_dt", reg_dt);
-		
-		String fileFullPath = this.catSvc.do_excelDown(dailyVO);
-		ModelAndView modelAndView = new ModelAndView();
 		log.debug("===========================");
 		log.debug("fileFullPath: "+fileFullPath);
 		log.debug("===========================");

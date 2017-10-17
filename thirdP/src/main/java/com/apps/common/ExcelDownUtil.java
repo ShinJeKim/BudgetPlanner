@@ -27,7 +27,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.apps.category.domain.CategoryVO;
 import com.apps.daily.domain.DailyVO;
 
 
@@ -157,30 +156,30 @@ public class ExcelDownUtil {
        for(int i = 0; i < data.size(); i++){
            // 1번째 행은 제목이니 건너 뜀
            row = sheet.createRow((short)this.firstRow+(i+1));
-           CategoryVO catVO = (CategoryVO)data.get(i);
+           DailyVO dailyVO = (DailyVO)data.get(i);
            // 번호
            cell_0 = row.createCell((short)0+firstCol);
-           cell_0.setCellValue(catVO.getNo());
+           cell_0.setCellValue(dailyVO.getNo());
            cell_0.setCellStyle(styleLeft);           
            // 수입/지출
            cell_1 = row.createCell((short)1+firstCol);
-           cell_1.setCellValue(catVO.getMst_ct_nm());
+           cell_1.setCellValue(dailyVO.getMst_ct_nm());
            cell_1.setCellStyle(styleLeft);
            // 카테고리 
            cell_2 = row.createCell((short)2+firstCol);
-           cell_2.setCellValue(catVO.getDtl_ct_nm());
+           cell_2.setCellValue(dailyVO.getDtl_ct_nm());
            cell_2.setCellStyle(styleLeft);
            // 금액 
            cell_3 = row.createCell((short)3+firstCol);
-           cell_3.setCellValue(catVO.getUsage());
+           cell_3.setCellValue(dailyVO.getUsage());
            cell_3.setCellStyle(styleRight);
            // 내용
            cell_4 = row.createCell((short)4+firstCol);
-           cell_4.setCellValue(catVO.getContent());
+           cell_4.setCellValue(dailyVO.getContent());
            cell_4.setCellStyle(styleRight);
            // 날짜
            cell_5 = row.createCell((short)5+firstCol);
-           cell_5.setCellValue(catVO.getReg_dt());
+           cell_5.setCellValue(dailyVO.getReg_dt());
            cell_5.setCellStyle(styleLeft);            
        }
         
