@@ -204,7 +204,7 @@ public class UserDaoImpl implements UserDao {
 	public int do_check_id(String id) {
 		String statement = namespace + ".do_check_id";
 		String userID = id;
-		log.debug("****************do_update*****************");
+		log.debug("**************do_check_id*****************");
 		log.debug("statement : "+statement);
 		log.debug("userID : "+userID); 
 		log.debug("******************************************");
@@ -222,7 +222,7 @@ public class UserDaoImpl implements UserDao {
 		
 		UserVO inUserVO = (UserVO)dto;
 		
-		log.debug("****************do_update*****************");
+		log.debug("*************do_check_passwd**************");
 		log.debug("statement : "+statement);
 		log.debug("inUserVO.toString() : "+inUserVO.toString()); 
 		log.debug("******************************************");
@@ -243,7 +243,7 @@ public class UserDaoImpl implements UserDao {
 		//Id Check
 		int idFlag = do_check_id(userVO.getId());
 		
-		log.debug("****************do_update*****************");
+		log.debug("*****************do_login*****************");
 		log.debug("statement : "+statement);
 		log.debug("inUserVO.toString() : "+userVO.toString()); 
 		log.debug("******************************************");

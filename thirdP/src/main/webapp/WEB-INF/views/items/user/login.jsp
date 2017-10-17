@@ -20,6 +20,11 @@
 					아이디 및 비밀번호를 확인해주세요
 				</div>
 			</c:if>
+			<c:if test="${message == 'deleteUser'}">
+				<div style="color: red;">
+					탈퇴한 회원입니다
+				</div>
+			</c:if>
 		</div>
 		<div id="anchorlink">
 			<div>

@@ -57,10 +57,10 @@ public class UserController {
 
 		outVO = (UserVO)userSvc.do_login(inVO);
 		
-		if(outVO !=null) {
+		if(outVO != null && outVO.getDelete_flag()==0) {
 			
 			log.debug(outVO.toString());
-			
+					
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginUser", outVO);
 			session.setAttribute("ID", outVO.getId());
@@ -74,6 +74,10 @@ public class UserController {
 		} else {
 			
 			int passwordFlag = userSvc.do_check_passwd(inVO);
+			
+			if(outVO.getDelete_flag()==1) {
+				modelAndView.addObject("message", "deleteUser");
+			}
 			
 			if(passwordFlag == 0) {
 				modelAndView.addObject("message", "passwordFailure");
