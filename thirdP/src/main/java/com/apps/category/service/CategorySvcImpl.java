@@ -12,6 +12,7 @@ import com.apps.category.dao.CategoryDao;
 import com.apps.category.domain.CategoryVO;
 import com.apps.common.DTO;
 import com.apps.common.ExcelDownUtil;
+import com.apps.daily.domain.DailyVO;
 
 @Service
 public class CategorySvcImpl implements CategorySvc {
@@ -42,7 +43,7 @@ public class CategorySvcImpl implements CategorySvc {
 	 * @return
 	 */
 	@Override
-	public List<CategoryVO> do_searchList(DTO dto) {
+	public List<DailyVO> do_searchList(DTO dto) {
 		
 		log.debug("=========================");
 		log.debug("do_searchOne dto: "+dto.toString());
@@ -61,7 +62,7 @@ public class CategorySvcImpl implements CategorySvc {
 		log.debug("do_excelDown: dto  "+dto.toString());
 		log.debug("00000============================");
 		
-		List<CategoryVO> list = (List<CategoryVO>) categoryDao.do_searchList(dto);
+		List<DailyVO> list = (List<DailyVO>) categoryDao.do_searchList(dto);
 		log.debug("11111============================");
 		log.debug("list.size():   "+list.size());
 		log.debug("11111============================");
