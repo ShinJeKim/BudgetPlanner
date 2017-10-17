@@ -291,6 +291,30 @@
 				div_name.addClass("has-success");
 			}
 			
+			//이메일 검사
+			if($("#email").val()==""){
+				alert("이메일을 입력해 주시기 바랍니다."); 
+				div_email.removeClass("has-success");
+				div_email.addClass("has-error");
+				$("#email").focus();
+				return false;
+			} else {
+				
+				var emailReg = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+
+				if(!$("#email").val().match(emailReg)){
+					alert("이메일 형식을 맞춰서 작성해 주시기 바랍니다");
+					div_email.removeClass("has-success");
+					div_email.addClass("has-error");
+					$("#email").val('');
+					$("#email").focus();
+					return false;
+				} else {
+					div_email.removeClass("has-error");
+					div_email.addClass("has-success");
+				}
+			}
+			
 			//고정수입 검사
 			if($("#fixed_income").val()==""){
 				alert("고정수입을 입력해 주시기 바랍니다."); 
