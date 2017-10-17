@@ -33,6 +33,18 @@
 				return;
 			}
 			
+			if(checkUserId != ""){
+				var hangul = $("#id").val().search(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/); //한글 정규식 체크
+				if(hangul>0){
+					alert("영문과 숫자 조합으로 작성해 주시기 바랍니다.");
+					$("#id").val('');
+					div_id.removeClass("has-success");
+					div_id.addClass("has-error");
+					$("#id").focus();
+					return false;
+				}
+			} 
+			
 			console.log("checkUserId : "+checkUserId);
 			
 			$.ajax({
@@ -74,6 +86,7 @@
 				div_id.removeClass("has-error");
 				div_id.addClass("has-success");
 			}
+			
 		}); //id check
 		
 		$("#password").keyup(function(e){
@@ -195,6 +208,15 @@
 				div_id.addClass("has-error");
 				$("#id").focus();
 				return false;
+			} else if($("#id").val() != ""){
+				var hangul = $("#id").val().search(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/); //한글 정규식 체크
+				if(hangul>0){
+					alert("영문과 숫자 조합으로 작성해 주시기 바랍니다.");
+					div_id.removeClass("has-success");
+					div_id.addClass("has-error");
+					$("#id").focus();
+					return false;
+				}
 			} else {
 				div_id.removeClass("has-error");
 				div_id.addClass("has-success");
@@ -232,27 +254,6 @@
 					}
 				}
 			}
-			
-			//password validation check
-//			if($("#password").val()!="") {
-//				
-//				if(password.length < 8 || password.length > 12){ //자리수가 안맞을 경우
-//					alert("8자리 ~ 12자리 이내로 입력해주세요");
-//					$("#password").focus();
-//					return false;
-//				} else { // 자리수가 맞을 때 영어+숫자+특수문자 조합 확인
-//					var num = $("#password").val().search(/[0-9]/g); //number
-//					var eng = $("#password").val().search(/[a-z]/ig); //eng character
-//					var spe = $("#password").val().search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi); //special character
-//					
-//					if(num < 0 || eng < 0 || spe < 0 ){
-//						  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요");
-//						  $("#password").focus();
-//						  return false;
-//					}	
-//				}
-//			}
-
 			
 			//PASSWORD 확인 검사
 			if($("#password_check").val()==""){
