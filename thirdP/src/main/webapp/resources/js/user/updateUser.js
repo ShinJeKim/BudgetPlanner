@@ -143,11 +143,14 @@ function menu_size(){
 	$('body').css('border-left','5px solid graytext');
 	$('body').css('border-right','5px solid graytext');
 	$('body').css('border-top','5px solid graytext');
-	$('.footer').css('width','100%');
+	$('.footer').css('border-bottom','5px solid graytext');
+	$('.footer').css('box-sizing','border-box');
+	$('.footer').css('width','inherit');
 	}else{
 		$('body').css('width','100%');
 		$('body').css('border','0px');
 		$('body').css('margin','0px');
+		$('.footer').css('border','0px');
 		$('.footer').css('width','100%');
 	}
 }
