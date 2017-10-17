@@ -72,7 +72,7 @@
 		<div id="searchList">
 		
 			<!-- List table -->
-			<form name="frm" method="post">
+		
 				<table id="listTable" class="table table-bordered table-hover table-striped">
 				<thead id="thead" class="align-center">
 					<tr>
@@ -88,7 +88,7 @@
 				<c:choose>
 					<c:when test="${list.size()>0 }">
 						<c:forEach var="CategoryVO" items="${list }">
-							<form action="category.do" method="POST" name="${CategoryVO.id }">
+							<form action="category.do" method="POST" name="frm">
 								<tr>
 									<td id="c_no" class="text-center"><c:out value="${CategoryVO.No }"></c:out></td>
 									<td id="c_mst_ct_id" class="text-left"><c:out value="${CategoryVO.mst_ct_id }"></c:out></td>
@@ -109,7 +109,7 @@
 				</tbody>
 			</table>
 			<!-- // List table closed-->
-		</form>
+
 		</div>
 		<!--// div 2 closed-->
 		

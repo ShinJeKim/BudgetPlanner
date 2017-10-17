@@ -1,12 +1,3 @@
-//paging 이동
-function do_search_page(url, PAGE_NUM) {
-	console.log(url + "\t" + PAGE_NUM);
-	var frm = document.frm;
-	frm.PAGE_NUM.value = PAGE_NUM;
-	frm.action = url;
-	frm.submit();
-}
-
 //do_searchCategory
 function do_searchCategory(){
 	console.log("3. mst_ct_id: "+mst_ct_id.value);
@@ -153,7 +144,7 @@ function do_excelDown(){
 							datahtml += ""
 							
 							for(var i=0; i<data.length; i++){
-								
+								var content = data[i].content.replace(/(<([^>]+)>)/gi,'');
 								console.log("data[i].id: "+data[i].mst_ct_id);
 								
 								datahtml += "<tr class='dataList'>"
@@ -161,7 +152,7 @@ function do_excelDown(){
 								datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
 								datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
 								datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
-								datahtml += "<td id='c_content' >"+data[i].content+"</td>"
+								datahtml += "<td id='c_content' >"+content+"</td>"
 								datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
 								datahtml += "</tr >"
 								
@@ -176,7 +167,75 @@ function do_excelDown(){
 										        totalPages: max_page,
 										        visiblePages: 5,
 										        onPageClick: function(evt, page){
-										        	do_search_page();
+										        	$.ajax({
+														type:"POST",
+														url:"do_searchList.do",
+														dataType:"JSON",
+														data:{			
+															"start_date": st_date.trim(),
+															"end_date": ed_date.trim(),
+															"mst_ct_id" : $('#mst_ct_id').val(),
+															"dtl_ct_nm": $('#dtlList').val(),
+															"page_size": "10",
+															"page_num": page
+														},
+														success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
+															
+															
+															console.log("success data: "+data);
+															console.log("data.length: "+data.length);
+
+															var totalCnt = data[0].totalNo;
+															var page_size = 10;
+															var max_page = Math.ceil(totalCnt/page_size);
+														
+
+															if(data.length > 0){
+																
+																var datahtml = "";
+																
+																datahtml += ""
+																
+																for(var i=0; i<data.length; i++){
+																	
+																	console.log("data[i].id: "+data[i].mst_ct_id);
+																	var content = data[i].content.replace(/(<([^>]+)>)/gi,'');
+																	datahtml += "<tr class='dataList'>"
+																	datahtml += "<td id='c_no' >"+data[i].No+"</td>"
+																	datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
+																	datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
+																	datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
+																	datahtml += "<td id='c_content' >"+content+"</td>"
+																	datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
+																	datahtml += "</tr >"
+																	
+																	
+																}
+																
+																	$('#tbody').html(datahtml);
+																	//console.log("datahtml: "+datahtml);
+																
+																// do_excelDown Btn event
+																	$('#do_excelDown').click(function(){
+																		do_excelDown();
+																	});
+																	
+																
+																
+															}else{
+																$('#tbody').html("<label style='font-size: 20px; color: red;'>검색결과가 없습니다.</label>");
+															}
+															
+														
+														},
+														complete: function(data){// 무조건 수행
+												
+															
+														},
+														error: function(xhr, status, error){
+															console.log("error: "+error);
+														}
+													}) // --ajax closed
 										        }
 									 });
 								
