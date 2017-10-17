@@ -88,8 +88,11 @@ function menu_size(){
 	$('.body').css('height',height*0.93-5);
 	$('.footer').css('height',height*0.07);
 	$('.footer').css('top',height*0.93);
+	$('#updateFrm').css('height',$('.body').height()*0.9);
+	$('#updateFrm').css('margin-top',$('.body').height()*0.05);
 	if(window.screen.width>768 && width>768){
 	$('body').css('width','60%');
+	$('body').css('height',height);
 	$('body').css('margin-left','20%');
 	$('body').css('border-left','5px solid graytext');
 	$('body').css('border-right','5px solid graytext');

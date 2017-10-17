@@ -1,1 +1,92 @@
 @CHARSET "UTF-8";
+
+/* 달력틀 */
+.calendar{
+	 height:100%; 
+	 width:100%;
+	 font-size: 0px;
+	 display: table;
+}
+
+/* 달력요일부분 */
+.weeks{
+	height:10%; 
+	width:100%;
+	display: table-row;
+	background-color: darkgray;
+}
+.weeks>.dayOfWeeks{
+	text-align: center;
+	box-sizing:border-box; 
+	width:14.28%; 
+	border-right:2px solid graytext; 
+	border-bottom:2px solid graytext; 
+	border-top:2px solid graytext; 
+	display: table-cell;
+	font-size: 3rem;
+	vertical-align: middle;
+}
+.weeks>.dayOfWeeks:last-child{
+	border: none;
+	border-bottom:2px solid graytext; 
+	border-top:2px solid graytext;
+}
+.weeks>.dayOfWeeks:first-child{
+	color: red;
+}
+
+
+/* 달력날짜부분 */
+#monthlyVertical{
+	height:15%; 
+	width:100%;
+	display: table-row;
+}
+#monthlyVertical>.dateDiv{
+	box-sizing:border-box; 
+	width:14.28%; 
+	display: table-cell;
+	border-right:2px solid graytext; 
+	border-bottom:2px solid graytext; 
+}
+#monthlyVertical>.dateDiv:last-child{
+	border: none;
+	border-bottom:2px solid graytext; 
+}
+#monthlyVertical>.dateDiv:first-child{
+	color: red;
+}
+#monthlyVertical>.dateDiv>.dateData{
+	width:90%; 
+	height: 100%;
+	display: inline-table;
+	font-size: 2rem;
+	vertical-align: middle;
+	margin-left: 5%;
+	margin-top: 3px;
+}
+#monthlyVertical>.dateDiv>.dateData>div{
+	height: 25%;
+	display: table-row;
+}
+#monthlyVertical>.dateDiv>.dateData>.dates{
+	font-size: 2.5rem;
+	text-align: left;
+}
+#monthlyVertical>.dateDiv>.dateData>.price{
+	font-size: 1.5rem;
+	text-align: right;
+}
+#monthlyVertical>.dateDiv>.dateData>#income{
+	color: blue;
+}
+#monthlyVertical>.dateDiv>.dateData>#expense{
+	color: red;
+}
+#monthlyVertical>.dateDiv>.dateData>#totalUsage{
+	color: gray;
+}
+#monthlyVertical>.dateDiv>.dateData>.price>label{
+	display: table-cell;
+	vertical-align: middle;
+}

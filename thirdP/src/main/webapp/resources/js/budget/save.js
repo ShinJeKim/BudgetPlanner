@@ -10,13 +10,13 @@ $(document).ready(function(){
 		 $('#income').attr('checked', true);
 	 }else if($('#main_cate').val() == '지출'){
 		 $('#spending').attr('checked', true);
+	 }else{
+		 $('#income').attr('checked', true);
 	 }
 	 $('#BudgetPlanner').attr('checked', true);
 	 
 	 var without_tag_content =  $('#content').val().toString().replace("<p>","").replace("</p>","");
-	 console.log(without_tag_content);
 	 var fromDB = without_tag_content.replace(/<br>/g,"\n");
-	 console.log(fromDB);
  	 $('#detail').val(fromDB);
 	
  	 
@@ -29,6 +29,9 @@ $(document).ready(function(){
 		 var cate = $(':input[name=main_cates]:radio:checked').val();
 		 $('#main_cate').val(cate); 
 		 setcate();
+		 $('#ccate div:first-child').find('.cateSelect').trigger('click');
+		 var sub_cate = $(document).find(':input[name=cate]:radio:checked').val();
+		 $('#sub_cate').val(sub_cate); 
 	 });
 	 
 	 $('.cateSelect').click(function(){
@@ -73,7 +76,17 @@ $(document).ready(function(){
 
             }
        	$('#ccate').html(datahtml);
-       	$('#ccate div:first-child').find('.cateSelect').trigger('click');
+       	if($('#workDiv').val() == 'save'){
+			$('#ccate div:first-child').find('.cateSelect').trigger('click');
+		}else if($('#workDiv').val() == 'update' && $('#ccate div:first-child').find('.cateSelect').val() != $('#sub_cate').val()){
+			$('#ccate div').find('.cateSelect').each(function(){
+				if($(this).val() == $('#sub_cate').val()){
+					$(this).trigger('click');
+				}else{
+					return;
+				}
+			});
+		}
         var sub_cate = $(document).find(':input[name=cate]:radio:checked').val();
 		 $('#sub_cate').val(sub_cate); 
         },
@@ -117,7 +130,7 @@ function menu_size(){
 	$('body').css('border-right','5px solid graytext');
 	$('.header').css('border-top','5px solid graytext');
 	$('.header').css('box-sizing','border-box');
-	$('.bodyCover').css('top',$('.header').height()+5);
+	$('.bodyCover').css('top',$('.header').height());
 	$('.footer').css('border-bottom','5px solid graytext');
 	$('.footer').css('box-sizing','border-box');
 	$('.header').css('width','inherit');

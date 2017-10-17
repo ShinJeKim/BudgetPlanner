@@ -17,10 +17,13 @@ $(document).ready(function(){
 		var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
 		$(this).find('.itemList>li').css('padding-top',paddingTop);
 		if($(this).height()<$(this).find('.itemList').height()){
-				$(this).css('height',$(this).find('.itemList').height()+20);
+				$(this).css('height',$(this).find('.itemList').height());
 			}
 	
-	});	
+	});
+	 $('#total_in>label').html(numberFormat($('#total_in>label').html().toString()));
+   	 $('#total_out>label').html(numberFormat($('#total_out>label').html().toString()));
+   	 $('#total_sum>label').html(numberFormat($('#total_sum>label').html().toString()));
 	$(window).resize(function(){
 		body_sizing();
 		font_sizing();
@@ -28,22 +31,26 @@ $(document).ready(function(){
 			var paddingTop = ($(this).height()-$(this).find('.itemList>li').css('font-size'))/2;
 			$(this).find('.itemList>li').css('padding-top',paddingTop);
 			if($(this).height()<$(this).find('.itemList').height()){
-				$(this).css('height',$(this).find('.itemList').height()+20);
+				$(this).css('height',$(this).find('.itemList').height());
 			}
 		});	
 	});
 	
 	var dd = $('#reg_dt').val().split("."); 
 	$('#nowDate>label').html(dd[2]);
-	$(document).find('.item_price').each(function(){
-		if($(this).children('label').html().toString().substring(1,0) == "-"){
-			$(this).children('label').html($(this).children('label').html().replace('-',''));
-			$(this).css('color','red');
-		}else{
-			$(this).css('color','blue');
-		}
-	});
-	
+	 $(document).find('.item_price').each(function(){
+			if($(this).children('label').html().toString().substring(1,0) == "-"){
+				$(this).children('label').html($(this).children('label').html().replace('-',''));
+				$(this).css('color','red');
+				
+				$(this).children('label').html(numberFormat($(this).children('label').html()));
+			}else{
+				$(this).css('color','blue');
+				
+				$(this).children('label').html(numberFormat($(this).children('label').html()));
+			}		
+		});
+   	 
 	$('#reg_dt').change(function(){
 		 $.ajax({
             type:"POST",
@@ -82,8 +89,8 @@ $(document).ready(function(){
         	 var total_out = 0;
            	 var total_in = 0;
            	 var total_sum = 0;
-           	 body_sizing();
            	 font_sizing();
+           	 body_sizing();
          	$(document).find('.item_content>label>p').each(function(){
         		var origin_text = $(this).html().toString();
         		var first_row = origin_text.split('<br>');
@@ -94,7 +101,7 @@ $(document).ready(function(){
            			var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
            			$(this).find('.itemList>li').css('padding-top',paddingTop);
            			if($(this).height()<$(this).find('.itemList').height()){
-           				$(this).css('height',$(this).find('.itemList').height()+20);
+           				$(this).css('height',$(this).find('.itemList').height());
         			}
            	 });
            	 $(document).find('.item_price').each(function(){
@@ -103,18 +110,19 @@ $(document).ready(function(){
    					$(this).css('color','red');
    					
    					total_out += parseInt($(this).children('label').html());
+   					$(this).children('label').html(numberFormat($(this).children('label').html()));
    				}else{
    					$(this).css('color','blue');
    					
    					total_in += parseInt($(this).children('label').html());
+   					$(this).children('label').html(numberFormat($(this).children('label').html()));
    				}		
    			});
            	 total_sum = (total_in - total_out);
-           	 $('#total_in>label').html(total_in+"원");
-           	 $('#total_out>label').html(total_out+"원");
-           	 $('#total_sum>label').html(total_sum+"원");
-           
-           	
+           	 $('#total_in>label').html(numberFormat(total_in.toString())+"원");
+           	 $('#total_out>label').html(numberFormat(total_out.toString())+"원");
+           	 $('#total_sum>label').html(numberFormat(total_sum.toString())+"원");
+           	 
            }//complete
 		 });
 	});
@@ -154,10 +162,10 @@ $(document).ready(function(){
 				var paddingTop = ($(this).height()-parseInt($(this).find('.itemList>li').css('font-size').replace('px','')))/2;
 				$(this).find('.itemList>li').css('padding-top',paddingTop);
 				if($(this).height()<$(this).find('.itemList').height()){
-					$(this).css('height',$(this).find('.itemList').height()+20);
+					$(this).css('height',$(this).find('.itemList').height());
 			}
 		 });
-		 $(document).find('.up_del').hide();
+		$(document).find('.up_del').hide();
 		$(document).find('.dailyitem').css('margin-bottom',$('.bodyCover').height()*0.02);
 		$(this).closest('form').find('.up_del').show();
 		$(this).parent().css('margin-bottom','0px');
@@ -167,6 +175,19 @@ $(document).ready(function(){
 		$('#search').attr('method','post');
 		$('#search').attr('action','do_save.do');
 		$('#search').submit();
+	});
+	$(document).click(function(e){
+		if($(document).find('.itemList').has(e.target).length === 0){
+			$(document).find('.item_content>label>p').each(function(){
+				var o_text = $(this).html().toString();
+				var f_row = o_text.split('<br>');
+				$(this).html(f_row[0]);
+				$(this).css('white-space','nowrap');
+			});
+			body_sizing();
+			$(document).find('.up_del').hide();
+			$(document).find('.dailyitem').css('margin-bottom',$('.bodyCover').height()*0.02);
+		}
 	});
 });
 
@@ -181,7 +202,7 @@ function font_sizing(){
 	$('#total>li').css('font-size',font_size*3);
 	$('#total>li>label').css('font-size',font_size*2.5);
 	$('#total>#nowDate>label').css('font-size',font_size*5);
-	$(document).find('.itemList>li').css('font-size',font_size*2.1);
+	$(document).find('.itemList>li').css('font-size',font_size*2.5);
 	$('.currentDate').css("font-size",font_size*6);
 	$('#selectedDate').css('height',$('.header').height()*0.6);
 	$('#balance').css('height',$('.header').height()*0.6);

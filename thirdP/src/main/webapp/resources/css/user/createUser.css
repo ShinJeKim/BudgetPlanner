@@ -19,7 +19,7 @@
   margin-left: 15%;
   height: 100%;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
@@ -122,6 +122,7 @@ input[type="search"] {
     margin-top: 2px;
     background-color: #ecdd84;
     height: 60%;
+    font-size: 3rem;
 }
 #checkUserID:hover{
 	background-color: #fecd76;
@@ -139,6 +140,7 @@ input[type="search"] {
 	width: 50%;
 	height: 60%;
 	background-color: #ecdd84;
+	font-size: 3rem;
 }
 #div_button>input:hover{
 	background-color: #fecd76;

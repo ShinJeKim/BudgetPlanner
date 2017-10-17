@@ -107,19 +107,20 @@
 	display: table-cell;
 	text-align: left;
 	height: 100%;
-	font-size: 2.5rem;
+	font-size: 3rem;
 	vertical-align: middle;
 }
 .input_content>input{
 	margin-left: 20px;
-	height: 2.5rem;
+	height: 3rem;
 	width: 40%;
+	font-size: 2.5rem
 }
 .input_content>.cates{
 	display: inline-block;
     width: 20%;
     height: 3rem;
-    font-size: 2rem;
+    font-size: 2.5rem;
     text-align: center;
 }	
 .input_content>.cates>.cateselect{
@@ -158,7 +159,7 @@
     height: 40%;
     margin-right: 20px;
     background: #ecdd84;
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 #up_save:hover,#cancle:hover{
 	background-color: #fecd76;

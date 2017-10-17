@@ -71,5 +71,23 @@ function font_sizing(){
 				});
 			})(i);
 		}
-		
+		$(document).find('#totalUsage>label').each(function(){
+			var totalUsage = $(this).html().toString()
+			if(totalUsage.substring(1,0) == '-'){
+				$(this).html(totalUsage.replace('-',''));
+				$(this).css('text-decoration','overline')
+				$(this).css('text-decoration-color','red');
+			}else if(totalUsage.substring(1,0) == '0'){
+				$(this).html(totalUsage.replace('-',''));
+				$(this).css('text-decoration','overline')
+				$(this).css('text-decoration-color','gray');
+			}else{
+				$(this).html(totalUsage);
+				$(this).css('text-decoration','overline')
+				$(this).css('text-decoration-color','blue');
+			}
+		});
+		$(document).find('.dateData>div>label').each(function(){
+			$(this).html(numberFormat($(this).html()));
+		})
 	});
