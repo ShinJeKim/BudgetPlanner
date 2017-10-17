@@ -2,6 +2,35 @@
 	$(document).ready(function(){
 		 font_size();
 		 menu_size();
+	$('#balance>label').click(function(){
+		if($(this).html().toString() == '잔고'){
+			$.ajax({
+	            type:"POST",
+	            url:"getBalance.do",
+	            dataType: "JSON",
+	            async: false,
+	            data:{
+	            	
+	            },
+	            success: function(data){
+	            	var balance = data.toString();
+	            	if(balance.substring(1,0) == '-'){
+	            		$('#balance>label').html(balance.replace('-',''));
+		    			$('#balance>label').css('color','#ffaa9b');
+		    			$('#balance>label').css('font-weight','bold');
+	            	}else{
+	            		$('#balance>label').html(balance);
+		    			$('#balance>label').css('color','#b6f4fb');
+		    			$('#balance>label').css('font-weight','bold');
+	            	}
+	            }
+	         });
+		}else{
+			$(this).html('잔고');
+			$(this).css('color','#ecdd84');
+			$('#balance>label').css('font-weight','normal');
+		}
+	});	 
 	});
 	
 	$( window ).resize(function() {

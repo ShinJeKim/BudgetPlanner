@@ -6,7 +6,11 @@ $(document).ready(function(){
 	
 	 font_size();
 	 menu_size();
-	 $('#income').attr('checked', true);
+	 if($('#main_cate').val() == '수입'){
+		 $('#income').attr('checked', true);
+	 }else if($('#main_cate').val() == '지출'){
+		 $('#spending').attr('checked', true);
+	 }
 	 $('#BudgetPlanner').attr('checked', true);
 	 
 	 var without_tag_content =  $('#content').val().toString().replace("<p>","").replace("</p>","");
@@ -65,18 +69,21 @@ $(document).ready(function(){
         success: function(data){
        var datahtml = "";
             for(var i=1;i<data.length;i++){
-             datahtml += "<input type='radio' class='cateSelect' value='"+data[i].dtl_ct_nm+"' name='cate'><label>"+data[i].dtl_ct_nm+"</label>"
+             datahtml += "<div class='cates'><input type='radio' class='cateSelect' value='"+data[i].dtl_ct_nm+"' id='cate"+i+"' name='cate'><label for='cate"+i+"'>"+data[i].dtl_ct_nm+"</label></div>"
 
             }
        	$('#ccate').html(datahtml);
-       	$('#ccate :input[class=cateSelect]:first-child').trigger('click');
-        var sub_cate = $(':input[name=cate]:radio:checked').val();
+       	$('#ccate div:first-child').find('.cateSelect').trigger('click');
+        var sub_cate = $(document).find(':input[name=cate]:radio:checked').val();
 		 $('#sub_cate').val(sub_cate); 
         },
         complete: function(data){
 
         }
    	 });
+	$(document).on('click',':input[name=cate]:radio:checked',function(){
+		$('#sub_cate').val($(this).val()); 
+	});	
   }
 });
 
