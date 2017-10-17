@@ -62,7 +62,8 @@
 					</div>
 					
 						<div id="search_footer">
-							<input type="button" id=do_excelDown  value="엑셀 다운로드"> 
+							<img id="do_excelDown" src="../resources/files/images/excel.png" width="40" height="40" title="엑셀파일 다운로드">
+							<!-- <input type="button" id=do_excelDown  value="엑셀 다운로드"></input> -->
 						</div>
 				</div>
 		</div>
@@ -109,23 +110,12 @@
 				</tbody>
 			</table>
 			<!-- // List table closed-->
-
 		</div>
 		<!--// div 2 closed-->
 		
 		<!-- div 3 -->
 		<div id="paging_div">
-		<!-- Paging -->
-	 	<!-- 	<ul class="pagination" align="center">
-				<li class="disabled"><a><<</a></li>
-				<li class="disabled"><a><</a></li>
-				<li class="disabled active"><a>1</a></li>
-				<li class="goPage" data-page="2"><a>2</a></li>
-				<li class="goPage" data-page="3"><a>3</a></li>
-				<li class="disabled"><a>></a></li>
-				<li class="goLastPage"><a>>></a></li>
-			</ul>  -->
-		<ul id="pagination" class="pagination_class" align="center"></ul>
+			<ul id="pagination" class="pagination_class" align="center"></ul>
 		<!-- // Paging closed  --> 
 		</div>
 		<!--// div 3 closed-->

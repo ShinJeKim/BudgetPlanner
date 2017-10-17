@@ -39,7 +39,7 @@
 	</sql>
 	
 	<!--  -->
-	<select id="do_searchList" parameterType="String" resultType="CategoryVO">
+	<select id="do_searchList" parameterType="String" resultType="DailyVO">
 
 		SELECT T1.*
         FROM(

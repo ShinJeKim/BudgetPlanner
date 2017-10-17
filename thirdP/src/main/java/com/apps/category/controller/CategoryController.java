@@ -95,7 +95,7 @@ public class CategoryController {
 		CategoryVO catVO = new CategoryVO();
 		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 		
-		String id = "";
+		/*String id = "";
 		
 		//Session에 값이 들어있을 경우 ID 할당
 		if(session.getAttribute("ID") != null) {
@@ -104,10 +104,10 @@ public class CategoryController {
 			//없을 경우 main으로 redirect
 			response.sendRedirect("../main.do");
 			modelAndView.setViewName("login");
-		}
+		}*/
 		
 		//catVO.setId(session.getAttribute("id").toString());
-		//String id = StringUtil.nvl(req.getParameter("id"), "id1");
+		String id = StringUtil.nvl(req.getParameter("id"), "id1");
 		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");

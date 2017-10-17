@@ -97,6 +97,7 @@ public class CategoryDaoImpl implements CategoryDao{
 		String statement = namespace+".do_searchList";
 		
 		CategoryVO param = (CategoryVO)dto;
+		//DailyVO param = (DailyVO)dto;
 		
 		Hashtable<String, String> searchParam = null;
 		searchParam = param.getParam();
