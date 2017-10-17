@@ -43,7 +43,7 @@
 				async: false,
 				data:{
 					"id" : $("#id").val(),
-					"email" : $("#email").val()
+					"email" : $("#pw_email").val()
 					
 				},
 				success: function(data){
@@ -89,30 +89,28 @@
 		</div>
 	</div>
 </form>
-<form id="missingPWFrm" name="missingPWFrm" action="missingPW.do" method="post">
+<form id="missingPWFrm" name="missingPWFrm" action="do_findPW.do" method="post">
 	<div>
 		<label>비밀번호찾기</label>
 		<div>
 			<input type="text" placeholder="ID" required autofocus
-				name="id" id="id" maxlength="15" />
+				name="id" id="id" maxlength="30" />
 		</div>
 		<div>		
 			<input type="text" placeholder="이메일" required autofocus
-				name="email" id=email maxlength="15"/>
+				name="email" id="pw_email" maxlength="50"/>
 		</div>
 		<div>
 			<input type="submit" id="btn_PW" value="확인" />
 		</div>
+		<div>
+			<c:if test="${message == 'pwOK'}">
+				<label id="PWresult">비밀번호는  ${email} 으로 전송되었습니다.</label>
+			</c:if>
+			<c:if test="${message == 'pwNo'}">
+				<label id="PWresult">ID와 이메일을 확인해 주세요</label>
+			</c:if>
+		</div>
 	</div>
-	<div>
-		<label id="PWresult"></label>
-	</div>
-	<div>
-		<c:if test="${message == 'pwOK'}">
-			<label id="PWresult">비밀번호는  ${email} 으로 전송되었습니다.</label>
-		</c:if>
-		<c:if test="${message == 'pwNo'}">
-			<label id="PWresult">ID와 이메일을 확인해 주세요</label>
-		</c:if>
-	</div>
+
 </form>

@@ -126,7 +126,7 @@
 		<!-- 버튼 -->
 		<div>
 			<input type="button" id="delete" value="회원탈퇴"/>
-			<input type="button" id="cancle" value="취소" onclick="history.go(-1)"/>
+			<input type="button" id="cancle" value="취소" onclick="history.go(-2)"/>
 			<input type="button" id="update" value="저장" />
 		</div>
 	</div>

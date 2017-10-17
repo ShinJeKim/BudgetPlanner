@@ -3,7 +3,7 @@ package com.apps.user.domain;
 public class EmailVO {
 	 
     private String subject;
-    private String content;
+	private String content;
     private String receiver;
      
     public String getReceiver() {
@@ -42,6 +42,7 @@ public class EmailVO {
 	public String toString() {
 		return "EmailVO [subject=" + subject + ", content=" + content + ", receiver=" + receiver + "]";
 	}
+
 	
 	
 }

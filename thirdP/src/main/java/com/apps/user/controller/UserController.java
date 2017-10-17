@@ -1,6 +1,7 @@
 package com.apps.user.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,13 +10,15 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.apps.user.domain.EmailSender;
+import com.apps.user.domain.EmailVO;
 import com.apps.user.domain.UserVO;
 import com.apps.user.service.UserSvc;
 import com.google.gson.Gson;
@@ -28,7 +31,14 @@ public class UserController {
 	@Autowired
 	UserSvc userSvc;
 	
-
+//	@Autowired
+//	private MailSender emailSender;
+	
+	@Autowired
+	private EmailSender emailSender;
+	
+//	@Autowired
+//	private EmailVO email;
 
 	//메인페이지 호출
 	@RequestMapping(value="main.do") 
@@ -193,26 +203,43 @@ public class UserController {
 	
 	
 	@RequestMapping(value="do_findPW.do" , method = RequestMethod.POST) 
-	public ModelAndView missing_PW(HttpServletRequest request) {
+	public ModelAndView missing_PW(HttpServletRequest request)  {
 		
 		ModelAndView modelAndView = new ModelAndView();
-		UserVO userVO = new UserVO();
 		
-		userVO.setId(request.getParameter("id"));
-		userVO.setEmail(request.getParameter("email"));
-		
-		String pw = userSvc.do_findPW(userVO);
-		
-		if(pw != null) {
-			modelAndView.addObject("message", "pwOK");
-			modelAndView.setViewName("missing");
-			modelAndView.addObject("pw", pw);
+		try {
+			UserVO userVO = new UserVO();
+			userVO.setId(request.getParameter("id"));
+			userVO.setEmail(request.getParameter("email"));
 			
-		} else if(null == pw || pw.equals("")) {
-			modelAndView.addObject("message", "pwNo");
-			modelAndView.setViewName("missing");
+			String pw = userSvc.do_findPW(userVO);
+			
+			if(pw != null) {
+				
+				EmailVO emailVO = new EmailVO();
+				
+				emailVO.setContent("비밀번호는 "+pw+" 입니다.");
+	            emailVO.setReceiver(userVO.getEmail());
+	            emailVO.setSubject("비밀번호 찾기 메일입니다.");
+	            log.debug("emailSender=====================================");
+	    		log.debug(emailSender.toString());
+	    		log.debug("emailSender=====================================");
+	            
+	            emailSender.SendEmail(emailVO);
+				modelAndView.addObject("message", "pwOK");
+				modelAndView.addObject("email", userVO.getEmail());
+				modelAndView.setViewName("missing");
+	
+				
+			} else if(null == pw || pw.equals("")) {
+				modelAndView.addObject("message", "pwNo");
+				modelAndView.setViewName("missing");
+			}
+		}catch(Exception e) {
+			System.out.println("==============");
+			e.printStackTrace();
+			System.out.println("=============="+e.getMessage());
 		}
-		
 		return modelAndView;
 	}
 	
@@ -312,6 +339,9 @@ public class UserController {
 		
 		return "redirect:logout.do";
 	}
+	
+
+
 	
 	
 	/*원본
