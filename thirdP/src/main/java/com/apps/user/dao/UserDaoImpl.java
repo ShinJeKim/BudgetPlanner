@@ -275,5 +275,18 @@ public class UserDaoImpl implements UserDao {
 		
 	}
 
+	@Override
+	public String do_findPW(DTO dto) {
+		String statement = namespace + ".do_findPW";
+		UserVO inUserVO = (UserVO)dto;
+		
+		log.debug("****************do_findPW*****************");
+		log.debug("statement : "+statement);
+		log.debug("inUserVO.toString() : "+inUserVO.toString()); 
+		log.debug("******************************************");
+		
+		return sqlSession.selectOne(statement, inUserVO);
+	}
+
 
 }

@@ -168,15 +168,8 @@ public class UserController {
 		ModelAndView modelAndView = new ModelAndView();
 		UserVO userVO = new UserVO();
 		
-		log.debug("name : "+request.getParameter("name"));
-		log.debug("email : "+request.getParameter("email"));
-		
-		
 		userVO.setName(request.getParameter("name"));
 		userVO.setEmail(request.getParameter("email"));
-		
-		log.debug("userVO"+userVO.toString());
-		
 		
 		String id = userSvc.do_findID(userVO);
 		
@@ -190,7 +183,30 @@ public class UserController {
 			modelAndView.setViewName("missing");
 		}
 		
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="do_findPW.do" , method = RequestMethod.POST) 
+	public ModelAndView missing_PW(HttpServletRequest request) {
 		
+		ModelAndView modelAndView = new ModelAndView();
+		UserVO userVO = new UserVO();
+		
+		userVO.setId(request.getParameter("id"));
+		userVO.setEmail(request.getParameter("email"));
+		
+		String pw = userSvc.do_findPW(userVO);
+		
+		if(pw != null) {
+			modelAndView.addObject("message", "pwOK");
+			modelAndView.setViewName("missing");
+			modelAndView.addObject("pw", pw);
+			
+		} else if(null == pw || pw.equals("")) {
+			modelAndView.addObject("message", "pwNo");
+			modelAndView.setViewName("missing");
+		}
 		
 		return modelAndView;
 	}

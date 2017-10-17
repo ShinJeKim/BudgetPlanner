@@ -108,8 +108,18 @@ public interface UserSvc {
 
 
 	/**
-	 * ID 찾기
+	 * ID찾기
+	 * @param dto
+	 * @return
 	 */
 	public String do_findID(DTO dto);
+	
+	
+	/**
+	 * PW찾기
+	 * @param dto
+	 * @return
+	 */
+	public String do_findPW(DTO dto);
 
 }

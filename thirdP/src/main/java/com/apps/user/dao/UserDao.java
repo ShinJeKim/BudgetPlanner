@@ -20,5 +20,5 @@ public interface UserDao extends WorkDiv {
 	public DTO do_login(DTO dto);
 	public void do_logout(HttpSession session);
 	public String do_findID(DTO dto);
-	
+	public String do_findPW(DTO dto);
 }

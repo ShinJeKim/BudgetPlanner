@@ -3,9 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script type="text/javascript">
+
 	$(document).ready(function(){
+		
 		//missing_id
-		$("#btn_Id").on("click", function(){
+		$("#btn_ID").on("click", function(){
 			
 			$.ajax({
 				type: "POST",
@@ -19,16 +21,44 @@
 				},
 				success: function(data){
 					console.log(data);
-					 $("#IDresult").val(data);//로그아웃시키고 다시 로그인페이지로 이동
+					 $("#IDresult").val(data);
 				},
 				complete: function(data){
 					
 				},
 				error:function(xhr, status, error){
-					alert("수정에러");
+					alert("id찾기 에러");
 				}
 			});
 		});//missing_id
+		
+		
+		//missing_pw
+		$("#btn_PW").on("click", function(){
+			
+			$.ajax({
+				type: "POST",
+				url: "do_findPW.do",
+				dataType: "html",
+				async: false,
+				data:{
+					"id" : $("#id").val(),
+					"email" : $("#email").val()
+					
+				},
+				success: function(data){
+					console.log(data);
+					 $("#PWresult").val(data);
+				},
+				complete: function(data){
+					
+				},
+				error:function(xhr, status, error){
+					alert("비밀번호찾기 에러");
+				}
+			});
+		});//missing_pw
+		
 		
 	});//JQuery
 
@@ -47,7 +77,7 @@
 				name="email" id="email" maxlength="50"/>
 		</div>
 		<div>
-			<input type="submit" id="btn_Id" value="확인" />
+			<input type="submit" id="btn_ID" value="확인" />
 		</div>
 		<div>
 			<c:if test="${message == 'idOK'}">
@@ -64,17 +94,25 @@
 		<label>비밀번호찾기</label>
 		<div>
 			<input type="text" placeholder="ID" required autofocus
-				name="id" id="id" value = "${userVO.id}" maxlength="15" />
+				name="id" id="id" maxlength="15" />
 		</div>
 		<div>		
 			<input type="text" placeholder="이메일" required autofocus
-				name="email" id=email value = "${userVO.email}" maxlength="15"/>
+				name="email" id=email maxlength="15"/>
 		</div>
 		<div>
-			<input type="button" id="btn_Pw" value="확인" />
+			<input type="submit" id="btn_PW" value="확인" />
 		</div>
 	</div>
 	<div>
 		<label id="PWresult"></label>
+	</div>
+	<div>
+		<c:if test="${message == 'pwOK'}">
+			<label id="PWresult">비밀번호는  ${email} 으로 전송되었습니다.</label>
+		</c:if>
+		<c:if test="${message == 'pwNo'}">
+			<label id="PWresult">ID와 이메일을 확인해 주세요</label>
+		</c:if>
 	</div>
 </form>
