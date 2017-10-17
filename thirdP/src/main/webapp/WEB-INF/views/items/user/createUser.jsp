@@ -60,7 +60,7 @@
 			</div>
 		</div>
 		<!-- 버튼 -->
-		<div class="form-group">
+		<div class="form-group" id="div_button">
 			<input type="button" id="cancle" value="취소" onclick="history.go(-1)"/>
 			<input type="button" id="doSave" value="가입" />
 		</div>

@@ -1,4 +1,10 @@
 	$(document).ready(function(){
+		font_sizing();
+		body_sizing();
+		$(window).resize(function(){
+			font_sizing();
+			body_sizing();
+		});
 		
 		//ID 중복체크 누름 여부
 		var idFlag = 0;
@@ -342,3 +348,32 @@
 			$("#createFrm").submit();
 		});//do_save
 	});//document
+	function font_sizing(){
+		var font_size = "";
+		if(window.innerWidth > window.innerHeight){
+			font_size = window.innerHeight*0.01;
+		}else{
+			font_size = window.innerWidth*0.01
+		}
+		$('html').css("font-size",font_size);
+	}
+
+	function body_sizing(){
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		$('.body').css("width",'100%');
+		$('#createFrm').css('height',$('.body').height());
+		$('#createFrm>div').css('height',$('.body').height()*0.9);
+		$('#createFrm>div').css('margin-top',$('.body').height()*0.05);
+		if(window.screen.width>768 && width>768){
+		$('body').css('width','60%');
+		$('body').css('margin-left','20%');
+		$('body').css('border','5px solid graytext');
+		$('.body').css("width",'100%');
+		}else{
+			$('body').css('width','100%');
+			$('body').css('border','0px');
+			$('body').css('margin','0px');
+		}
+	}
+	
