@@ -9,7 +9,13 @@
 		FROM category
 		WHERE mst_ct_nm = #{mst_ct_nm}
  	</select>
- 	
+ 	<select id="check_balance" parameterType="DailyVO" resultType="java.lang.Integer">
+ 		select   t2.BALANCE+nvl(sum(t1.usage),0) as balance
+		from finance t1, USERS t2
+		where t2.id = #{id}
+		and t1.id(+) = t2.id
+		group by t2.balance
+ 	</select>
  	<select id="do_search" parameterType="DailyVO" resultType="DailyVO">
 		SELECT t2.dtl_ct_nm 
 		       ,t1.content 
@@ -73,7 +79,8 @@
 			                        WHERE ct.mst_ct_nm = #{mst_ct_nm})
 			        ,dtl_ct_id = (SELECT ct.dtl_ct_id 
 			                       FROM category ct
-			                       WHERE ct.dtl_ct_nm = #{dtl_ct_nm})
+			                       WHERE ct.dtl_ct_nm = #{dtl_ct_nm}
+			                       AND 	ct.mst_ct_nm = #{mst_ct_nm})
 			        ,reg_dt = TO_DATE(#{reg_dt},'yyyy.mm.dd')
 			        ,mod_dt =SYSDATE        
 			WHERE id = #{id}

@@ -22,6 +22,17 @@ public class DailyDaoImpl implements DailyDao{
 	private final String namespace ="com.sist.repository.mappers.daily";
 	
 	@Override
+	public int check_balance(DTO dto) {
+		String statement = namespace +".check_balance";
+		DailyVO inVO = (DailyVO)dto;
+		log.debug("------------------");
+		log.debug("2:"+dto);
+		log.debug("------------------");
+		
+		return sqlSession.selectOne(statement, inVO);
+	}
+	
+	@Override
 	public List<?> category(DTO dto){
 		String statement = namespace +".searchCate";
 		DailyVO inVO = (DailyVO)dto;
@@ -113,6 +124,8 @@ public class DailyDaoImpl implements DailyDao{
 	public int do_excelUp(List<?> list) {
 		return 0;
 	}
+
+
 
 	
 	

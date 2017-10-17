@@ -19,6 +19,14 @@ public class DailySvcImpl implements DailySvc {
 	@Autowired 
 	private DailyDao dailyDao;
 	
+	public int check_balance(DTO dto) {
+		log.debug("------------------");
+		log.debug("1:"+dto);
+		log.debug("------------------");
+		
+		return dailyDao.check_balance(dto);
+	}
+	
 	@Override
 	public List<?> category(DTO dto){
 		log.debug("------------------");

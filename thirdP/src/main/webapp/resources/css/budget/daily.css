@@ -94,9 +94,10 @@
 	text-align: center;
 	width: 50%;
 	height: 100%;
+	font-size: 3rem;
 }
 .up_del>input:hover{
-	background-color: blueviolet;
+	background-color: #fecd76;
 	box-shadow: inset 0px 0px 10px aliceblue;
 	color:white;
 	cursor: pointer;
