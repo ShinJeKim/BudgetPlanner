@@ -86,16 +86,27 @@ public class CategoryController {
 	@RequestMapping(value="budget/do_searchList.do", method=RequestMethod.POST
 			, produces="application/json;charset=utf8")
 	@ResponseBody
-	public String do_searchList(HttpServletRequest req){
+	public String do_searchList(HttpServletRequest req,HttpServletResponse response, HttpSession session) throws IOException {
 		log.debug("=================================");
 		log.debug("do_searchList.do");
 		log.debug("=================================");
-		
+		ModelAndView modelAndView = new ModelAndView();
 		CategoryVO catVO = new CategoryVO();
 		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 		
+		String id = "";
+		
+		//Session에 값이 들어있을 경우 ID 할당
+		if(session.getAttribute("ID") != null) {
+			id = session.getAttribute("ID").toString();
+		} else {
+			//없을 경우 main으로 redirect
+			response.sendRedirect("../main.do");
+			modelAndView.setViewName("login");
+		}
+		
 		//catVO.setId(session.getAttribute("id").toString());
-		String id = StringUtil.nvl(req.getParameter("id"), "id1");
+		//String id = StringUtil.nvl(req.getParameter("id"), "id1");
 		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
@@ -103,7 +114,7 @@ public class CategoryController {
 		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
 		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
-		searchParam.put("id".toString(), id);
+		searchParam.put("ID".toString(), id);
 		searchParam.put("page_size".toString(), pageSize);
 		searchParam.put("page_num".toString(), pageNum);
 		searchParam.put("start_date".toString(), start_date);
@@ -123,13 +134,7 @@ public class CategoryController {
 		}
 
 		catVO.setParam(searchParam);
-		
-		
-//		catVO.setId(StringUtil.nvl(req.getParameter("id"), "id1"));
-//		catVO.setStart_date(StringUtil.nvl(req.getParameter("start_date"), "2017-07-01"));
-//		catVO.setEnd_date( StringUtil.nvl(req.getParameter("end_date"), "2017-09-30"));
-//		catVO.setMst_ct_id(StringUtil.nvl(req.getParameter("mst_ct_id"), "10"));
-//		catVO.setDtl_ct_id( StringUtil.nvl(req.getParameter("dtl_ct_id"), "2"));
+
 		List<CategoryVO> list = catSvc.do_searchList(catVO);
 		
 		Gson gson = new Gson();
@@ -154,15 +159,15 @@ public class CategoryController {
 		log.debug("=================================");
 		
 		CategoryVO catVO = new CategoryVO();
-		Hashtable<String, String> searchParam = new Hashtable<String, String>();
+/*		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 		
 		//catVO.setId(session.getAttribute("id").toString());
-		String id = StringUtil.nvl(req.getParameter("id"), "id1");
-		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
-		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
-		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
-		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-22");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
+		String id = StringUtil.nvl(req.getParameter("id"), "");
+		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "");
+		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "");
+		String start_date = StringUtil.nvl(req.getParameter("start_date"), "");
+		String end_date = StringUtil.nvl(req.getParameter("end_date"), "");
+		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_nm"), "");
 		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
 		searchParam.put("id".toString(), id);
@@ -170,11 +175,11 @@ public class CategoryController {
 		searchParam.put("page_num".toString(), pageNum);
 		searchParam.put("start_date".toString(), start_date);
 		searchParam.put("end_date".toString(), end_date);
-		searchParam.put("mst_ct_id".toString(), mst_ct_id);
+		searchParam.put("mst_ct_nm".toString(), mst_ct_id);
 		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
 
 		log.debug("searchParam: "+searchParam);
-		catVO.setParam(searchParam);
+		catVO.setParam(searchParam);*/
 		
 		String fileFullPath = this.catSvc.do_excelDown(catVO);
 		ModelAndView modelAndView = new ModelAndView();
