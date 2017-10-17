@@ -61,6 +61,8 @@ function font_sizing(){
 					} else if ($("#date"+a).text().trim().length == 2){
 						reg_dt = $(".currentDate").html().toString() + "." + $("#date"+a).text().trim();
 						console.log("selectedDate : "+reg_dt);
+					} else if ($("#data"+a).text().trim() == ''){
+						return false;
 					}
 					
 					//일별 화면으로 이동
