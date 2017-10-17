@@ -21,7 +21,7 @@
 				</div>
 			</c:if>
 			<c:if test="${message == 'deleteUser'}">
-				<div style="color: red;">
+				<div style="color: #f56360; font-size: 3rem;">
 					탈퇴한 회원입니다
 				</div>
 			</c:if>
