@@ -85,8 +85,8 @@
  			resultType="String">
 			SELECT ID
 			FROM USERS
-			WHERE NAME = #{NAME} 
-				AND EMAIL = #{EMAIL}
+			WHERE NAME = #{name} 
+				AND EMAIL = #{email}
  	</select>
  	
  	
@@ -96,8 +96,8 @@
  			resultType="String">
 			SELECT PASSWORD
 			FROM USERS
-			WHERE ID = #{ID} 
-				AND EMAIL = #{EMAIL}
+			WHERE ID = #{id} 
+				AND EMAIL = #{email}
  	</select>
  	
  	

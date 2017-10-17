@@ -165,15 +165,32 @@ public class UserController {
 	@RequestMapping(value="do_findID.do" , method = RequestMethod.POST) 
 	public ModelAndView missing_ID(HttpServletRequest request) {
 		
+		ModelAndView modelAndView = new ModelAndView();
 		UserVO userVO = new UserVO();
+		
+		log.debug("name : "+request.getParameter("name"));
+		log.debug("email : "+request.getParameter("email"));
+		
+		
 		userVO.setName(request.getParameter("name"));
 		userVO.setEmail(request.getParameter("email"));
 		
+		log.debug("userVO"+userVO.toString());
+		
+		
 		String id = userSvc.do_findID(userVO);
 		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("missing");
-		modelAndView.addObject("id", id);
+		if(id != null) {
+			modelAndView.addObject("message", "idOK");
+			modelAndView.setViewName("missing");
+			modelAndView.addObject("id", id);
+			
+		} else if(null == id || id.equals("")) {
+			modelAndView.addObject("message", "idNo");
+			modelAndView.setViewName("missing");
+		}
+		
+		
 		
 		return modelAndView;
 	}
@@ -232,28 +249,29 @@ public class UserController {
 		UserVO inVO = new UserVO();
 		
 		//testcase
-		String id = "id4";
-		int balance = 123456;
-		int delete_flag = 0;
-		int admin_flag = 0;
+//		String id = "id4";
+//		int balance = 123456;
+//		int delete_flag = 0;
+//		int admin_flag = 0;
 		//testcase
-		inVO.setId(id);
-		inVO.setBalance(balance);
-		inVO.setDelete_flag(delete_flag);
-		inVO.setAdmin_flag(admin_flag);
+//		inVO.setId(id);
+//		inVO.setBalance(balance);
+//		inVO.setDelete_flag(delete_flag);
+//		inVO.setAdmin_flag(admin_flag);
 		
-		//inVO.setId(sessionVO.getId());
+		inVO.setId(sessionVO.getId());
 		inVO.setPassword(request.getParameter("password"));
 		inVO.setName(request.getParameter("name"));
 		inVO.setEmail(request.getParameter("email"));
 		int fixed_income = Integer.parseInt(request.getParameter("fixed_income"));
 		inVO.setFixed_income(fixed_income);
-		//inVO.setBalance(sessionVO.getBalance());
-		//inVO.setDelete_flag(sessionVO.getDelete_flag());
-		//inVO.setAdmin_flag(sessionVO.getAdmin_flag());
+		inVO.setBalance(sessionVO.getBalance());
+		inVO.setDelete_flag(sessionVO.getDelete_flag());
+		inVO.setAdmin_flag(sessionVO.getAdmin_flag());
 		
 		
 		int flag = userSvc.do_update(inVO);
+		
 		
 		ModelAndView modelAndView =new ModelAndView();
 		modelAndView.setViewName("login");
@@ -269,12 +287,7 @@ public class UserController {
 		
 		UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		
-		//testcase
-		UserVO inVO = new UserVO();
-		String id = "id4";
-		inVO.setId(id);
-		
-		int flag = userSvc.do_delete(inVO);
+		int flag = userSvc.do_delete(sessionVO);
 		
 		return "redirect:logout.do";
 	}
