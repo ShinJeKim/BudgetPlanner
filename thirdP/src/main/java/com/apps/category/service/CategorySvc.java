@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.apps.category.domain.CategoryVO;
 import com.apps.common.DTO;
+import com.apps.daily.domain.DailyVO;
 
 public interface CategorySvc {
 
@@ -21,7 +22,7 @@ public interface CategorySvc {
 	 * @param dto
 	 * @return
 	 */
-	public List<CategoryVO> do_searchList(DTO dto);
+	public List<DailyVO> do_searchList(DTO dto);
 	
 	/**
 	 * excelDown

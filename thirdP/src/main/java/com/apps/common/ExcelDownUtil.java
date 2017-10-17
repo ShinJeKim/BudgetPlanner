@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.apps.category.domain.CategoryVO;
+import com.apps.daily.domain.DailyVO;
 
 
 public class ExcelDownUtil {
@@ -49,7 +50,7 @@ public class ExcelDownUtil {
 	 * @param data
 	 * @throws IOException
 	 */   
-	public String writeExcel(String filePath,String excelFileName,List<CategoryVO> data)throws IOException{
+	public String writeExcel(String filePath,String excelFileName,List<DailyVO> data)throws IOException{
 		this.filePath = filePath;
 		this.excelFileName =excelFileName;
 		FileOutputStream out = setFile(this.filePath,this.excelFileName);
@@ -163,11 +164,11 @@ public class ExcelDownUtil {
            cell_0.setCellStyle(styleLeft);           
            // 수입/지출
            cell_1 = row.createCell((short)1+firstCol);
-           cell_1.setCellValue(catVO.getMst_ct_id());
+           cell_1.setCellValue(catVO.getMst_ct_nm());
            cell_1.setCellStyle(styleLeft);
            // 카테고리 
            cell_2 = row.createCell((short)2+firstCol);
-           cell_2.setCellValue(catVO.getDtl_ct_id());
+           cell_2.setCellValue(catVO.getDtl_ct_nm());
            cell_2.setCellStyle(styleLeft);
            // 금액 
            cell_3 = row.createCell((short)3+firstCol);

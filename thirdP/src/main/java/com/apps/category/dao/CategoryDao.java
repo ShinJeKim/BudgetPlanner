@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.apps.category.domain.CategoryVO;
 import com.apps.common.DTO;
 import com.apps.common.WorkDiv;
+import com.apps.daily.domain.DailyVO;
 
 public interface CategoryDao extends WorkDiv{
 
@@ -23,5 +24,5 @@ public interface CategoryDao extends WorkDiv{
 	 * @param dto
 	 * @return
 	 */
-	public List<CategoryVO> do_searchList(DTO dto);
+	public List<DailyVO> do_searchList(DTO dto);
 }

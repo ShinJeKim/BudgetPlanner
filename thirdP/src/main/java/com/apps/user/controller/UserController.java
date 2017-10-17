@@ -73,13 +73,14 @@ public class UserController {
 			}
 		} else {
 			
+			int idFlag = userSvc.do_check_id(inVO.getId());
 			int passwordFlag = userSvc.do_check_passwd(inVO);
 			
-			if(outVO.getDelete_flag()==1) {
+			if(outVO!=null && outVO.getDelete_flag()==1) {
 				modelAndView.addObject("message", "deleteUser");
 			}
 			
-			if(passwordFlag == 0) {
+			if(idFlag == 0 || passwordFlag == 0) {
 				modelAndView.addObject("message", "passwordFailure");
 			}
 			

@@ -28,6 +28,7 @@ import com.apps.category.domain.CategoryVO;
 import com.apps.category.service.CategorySvc;
 import com.apps.common.DTO;
 import com.apps.common.StringUtil;
+import com.apps.daily.domain.DailyVO;
 import com.google.gson.Gson;
 
 @Controller
@@ -114,7 +115,7 @@ public class CategoryController {
 		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
 		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
-		searchParam.put("ID".toString(), id);
+		searchParam.put("id".toString(), id);
 		searchParam.put("page_size".toString(), pageSize);
 		searchParam.put("page_num".toString(), pageNum);
 		searchParam.put("start_date".toString(), start_date);
@@ -135,7 +136,7 @@ public class CategoryController {
 
 		catVO.setParam(searchParam);
 
-		List<CategoryVO> list = catSvc.do_searchList(catVO);
+		List<DailyVO> list = catSvc.do_searchList(catVO);
 		
 		Gson gson = new Gson();
 		String searchList = gson.toJson(list);
@@ -158,7 +159,7 @@ public class CategoryController {
 		log.debug("do_excelDown.do");
 		log.debug("=================================");
 		
-		CategoryVO catVO = new CategoryVO();
+		//CategoryVO catVO = new CategoryVO();
 /*		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 		
 		//catVO.setId(session.getAttribute("id").toString());
@@ -181,7 +182,25 @@ public class CategoryController {
 		log.debug("searchParam: "+searchParam);
 		catVO.setParam(searchParam);*/
 		
-		String fileFullPath = this.catSvc.do_excelDown(catVO);
+		DailyVO dailyVO = new DailyVO();
+		
+		Hashtable<String, String> searchParam = new Hashtable<String, String>();
+		String no = StringUtil.nvl(req.getParameter("No"), "");
+		String mst_ct_nm = StringUtil.nvl(req.getParameter("mst_ct_nm"), "");
+		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
+		String usage = StringUtil.nvl(req.getParameter("usage"), "");
+		String content = StringUtil.nvl(req.getParameter("content"), "");
+		String reg_dt = StringUtil.nvl(req.getParameter("reg_dt"), "");
+		
+		searchParam.put("No", no);
+		searchParam.put("mst_ct_nm", mst_ct_nm);
+		searchParam.put("dtl_ct_nm", dtl_ct_nm);
+		searchParam.put("usage", usage);
+		searchParam.put("content", content);
+		
+		searchParam.put("reg_dt", reg_dt);
+		
+		String fileFullPath = this.catSvc.do_excelDown(dailyVO);
 		ModelAndView modelAndView = new ModelAndView();
 		log.debug("===========================");
 		log.debug("fileFullPath: "+fileFullPath);

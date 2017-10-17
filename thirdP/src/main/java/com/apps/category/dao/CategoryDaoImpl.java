@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.apps.category.domain.CategoryVO;
 import com.apps.category.service.CategorySvcImpl;
 import com.apps.common.DTO;
+import com.apps.daily.domain.DailyVO;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao{
@@ -92,7 +93,7 @@ public class CategoryDaoImpl implements CategoryDao{
 	 * @return
 	 */
 	@Override
-	public List<CategoryVO> do_searchList(DTO dto) {
+	public List<DailyVO> do_searchList(DTO dto) {
 		String statement = namespace+".do_searchList";
 		
 		CategoryVO param = (CategoryVO)dto;
