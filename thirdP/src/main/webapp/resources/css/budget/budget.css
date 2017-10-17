@@ -21,6 +21,12 @@
 	    display: table;
 	    margin-right: 10%;
 	}
+	#balance:hover{
+		cursor: pointer;
+	}
+	#balance>label:hover{
+		cursor: pointer;
+	}
 	#balance>label{
 		font-size: 3rem;
 	    vertical-align: middle;

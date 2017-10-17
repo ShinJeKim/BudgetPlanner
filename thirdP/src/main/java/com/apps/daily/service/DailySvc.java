@@ -12,5 +12,6 @@ public interface DailySvc {
 	public abstract DTO do_searchOne(DTO dto)throws DataAccessException;
 	public abstract int do_delete(DTO dto)throws DataAccessException;
 	public abstract int do_update(DTO dto)throws DataAccessException;
-	List<?> category(DTO dto);
+	public abstract List<?> category(DTO dto);
+	public abstract int check_balance(DTO dto);
 }
