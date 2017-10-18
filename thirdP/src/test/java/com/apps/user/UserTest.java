@@ -62,75 +62,95 @@ public class UserTest {
 	 *  ADMIN_FLAG		NUMBER(1,0)
 	 */
 	
-	@Test
-	public void do_check_id() throws Exception{
-		MockHttpServletRequestBuilder createMessage = 
-				post("/do_check_id.do")
-				.param("id", "Testcase");
-		
-		mockMvc.perform(createMessage).andDo(print())
-		.andExpect(status().is3xxRedirection());
-	}
+//	@Test
+//	public void do_check_id() throws Exception{
+//		MockHttpServletRequestBuilder createMessage = 
+//				post("/do_check_id.do")
+//				.param("id", "Testcase");
+//		
+//		mockMvc.perform(createMessage).andDo(print())
+//		.andExpect(status().is3xxRedirection());
+//	}
+//	
+//	@Test
+//	public void do_save() throws Exception{
+//		MockHttpServletRequestBuilder createMessage = 
+//				post("/do_save.do")
+//				.param("id", "abc123")
+//				.param("password", "1234")
+//				.param("name", "Testcase")
+//				.param("email", "testcase@testcase.com")
+//				.param("fixed_income", "6512345")
+//				.param("balance", "561233345");
+//	
+//		mockMvc.perform(createMessage).andDo(print())
+//		.andExpect(status().is3xxRedirection());
+//		
+//	}
+//	
+//	@Test
+//	public void do_login() throws Exception{
+//		MockHttpServletRequestBuilder createMessage = 
+//				post("/do_login.do")
+//				.param("id", "test")
+//				.param("password", "1234");
+//		
+//		mockMvc.perform(createMessage).andDo(print())
+//		.andExpect(status().isOk())
+//		.andExpect(model().attribute("message", "success"))
+//		.andExpect(status().is3xxRedirection());
+//	}
+//	
+//	
+//	@Test
+//	public void do_update() throws Exception{
+//		MockHttpServletRequestBuilder createMessage = 
+//				post("/do_updateUser.do")
+//				.param("password", "id4id4")
+//				.param("name", "김정인")
+//				.param("email", "id4email@email.com")
+//				.param("fixed_income", "5000");
+//
+//		mockMvc.perform(createMessage)
+//		.andExpect(status().isOk())
+//		.andExpect(status().is2xxSuccessful())
+//		.andDo(print()
+//		);
+//	}
+//	
+//	@Test
+//	public void do_delete() throws Exception{
+//		MockHttpServletRequestBuilder createMessage = 
+//				post("/do_delete.do")
+//				.param("id", "id4");
+//
+//		mockMvc.perform(createMessage).andDo(print())
+//		.andExpect(status().is3xxRedirection());
+//		
+//	}
+//	
+//	@Test
+//	public void do_findID() throws Exception{
+//		MockHttpServletRequestBuilder createMessage = 
+//				post("/do_findID.do")
+//				.param("name", "name5")
+//				.param("email", "thirdp03@gmail.com");
+//
+//		mockMvc.perform(createMessage).andDo(print())
+//		.andExpect(status().is3xxRedirection());
+//		
+//	}
 	
 	@Test
-	public void do_save() throws Exception{
+	public void do_findPW() throws Exception{
 		MockHttpServletRequestBuilder createMessage = 
-				post("/do_save.do")
-				.param("id", "abc123")
-				.param("password", "1234")
-				.param("name", "Testcase")
-				.param("email", "testcase@testcase.com")
-				.param("fixed_income", "6512345")
-				.param("balance", "561233345");
-	
-		mockMvc.perform(createMessage).andDo(print())
-		.andExpect(status().is3xxRedirection());
-		
-	}
-	
-	@Test
-	public void do_login() throws Exception{
-		MockHttpServletRequestBuilder createMessage = 
-				post("/do_login.do")
-				.param("id", "test")
-				.param("password", "1234");
-		
-		mockMvc.perform(createMessage).andDo(print())
-		.andExpect(status().isOk())
-		.andExpect(model().attribute("message", "success"))
-		.andExpect(status().is3xxRedirection());
-	}
-	
-	
-	@Test
-	public void do_update() throws Exception{
-		MockHttpServletRequestBuilder createMessage = 
-				post("/do_updateUser.do")
-				.param("password", "id4id4")
-				.param("name", "김정인")
-				.param("email", "id4email@email.com")
-				.param("fixed_income", "5000");
+				post("/do_findPW.do")
+				.param("id", "id5")
+				.param("email", "thirdp03@gmail.com");
 
-		mockMvc.perform(createMessage)
-		.andExpect(status().isOk())
-		.andExpect(status().is2xxSuccessful())
-		.andDo(print()
-		);
-	}
-	
-	@Test
-	public void do_delete() throws Exception{
-		MockHttpServletRequestBuilder createMessage = 
-				post("/do_delete.do")
-				.param("id", "id4");
-
 		mockMvc.perform(createMessage).andDo(print())
 		.andExpect(status().is3xxRedirection());
 		
 	}
-	
-	
-	
-	
 	
 }

@@ -1,6 +1,7 @@
 package com.apps.user.domain;
 
 import javax.mail.MessagingException;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import com.apps.user.controller.UserController;
 import com.sun.activation.registries.MailcapParseException;
+	
+
 	@Component
 	public class EmailSender  {
 	     
