@@ -1,58 +1,45 @@
 @CHARSET "UTF-8";
 
 #body_div{
-	background-color: white; 
-	width: 800px;
-	float: center;
-	padding: 10px;
-	
+	background-color: white;
+    width: 98%;
+    float: center;
+    position: absolute;
+    margin-left: 1%;
 }
 
 #search_div{
 	background-color: white; 
 	height: 20%;
-}
 
-#search_header{
-	padding: 10px; 
-	margin: 10px;
 }
 
 #cat_select{
-	float: left; 
-	width: 50%;
+	display: inline-table;
+    width: 33%;
+    padding-top: 5%;
+    padding-left: 3%;
 }
 
 #month_select{
-	float: right; 
-	width: 40%
+	display: inline-table;
+    width: 40%;
 }
 
-#search_content{
+#excel_icon{
+	/* float: left;
+	width: 33%;
 	padding: 10px; 
-	margin: 10px;
-}
-
-#result_text{
-	float: left; 
-	width: 60%
-}
-
-#search_footer{
-	padding: 10px; 
-	margin: 10px;
-}
-
-#searchList{
-	background-color: white; 
-	height: 75%;
+	margin: 10px; */
+	display: inline-block;
+    vertical-align: middle;
 }
 
 #listTable{
 	border: 1px solid black;
 	cellpadding: 1px;
 	cellspacing: 1px;
-	
+	width: 100%;
 }
 
 #thead{

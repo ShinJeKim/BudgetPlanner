@@ -22,6 +22,8 @@ function font_sizing(){
 	$('#balance').css('height',$('.header').height()*0.6);
 }
 
+
+
 // 엑셀 다운로드
 function do_excelDown(){
 	var frm = document.excel_frm;
@@ -32,7 +34,10 @@ function do_excelDown(){
 
 	//jQuery Start
 	$(document).ready(function(){
-		
+		$('#whole_div').css('width',$('.bodyCover').width());
+	$(window).resize(function(){
+		$('#whole_div').css('width',$('.bodyCover').width());
+	})
 		// datePicker
 		 $('#date').datepicker({
 			 type	: 'y',
