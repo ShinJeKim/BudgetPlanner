@@ -136,9 +136,6 @@ function do_excelDown(){
 						console.log("success data: "+data);
 						console.log("data.length: "+data.length);
 
-						var totalCnt = data[0].totalNo;
-						var page_size = 10;
-						var max_page = Math.ceil(totalCnt/page_size);
 					
 						// 기존페이지네이션 있을시 없애고 재생성
 						if($('.pagination').data("twbs-pagination")){
@@ -147,6 +144,10 @@ function do_excelDown(){
 							
 
 						if(data.length > 0){
+							
+							var totalCnt = data[0].totalNo;
+							var page_size = 10;
+							var max_page = Math.ceil(totalCnt/page_size);	
 							
 							var datahtml = "";
 							
@@ -171,8 +172,19 @@ function do_excelDown(){
 							}
 							
 								$('#tbody').html(datahtml);
-								//console.log("datahtml: "+datahtml);
-								
+
+								 $(document).find('#c_usage').each(function(){
+						   				if($(this).html().toString().substring(1,0) == "-"){
+						   					$(this).html($(this).html().replace('-',''));
+						   					$(this).css('color','red');
+						   				
+						   					$(this).children('label').html(numberFormat($(this).children('label').html()));
+						   				}else{
+						   					$(this).css('color','blue');
+						   					
+						   					$(this).children('label').html(numberFormat($(this).children('label').html()));
+						   				}		
+						   			});
 									
 								$('#pagination').twbsPagination({
 										        totalPages: max_page,
@@ -224,7 +236,19 @@ function do_excelDown(){
 																}
 																
 																	$('#tbody').html(datahtml);
-																	//console.log("datahtml: "+datahtml);
+
+																	 $(document).find('#c_usage').each(function(){
+															   				if($(this).html().toString().substring(1,0) == "-"){
+															   					$(this).html($(this).html().replace('-',''));
+															   					$(this).css('color','red');
+															   				
+															   					$(this).children('label').html(numberFormat($(this).children('label').html()));
+															   				}else{
+															   					$(this).css('color','blue');
+															   					
+															   					$(this).children('label').html(numberFormat($(this).children('label').html()));
+															   				}		
+															   			});
 																
 																// do_excelDown Btn event
 																	$('#do_excelDown').click(function(){										
@@ -292,3 +316,5 @@ function do_excelDown(){
 				$('#e_end_date').val(ed_dt.trim());
 			});
 	});//-- jQuery closed
+
+
