@@ -1,12 +1,9 @@
 package com.apps.common;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,12 +15,8 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.CellStyle;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,6 +70,8 @@ public class ExcelDownUtil {
 	public HSSFWorkbook createExcel(List<?> data){
 	   workbook = new HSSFWorkbook();
 	   HSSFSheet sheet = workbook.createSheet("BalanceSheet");
+	  // sheet.setDefaultColumnWidth(2400);
+	   //sheet.setColumnWidth(5, 8400);
        
        // ## Font Setting
        // @HSSFFont : 폰트 설정
@@ -93,6 +88,7 @@ public class ExcelDownUtil {
        titleStyle.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index);
        titleStyle.setFillPattern(HSSFCellStyle.ALIGN_LEFT);
        titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+       titleStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
        titleStyle.setFont(font);
         
        // ## Row Create
@@ -135,17 +131,31 @@ public class ExcelDownUtil {
        //  Content align : center
        HSSFCellStyle styleCenter = workbook.createCellStyle();
        styleCenter.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+       styleCenter.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
        styleCenter.setFont(font);
         
        //  Content align : left
        HSSFCellStyle styleLeft = workbook.createCellStyle();
        styleLeft.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+       styleLeft.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
        styleLeft.setFont(font);
        
        //  Content align : left
        HSSFCellStyle styleRight = workbook.createCellStyle();
        styleRight.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
+       styleRight.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
        styleRight.setFont(font);
+       
+       // Content vertical align : center
+       HSSFCellStyle verticalCenter = workbook.createCellStyle();
+       verticalCenter.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+       verticalCenter.setFont(font);
+       
+       HSSFCellStyle conStyle = workbook.createCellStyle();
+       conStyle.setWrapText(true);
+       conStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
+       conStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+       conStyle.setFont(font);
        
        
        
@@ -154,33 +164,41 @@ public class ExcelDownUtil {
         
        //  ObjectList 엑셀에 출력
        for(int i = 0; i < data.size(); i++){
+    	   
            // 1번째 행은 제목이니 건너 뜀
            row = sheet.createRow((short)this.firstRow+(i+1));
            DailyVO dailyVO = (DailyVO)data.get(i);
+           
            // 번호
            cell_0 = row.createCell((short)0+firstCol);
            cell_0.setCellValue(dailyVO.getNo());
-           cell_0.setCellStyle(styleLeft);           
+           cell_0.setCellStyle(styleCenter);      
+           
            // 수입/지출
            cell_1 = row.createCell((short)1+firstCol);
            cell_1.setCellValue(dailyVO.getMst_ct_nm());
-           cell_1.setCellStyle(styleLeft);
+           cell_1.setCellStyle(styleCenter);
+           
            // 카테고리 
            cell_2 = row.createCell((short)2+firstCol);
            cell_2.setCellValue(dailyVO.getDtl_ct_nm());
            cell_2.setCellStyle(styleLeft);
+           
            // 금액 
            cell_3 = row.createCell((short)3+firstCol);
            cell_3.setCellValue(dailyVO.getUsage());
            cell_3.setCellStyle(styleRight);
+           
            // 내용
            cell_4 = row.createCell((short)4+firstCol);
            cell_4.setCellValue(dailyVO.getContent());
-           cell_4.setCellStyle(styleRight);
+           cell_4.setCellStyle(conStyle);
+           //sheet.setColumnWidth(cell_4.getColumnIndex(), 8400);
+           
            // 날짜
            cell_5 = row.createCell((short)5+firstCol);
            cell_5.setCellValue(dailyVO.getReg_dt());
-           cell_5.setCellStyle(styleLeft);            
+           cell_5.setCellStyle(styleCenter);          
        }
         
        //컬럼사이즈
@@ -193,13 +211,11 @@ public class ExcelDownUtil {
     	   }
        }
        
+       sheet.setColumnWidth(cell_4.getColumnIndex(), 8400);
+       
        
        return workbook;
    }
-
-	
-    	
-	
 
 	/**
 	 * 파일을 저장시키는 메소드

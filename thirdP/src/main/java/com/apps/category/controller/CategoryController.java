@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
@@ -88,7 +89,7 @@ public class CategoryController {
 	@RequestMapping(value="budget/do_searchList.do", method=RequestMethod.POST
 			, produces="application/json;charset=utf8")
 	@ResponseBody
-	public String do_searchList(HttpServletRequest req,HttpServletResponse response, HttpSession session) throws IOException {
+	public String do_searchList(HttpServletRequest req,HttpServletResponse response, HttpSession session) throws IOException, NumberFormatException{
 		log.debug("=================================");
 		log.debug("do_searchList.do");
 		log.debug("=================================");
@@ -96,7 +97,7 @@ public class CategoryController {
 		CategoryVO catVO = new CategoryVO();
 		Hashtable<String, String> searchParam = new Hashtable<String, String>();
 		
-		/*String id = "";
+		String id = "";
 		
 		//Session에 값이 들어있을 경우 ID 할당
 		if(session.getAttribute("ID") != null) {
@@ -105,10 +106,10 @@ public class CategoryController {
 			//없을 경우 main으로 redirect
 			response.sendRedirect("../main.do");
 			modelAndView.setViewName("login");
-		}*/
+		}
 		
-		//catVO.setId(session.getAttribute("id").toString());
-		String id = StringUtil.nvl(req.getParameter("id"), "id1");
+		catVO.setId(session.getAttribute("ID").toString());
+
 		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
 		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-08-01");
@@ -139,6 +140,14 @@ public class CategoryController {
 
 		List<DailyVO> list = catSvc.do_searchList(catVO);
 		
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumIntegerDigits(0);
+		nf.setMaximumIntegerDigits(8);
+		
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setUsage(nf.format(Integer.parseInt(list.get(i).getUsage())));
+		}
+		
 		Gson gson = new Gson();
 		String searchList = gson.toJson(list);
 		log.debug("do_searchList: "+searchList);
@@ -167,17 +176,13 @@ public class CategoryController {
 		String id = session.getAttribute("ID").toString();
 
 		log.debug("start_date" + req.getParameter("start_date"));
-		//String id = StringUtil.nvl(req.getParameter("id"), "");
-/*		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "");
-		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "");*/
+
 		String start_date = StringUtil.nvl(req.getParameter("start_date"), "");
 		String end_date = StringUtil.nvl(req.getParameter("end_date"), "");
 		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
 		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
 		
 		searchParam.put("id".toString(), id);
-/*		searchParam.put("page_size".toString(), pageSize);
-		searchParam.put("page_num".toString(), pageNum);*/
 		searchParam.put("start_date".toString(), start_date);
 		searchParam.put("end_date".toString(), end_date);
 		searchParam.put("mst_ct_id".toString(), mst_ct_id);
@@ -190,6 +195,16 @@ public class CategoryController {
 		
 		List<DailyVO> list = catSvc.do_searchExcel(catVO);
 
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumIntegerDigits(0);
+		nf.setMaximumIntegerDigits(8);
+		
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setUsage(nf.format(Integer.parseInt(list.get(i).getUsage())));
+			list.get(i).setContent(list.get(i).getContent().replaceAll("<p>|</p>", ""));
+			list.get(i).setContent(list.get(i).getContent().replaceAll("<br>", "\n"));
+		}
+		
 		String fileFullPath = this.catSvc.do_excelDown(list);
 		
 		

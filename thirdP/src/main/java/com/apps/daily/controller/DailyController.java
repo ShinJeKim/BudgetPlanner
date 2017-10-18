@@ -79,7 +79,7 @@ public class DailyController {
 			int total_sum = 0;
 			if(list.size()>0){
 				for(int i=0;i<list.size();i++){
-					int thisusage = list.get(i).getUsage();
+					int thisusage = Integer.parseInt(list.get(i).getUsage());
 					if(thisusage<0){
 						total_out += (thisusage*-1);
 					}else{
@@ -126,7 +126,7 @@ public class DailyController {
 		int total_sum = 0;
 		if(list.size()>0){
 			for(int i=0;i<list.size();i++){
-				int thisusage = list.get(i).getUsage();
+				int thisusage = Integer.parseInt(list.get(i).getUsage());
 				if(thisusage<0){
 					total_out += (thisusage*-1);
 				}else{
@@ -151,9 +151,9 @@ public class DailyController {
 			inVO.setContent(req.getParameter("content"));
 			inVO.setReg_dt(req.getParameter("reg_dt"));
 			if(req.getParameter("mst_ct_nm").equals("지출")){
-				inVO.setUsage(Integer.parseInt(req.getParameter("usage"))*-1);
+				inVO.setUsage(String.valueOf(Integer.parseInt(req.getParameter("usage"))*-1));
 			}else if(req.getParameter("mst_ct_nm").equals("수입")){
-				inVO.setUsage(Integer.parseInt(req.getParameter("usage")));
+				inVO.setUsage(String.valueOf(Integer.parseInt(req.getParameter("usage"))));
 			}
 			log.debug("------------------");
 			log.debug("0: "+inVO);
