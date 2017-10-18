@@ -75,16 +75,16 @@ function font_sizing(){
 			var totalUsage = $(this).html().toString()
 			if(totalUsage.substring(1,0) == '-'){
 				$(this).html(totalUsage.replace('-',''));
-				$(this).css('text-decoration','overline')
-				$(this).css('text-decoration-color','red');
+				$(this).css('border-top','1px solid red');
 			}else if(totalUsage.substring(1,0) == '0'){
 				$(this).html(totalUsage.replace('-',''));
-				$(this).css('text-decoration','overline')
-				$(this).css('text-decoration-color','gray');
+				$(this).css('border-top','1px solid gray');
+			}else if(totalUsage.substring(1,0) == ''){
+				$(this).html(totalUsage);
+				$(this).css('border-top','none');
 			}else{
 				$(this).html(totalUsage);
-				$(this).css('text-decoration','overline')
-				$(this).css('text-decoration-color','blue');
+				$(this).css('border-top','1px solid blue');
 			}
 		});
 		$(document).find('.dateData>div>label').each(function(){

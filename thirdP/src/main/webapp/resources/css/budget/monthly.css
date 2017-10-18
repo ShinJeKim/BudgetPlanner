@@ -87,6 +87,7 @@
 	color: gray;
 }
 #monthlyVertical>.dateDiv>.dateData>.price>label{
-	display: table-cell;
-	vertical-align: middle;
+    display: inline-block;
+    padding-top: 4px;
+    box-sizing: border-box;
 }
