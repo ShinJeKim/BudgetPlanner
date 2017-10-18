@@ -112,7 +112,7 @@
 }
 .input_content>input{
 	margin-left: 20px;
-	height: 3rem;
+	height: 50%;
 	width: 40%;
 	font-size: 2.5rem
 }
@@ -120,7 +120,6 @@
 	display: inline-block;
     width: 20%;
     height: 50%;
-    height: 3rem;
     font-size: 2.5rem;
     text-align: center;
 }	
