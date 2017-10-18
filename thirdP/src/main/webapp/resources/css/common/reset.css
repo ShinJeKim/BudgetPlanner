@@ -33,7 +33,7 @@ time, mark, audio, video {
     background:transparent;
 }
 
-body,input {
+body,input,select {
     line-height:1;
     font-family: BM-JUA;
 }
