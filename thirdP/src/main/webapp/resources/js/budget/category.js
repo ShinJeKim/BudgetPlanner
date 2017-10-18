@@ -16,8 +16,6 @@ function font_sizing(){
 	}else{
 		font_size = window.innerWidth*0.01
 	}
-	$('#thead>tr>th').css('font-size',font_size*3);
-	$('#tbody>tr>td').css('font-size',font_size*2.5);
 	$('#selectedDate').css('height',$('.header').height()*0.6);
 	$('#balance').css('height',$('.header').height()*0.6);
 }

@@ -1,15 +1,5 @@
-<%@page import="com.apps.common.StringUtil"%>
-<%
-	// 상위 카테고리 param 받아오기
-	String mst_ct_id = StringUtil.nvl(request.getParameter("mst_ct_id"),""); 
-%>
-<%
-	//contextPath
-	String contextPath = request.getContextPath();
-	contextPath = "http://localhost:8080/" + contextPath;
-%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="whole_div">
 	<form name="excel_frm" action="do_excelDown" method="post">
 		<input type="hidden" id="e_start_date" name="start_date" >
@@ -17,65 +7,55 @@
 		<input type="hidden" id="e_mst_ct_id" name="mst_ct_id">
 		<input type="hidden" id="e_dtl_ct_nm" name="dtl_ct_nm">
 	</form>
-		<!-- div 1: 검색조건, 조회버튼, 엑셀다운로드 || div 2: 검색결과 list || div 3: Paging -->
-			<!-- div 1 for search condition -->
-			<div id="search_div">
-							<div id="cat_select" >상위분류
-								<select name="mst_ct_id" id="mst_ct_id">
-									<option value="">전체</option>
-									<option value="10" <%if(mst_ct_id.equals("10")) out.print("selected='selected'"); %>>지출</option>
-									<option value="20" <%if(mst_ct_id.equals("20")) out.print("selected='selected'"); %>>수입</option>
-								</select>하위분류
-								<select name="dtlList" id="dtlList">
-								</select>
-							</div>
-							<div id="month_select">
-								<select name="start_month" id="start_month" >
-								<% 
-								int start_month=1;
-									for(start_month=1; start_month<=12; start_month++){
-								%>
-									<option id="s_month" value="<%=start_month%>"><%=start_month%>월</option>
-								<%
-									}
-								%>
-								</select>
-								<select name="end_month" id="end_month">
-								<% 
-								int end_month=1;
-									for(end_month=1; end_month<=12; end_month++){
-								%>
-									<option id="e_month" value="<%=end_month%>"><%=end_month%>월</option>
-								<%
-									}
-								%>
-								</select>
-								<input type="button" id=do_searchList  value="조회">
-								<img id="do_excelDown" src="../resources/files/images/excel.png" width="40" height="40" title="엑셀파일 다운로드">
-							</div>
-
-<!-- 							<div id="excel_icon">
-								<img id="do_excelDown" src="../resources/files/images/excel.png" width="40" height="40" title="엑셀파일 다운로드">
-							</div> -->
-			</div>
-			<!--// div 1 closed-->
-
-				<!-- List table -->
+	<%-- div 1: 검색조건, 조회버튼, 엑셀다운로드 || div 2: 검색결과 list || div 3: Paging --%>
+		<%-- div 1 for search condition --%>
+				<div id="search_div">
+					<div id="cat_select" >
+						<label>상위분류</label>
+						<select name="mst_ct_id" id="mst_ct_id">
+							<option value="">전체</option>
+							<option value="10">지출</option>
+							<option value="20">수입</option>
+						</select>
+						<label>하위분류</label>
+						<select name="dtlList" id="dtlList">
+						</select>
+					</div>
+					<div id="month_select">
+						<select name="start_month" id="start_month" >
+							<c:forEach begin="1" end="12" step="1" varStatus="str">
+								<option id="s_month" value="${str.count}">${str.count}월</option>
+							</c:forEach>
+						</select>
+						<select name="end_month" id="end_month">
+							<c:forEach begin="1" end="12" step="1" varStatus="str">
+								<option id="e_month" value="${str.count}">${str.count}월</option>
+							</c:forEach>
+						</select>
+						<input type="button" id=do_searchList  value="조회">
+						<label>
+							<img id="do_excelDown" src="../resources/files/images/excel.png" width="40" height="40" title="엑셀파일 다운로드">
+						</label>
+					</div>
+				</div>
+		<%--// div 1 closed--%>
+		<%-- List table --%>
+				<div id="table">
 					<table id="listTable" >
 					<thead id="thead" class="align-center">
 						<tr>
-							<th>No.&nbsp;</th>
-							<th>수입/지출&nbsp;</th>
-							<th>카테고리&nbsp;</th>
-							<th>금액&nbsp;</th>
-							<th>상세설명&nbsp;</th>
-							<th>날짜&nbsp;</th>
+							<th>No.</th>
+							<th>수입/지출</th>
+							<th>카테고리</th>
+							<th>금액</th>
+							<th>상세설명</th>
+							<th>날짜</th>
 						</tr>
 					</thead>
 					<tbody id="tbody">
 					<c:choose>
-						<c:when test="${list.size()>0 }">
-							<c:forEach var="CategoryVO" items="${list }">
+						<c:when test="${list.size()>0}">
+							<c:forEach var="CategoryVO" items="${list}">
 								<form action="category.do" method="POST" name="frm" >
 									<tr>
 										<td id="c_no" class="text-center"><c:out value="${CategoryVO.No }"></c:out></td>
@@ -96,9 +76,10 @@
 					</c:choose>
 					</tbody>
 				</table>
-				<!-- // List table closed-->
+			</div>
+		<%-- // List table closed--%>
 			<div id="paging_div">
-				<ul id="pagination" class="pagination_class" align="center"></ul>
+				<ul id="pagination" class="pagination_class"></ul>
 			</div>
 </div>
 
