@@ -16,12 +16,12 @@
 		<div id="doLogin">
 			<input type="button" id="loginBtn" value="로그인" />
 			<c:if test="${message == 'passwordFailure'}">
-				<div style="color: red;">
+				<div style="color: #f56360; font-size: 3.8rem;">
 					아이디 및 비밀번호를 확인해주세요
 				</div>
 			</c:if>
 			<c:if test="${message == 'deleteUser'}">
-				<div style="color: #f56360; font-size: 3rem;">
+				<div style="color: #f56360; font-size: 3.8rem;">
 					탈퇴한 회원입니다
 				</div>
 			</c:if>

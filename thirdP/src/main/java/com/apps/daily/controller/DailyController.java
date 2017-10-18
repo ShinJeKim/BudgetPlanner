@@ -86,7 +86,7 @@ public class DailyController {
 						total_in += thisusage;
 					}
 				}
-				total_sum = Math.abs(total_in - total_out);
+				total_sum = total_in - total_out;
 			}
 			mav.addObject("total_in",total_in);
 			mav.addObject("total_out",total_out);

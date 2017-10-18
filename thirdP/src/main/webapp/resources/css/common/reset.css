@@ -1,4 +1,8 @@
 @charset "UTF-8";
+@font-face { 
+	font-family:'BM-JUA'; 
+	src: url(/apps/resources/fonts/BM-JUA.woff) format('woff'); 
+}
 
 /* 
 html5doctor.com Reset Stylesheet
@@ -29,8 +33,9 @@ time, mark, audio, video {
     background:transparent;
 }
 
-body {
+body,input {
     line-height:1;
+    font-family: BM-JUA;
 }
 
 article,aside,details,figcaption,figure,
@@ -106,3 +111,4 @@ hr {
 input, select {
     vertical-align:middle;
 }
+

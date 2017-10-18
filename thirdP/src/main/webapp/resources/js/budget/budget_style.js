@@ -15,11 +15,12 @@
 	            success: function(data){
 	            	var balance = data.toString();
 	            	if(balance.substring(1,0) == '-'){
-	            		$('#balance>label').html(balance.replace('-',''));
+	            		$('#balance>label').html(numberFormat(balance).replace('-',''));
 		    			$('#balance>label').css('color','#ffaa9b');
 		    			$('#balance>label').css('font-weight','bold');
+		    			
 	            	}else{
-	            		$('#balance>label').html(balance);
+	            		$('#balance>label').html(numberFormat(balance));
 		    			$('#balance>label').css('color','#b6f4fb');
 		    			$('#balance>label').css('font-weight','bold');
 	            	}
@@ -39,7 +40,13 @@
 	});
 	
 })(jQuery);
-
+function numberFormat(num) {
+    var pattern = /(-?[0-9]+)([0-9]{3})/;
+    while(pattern.test(num)) {
+        num = num.replace(pattern,"$1,$2");
+    }
+    return num;
+}
 function font_size(){
 	var width = window.innerWidth;
 	var height = window.innerHeight;

@@ -1,4 +1,17 @@
 @CHARSET "UTF-8";
+#goBack{
+	position: absolute;
+    background-color: #ecdd84;
+    font-weight: bold;
+    font-size: 3em;
+    line-height: 150%;
+}
+#goBack:hover{
+	 background-color: #fecd76;
+    color: white;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 20px cornsilk;
+}
 .body{
 	width: 100%;
 }

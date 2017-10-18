@@ -56,6 +56,8 @@ function menu_size(){
 	$('.body').css('height',height*0.93-5);
 	$('.footer').css('height',height*0.07);
 	$('.footer').css('top',height*0.93);
+	$('#identifyFrm').css('height',$('.body').height()*0.5);
+	$('#identifyFrm').css('margin-top',$('.body').height()*0.25);
 	if(window.screen.width>768 && width>768){
 	$('body').css('width','60%');
 	$('body').css('margin-left','20%');

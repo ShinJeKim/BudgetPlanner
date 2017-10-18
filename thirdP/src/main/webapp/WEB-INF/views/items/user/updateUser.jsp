@@ -2,76 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<script type="text/javascript">
-	//JQuery
-	$(document).ready(function(){
-	
-		//update
-		$("#update").on("click", function(event){
-			event.preventDefault();//연속수행방지
-			
-			console.log("1");
-			
-			$.ajax({
-				type: "POST",
-				url: "do_update.do",
-				dataType: "html",
-				async: false,
-				data:{
-					"id" : $("#id").val(),
-					"password" : $("#password").val(),
-					"name" : $("#name").val(),
-					"email" : $("#email").val(),
-					"fixed_income" : $("#fixed_income").val(),
-					"balance" : $("#balance").val()
-					
-				},
-				success: function(data){
-					$("#updateFrm").submit();
-	            	$(location).attr('href', "logout.do"); //로그아웃시키고 다시 로그인페이지로 이동
-				},
-				complete: function(data){
-					
-				},
-				error:function(xhr, status, error){
-					alert("수정에러");
-				}
-			});
-		});//upedate
-		
-		//delete
-		$("#delete").on("click", function(){
-			var delete_flag = $("#delete_flag").val();
-			
-			$.ajax({
-				type:"POST",
-				url:"do_delete.do",
-				dataType:"html",
-				async:false,
-				data:{
-					"id" : $("#id").val()
-				},
-				success: function(data){
-					alert("탈퇴하시겠습니까?");
-					$("#updateFrm").submit();
-					alert("회원탈퇴 되었습니다");
-					$(location).attr('href', "logout.do"); //다시 로그인 페이지로 이동
-					
-				},
-				complete: function(data){
-					
-				},
-				error:function(xhr, status, error){
-					alert("탈퇴에러");
-				}
-			});
-		});//delete
-		
-});//JQuery
-
-</script>
-
-
 <form id="updateFrm" method="post" >
 	<div>
 		<!-- 아이디  -->
@@ -125,17 +55,11 @@
 
 		<!-- 버튼 -->
 		<div>
-<<<<<<< HEAD
 			<div id="buttons">
 				<input type="button" id="delete" value="회원탈퇴"/>
 				<input type="button" id="cancle" value="취소" onclick="history.go(-1)"/>
 				<input type="button" id="update" value="저장" />
 			</div>
-=======
-			<input type="button" id="delete" value="회원탈퇴"/>
-			<input type="button" id="cancle" value="취소" onclick="history.go(-2)"/>
-			<input type="button" id="update" value="저장" />
->>>>>>> refs/heads/정인ORIGIN
 		</div>
 	</div>
 </form>

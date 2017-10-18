@@ -27,7 +27,7 @@
     height: 100%;
     background-color: #ecdd84;
     font-weight: bold;
-    font-size: 3rem;	
+    font-size: 5rem;	
 }
 #loginBtn:hover{
     background-color: #fecd76;
@@ -45,7 +45,7 @@
 #anchorlink>div{
 	display: table-cell;
 	vertical-align: middle;
-	font-size: 3rem;
+	font-size: 4.5rem;
     color: darkgray;
 }
 #anchorlink>div>a:hover{
