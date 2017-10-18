@@ -64,4 +64,17 @@
 	padding: 0px;
 }
 
+#div_email{
+	height: 15%
+}
+#div_email>label{
+	height: 30%;
+}
+#div_email>div{
+	height: 60%;
+}
+#div_email>div>#email{
+	height: 70%;
+}
+
    

@@ -162,4 +162,14 @@
 			  AND  PASSWORD = #{password}
  			
  	</select>
+ 	
+ 	<!-- email 체크 -->
+ 	<select id="do_check_email"
+ 			parameterType="String"
+ 			resultType="int">
+ 			SELECT COUNT(*) AS CNT
+ 			FROM USERS
+ 			WHERE EMAIL = #{email}
+ 	</select>
+ 	
  </mapper>

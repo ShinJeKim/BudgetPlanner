@@ -106,6 +106,19 @@ input[type="search"] {
 #div_id>div>#id{
 	height: 70%;
 }
+
+#div_email{
+	height: 15%
+}
+#div_email>label{
+	height: 30%;
+}
+#div_email>div{
+	height: 60%;
+}
+#div_email>div>#email{
+	height: 70%;
+}
 .form-group>label{
 	font-size: 3rem;
     line-height: 150%;
@@ -125,6 +138,20 @@ input[type="search"] {
     font-size: 3rem;
 }
 #checkUserID:hover{
+	background-color: #fecd76;
+    color: white;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 20px cornsilk;
+}
+#checkUserEmail{
+	width: 70%;
+    margin-left: 15%;
+    margin-top: 2px;
+    background-color: #ecdd84;
+    height: 60%;
+    font-size: 3rem;
+}
+#checkUserEmail:hover{
 	background-color: #fecd76;
     color: white;
     cursor: pointer;

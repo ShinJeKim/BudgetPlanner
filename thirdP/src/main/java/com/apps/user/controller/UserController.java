@@ -130,6 +130,27 @@ public class UserController {
 		return flag+"";
 	}
 	
+	@RequestMapping(value="do_check_email.do")
+	@ResponseBody
+	public String do_check_email(HttpServletRequest request) {
+		
+		log.debug("1======================================");
+		log.debug("do_check_email");
+		log.debug("1======================================");
+		
+		int flag = 0;
+		
+		String email = request.getParameter("email");
+		
+		log.debug("email : "+email);
+		
+		flag = userSvc.do_check_email(email);
+		
+		log.debug("flag(control) : "+flag);
+		
+		return flag+"";
+	}
+	
 	@RequestMapping(value="do_save.do")
 	public void do_save(HttpServletRequest request,HttpServletResponse res) throws IOException{
 		
