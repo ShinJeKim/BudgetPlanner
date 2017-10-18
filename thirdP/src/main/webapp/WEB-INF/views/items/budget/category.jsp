@@ -27,11 +27,13 @@
 					</div>
 					<div id="month_select">
 							<select name="start_month" id="start_month" >
+									<option id="s_month" value="">시작</option>
 								<c:forEach begin="1" end="12" step="1" varStatus="str">
 									<option id="s_month" value="${str.count}">${str.count}월</option>
 								</c:forEach>
 							</select>
 							<select name="end_month" id="end_month">
+									<option id="e_month" value="">종료</option>
 								<c:forEach begin="1" end="12" step="1" varStatus="str">
 									<option id="e_month" value="${str.count}">${str.count}월</option>
 								</c:forEach>
@@ -46,12 +48,12 @@
 					<table id="listTable" >
 					<thead id="thead" class="align-center">
 						<tr>
-							<th>No.</th>
-							<th>수입/지출</th>
-							<th>카테고리</th>
-							<th>금액</th>
-							<th>상세설명</th>
-							<th>날짜</th>
+							<th class="c_no">No.</th>
+							<th class="c_mst_ct_id">구분</th>
+							<th class="c_dtl_ct_nm">카테고리</th>
+							<th class="c_usage">금액</th>
+							<th class="c_content">상세설명</th>
+							<th class="c_reg_dt">날짜</th>
 						</tr>
 					</thead>
 					<tbody id="tbody">
@@ -71,9 +73,7 @@
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							<tr>
-								<td colspan="99">등록된 게시물이 없습니다</td>
-							</tr>
+							<tr><td></td></tr><tr><td id="result_empty">검색 결과가 없습니다</td></tr>
 						</c:otherwise>
 					</c:choose>
 					</tbody>

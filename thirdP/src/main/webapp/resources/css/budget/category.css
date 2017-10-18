@@ -1,86 +1,85 @@
 @CHARSET "UTF-8";
 
 /*검색 조건 및 엑셀 다운  */
-#search_div{ 
-	height: 10%;
-	display: table;
-	width: 100%;
-	font-size: 0px;
-}
-#search_div>div{
-	font-size: 0px;
-}
-#cat_select{
-	display: inline-table;
-    width: 55%;
-    height: 100%;
-    font-size: 0px;
-    vertical-align: middle;
-}
-#cat_select>div{
-	display: table-cell;
-	vertical-align: middle;
-	padding-left: 2%;
-}
-#cat_select>div>label{
-	font-size: 3rem;
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 5%; 
-}
-#cat_select>div>select{
-	font-size: 2.5rem;
-	display: inline-block;
-	 vertical-align: middle;
-}
-#cat_select>#main_cate{
-	width: 38%;
-}
-#cat_select>#sub_cate{
-	width: 58%;
-}
-
-
-
-
-#month_select{
-	display: inline-table;
-    width: 45%;
-    height: 100%;
-    font-size: 0px;
-}
-#month_select>label{
-	display: table-cell;
-	vertical-align: middle;
-}
-#month_select>select{
-	font-size: 2.5rem;
-	display: table-cell;
-	 vertical-align: middle;
-	 width: 20%;
-	 margin-right: 5%;
-}
-#month_select>input{
-	font-size: 3rem;
-	display: table-cell;
-	 vertical-align: middle;
-	 width: 25%;
-}
-#month_select>input:hover{
-	background-color: #fecd76;
-    color: white;
-    cursor: pointer;
-    box-shadow: inset 0px 0px 20px cornsilk;
-}
-#month_select>#do_excelDown{
-	width: 12%;
-    height: 35%;
-    vertical-align: middle;
-    margin-left: 6%;
-}
-#month_select>#do_excelDown:hover{
-	cursor: pointer;
-}
+	#search_div{ 
+		height: 10%;
+		display: table;
+		width: 100%;
+		font-size: 0px;
+	}
+	#search_div>div{
+		font-size: 0px;
+	}
+	/*카테고리선택  */
+		#cat_select{
+			display: inline-table;
+		    width: 55%;
+		    height: 100%;
+		    font-size: 0px;
+		    vertical-align: middle;
+		}
+		#cat_select>div{
+			display: table-cell;
+			vertical-align: middle;
+			padding-left: 2%;
+		}
+		#cat_select>div>label{
+			font-size: 3rem;
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 5%; 
+		}
+		#cat_select>div>select{
+			font-size: 2.5rem;
+			display: inline-block;
+			 vertical-align: middle;
+		}
+		#cat_select>#main_cate{
+			width: 38%;
+		}
+		#cat_select>#sub_cate{
+			width: 58%;
+		}
+	
+	/*월 선택 및 엑셀다운 버튼  */
+		#month_select{
+			display: inline-table;
+		    width: 45%;
+		    height: 100%;
+		    font-size: 0px;
+		}
+		#month_select>label{
+			display: table-cell;
+			vertical-align: middle;
+		}
+		#month_select>select{
+			font-size: 2.5rem;
+			display: table-cell;
+			 vertical-align: middle;
+			 width: 20%;
+			 margin-right: 5%;
+		}
+		#month_select>input{
+			font-size: 3rem;
+			display: table-cell;
+			 vertical-align: middle;
+			 width: 25%;
+		}
+		#month_select>input:hover{
+			background-color: #fecd76;
+		    color: white;
+		    cursor: pointer;
+		    box-shadow: inset 0px 0px 20px cornsilk;
+		}
+		#month_select>#do_excelDown{
+			width: 12%;
+		    height: 35%;
+		    vertical-align: middle;
+		    margin-left: 6%;
+		}
+		#month_select>#do_excelDown:hover{
+			cursor: pointer;
+		}
 
 
 /*결과 테이블  */
@@ -96,6 +95,86 @@
 	border: 1px solid gray;
 	box-sizing: border-box;
 	
+}
+#listTable>#thead{
+	display: inline-block;
+    width: 100%;
+    height: 10%;
+    background-color: gray;
+}
+#listTable>#thead>tr{
+	height: 100%;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+#listTable>#thead>tr>th{
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 3rem;
+	color: white;
+	font-weight: lighter;
+}
+#listTable>#thead>tr>.c_no{
+	width: 6%;
+}	
+#listTable>#thead>tr>.c_mst_ct_id{		
+	width: 10%;
+}
+#listTable>#thead>tr>.c_dtl_ct_nm{		
+	width: 10%;
+}
+#listTable>#thead>tr>.c_usage{		
+	width: 14%;
+}
+#listTable>#thead>tr>.c_content{	
+	width: 40%;
+}
+#listTable>#thead>tr>.c_reg_dt{	
+	width: 20%;
+}
+
+#listTable>#tbody{
+	display: inline-block;
+    width: 100%;
+    height: 90%;
+}
+#listTable>#tbody>tr{
+	height: 10%;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+#listTable>#tbody>tr>td{
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 2.5rem;
+	text-align: center;
+}
+#listTable>#tbody>tr>#c_no{
+	width: 6%;
+}	
+#listTable>#tbody>tr>#c_mst_ct_id{		
+	width: 10%;
+}
+#listTable>#tbody>tr>#c_dtl_ct_nm{		
+	width: 10%;
+}
+#listTable>#tbody>tr>#c_usage{		
+	width: 14%;
+}
+#listTable>#tbody>tr>#c_content{	
+	width: 40%;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#listTable>#tbody>tr>#c_reg_dt{	
+	width: 20%;
+}
+
+#listTable>#tbody>tr>#result_empty{
+	font-size: 7rem;
 }
 
 /* 하단부 페이지 네이션 */

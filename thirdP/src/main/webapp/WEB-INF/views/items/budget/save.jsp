@@ -32,7 +32,7 @@
 					<label>금액 </label>
 				</div> 
 				<div class="input_content" id="cusage">
-					<input type="text" id="usage" name="usage" value="${updateData.usage}"><label>&nbsp;원</label>
+					<input type="text" id="usage" name="usage" numberonly="true" value="${updateData.usage}"><label>&nbsp;원</label>
 				</div>
 			</div>
 			<div id="content_division">

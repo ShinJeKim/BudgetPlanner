@@ -96,191 +96,206 @@ function do_excelDown(){
 			
 			// do_searchList
 			$("#do_searchList").on("click", function(){
-				
-				var st_date;
-				var ed_date;
-				
-				// month 쿼리를 위한 0 붙이기 조건
-				if((parseInt($('#start_month').val())<10)){
-					st_date = $('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01";
-					console.log("start_month"+$('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01");
-				}else{
-					st_date = $('.currentDate').html().toString()+"-"+$('#start_month').val()+"-01";
-					console.log("start_month"+$('.currentDate').html().toString()+"-"+$('#start_month').val()+"-01");
-				}
-
-				if((parseInt($('#end_month').val())<10)){
-					ed_date = $('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01";
-					console.log("end_month"+$('.currentDate').html().toString()+"-0"+$('#end_month').val()+"-01");
-				}else{
-					ed_date = $('.currentDate').html().toString()+"-"+$('#end_month').val()+"-01";
-					console.log("end_month"+$('.currentDate').html().toString()+"-"+$('#end_month').val()+"-01");
-				}
-				
-
-				$.ajax({
-					type:"POST",
-					url:"do_searchList.do",
-					dataType:"JSON",
-					data:{			
-						"start_date": st_date.trim(),
-						"end_date": ed_date.trim(),
-						"mst_ct_id" : $('#mst_ct_id').val(),
-						"dtl_ct_nm": $('#dtlList').val(),
-						"page_size": "10",
-						"page_num": "1"
-					},
-					success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
-						
-						
-						console.log("success data: "+data);
-						console.log("data.length: "+data.length);
-
-					
-						// 기존페이지네이션 있을시 없애고 재생성
-						if($('.pagination').data("twbs-pagination")){
-		                    $('.pagination').twbsPagination('destroy');
-		                }
-							
-
-						if(data.length > 0){
-							
-							var totalCnt = data[0].totalNo;
-							var page_size = 10;
-							var max_page = Math.ceil(totalCnt/page_size);	
-							
-							var datahtml = "";
-							
-							datahtml += ""
-							
-							clickFlag = 1;	
-								
-							for(var i=0; i<data.length; i++){
-								var content = data[i].content.replace(/(<([^>]+)>)/gi,'');
-								console.log("data[i].id: "+data[i].mst_ct_id);
-								
-								datahtml += "<tr class='dataList'>"
-								datahtml += "<td id='c_no' >"+data[i].No+"</td>"
-								datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
-								datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
-								datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
-								datahtml += "<td id='c_content' >"+content+"</td>"
-								datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
-								datahtml += "</tr >"
-								
-								
-							}
-							
-								$('#tbody').html(datahtml);
-
-								 $(document).find('.dataList').each(function(){
-						   				if($(this).children('#c_usage').text().substring(1,0) == "-"){
-						   					$(this).children('#c_usage').text($(this).children('#c_usage').text().replace('-',''));
-						   					$(this).children('#c_usage').css('color','red');
-						   				
-						   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
-						   				}else{
-						   					$(this).children('#c_usage').css('color','blue');
-						   					
-						   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
-						   				}		
-						   			});
-									
-								$('#pagination').twbsPagination({
-										        totalPages: max_page,
-										        visiblePages: 5,
-										        onPageClick: function(evt, page){
-										        	$.ajax({
-														type:"POST",
-														url:"do_searchList.do",
-														dataType:"JSON",
-														data:{			
-															"start_date": st_date.trim(),
-															"end_date": ed_date.trim(),
-															"mst_ct_id" : $('#mst_ct_id').val(),
-															"dtl_ct_nm": $('#dtlList').val(),
-															"page_size": "10",
-															"page_num": page
-														},
-														success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
-															
-															
-															console.log("success data: "+data);
-															console.log("data.length: "+data.length);
-
-															var totalCnt = data[0].totalNo;
-															var page_size = 10;
-															var max_page = Math.ceil(totalCnt/page_size);
-														
-
-															if(data.length > 0){
-																
-																var datahtml = "";
-																
-																datahtml += ""
-																
-																for(var i=0; i<data.length; i++){
-																	
-																	console.log("data[i].id: "+data[i].mst_ct_id);
-																	var content = data[i].content.replace(/(<([^>]+)>)/gi,'');
-																	datahtml += "<tr class='dataList'>"
-																	datahtml += "<td id='c_no' >"+data[i].No+"</td>"
-																	datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
-																	datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
-																	datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
-																	datahtml += "<td id='c_content' >"+content+"</td>"
-																	datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
-																	datahtml += "</tr >"
-																	
-																	
-																}
-																
-																	$('#tbody').html(datahtml);
-
-																	$(document).find('.dataList').each(function(){
-														   				if($(this).children('#c_usage').text().substring(1,0) == "-"){
-														   					$(this).children('#c_usage').text($(this).children('#c_usage').text().replace('-',''));
-														   					$(this).children('#c_usage').css('color','red');
-														   				
-														   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
-														   				}else{
-														   					$(this).children('#c_usage').css('color','blue');
-														   					
-														   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
-														   				}		
-														   			});
-																
-																// do_excelDown Btn event
-																	$('#do_excelDown').click(function(){										
-																		do_excelDown();
-																	});
-															}else{
-																$('#tbody').html("<label style='font-size: 20px; color: red;'>검색결과가 없습니다.</label>");
-															}	
-														},
-														complete: function(data){// 무조건 수행
-														},
-														error: function(xhr, status, error){
-															console.log("error: "+error);
-														}
-													}) // --ajax closed
-										        }
-									 });
-								
-							// do_excelDown Btn event
-								$('#do_excelDown').click(function(){
-									do_excelDown();
-								});		
-						}else{
-							$('#tbody').html("<label style='font-size: 20px; color: red;'>검색결과가 없습니다.</label>");
-						}
-					},
-					complete: function(data){// 무조건 수행	
-					},
-					error: function(xhr, status, error){
-						console.log("error: "+error);
+				if($('#start_month').val() == '' | $('#end_month').val() == ''){
+					if($('#start_month').val() == ''){
+						alert("시작월을 선택해주세요");
 					}
-				}) // --ajax closed
+					if($('#end_month').val() == ''){
+						alert("종료월을 선택해주세요");
+					}
+					
+					return;
+				}else{
+					if(parseInt($('#start_month').val()) > parseInt($('#end_month').val())){
+						alert("시작월은 종료월보다 이전이어야 합니다.");
+						return;
+					}
+					var st_date;
+					var ed_date;
+					
+					// month 쿼리를 위한 0 붙이기 조건
+					if((parseInt($('#start_month').val())<10)){
+						st_date = $('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01";
+						console.log("start_month"+$('.currentDate').html().toString()+"-0"+$('#start_month').val()+"-01");
+					}else{
+						st_date = $('.currentDate').html().toString()+"-"+$('#start_month').val()+"-01";
+						console.log("start_month"+$('.currentDate').html().toString()+"-"+$('#start_month').val()+"-01");
+					}
+	
+					if((parseInt($('#end_month').val())<9)){
+						ed_date = $('.currentDate').html().toString()+"-0"+(parseInt($('#end_month').val())+1)+"-01";
+						console.log("end_month"+$('.currentDate').html().toString()+"-0"+(parseInt($('#end_month').val())+1)+"-01");
+					}else if(parseInt($('#end_month').val()) >= 9 && parseInt($('#end_month').val()) < 12){
+						ed_date = $('.currentDate').html().toString()+"-"+(parseInt($('#end_month').val())+1)+"-01";
+						console.log("end_month"+$('.currentDate').html().toString()+"-"+(parseInt($('#end_month').val())+1)+"-01");
+					}else if(parseInt($('#end_month').val()) == 12){
+						ed_date = (parseInt($('.currentDate').html().toString())+1)+"-01-01";
+						console.log((parseInt($('.currentDate').html().toString())+1)+"-01-01");
+					}
+					
+	
+					$.ajax({
+						type:"POST",
+						url:"do_searchList.do",
+						dataType:"JSON",
+						data:{			
+							"start_date": st_date.trim(),
+							"end_date": ed_date.trim(),
+							"mst_ct_id" : $('#mst_ct_id').val(),
+							"dtl_ct_nm": $('#dtlList').val(),
+							"page_size": "10",
+							"page_num": "1"
+						},
+						success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
+							
+							
+							console.log("success data: "+data);
+							console.log("data.length: "+data.length);
+	
+						
+							// 기존페이지네이션 있을시 없애고 재생성
+							if($('.pagination').data("twbs-pagination")){
+			                    $('.pagination').twbsPagination('destroy');
+			                }
+								
+	
+							if(data.length > 0){
+								
+								var totalCnt = data[0].totalNo;
+								var page_size = 10;
+								var max_page = Math.ceil(totalCnt/page_size);	
+								
+								var datahtml = "";
+								
+								datahtml += ""
+								
+								clickFlag = 1;	
+									
+								for(var i=0; i<data.length; i++){
+									var content = data[i].content.replace(/(<([^>]+)>)/gi,'');
+									console.log("data[i].id: "+data[i].mst_ct_id);
+									
+									datahtml += "<tr class='dataList'>"
+									datahtml += "<td id='c_no' >"+data[i].No+"</td>"
+									datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
+									datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
+									datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
+									datahtml += "<td id='c_content' >"+content+"</td>"
+									datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
+									datahtml += "</tr >"
+									
+									
+								}
+								
+									$('#tbody').html(datahtml);
+	
+									 $(document).find('.dataList').each(function(){
+							   				if($(this).children('#c_usage').text().substring(1,0) == "-"){
+							   					$(this).children('#c_usage').text($(this).children('#c_usage').text().replace('-',''));
+							   					$(this).children('#c_usage').css('color','red');
+							   				
+							   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
+							   				}else{
+							   					$(this).children('#c_usage').css('color','blue');
+							   					
+							   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
+							   				}		
+							   			});
+										
+									$('#pagination').twbsPagination({
+											        totalPages: max_page,
+											        visiblePages: 5,
+											        onPageClick: function(evt, page){
+											        	$.ajax({
+															type:"POST",
+															url:"do_searchList.do",
+															dataType:"JSON",
+															data:{			
+																"start_date": st_date.trim(),
+																"end_date": ed_date.trim(),
+																"mst_ct_id" : $('#mst_ct_id').val(),
+																"dtl_ct_nm": $('#dtlList').val(),
+																"page_size": "10",
+																"page_num": page
+															},
+															success: function(data){// 통신이 성공적으로 이루어졌을때 받을 함수
+																
+																
+																console.log("success data: "+data);
+																console.log("data.length: "+data.length);
+	
+																var totalCnt = data[0].totalNo;
+																var page_size = 10;
+																var max_page = Math.ceil(totalCnt/page_size);
+															
+	
+																if(data.length > 0){
+																	
+																	var datahtml = "";
+																	
+																	datahtml += ""
+																	
+																	for(var i=0; i<data.length; i++){
+																		
+																		console.log("data[i].id: "+data[i].mst_ct_id);
+																		var content = data[i].content.replace(/(<([^>]+)>)/gi,'');
+																		datahtml += "<tr class='dataList'>"
+																		datahtml += "<td id='c_no' >"+data[i].No+"</td>"
+																		datahtml += "<td id='c_mst_ct_id' >"+data[i].mst_ct_nm+"</td>"
+																		datahtml += "<td id='c_dtl_ct_nm' >"+data[i].dtl_ct_nm+"</td>"
+																		datahtml += "<td id='c_usage' >"+data[i].usage+"</td>"
+																		datahtml += "<td id='c_content' >"+content+"</td>"
+																		datahtml += "<td id='c_reg_dt' >"+data[i].reg_dt+"</td>"
+																		datahtml += "</tr >"
+																		
+																		
+																	}
+																	
+																		$('#tbody').html(datahtml);
+	
+																		$(document).find('.dataList').each(function(){
+															   				if($(this).children('#c_usage').text().substring(1,0) == "-"){
+															   					$(this).children('#c_usage').text($(this).children('#c_usage').text().replace('-',''));
+															   					$(this).children('#c_usage').css('color','red');
+															   				
+															   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
+															   				}else{
+															   					$(this).children('#c_usage').css('color','blue');
+															   					
+															   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
+															   				}		
+															   			});
+																	
+																	// do_excelDown Btn event
+																		$('#do_excelDown').click(function(){										
+																			do_excelDown();
+																		});
+																}
+															},
+															complete: function(data){// 무조건 수행
+															},
+															error: function(xhr, status, error){
+																console.log("error: "+error);
+															}
+														}) // --ajax closed
+											        }
+										 });
+									
+								// do_excelDown Btn event
+									$('#do_excelDown').click(function(){
+										do_excelDown();
+									});		
+							}else{
+								$('#tbody').html("<tr><td></td></tr><tr><td id='result_empty' style='color: red;'>검색 결과가 없습니다.</td></tr>");
+							}
+						},
+						complete: function(data){// 무조건 수행	
+						},
+						error: function(xhr, status, error){
+							console.log("error: "+error);
+						}
+					}) // --ajax closed
+				}
 			});// --do_searchList closed
 			
 			

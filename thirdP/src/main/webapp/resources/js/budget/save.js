@@ -3,6 +3,7 @@ $(document).ready(function(){
 		 type	: 'ymd',
 		 lang	: 'ko'
 	});
+	$(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
 	
 	 font_size();
 	 menu_size();
@@ -46,7 +47,26 @@ $(document).ready(function(){
 		var tag_content =  "<p>"+$('#detail').val()+"</p>";
 		var forDB = tag_content.replace(/\n/g,"<br>");
 		$('#content').val(forDB);
-		$('#save').submit();	
+		if($('#usage').val() == '' | $('#detail').val() == ''){
+			if($('#usage').val() == ''){
+				alert("금액을 입력해주세요");
+				$('#usage').focus();
+				$('#usage').css('border','inset 3px red');
+			}else{
+				$('#usage').css('border','inset 3px blue');
+			}
+			if($('#detail').val() == ''){
+				alert("내용을 입력해주세요");
+				$('#detail').focus();
+				$('#detail').css('border','inset 3px red');
+			}else{
+				$('#detail').css('border','inset 3px blue');
+			}
+			return;
+		}else{
+			$('#save').submit();
+		}
+			
 	});
 	$('#cancle').click(function(){
 		$('#save').attr('action','daily.do');
