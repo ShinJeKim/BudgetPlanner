@@ -22,8 +22,6 @@ function font_sizing(){
 	$('#balance').css('height',$('.header').height()*0.6);
 }
 
-
-
 // 엑셀 다운로드
 function do_excelDown(){
 	var frm = document.excel_frm;
@@ -34,6 +32,9 @@ function do_excelDown(){
 
 	//jQuery Start
 	$(document).ready(function(){
+		
+		var clickFlag = 0;
+		
 		$('#whole_div').css('width',$('.bodyCover').width());
 	$(window).resize(function(){
 		$('#whole_div').css('width',$('.bodyCover').width());
@@ -73,11 +74,15 @@ function do_excelDown(){
 						var dtlList = "${dtlList}";
 						console.log("dtlList: "+"${dtlList}");
 						var htmlval ="";
+						
 						for(var i=0;i<data.length;i++){
 							console.log(data[i]);
 							htmlval += "<option value="+data[i]+">"+data[i]+"</option>"
 						}
 						$('#dtlList').html(htmlval);
+						
+						$('#e_dtl_ct_nm').val('전체');
+						console.log("$('#e_dtl_ct_nm').val(): "+$('#e_dtl_ct_nm').val());
 					},
 					complete: function(data){// 무조건 수행
 						console.log("mst_ct_id: "+$('#mst_ct_id').val());
@@ -113,7 +118,6 @@ function do_excelDown(){
 				}
 				
 
-				
 				$.ajax({
 					type:"POST",
 					url:"do_searchList.do",
@@ -148,6 +152,8 @@ function do_excelDown(){
 							
 							datahtml += ""
 							
+							clickFlag = 1;	
+								
 							for(var i=0; i<data.length; i++){
 								var content = data[i].content.replace(/(<([^>]+)>)/gi,'');
 								console.log("data[i].id: "+data[i].mst_ct_id);
@@ -221,22 +227,14 @@ function do_excelDown(){
 																	//console.log("datahtml: "+datahtml);
 																
 																// do_excelDown Btn event
-																	$('#do_excelDown').click(function(){
-																		
+																	$('#do_excelDown').click(function(){										
 																		do_excelDown();
 																	});
-																	
-																
-																
 															}else{
 																$('#tbody').html("<label style='font-size: 20px; color: red;'>검색결과가 없습니다.</label>");
-															}
-															
-														
+															}	
 														},
 														complete: function(data){// 무조건 수행
-												
-															
 														},
 														error: function(xhr, status, error){
 															console.log("error: "+error);
@@ -248,19 +246,12 @@ function do_excelDown(){
 							// do_excelDown Btn event
 								$('#do_excelDown').click(function(){
 									do_excelDown();
-								});
-								
-							
-							
+								});		
 						}else{
 							$('#tbody').html("<label style='font-size: 20px; color: red;'>검색결과가 없습니다.</label>");
 						}
-						
-					
 					},
-					complete: function(data){// 무조건 수행
-			
-						
+					complete: function(data){// 무조건 수행	
 					},
 					error: function(xhr, status, error){
 						console.log("error: "+error);
@@ -271,10 +262,12 @@ function do_excelDown(){
 			
 			$(document).on('change','#mst_ct_id',function(){
 				$('#e_mst_ct_id').val($(this).val());
+				
 			});
 			
 			$(document).on('change','#dtlList',function(){
-				$('#e_dtl_ct_nm').val($(this).val())
+				console.log("this.val: "+$(this).val());
+				$('#e_dtl_ct_nm').val($(this).val());
 			});
 			
 			$(document).on('change','#start_month',function(){
@@ -298,6 +291,4 @@ function do_excelDown(){
 				var ed_dt = $(document).find('.currentDate').html().toString()+"-"+month+"-01";
 				$('#e_end_date').val(ed_dt.trim());
 			});
-			
-			
 	});//-- jQuery closed

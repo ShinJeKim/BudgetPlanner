@@ -16,7 +16,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
-
+import org.apache.poi.ss.usermodel.Font;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,14 +70,19 @@ public class ExcelDownUtil {
 	public HSSFWorkbook createExcel(List<?> data){
 	   workbook = new HSSFWorkbook();
 	   HSSFSheet sheet = workbook.createSheet("BalanceSheet");
-	  // sheet.setDefaultColumnWidth(2400);
-	   //sheet.setColumnWidth(5, 8400);
        
        // ## Font Setting
        // @HSSFFont : 폰트 설정
        //  - FONT_ARIAL : 기본
        HSSFFont font = workbook.createFont();
-       font.setFontName(HSSFFont.FONT_ARIAL);
+       font.setFontName("맑은 고딕");
+       
+       // 머리말행 폰트 설정
+       HSSFFont titleFont = workbook.createFont();
+       titleFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
+       titleFont.setFontHeightInPoints((short)13);
+       titleFont.setFontName("맑은 고딕");
+       
         
        // ## Title Style Setting
        // @HSSFColor : 셀 배경색
@@ -89,7 +94,12 @@ public class ExcelDownUtil {
        titleStyle.setFillPattern(HSSFCellStyle.ALIGN_LEFT);
        titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
        titleStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-       titleStyle.setFont(font);
+       titleStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+       titleStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+       titleStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+       titleStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+       titleStyle.setFont(titleFont);
+       
         
        // ## Row Create
        // ? 가로열 생성
@@ -132,32 +142,50 @@ public class ExcelDownUtil {
        HSSFCellStyle styleCenter = workbook.createCellStyle();
        styleCenter.setAlignment(HSSFCellStyle.ALIGN_CENTER);
        styleCenter.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+       styleCenter.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+       styleCenter.setBorderTop(HSSFCellStyle.BORDER_THIN);
+       styleCenter.setBorderRight(HSSFCellStyle.BORDER_THIN);
+       styleCenter.setBorderLeft(HSSFCellStyle.BORDER_THIN);
        styleCenter.setFont(font);
         
        //  Content align : left
        HSSFCellStyle styleLeft = workbook.createCellStyle();
        styleLeft.setAlignment(HSSFCellStyle.ALIGN_LEFT);
        styleLeft.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+       styleLeft.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+       styleLeft.setBorderTop(HSSFCellStyle.BORDER_THIN);
+       styleLeft.setBorderRight(HSSFCellStyle.BORDER_THIN);
+       styleLeft.setBorderLeft(HSSFCellStyle.BORDER_THIN);
        styleLeft.setFont(font);
        
        //  Content align : left
        HSSFCellStyle styleRight = workbook.createCellStyle();
        styleRight.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
        styleRight.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+       styleRight.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+       styleRight.setBorderTop(HSSFCellStyle.BORDER_THIN);
+       styleRight.setBorderRight(HSSFCellStyle.BORDER_THIN);
+       styleRight.setBorderLeft(HSSFCellStyle.BORDER_THIN);
        styleRight.setFont(font);
        
        // Content vertical align : center
        HSSFCellStyle verticalCenter = workbook.createCellStyle();
        verticalCenter.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+       verticalCenter.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+       verticalCenter.setBorderTop(HSSFCellStyle.BORDER_THIN);
+       verticalCenter.setBorderRight(HSSFCellStyle.BORDER_THIN);
+       verticalCenter.setBorderLeft(HSSFCellStyle.BORDER_THIN);
        verticalCenter.setFont(font);
        
        HSSFCellStyle conStyle = workbook.createCellStyle();
        conStyle.setWrapText(true);
        conStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
        conStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+       conStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+       conStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+       conStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+       conStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
        conStyle.setFont(font);
-       
-       
        
        //  ObjectList 가 비어있으면 제목만 출력 후 종료
        if(data == null) return workbook;
@@ -211,7 +239,7 @@ public class ExcelDownUtil {
     	   }
        }
        
-       sheet.setColumnWidth(cell_4.getColumnIndex(), 8400);
+       sheet.setColumnWidth(cell_4.getColumnIndex(), 12000);
        
        
        return workbook;
