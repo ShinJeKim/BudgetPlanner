@@ -154,7 +154,6 @@
 .has-error .form-control-feedback {
   color: #a94442;
 }
-
 #div_email{
 	height: 15%
 }
@@ -167,5 +166,20 @@
 #div_email>div>#email{
 	height: 70%;
 }
+
+#updateFrm>div>div>div>#checkUserEmail{
+	width: 100%;
+    margin-top: 2px;
+    background-color: #ecdd84;
+    height: 60%;
+    font-size: 1rem;
+}
+#checkUserEmail:hover{
+	background-color: #fecd76;
+    color: white;
+    cursor: pointer;
+    box-shadow: inset 0px 0px 20px cornsilk;
+}
+
 
    
