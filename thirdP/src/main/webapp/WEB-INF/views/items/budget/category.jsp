@@ -11,31 +11,33 @@
 		<%-- div 1 for search condition --%>
 				<div id="search_div">
 					<div id="cat_select" >
-						<label>상위분류</label>
-						<select name="mst_ct_id" id="mst_ct_id">
-							<option value="">전체</option>
-							<option value="10">지출</option>
-							<option value="20">수입</option>
-						</select>
-						<label>하위분류</label>
-						<select name="dtlList" id="dtlList">
-						</select>
+						<div id="main_cate">
+							<label>상위분류</label>
+							<select name="mst_ct_id" id="mst_ct_id">
+								<option value="">전체</option>
+								<option value="10">지출</option>
+								<option value="20">수입</option>
+							</select>
+						</div>
+						<div id="sub_cate">
+							<label>하위분류</label>
+							<select name="dtlList" id="dtlList">
+							</select>
+						</div>
 					</div>
 					<div id="month_select">
-						<select name="start_month" id="start_month" >
-							<c:forEach begin="1" end="12" step="1" varStatus="str">
-								<option id="s_month" value="${str.count}">${str.count}월</option>
-							</c:forEach>
-						</select>
-						<select name="end_month" id="end_month">
-							<c:forEach begin="1" end="12" step="1" varStatus="str">
-								<option id="e_month" value="${str.count}">${str.count}월</option>
-							</c:forEach>
-						</select>
-						<input type="button" id=do_searchList  value="조회">
-						<label>
-							<img id="do_excelDown" src="../resources/files/images/excel.png" width="40" height="40" title="엑셀파일 다운로드">
-						</label>
+							<select name="start_month" id="start_month" >
+								<c:forEach begin="1" end="12" step="1" varStatus="str">
+									<option id="s_month" value="${str.count}">${str.count}월</option>
+								</c:forEach>
+							</select>
+							<select name="end_month" id="end_month">
+								<c:forEach begin="1" end="12" step="1" varStatus="str">
+									<option id="e_month" value="${str.count}">${str.count}월</option>
+								</c:forEach>
+							</select>
+							<input type="button" id=do_searchList  value="조회">
+							<img id="do_excelDown" src="../resources/files/images/excel.png" alt="엑셀파일 다운로드">
 					</div>
 				</div>
 		<%--// div 1 closed--%>

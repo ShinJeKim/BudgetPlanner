@@ -33,10 +33,12 @@ function do_excelDown(){
 		
 		var clickFlag = 0;
 		
-		$('#whole_div').css('width',$('.bodyCover').width());
+		$('#whole_div').css('width',$('.bodyCover').width()*0.98);
+		$('#whole_div').css('margin-left',$('.bodyCover').width()*0.01);
 	$(window).resize(function(){
-		$('#whole_div').css('width',$('.bodyCover').width());
-	})
+		$('#whole_div').css('width',$('.bodyCover').width()*0.98);
+		$('#whole_div').css('margin-left',$('.bodyCover').width()*0.01);
+	});
 		// datePicker
 		 $('#date').datepicker({
 			 type	: 'y',
