@@ -96,6 +96,8 @@ $(document).ready(function(){
 
             }
        	$('#ccate').html(datahtml);
+        font_size();
+   	 	menu_size();
        	if($('#workDiv').val() == 'save'){
 			$('#ccate div:first-child').find('.cateSelect').trigger('click');
 		}else if($('#workDiv').val() == 'update' && $('#ccate div:first-child').find('.cateSelect').val() != $('#sub_cate').val()){
@@ -108,7 +110,8 @@ $(document).ready(function(){
 			});
 		}
         var sub_cate = $(document).find(':input[name=cate]:radio:checked').val();
-		 $('#sub_cate').val(sub_cate); 
+		 $('#sub_cate').val(sub_cate);  
+		 
         },
         complete: function(data){
 
@@ -142,7 +145,9 @@ function menu_size(){
 	$('.body').css("width",body_width);
 	$('.footer').css('height',height*0.07);
 	$('.footer').css('top',height*0.93);
-	
+	$(document).find('.cates').each(function(){
+	   $(this).css('height',$('#ccate').height()*0.48);
+	});
 	if(window.screen.width>768 && width>768){
 	$('body').css('width','60%');
 	$('body').css('margin-left','20%');
@@ -158,6 +163,9 @@ function menu_size(){
 	$('.bodyCover').css('width','inherit');
 	$('.body').css("width",$('.bodyCover').width()+18);
 	}else{
+		if(window.screen.width<768){
+			$('.cates>label').css('font-size',width*0.035);
+		}
 		$('body').css('width','100%');
 		$('body').css('border','0px');
 		$('body').css('margin','0px');

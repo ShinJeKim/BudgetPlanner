@@ -144,6 +144,7 @@
 	background-color: #ecdd84;
     border: 2px outset blanchedalmond;
     box-sizing: border-box;
+    vertical-align: middle;
 }	
 .input_content>.cates>label:hover{
 	cursor: pointer
