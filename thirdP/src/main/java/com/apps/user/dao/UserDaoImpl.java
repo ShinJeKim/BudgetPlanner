@@ -196,6 +196,22 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public int do_check_email(String email) {
+		String statement = namespace + ".do_check_email";
+		String userEmail = email;
+		log.debug("**************do_check_email*****************");
+		log.debug("statement : "+statement);
+		log.debug("userEmail : "+userEmail); 
+		log.debug("******************************************");
+		
+		flag = sqlSession.selectOne(statement, userEmail);
+		
+		log.debug("flag : "+flag);
+		
+		return flag;
+	}
+	
+	@Override
 	public int do_check_id(String id) {
 		String statement = namespace + ".do_check_id";
 		String userID = id;
@@ -282,6 +298,8 @@ public class UserDaoImpl implements UserDao {
 		
 		return sqlSession.selectOne(statement, inUserVO);
 	}
+
+
 
 
 }

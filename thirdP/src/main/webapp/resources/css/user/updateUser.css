@@ -64,7 +64,6 @@
 	padding: 0px;
 }
 
-
 .has-success .help-block,
 .has-success .control-label,
 .has-success .radio,
@@ -155,4 +154,18 @@
 .has-error .form-control-feedback {
   color: #a94442;
 }
+
+#div_email{
+	height: 15%
+}
+#div_email>label{
+	height: 30%;
+}
+#div_email>div{
+	height: 60%;
+}
+#div_email>div>#email{
+	height: 70%;
+}
+
    

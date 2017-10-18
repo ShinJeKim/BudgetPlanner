@@ -124,6 +124,15 @@ public class UserSvcImpl implements UserSvc {
 	}
 
 	@Override
+	public int do_check_email(String email) {
+		log.debug("2============do_check_email=============");
+		log.debug("email : "+email);
+		log.debug("2==================================");
+		
+		return userDao.do_check_email(email);
+	}
+	
+	@Override
 	public void do_logout(HttpSession session) {
 		log.debug("2============do_logout=============");
 		log.debug("");
@@ -149,6 +158,8 @@ public class UserSvcImpl implements UserSvc {
 		
 		return userDao.do_findPW(dto);
 	}
+
+
 
 	
 	

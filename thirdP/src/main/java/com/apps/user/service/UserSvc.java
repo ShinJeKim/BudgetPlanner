@@ -93,6 +93,14 @@ public interface UserSvc {
 	public int do_check_passwd(DTO dto);
 	
 	/**
+	 * email 체크
+	 * return 1 : email 존재, else : 없음
+	 * @param email
+	 * @return
+	 */
+	public int do_check_email(String email);
+	
+	/**
 	 * login 수행
 	 * 사용자 정보를 객체로 가져옴
 	 * @param dto

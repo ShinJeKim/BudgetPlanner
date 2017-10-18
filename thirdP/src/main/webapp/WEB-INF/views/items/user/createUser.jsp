@@ -41,6 +41,7 @@
 			<div>
 				<input type="text" class="form-control" id="email" name="email" data-rule-required="true" 
 				placeholder="이메일" maxlength="50">
+				<input type="button" id="checkUserEmail" name="checkUserEmail" value="중복확인"/>
 			</div>
 		</div>
 		<!-- 고정수입 -->
