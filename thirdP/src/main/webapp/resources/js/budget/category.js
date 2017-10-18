@@ -173,16 +173,16 @@ function do_excelDown(){
 							
 								$('#tbody').html(datahtml);
 
-								 $(document).find('#c_usage').each(function(){
-						   				if($(this).html().toString().substring(1,0) == "-"){
-						   					$(this).html($(this).html().replace('-',''));
-						   					$(this).css('color','red');
+								 $(document).find('.dataList').each(function(){
+						   				if($(this).children('#c_usage').text().substring(1,0) == "-"){
+						   					$(this).children('#c_usage').text($(this).children('#c_usage').text().replace('-',''));
+						   					$(this).children('#c_usage').css('color','red');
 						   				
-						   					$(this).children('label').html(numberFormat($(this).children('label').html()));
+						   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
 						   				}else{
-						   					$(this).css('color','blue');
+						   					$(this).children('#c_usage').css('color','blue');
 						   					
-						   					$(this).children('label').html(numberFormat($(this).children('label').html()));
+						   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
 						   				}		
 						   			});
 									
@@ -237,18 +237,18 @@ function do_excelDown(){
 																
 																	$('#tbody').html(datahtml);
 
-																	 $(document).find('#c_usage').each(function(){
-															   				if($(this).html().toString().substring(1,0) == "-"){
-															   					$(this).html($(this).html().replace('-',''));
-															   					$(this).css('color','red');
-															   				
-															   					$(this).children('label').html(numberFormat($(this).children('label').html()));
-															   				}else{
-															   					$(this).css('color','blue');
-															   					
-															   					$(this).children('label').html(numberFormat($(this).children('label').html()));
-															   				}		
-															   			});
+																	$(document).find('.dataList').each(function(){
+														   				if($(this).children('#c_usage').text().substring(1,0) == "-"){
+														   					$(this).children('#c_usage').text($(this).children('#c_usage').text().replace('-',''));
+														   					$(this).children('#c_usage').css('color','red');
+														   				
+														   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
+														   				}else{
+														   					$(this).children('#c_usage').css('color','blue');
+														   					
+														   					$(this).children('#c_usage').text(numberFormat($(this).children('#c_usage').text()));
+														   				}		
+														   			});
 																
 																// do_excelDown Btn event
 																	$('#do_excelDown').click(function(){										
