@@ -240,10 +240,12 @@ public class UserController {
 	    		log.debug(emailSender.toString());
 	    		log.debug("emailSender=====================================");
 	            
-	            emailSender.SendEmail(emailVO);
+	            
 				modelAndView.addObject("message", "pwOK");
 				modelAndView.addObject("email", userVO.getEmail());
 				modelAndView.setViewName("missing");
+				
+				emailSender.SendEmail(emailVO);
 	
 				
 			} else if(null == pw || pw.equals("")) {
