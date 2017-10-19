@@ -31,14 +31,8 @@ public class UserController {
 	@Autowired
 	UserSvc userSvc;
 	
-//	@Autowired
-//	private MailSender emailSender;
-	
 	@Autowired
 	private EmailSender emailSender;
-	
-//	@Autowired
-//	private EmailVO email;
 
 	//메인페이지 호출
 	@RequestMapping(value="main.do") 
@@ -317,17 +311,6 @@ public class UserController {
 		UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		UserVO inVO = new UserVO();
 		
-		//testcase
-//		String id = "id4";
-//		int balance = 123456;
-//		int delete_flag = 0;
-//		int admin_flag = 0;
-		//testcase
-//		inVO.setId(id);
-//		inVO.setBalance(balance);
-//		inVO.setDelete_flag(delete_flag);
-//		inVO.setAdmin_flag(admin_flag);
-		
 		inVO.setId(sessionVO.getId());
 		inVO.setPassword(request.getParameter("password"));
 		inVO.setName(request.getParameter("name"));
@@ -357,126 +340,9 @@ public class UserController {
 		UserVO sessionVO = (UserVO) session.getAttribute("loginUser");
 		
 		int flag = userSvc.do_delete(sessionVO);
-		
+		int deleteLog_Flag = userSvc.do_dlog_save(sessionVO.getId());
 		//DELETE_LOG 테이블 쓸 수 있게 만들기
 		
 		return "redirect:logout.do";
 	}
-	
-
-
-	
-	
-	/*원본
-	@RequestMapping(value="user/login.do") 
-	public String main(HttpServletRequest request) {
-		
-		log.debug("0=====================================");
-		log.debug("main()");
-		log.debug("0=====================================");
-		
-		return "items/user/login";
-	}
-	
-	@RequestMapping(value="user/createUser.do")
-	public String goCreateUser(HttpServletRequest request) {
-		log.debug("0=====================================");
-		log.debug("goCreateUser()");
-		log.debug("0=====================================");
-		
-		return "itmes/user/createUser";
-	}
-
-	@RequestMapping(value="user/do_check_id.do")
-	@ResponseBody
-	public String do_check_id(HttpServletRequest request) {
-		
-		log.debug("1======================================");
-		log.debug("do_check_id");
-		log.debug("1======================================");
-		
-		int flag = 0;
-		
-		String id = request.getParameter("id");
-		
-		log.debug("id : "+id);
-		
-		flag = userSvc.do_check_id(id);
-		
-		log.debug("flag(control) : "+flag);
-		
-		return flag+"";
-	}
-	
-	@RequestMapping(value="user/do_login.do", method=RequestMethod.POST)
-	public ModelAndView do_login(HttpServletRequest request) {
-		
-		log.debug("1======================================");
-		log.debug("do_login.do");
-		log.debug("1======================================");
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		UserVO inVO = new UserVO();
-		UserVO outVO = new UserVO();
-		
-		inVO.setId(request.getParameter("id"));
-		inVO.setPassword(request.getParameter("password"));
-
-		outVO = (UserVO)userSvc.do_login(inVO);
-		
-		if(outVO !=null) {
-			
-			log.debug(outVO.toString());
-			modelAndView.addObject("message", "success");
-			modelAndView.setViewName("items/user/test");
-			
-			HttpSession session = request.getSession(true);
-			session.setAttribute("loginUser", outVO);
-			
-		} else {
-			
-			int passwordFlag = userSvc.do_check_passwd(inVO);
-			
-			if(passwordFlag == 0) {
-				modelAndView.addObject("message", "passwordFailure");
-			}
-			
-			modelAndView.setViewName("itmes/user/login");
-		}
-		
-		return modelAndView;
-	}
-	
-	
-	@RequestMapping(value="user/do_save.do")
-	public ModelAndView do_save(HttpServletRequest request) throws IOException{
-		
-		ModelAndView modelAndView = new ModelAndView();
-		
-		UserVO inVO = new UserVO();
-		
-		inVO.setId(request.getParameter("id"));
-		inVO.setPassword(request.getParameter("password"));
-		inVO.setName(request.getParameter("name"));
-		inVO.setEmail(request.getParameter("email"));
-		
-		int fixed_income = Integer.parseInt(request.getParameter("fixed_income"));
-		inVO.setFixed_income(fixed_income);
-		
-		int balance = Integer.parseInt(request.getParameter("balance"));
-		inVO.setBalance(balance);
-		
-		log.debug("inVO : "+inVO.toString());
-		
-		int flag = 0;
-		flag = userSvc.do_save(inVO);
-		
-		log.debug("flag : "+flag);
-		
-		modelAndView.setViewName("itmes/user/login");
-		
-		return modelAndView;
-	}
-	*/
 }

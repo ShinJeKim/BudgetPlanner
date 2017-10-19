@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.apps.common.DTO;
+import com.apps.user.domain.DeleteLogVO;
 import com.apps.user.domain.UserVO;
 
 
@@ -69,7 +70,7 @@ public class UserDaoImpl implements UserDao {
 		private int admin_flag;
 	 */
 	
-	//RowMapper Setting
+	//user RowMapper Setting
 	private RowMapper<UserVO> userMapper = new RowMapper<UserVO>() {
 
 		@Override
@@ -297,6 +298,18 @@ public class UserDaoImpl implements UserDao {
 		log.debug("******************************************");
 		
 		return sqlSession.selectOne(statement, inUserVO);
+	}
+
+	@Override
+	public int do_dlog_save(String id) {
+		String statement = namespace + ".do_dlog_save";
+		String userId = id;
+		log.debug("****************do_dlog_save*****************");
+		log.debug("statement : "+statement);
+		log.debug("inUserVO.toString() : "+userId); 
+		log.debug("******************************************");
+		
+		return sqlSession.update(statement, userId);
 	}
 
 

@@ -14,13 +14,12 @@ import org.springframework.dao.DataAccessException;
  * 
  * do_excelDown
  * do_excelUp
- * do_report : rd,크리스탈 리포트
- * @author sist_
+ * @author 3rdProj
  *
  */
 public interface WorkDiv {
 
-	public int do_save(DTO dto);//Upsert
+	public int do_save(DTO dto);
 	public List<?> do_search(DTO dto);
 	public int do_delete(DTO dto);
 	public int do_update(DTO dto);

@@ -159,6 +159,15 @@ public class UserSvcImpl implements UserSvc {
 		return userDao.do_findPW(dto);
 	}
 
+	@Override
+	public int do_dlog_save(String id) {
+		log.debug("2============do_save===============");
+		log.debug(id);
+		log.debug("2==================================");
+		
+		return userDao.do_dlog_save(id);
+	}
+
 
 
 	

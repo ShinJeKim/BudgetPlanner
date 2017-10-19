@@ -348,28 +348,35 @@ $(document).ready(function(){
 	$("#delete").on("click", function(){
 		var delete_flag = $("#delete_flag").val();
 		
-		$.ajax({
-			type:"POST",
-			url:"do_delete.do",
-			dataType:"html",
-			async:false,
-			data:{
-				"id" : $("#id").val()
-			},
-			success: function(data){
-				alert("탈퇴하시겠습니까?");
-				$("#updateFrm").submit();
-				alert("회원탈퇴 되었습니다");
-				$(location).attr('href', "logout.do"); //다시 로그인 페이지로 이동
-				
-			},
-			complete: function(data){
-				
-			},
-			error:function(xhr, status, error){
-				alert("탈퇴에러");
-			}
-		});
+		if(confirm("탈퇴하시겠습니까?")==true){
+			$.ajax({
+				type:"POST",
+				url:"do_delete.do",
+				dataType:"html",
+				async:false,
+				data:{
+					"id" : $("#id").val()
+				},
+				success: function(data){
+					
+					$("#updateFrm").submit();
+					alert("회원탈퇴 되었습니다");
+					
+					$(location).attr('href', "logout.do"); //다시 로그인 페이지로 이동
+					
+				},
+				complete: function(data){
+					
+				},
+				error:function(xhr, status, error){
+					alert("탈퇴에러");
+				}
+			});
+		} else {
+			return;
+		}
+		
+		
 	});//delete
 	
 });//document
