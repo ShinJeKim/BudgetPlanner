@@ -423,7 +423,6 @@
 		$('.body').css("width",'100%');
 		$('#createFrm').css('height',$('.body').height());
 		$('#createFrm>div').css('height',$('.body').height()*0.9);
-		$('#createFrm>div').css('margin-top',$('.body').height()*0.05);
 		if(window.screen.width>768 && width>768){
 		$('body').css('width','60%');
 		$('body').css('margin-left','20%');

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<input type="button" id=goBack value="뒤로">
+<input type="button" id=goBack >
 <form id="missingIDFrm" name="missingIDFrm" action="do_findID.do" method="post">
 	<div>
 		<div class="title">

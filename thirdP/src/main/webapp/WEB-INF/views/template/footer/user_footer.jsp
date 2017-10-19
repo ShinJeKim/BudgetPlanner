@@ -7,10 +7,6 @@
 			<label class="menu-label" for="BudgetPlanner"><a href="/apps/budget/daily.do">가계부</a></label>
 		</li>
 		<li class="menu">
-			<input class="main_selector" type="radio" name="main_menu"  id="chart">
-			<label class="menu-label" for="chart"><a href="/apps/chart.do">통계</a></label>
-		</li>
-		<li class="menu">
 			<input class="main_selector" type="radio" name="main_menu" id="mypage">
 			<label class="menu-label" for="mypage"><a href="/apps/mypage.do">내정보</a></label>
 		</li>

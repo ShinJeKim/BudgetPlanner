@@ -1,10 +1,14 @@
 @CHARSET "UTF-8";
 #goBack{
 	position: absolute;
-    background-color: #ecdd84;
+    background-color: white;
     font-weight: bold;
     font-size: 3em;
     line-height: 150%;
+    background-image: url(/apps/resources/files/images/goBack.png);
+    background-repeat: round;
+    border: 0px;
+    outline: 0px;
 }
 #goBack:hover{
 	 background-color: #fecd76;
