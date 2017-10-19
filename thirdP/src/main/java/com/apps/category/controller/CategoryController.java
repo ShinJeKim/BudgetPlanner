@@ -57,11 +57,15 @@ public class CategoryController {
 	
 	//헤더적용 페이지
 	@RequestMapping(value="budget/category.do") 
-	public String category(HttpServletRequest request) {
+	public String category(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		
 		log.debug("0=====================================");
 		log.debug("main()");
 		log.debug("0=====================================");
+		
+		if(session.getAttribute("ID") == null) {
+			response.sendRedirect("../main.do");
+		}
 		
 		return "category";
 	}
@@ -217,73 +221,5 @@ public class CategoryController {
 		
 		return modelAndView;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*@RequestMapping(value = "budget/do_searchList.do", method=RequestMethod.POST)
-	public ModelAndView do_searchList(HttpServletRequest req, HttpSession session) throws IOException{
-		log.debug("=================================");
-		log.debug("do_searchList.do");
-		log.debug("=================================");
-		
-		CategoryVO catVO = new CategoryVO();
-		Hashtable<String, String> searchParam = new Hashtable<String, String>();
-		
-		//catVO.setId(session.getAttribute("id").toString());
-		String id = StringUtil.nvl(req.getParameter("id"), "id1");
-		String pageSize = StringUtil.nvl(req.getParameter("page_size"), "10");
-		String pageNum = StringUtil.nvl(req.getParameter("page_num"), "1");
-		String start_date = StringUtil.nvl(req.getParameter("start_date"), "2017-07-01");
-		String end_date = StringUtil.nvl(req.getParameter("end_date"), "2017-09-30");
-		String mst_ct_id = StringUtil.nvl(req.getParameter("mst_ct_id"), "");
-		String dtl_ct_nm = StringUtil.nvl(req.getParameter("dtl_ct_nm"), "");
-		
-		searchParam.put("id".toString(), id);
-		searchParam.put("page_size".toString(), pageSize);
-		searchParam.put("page_num".toString(), pageNum);
-		searchParam.put("start_date".toString(), start_date);
-		searchParam.put("end_date".toString(), end_date);
-		searchParam.put("mst_ct_id".toString(), mst_ct_id);
-		searchParam.put("dtl_ct_nm".toString(), dtl_ct_nm);
 
-		log.debug("searchParam: "+searchParam);
-
-		// request 이름 read
-		Enumeration<String> params = req.getParameterNames();
-		Hashtable<String, String> sParam = new Hashtable<String, String>();
-		while (params.hasMoreElements()) {
-			String name = (String) params.nextElement();
-			req.getParameter(name);
-			sParam.put(name, StringUtil.nvl(req.getParameter(name), ""));
-		}
-
-		catVO.setParam(searchParam);
-		
-		List<CategoryVO> list = catSvc.do_searchList(catVO);
-		int totalCnt = 0;
-		if(list != null && list.size()>0)
-			totalCnt = list.get(0).getTotalNo();
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("list", catSvc.do_searchList(catVO));
-		modelAndView.addObject("totalCnt", totalCnt);
-		modelAndView.setViewName("items/budget/category");
-		
-		return modelAndView;
-	}*/
-
-	
-
-	
-	
 }
