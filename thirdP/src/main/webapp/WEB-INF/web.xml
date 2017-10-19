@@ -23,6 +23,18 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/items/error/error404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/items/error/error500.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/WEB-INF/views/items/error/errorNullPointer.jsp</location>
+	</error-page>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
