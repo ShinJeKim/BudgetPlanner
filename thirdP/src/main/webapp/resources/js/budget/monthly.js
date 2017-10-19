@@ -22,7 +22,6 @@ function font_sizing(){
 			//날짜 만들기
 			var thisDate = $('#currentDate').val().toString().split(".");
 			var selectedMonth = thisDate[0] + thisDate[1];
-			console.log(selectedMonth);
 			
 			//날짜 변경시 화면 갱신해주기
 			$.ajax({
@@ -34,7 +33,7 @@ function font_sizing(){
 					"month" : selectedMonth
 				},
 				success: function(data){	//통신이 성공적으로 이루어 졌을 때 받을 함수
-					console.log(data);
+
 					$("#month").val(selectedMonth);
 					$("#monthlyData").submit();
 				},
@@ -52,15 +51,15 @@ function font_sizing(){
 		for(var i=0; i<$("#monthlyListSize").val(); i++){
 			(function(a){
 				$("#area"+a).click(function(){
-					console.log("date.text : "+$("#date"+a).text().trim());
+
 					var reg_dt = "";
-					console.log("month" + $(".currentDate").html().toString());
+
 					if($("#date"+a).text().trim().length == 1){
 						reg_dt = $(".currentDate").html().toString() + "." + "0" + $("#date"+a).text().trim();
-						console.log("selectedDate : "+reg_dt);
+
 					} else if ($("#date"+a).text().trim().length == 2){
 						reg_dt = $(".currentDate").html().toString() + "." + $("#date"+a).text().trim();
-						console.log("selectedDate : "+reg_dt);
+
 					} else if ($("#data"+a).text().trim() == ''){
 						return false;
 					}

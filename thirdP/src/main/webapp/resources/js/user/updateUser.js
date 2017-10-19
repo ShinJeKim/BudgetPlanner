@@ -34,8 +34,6 @@ $(document).ready(function(){
 		
 		if(checkUserEmail != sessionEmail){
 			
-			console.log("ddd");
-			
 			var emailReg = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
 			
 			if(!$("#email").val().match(emailReg)){
@@ -47,9 +45,6 @@ $(document).ready(function(){
 				return false;
 			}  else {
 				
-				console.log("sessionEmail(diff) : "+sessionEmail);
-				console.log("checkUserEmail(diff) : "+checkUserEmail);
-				
 				$.ajax({
 					type:"POST",
 					url:"do_check_email.do",
@@ -58,7 +53,6 @@ $(document).ready(function(){
 						"email" : checkUserEmail
 					},
 					success: function(data){	//통신이 성공적으로 이루어 졌을 때 받을 함수
-						console.log("data : "+data);
 						var flag = ($.trim(data));
 						if(flag != "0"){
 							alert("다른 email를 입력해 주십시오");
@@ -76,11 +70,7 @@ $(document).ready(function(){
 				}); //ajax
 			}
 		} 
-		
-		console.log("emailFlag : "+emailFlag);
-		console.log("checkUserEmail : "+checkUserEmail);
-		
-		
+			
 	});//checkUserEmail
 		
 
@@ -180,11 +170,7 @@ $(document).ready(function(){
 	
 	//update
 	$("#update").on("click", function(event){
-		event.preventDefault();//연속수행방지
 		
-		console.log("1");
-		
-
 		var div_id = $("#div_id");
 		var div_password = $("#div_password");
 		var div_password_check = $("#div_password_check");
@@ -204,7 +190,6 @@ $(document).ready(function(){
 		
 		//PW 중복체크 검사
 		if(emailFlag == 0){
-			console.log("emailFlag(2) : "+emailFlag);
 			alert("이메일 중복체크를 해주세요");
 			return;
 		}

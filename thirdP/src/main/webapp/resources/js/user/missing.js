@@ -21,7 +21,7 @@ $(document).ready(function(){
 					
 				},
 				success: function(data){
-					console.log(data);
+
 					 $("#IDresult").val(data);
 				},
 				complete: function(data){
@@ -48,7 +48,7 @@ $(document).ready(function(){
 					
 				},
 				success: function(data){
-					console.log(data);
+
 					 $("#PWresult").val(data);
 				},
 				complete: function(data){

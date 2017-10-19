@@ -7,7 +7,7 @@
 		 });
 		 $('#mypage').attr('checked', true);
 		 $('#identifyBtn').click(function(){
-				console.log("클릭은 되는거냐?")
+
 				 $.ajax({
 		           type:"POST",
 		           url:"checkPW.do",
@@ -23,8 +23,7 @@
 		        	  }
 		           },
 		           complete: function(data){
-		        	   console.log($('#id').val());
-		        	   console.log($('#password').val());
+
 		           }
 		        });//ajax
 			});	 

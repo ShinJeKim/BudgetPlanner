@@ -22,8 +22,6 @@
 		///////////////////////////////////////////
 		$("#loginBtn").on("click", function(){
 			
-			console.log("loginBtn");
-			
 			//get input id
 			var userID = $("#id").val().trim();
 			if(userID.length==0){

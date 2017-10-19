@@ -127,7 +127,7 @@ $(document).ready(function(){
 		 });
 	});
 	$(document).on('click','#update',function(){
-		console.log($(this).closest('form'));
+
 		$('#loadWork').val('reload');
 		$(this).closest('form').submit(); //dailyDatas
 	});

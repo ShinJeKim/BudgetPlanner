@@ -51,9 +51,7 @@
 					return false;
 				}
 			} 
-			
-			console.log("checkUserId : "+checkUserId);
-			
+
 			$.ajax({
 				type:"POST",
 				url:"do_check_id.do",
@@ -62,7 +60,7 @@
 					"id" : checkUserId
 				},
 				success: function(data){	//통신이 성공적으로 이루어 졌을 때 받을 함수
-					console.log("data : "+data);
+
 					var flag = ($.trim(data));
 					if(flag == "1"){
 						alert("다른 ID를 입력해 주십시오");
@@ -104,8 +102,6 @@
 				} 
 			} 
 			
-			console.log("checkUserEmail : "+checkUserEmail);
-			
 			$.ajax({
 				type:"POST",
 				url:"do_check_email.do",
@@ -114,7 +110,7 @@
 					"email" : checkUserEmail
 				},
 				success: function(data){	//통신이 성공적으로 이루어 졌을 때 받을 함수
-					console.log("data : "+data);
+
 					var flag = ($.trim(data));
 					if(flag != "0"){
 						alert("다른 email를 입력해 주십시오");
