@@ -11,10 +11,16 @@
 		///////////////////////////////////////////		
 		$("#id").focus();
 		
+		$('#passinput').keyup(function(e){
+			if(e.which == 13){
+				$("#loginBtn").click();
+			}
+		});
+		
 		///////////////////////////////////////////
 		//LoginBtn
 		///////////////////////////////////////////
-		$("#loginBtn").bind("click", function(){
+		$("#loginBtn").on("click", function(){
 			
 			console.log("loginBtn");
 			
