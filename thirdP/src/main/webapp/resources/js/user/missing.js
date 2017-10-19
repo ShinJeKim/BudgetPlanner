@@ -65,32 +65,16 @@ $(document).ready(function(){
 				return false;
 			}
 			
-			if($("email").val() == ''){
+			if($("#pw_email").val() == ''){
 				alert("이메일을 입력해 주세요");
 				return false;
 			}
 			
-			$.ajax({
-				type: "POST",
-				url: "do_findPW.do",
-				dataType: "html",
-				async: false,
-				data:{
-					"id" : $("#id").val(),
-					"email" : $("#pw_email").val()
-					
-				},
-				success: function(data){
-
-					 $("#PWresult").val(data);
-				},
-				complete: function(data){
-					
-				},
-				error:function(xhr, status, error){
-					alert("비밀번호찾기 에러");
-				}
-			});
+			$("#inputID").val($("#id").val());
+			$("#inputEmail").val($("#pw_email").val());
+			
+			$("#missingPWFrm").submit();
+			
 		});//missing_pw
 		
 		function font_sizing(){

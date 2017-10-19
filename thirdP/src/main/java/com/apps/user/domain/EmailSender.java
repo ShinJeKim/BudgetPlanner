@@ -40,7 +40,7 @@ import com.sun.activation.registries.MailcapParseException;
 	        log.debug("sender : "+sender);
 	        
 	        mailMessage.setTo(email.getReceiver());
-			mailMessage.setFrom("thirdp03@gmail.com");
+			//mailMessage.setFrom("thirdp03@gmail.com");
 			mailMessage.setSubject(email.getSubject());
 			mailMessage.setText(email.getContent());
            

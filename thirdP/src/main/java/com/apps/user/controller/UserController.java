@@ -224,8 +224,9 @@ public class UserController {
 		
 		try {
 			UserVO userVO = new UserVO();
-			userVO.setId(request.getParameter("id"));
-			userVO.setEmail(request.getParameter("email"));
+			
+			userVO.setId(request.getParameter("inputID"));
+			userVO.setEmail(request.getParameter("inputEmail"));
 			
 			String pw = userSvc.do_findPW(userVO);
 			

@@ -27,6 +27,8 @@
 	</div>
 </form>
 <form id="missingPWFrm" name="missingPWFrm" action="do_findPW.do" method="post">
+	<input type="hidden" id="inputID" name="inputID" />
+	<input type="hidden" id="inputEmail" name="inputEmail"/>
 	<div>
 		<div class="title">
 			<label>비밀번호찾기</label>
@@ -38,7 +40,7 @@
 			<input type="text" placeholder="이메일" name="email" id="pw_email" maxlength="50"/>
 		</div>
 		<div>
-			<input type="submit" id="btn_PW" value="확인" />
+			<input type="button" id="btn_PW" value="확인" />
 		</div>
 	<div id="PWlabel">
 		<c:if test="${message == 'pwOK'}">
