@@ -7,8 +7,24 @@ $(document).ready(function(){
 			body_sizing();
 		});
 		
+		$('#email').keyup(function(e){
+			if(e.which == 13){
+				$("#btn_ID").click();
+			}
+		});
+
 		//missing_id
 		$("#btn_ID").on("click", function(){
+			
+			if($("#name").val() == ''){
+				alert("이름을 입력해 주세요");
+				return false;
+			}
+			
+			if($("#email").val() == ''){
+				alert("이메일을 입력해 주세요");
+				return false;
+			}
 			
 			$.ajax({
 				type: "POST",
@@ -33,9 +49,26 @@ $(document).ready(function(){
 			});
 		});//missing_id
 		
+
+		$('#pw_email').keyup(function(e){
+			if(e.which == 13){
+				$("#btn_PW").click();
+			}
+		});
+
 		
 		//missing_pw
 		$("#btn_PW").on("click", function(){
+			
+			if($("#id").val() == ''){
+				alert("아이디를 입력해 주세요");
+				return false;
+			}
+			
+			if($("email").val() == ''){
+				alert("이메일을 입력해 주세요");
+				return false;
+			}
 			
 			$.ajax({
 				type: "POST",

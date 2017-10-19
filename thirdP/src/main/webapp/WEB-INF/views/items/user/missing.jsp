@@ -8,12 +8,10 @@
 			<label>아이디찾기</label>
 		</div>
 		<div>
-			<input type="text" placeholder="이름" required autofocus
-				name="name" id="name"  maxlength="30" />
+			<input type="text" placeholder="이름" name="name" id="name"  maxlength="30" />
 		</div>
 		<div>		
-			<input type="text" placeholder="이메일" required autofocus
-				name="email" id="email" maxlength="50"/>
+			<input type="text" placeholder="이메일" name="email" id="email" maxlength="50"/>
 		</div>
 		<div>
 			<input type="submit" id="btn_ID" value="확인" />
@@ -34,12 +32,10 @@
 			<label>비밀번호찾기</label>
 		</div>
 		<div>
-			<input type="text" placeholder="ID" required autofocus
-				name="id" id="id" maxlength="30" />
+			<input type="text" placeholder="ID" name="id" id="id" maxlength="30" />
 		</div>
 		<div>		
-			<input type="text" placeholder="이메일" required autofocus
-				name="email" id="pw_email" maxlength="50"/>
+			<input type="text" placeholder="이메일" name="email" id="pw_email" maxlength="50"/>
 		</div>
 		<div>
 			<input type="submit" id="btn_PW" value="확인" />
