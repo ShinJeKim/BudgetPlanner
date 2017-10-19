@@ -331,6 +331,7 @@ $(document).ready(function(){
 				
 			},
 			success: function(data){
+				alert("성공적으로 수정되었습니다");
 				$("#updateFrm").submit();
             	$(location).attr('href', "logout.do"); //로그아웃시키고 다시 로그인페이지로 이동
 			},
@@ -341,7 +342,7 @@ $(document).ready(function(){
 				alert("수정에러");
 			}
 		});
-	});//upedate
+	});//update
 	
 	//delete
 	$("#delete").on("click", function(){
