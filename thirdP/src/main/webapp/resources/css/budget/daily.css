@@ -15,10 +15,9 @@
     background-color: yellow;
     border-radius: 100%;
     border: 2.5px solid;
-    font-family: sans-serif;
-    font-weight: bold;
 }
 #plus>#icon{
+	vertical-align: bottom;
 	display: table-cell;
 	text-align: center;
 }

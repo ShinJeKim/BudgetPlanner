@@ -384,31 +384,52 @@ function font_size(){
 	}else{
 		font_size = width*0.01
 	}
+	$('html').css("font-size",font_size);
 	$('.menu-label').css("font-size",font_size*4);
 }
 function menu_size(){
 	var width = window.innerWidth;
 	var height = window.innerHeight;
-	$('.body').css('height',height*0.93-5);
-	$('.footer').css('height',height*0.07);
-	$('.footer').css('top',height*0.93);
-	$('#updateFrm').css('height',$('.body').height()*0.9);
-	$('#updateFrm').css('margin-top',$('.body').height()*0.05);
+	
 	if(window.screen.width>768 && width>768){
-	$('body').css('width','60%');
-	$('body').css('height',height);
-	$('body').css('margin-left','20%');
-	$('body').css('border-left','5px solid graytext');
-	$('body').css('border-right','5px solid graytext');
-	$('body').css('border-top','5px solid graytext');
-	$('.footer').css('border-bottom','5px solid graytext');
-	$('.footer').css('box-sizing','border-box');
-	$('.footer').css('width','inherit');
+		$('body').css('width',width*0.6);
+		$('body').css('margin-left',width*0.2);
+		$('body').css('border','5px solid graytext');
+		$('body').css('height',height);
+		$('.body').css("width",(width*0.6)-10);
+		$('.body').css("height",height*0.93-10);
+		$('.footer').css('top',height*0.93-5);
 	}else{
-		$('body').css('width','100%');
+		$('body').css('width',width);
+		$('body').css('height',height);
 		$('body').css('border','0px');
 		$('body').css('margin','0px');
-		$('.footer').css('border','0px');
-		$('.footer').css('width','100%');
+		$('.body').css("width",width);
+		$('.body').css('height',height*0.93);
+		$('.footer').css('top',height*0.93);
 	}
+	$('body').css('box-sizing','border-box');
+	$('.footer').css('height',height*0.07);
+	$('.footer').css('width',$('.body').width());
+	$('.menu').css('height',$('.footer').height());
+	$('#updateFrm').css('width',$('.body').width());
+	$('#updateFrm').css('height',$('.body').height());
+	$('#updateFrm>div').css('width',$('#updateFrm').width()*0.6);
+	$('#updateFrm>div').css('margin-left',$('#updateFrm').width()*0.2);
+	$('#updateFrm>div').css('height',$('#updateFrm').height()*0.85);
+	$('#updateFrm>div').css('margin-top',$('#updateFrm').height()*0.075);
+	$('#updateFrm>div').css('padding-top',$('#updateFrm').height()*0.85*0.025);
+	$('#updateFrm>div').css('box-sizing','border-box');
+	$('#updateFrm>div>div').css('height',$('#updateFrm>div').height()*0.9*0.11);
+	$('.form-group').css('height',$('#updateFrm>div').height()*0.9*0.135);
+	$('#div_email').css('height',$('#updateFrm>div').height()*0.9*0.205);
+	$('.form-group>label').css('height',$('.form-group').height()*0.3);
+	$('.form-group>div').css('height',$('.form-group').height()*0.6);
+	$('.form-group>div>input').css('height',$('.form-group>div').height());
+	$('.form-group').css('margin-bottom',$('.form-group').height()*0.1);
+	$('#div_email>label').css('height',$('#div_email').height()*0.2);
+	$('#div_email>div').css('height',$('#div_email').height()*0.73);
+	$('#div_email>div>input').css('height',$('#div_email>div').height()*0.5);
+	$('#div_email>div>#checkUserEmail').css('height',$('#div_email>div').height()*0.4);
+	$('#buttons').css('height',$('#updateFrm>div>div').height()*0.8);
 }

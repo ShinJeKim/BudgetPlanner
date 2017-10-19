@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
 
 /* 달력틀 */
+#monthlyData{
+	height: 100%;
+}
 .calendar{
 	 height:100%; 
 	 width:100%;
@@ -10,7 +13,7 @@
 
 /* 달력요일부분 */
 .weeks{
-	height:10%; 
+	height:11%; 
 	width:100%;
 	display: table-row;
 	background-color: darkgray;

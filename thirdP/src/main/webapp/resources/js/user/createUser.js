@@ -416,18 +416,40 @@
 	function body_sizing(){
 		var width = window.innerWidth;
 		var height = window.innerHeight;
-		$('.body').css("width",'100%');
-		$('#createFrm').css('height',$('.body').height());
-		$('#createFrm>div').css('height',$('.body').height()*0.9);
+		$('body').css('box-sizing','border-box');
 		if(window.screen.width>768 && width>768){
-		$('body').css('width','60%');
-		$('body').css('margin-left','20%');
-		$('body').css('border','5px solid graytext');
-		$('.body').css("width",'100%');
+			$('body').css('width',width*0.6);
+			$('body').css('margin-left',width*0.2);
+			$('body').css('border','5px solid graytext');
+			$('body').css('height',height);
+			$('.body').css("width",(width*0.6)-10);
+			$('.body').css("height",height-10);
 		}else{
-			$('body').css('width','100%');
+			$('body').css('width',width);
+			$('body').css('height',height);
 			$('body').css('border','0px');
 			$('body').css('margin','0px');
+			$('.body').css("width",width);
+			$('.body').css('height',height);
 		}
+		$('#createFrm>div').css('height',$('.body').height()*0.9);
+		$('#createFrm>div').css('margin-top',$('.body').height()*0.05);
+		$('.form-group').css('height',$('#createFrm>div').height()*0.1);
+		$('#div_id').css('height',$('#createFrm>div').height()*0.15);
+		$('#div_email').css('height',$('#createFrm>div').height()*0.15);
+		$('.form-group>label').css('height',$('.form-group').height()*0.3);
+		$('.form-group>div').css('height',$('.form-group').height()*0.6);
+		$('.form-group').css('margin-bottom',$('.form-group').height()*0.1);
+		$('.form-group>div>input').css('height',$('.form-group>div').height()*0.7);
+		$('#div_id>label').css('height',$('#div_id').height()*0.2);
+		$('#div_id>div').css('height',$('#div_id').height()*0.73);
+		$('#div_id>div>#id').css('height',$('#div_id>div').height()*0.5);
+		$('#div_id>div>#checkUserId').css('height',$('#div_id>div').height()*0.4);
+		$('#div_email>label').css('height',$('#div_email').height()*0.2);
+		$('#div_email>div').css('height',$('#div_email').height()*0.73);
+		$('#div_email>div>input').css('height',$('#div_email>div').height()*0.5);
+		$('#div_id>div>#checkUserEmail').css('height',$('#div_email>div').height()*0.4);
+		$('#div_button').css('padding-top',$('.form-group').height()*0.1);
+		$('#div_button>input').css('height',$('#div_button').height()*0.8);
 	}
 	

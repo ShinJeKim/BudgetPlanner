@@ -1,12 +1,12 @@
 @CHARSET "UTF-8";
 #goBack{
 	position: absolute;
-    background-color: white;
-    font-weight: bold;
-    font-size: 3em;
-    line-height: 150%;
+    background-color: transparent;
+    width: 6rem;
+    height: 5rem;
     background-image: url(/apps/resources/files/images/goBack.png);
-    background-repeat: round;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     border: 0px;
     outline: 0px;
 }
@@ -22,14 +22,10 @@
 #missingIDFrm,#missingPWFrm{
     display: table;
     text-align: center;
-    width: 70%;
-    height: 40%;
-    margin-top: 8%;
-    margin-left: 15%;
 	
 }
 #missingIDFrm>div,#missingPWFrm>div{
-	display: table-cell;
+	display: block;
 	vertical-align: middle;
 	background-color: #2c8a7b;
 	box-sizing: border-box;
@@ -44,6 +40,7 @@
 	height: 80%;
 	font-size: 2rem;
 	padding-left: 10px; 
+	box-sizing: border-box;
 }
 #missingIDFrm>div>.title,#missingPWFrm>div>.title{
 	height: 30%;
@@ -51,7 +48,7 @@
 .title>label{
 	display: table-cell;
     color: #fecd76;
-    font-size: 5rem;
+    font-size: 6rem;
     vertical-align: middle;
     font-weight: bold;
 }

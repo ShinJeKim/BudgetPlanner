@@ -211,6 +211,7 @@ function font_sizing(){
 function body_sizing(){
 	var height_body = $('.bodyCover').height();
 	var width_body = $('.bodyCover').width();
+	
 	$('#dailyData').css('width',width_body);
 	$('#dailyTitle').css('width',width_body);
 	$('#dailyTitle').css('position','fixed');
@@ -230,6 +231,8 @@ function body_sizing(){
     $(document).find('.up_del').css('width',width_body*0.99+1);
     $(document).find('.up_del').css('display','none');
 	$('#blank').css('width',width_body);
+	$('#blank').css('height',$('#plus').height()*1.15);
+	
 	if(window.screen.width<768){
 		$('#plus').css('height',height_body*0.1);
 		$('#plus').css('width',$('#plus').height());
@@ -256,9 +259,9 @@ function body_sizing(){
 	}else if(window.innerWidth>768 && window.screen.width>768){
 		$('#plus').css('height',height_body*0.15);
 		$('#plus').css('width',$('#plus').height());
-		$('#plus').css('font-size',window.innerHeight*0.09);
+		$('#plus').css('font-size',window.innerHeight*0.1);
 		$('#plus').css('bottom',window.innerHeight*0.09);
 		$('#plus').css('right',window.innerWidth*0.21);
 	}
-	$('#blank').css('height',$('#plus').height()*1.15);
+	
 }

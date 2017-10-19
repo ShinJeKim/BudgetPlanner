@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
-
+#whole_div{
+	height: 100%;
+}
 /*검색 조건 및 엑셀 다운  */
 	#search_div{ 
 		height: 10%;
@@ -35,10 +37,10 @@
 			 vertical-align: middle;
 		}
 		#cat_select>#main_cate{
-			width: 38%;
+			width: 45%;
 		}
 		#cat_select>#sub_cate{
-			width: 58%;
+			width: 55%;
 		}
 	
 	/*월 선택 및 엑셀다운 버튼  */

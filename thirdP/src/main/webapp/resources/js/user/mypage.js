@@ -59,25 +59,32 @@ function font_size(){
 function menu_size(){
 	var width = window.innerWidth;
 	var height = window.innerHeight;
-	$('.body').css('height',height*0.93-5);
-	$('.footer').css('height',height*0.07);
-	$('.footer').css('top',height*0.93);
-	$('#identifyFrm').css('height',$('.body').height()*0.5);
-	$('#identifyFrm').css('margin-top',$('.body').height()*0.25);
 	if(window.screen.width>768 && width>768){
-	$('body').css('width','60%');
-	$('body').css('margin-left','20%');
-	$('body').css('border-left','5px solid graytext');
-	$('body').css('border-right','5px solid graytext');
-	$('body').css('border-top','5px solid graytext');
-	$('.footer').css('border-bottom','5px solid graytext');
-	$('.footer').css('box-sizing','border-box');
-	$('.footer').css('width','inherit');
+		$('body').css('width',width*0.6);
+		$('body').css('margin-left',width*0.2);
+		$('body').css('border','5px solid graytext');
+		$('body').css('height',height);
+		$('.body').css("width",(width*0.6)-10);
+		$('.body').css("height",height*0.93-10);
+		$('.footer').css('top',height*0.93-5);
 	}else{
-		$('body').css('width','100%');
+		$('body').css('width',width);
+		$('body').css('height',height);
 		$('body').css('border','0px');
 		$('body').css('margin','0px');
-		$('.footer').css('border','0px');
-		$('.footer').css('width','100%');
+		$('.body').css("width",width);
+		$('.body').css('height',height*0.93);
+		$('.footer').css('top',height*0.93);
 	}
+	$('body').css('box-sizing','border-box');
+	$('.footer').css('height',height*0.07);
+	$('.footer').css('width',$('.body').width());
+	$('.menu').css('height',$('.footer').height());
+	$('#identifyFrm').css('width',$('.body').width());
+	$('#identifyFrm').css('height',$('.body').height());
+	$('#identifyFrm>div').css('width',$('#identifyFrm').width()*0.5);
+	$('#identifyFrm>div').css('margin-left',$('#identifyFrm').width()*0.25);
+	$('#identifyFrm>div').css('width',$('#identifyFrm').width()*0.5);
+	$('#identifyFrm>div').css('height',$('#identifyFrm').height()*0.5);
+	$('#identifyFrm>div').css('margin-top',$('#identifyFrm').height()*0.25);
 }

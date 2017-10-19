@@ -45,29 +45,29 @@
 		
 	}); //End Document
 	
-function font_sizing(){
-	var font_size = "";
-	if(window.innerWidth > window.innerHeight){
-		font_size = window.innerHeight*0.01;
-	}else{
-		font_size = window.innerWidth*0.01
+	function body_sizing(){
+		var width = window.innerWidth;
+		var height = window.innerHeight;
+		$('body').css('box-sizing','border-box');
+		
+		if(window.screen.width>768 && width>768){
+			$('body').css('width',width*0.6);
+			$('body').css('margin-left',width*0.2);
+			$('body').css('border','5px solid graytext');
+			$('body').css('height',height);
+			$('.body').css("width",(width*0.6)-10);
+			$('.body').css("height",height-10);
+		}else{
+			$('body').css('width',width);
+			$('body').css('height',height);
+			$('body').css('border','0px');
+			$('body').css('margin','0px');
+			$('.body').css("width",width);
+			$('.body').css('height',height);
+		}
+		$('#loginFrm>div').css('height',$('.body').height()*0.8*0.3*0.25);
+		$('#loginFrm>#logo').css('height',$('.body').height()*0.8*0.7);
+		$('#loginFrm>#logo').css('padding-top',$('.body').height()*0.1);
+		$('#logoimg').css('width',$('#loginFrm>#logo').width()*0.6);
+		$('#logoimg').css('height',$('.body').height()*0.8*0.7);
 	}
-	$('html').css("font-size",font_size);
-}
-
-function body_sizing(){
-	var width = window.innerWidth;
-	var height = window.innerHeight;
-	$('.body').css("width",'100%');
-	
-	if(window.screen.width>768 && width>768){
-	$('body').css('width','60%');
-	$('body').css('margin-left','20%');
-	$('body').css('border','5px solid graytext');
-	$('.body').css("width",'100%');
-	}else{
-		$('body').css('width','100%');
-		$('body').css('border','0px');
-		$('body').css('margin','0px');
-	}
-}
