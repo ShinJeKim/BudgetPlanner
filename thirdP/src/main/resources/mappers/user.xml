@@ -172,4 +172,11 @@
  			WHERE EMAIL = #{email}
  	</select>
  	
+ 	<!-- DeleteLog 저장 -->
+ 	<update id="do_dlog_save"
+ 			parameterType="DeleteLogVO">
+ 			INSERT INTO DELETE_LOG (ID, DELETE_DT, D_LOG_FLAG) 
+			VALUES (#{id}, SYSDATE, 0)
+ 	</update>
+ 	
  </mapper>

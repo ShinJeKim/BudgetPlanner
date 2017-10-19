@@ -130,6 +130,10 @@ public interface UserSvc {
 	 */
 	public String do_findPW(DTO dto);
 	
-	
-
+	/**
+	 * DeleteLog 삽입
+	 * @param dto
+	 * @return
+	 */
+	public int do_dlog_save(String id);
 }

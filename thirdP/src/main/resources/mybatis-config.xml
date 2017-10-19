@@ -23,6 +23,9 @@
 		<!-- TotalDataVO typeAliases -->
 		<typeAlias type="com.apps.montly.domain.TotalDataVO" alias="TotalDataVO"/>
 		
+		<!-- DeleteLogVO typeAliases -->
+		<typeAlias type="com.apps.user.domain.DeleteLogVO" alias="DeleteLogVO"/>
+		
 	</typeAliases>
 	
 </configuration>
