@@ -6,17 +6,18 @@
 <title>에러 발생</title>
 <style type="text/css">
 #errorDiv{
-	width:80%;
-	height:80%;
-	position: absolute;
-	top: 10%;
-	left: 10%;
-	background-image: url("/apps/resources/files/images/error.PNG");
-	background-repeat: round;
+	width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    background-image: url(/apps/resources/files/images/error.PNG);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 #errorDiv>input{
     position: relative;
-    top: 70%;
+    top: 69%;
     left: 44%;
     width: 10%;
     outline: 0px;
