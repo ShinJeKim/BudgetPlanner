@@ -6,6 +6,13 @@
 			$("#password").focus();
 		 });
 		 $('#mypage').attr('checked', true);
+		 
+		 $('#password').keyup(function(e){
+			if(e.which == 13){
+				$("#identifyBtn").click();
+			}
+		 });
+		 
 		 $('#identifyBtn').click(function(){
 
 				 $.ajax({
