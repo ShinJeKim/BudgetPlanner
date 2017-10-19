@@ -10,29 +10,31 @@ $(document).ready(function(){
 	
 	//email 중복체크 누름 여부
 	var emailFlag = 0;
-	var checkUserEmail = $("#email").val();
-	
-	if(checkUserEmail != "" && (checkUserEmail == $("#sessionEmailData").val())){
-		
-		console.log("$(#sessionEmailData).val() : "+$("#sessionEmailData").val());
-		console.log("checkUserEmail : "+checkUserEmail);
-		
-		emailFlag = -1;
-		
-		console.log("emailFlag : "+emailFlag);
-	}
-	
+
 	//email 중복 체크 버튼
 	$("#checkUserEmail").on("click", function(){
 		
-		console.log("checkUserEmail");
+		
+		var checkUserEmail = $("#email").val().trim();
+		var sessionEmail = $("#sessionEmailData").val().trim();
 		
 		if(checkUserEmail == ""){
 			alert("email을 입력해 주세요");
 			return;
 		}
 		
-		if(checkUserEmail != "" && (checkUserEmail != $("#sessionEmailData").val())){
+		if(checkUserEmail != "" && (checkUserEmail == sessionEmail)){
+			
+			emailFlag = -1;
+			
+			if(confirm("기존 이메일을 사용하시겠습니까?")==false){
+				return
+			}
+		}
+		
+		if(checkUserEmail != sessionEmail){
+			
+			console.log("ddd");
 			
 			var emailReg = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
 			
@@ -45,8 +47,8 @@ $(document).ready(function(){
 				return false;
 			}  else {
 				
-				console.log("$(#sessionEmailData).val() : "+$("#sessionEmailData").val());
-				console.log("checkUserEmail : "+checkUserEmail);
+				console.log("sessionEmail(diff) : "+sessionEmail);
+				console.log("checkUserEmail(diff) : "+checkUserEmail);
 				
 				$.ajax({
 					type:"POST",
@@ -75,15 +77,13 @@ $(document).ready(function(){
 			}
 		} 
 		
+		console.log("emailFlag : "+emailFlag);
 		console.log("checkUserEmail : "+checkUserEmail);
 		
 		
 	});//checkUserEmail
 		
-	
-	
-	
-	//
+
 	//////////////////////////////////////////////////////
 	/// Alphabet And Number Validation Check
 	//////////////////////////////////////////////////////
@@ -203,12 +203,8 @@ $(document).ready(function(){
 	
 		
 		//PW 중복체크 검사
-		if(emailFlag != 1 ){
+		if(emailFlag == 0){
 			console.log("emailFlag(2) : "+emailFlag);
-			alert("이메일 중복체크를 해주세요");
-			return;
-		} else if ( emailFlag != -1){
-			console.log("emailFlag(3) : "+emailFlag);
 			alert("이메일 중복체크를 해주세요");
 			return;
 		}

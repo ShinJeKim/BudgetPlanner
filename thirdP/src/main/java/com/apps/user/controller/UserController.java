@@ -358,6 +358,8 @@ public class UserController {
 		
 		int flag = userSvc.do_delete(sessionVO);
 		
+		//DELETE_LOG 테이블 쓸 수 있게 만들기
+		
 		return "redirect:logout.do";
 	}
 	
