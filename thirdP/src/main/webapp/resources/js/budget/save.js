@@ -151,6 +151,7 @@ function menu_size(){
 		$('.datepicker').css('width',width*0.6*0.4);
 		$('.bodyCover').css("width",(width*0.6)-10);
 		$('.bodyCover').css('height',height*0.79-5);
+		$('.bodyCover').css('top',$('.header').height()+5);
 		$('.footer').css('top',height*0.93-5);
 	}else{
 		if(window.screen.width<768){
@@ -164,6 +165,7 @@ function menu_size(){
 		$('.header').css('height',height*0.14);
 		$('.datepicker').css('width',width*0.4);
 		$('.bodyCover').css('height',height*0.79);
+		$('.bodyCover').css('top',$('.header').height());
 		$('.bodyCover').css("width",width);
 		$('.footer').css('top',height*0.93);
 	}
@@ -172,8 +174,9 @@ function menu_size(){
 	$('.sub_menus').css('display','inline-block');
 	$('.sub_menu').css('height',$('.header').height());
 	$('body').css('box-sizing','border-box');
-	$('.bodyCover').css('top',$('.header').height());
 	$('.body').css("width",$('.bodyCover').width()+18);
+	$(document).find('.input_content>.cates').css('height',$('.input_content').height()*0.5);
+	$(document).find('.input_content>.cates>label').css('height',$('#category_division').height()*0.9*0.5);
 	$('.footer').css('height',height*0.07);
 	$('.footer').css('width',$('.bodyCover').width());
 	$('.menu').css('height',$('.footer').height());

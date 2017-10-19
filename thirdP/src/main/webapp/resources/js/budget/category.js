@@ -7,18 +7,6 @@ function do_searchCategory(){
 	}
 } 
 
-//font sizing
-function font_sizing(){
-	var font_size = "";
-	if(window.innerWidth > window.innerHeight){
-		font_size = window.innerHeight*0.01;
-	}else{
-		font_size = window.innerWidth*0.01
-	}
-	$('#selectedDate').css('height',$('.header').height()*0.6);
-	$('#balance').css('height',$('.header').height()*0.6);
-}
-
 // 엑셀 다운로드
 function do_excelDown(){
 	var frm = document.excel_frm;
@@ -45,7 +33,8 @@ function do_excelDown(){
 		 });
 		$('#category').attr('checked', true);
 		$('#BudgetPlanner').attr('checked', true);
-		font_sizing();
+		$('#selectedDate').css('height',$('.header').height()*0.6);
+		$('#balance').css('height',$('.header').height()*0.6);
 		$('#currentDate').change(function(){
 			var thisDate = $('#currentDate').val().toString().split(".");
 			var selectedDate = thisDate[0];

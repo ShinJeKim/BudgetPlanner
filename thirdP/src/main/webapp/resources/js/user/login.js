@@ -45,6 +45,16 @@
 		
 	}); //End Document
 	
+	function font_sizing(){
+		var font_size = "";
+		if(window.innerWidth > window.innerHeight){
+			font_size = window.innerHeight*0.01;
+		}else{
+			font_size = window.innerWidth*0.01
+		}
+		$('html').css("font-size",font_size);
+	}
+
 	function body_sizing(){
 		var width = window.innerWidth;
 		var height = window.innerHeight;
@@ -68,6 +78,6 @@
 		$('#loginFrm>div').css('height',$('.body').height()*0.8*0.3*0.25);
 		$('#loginFrm>#logo').css('height',$('.body').height()*0.8*0.7);
 		$('#loginFrm>#logo').css('padding-top',$('.body').height()*0.1);
-		$('#logoimg').css('width',$('#loginFrm>#logo').width()*0.6);
-		$('#logoimg').css('height',$('.body').height()*0.8*0.7);
+		$('#logo>label>img').css('width',$('#loginFrm>#logo').width()*0.6);
+		$('#logo>label>img').css('height',$('.body').height()*0.8*0.7);
 	}

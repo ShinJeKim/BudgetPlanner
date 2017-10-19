@@ -8,6 +8,9 @@ function font_sizing(){
 	$('.currentDate').css("font-size",font_size*6);
 	$('#selectedDate').css('height',$('.header').height()*0.6);
 	$('#balance').css('height',$('.header').height()*0.6);
+	$('.weeks>.dayOfWeeks').css('font-size',font_size*3);
+	$('#monthlyVertical>.dateDiv>.dateData>.dates').css('font-size',font_size*2.5);
+	$('#monthlyVertical>.dateDiv>.dateData>.price').css('font-size',font_size*1.5);
 }	
 	$(document).ready(function(){
 		 $('#date').datepicker({

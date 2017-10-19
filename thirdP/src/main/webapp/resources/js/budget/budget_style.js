@@ -32,14 +32,17 @@
 			$('#balance>label').css('font-weight','normal');
 		}
 	});	 
-	});
-	
+
 	$( window ).resize(function() {
 		 font_size();
 		 menu_size();
 	});
 	
+	});
+	
+	
 })(jQuery);
+
 function numberFormat(num) {
     var pattern = /(-?[0-9]+)([0-9]{3})/;
     while(pattern.test(num)) {
@@ -61,6 +64,7 @@ function font_size(){
 	$('#balance>label').css("font-size",font_size*3);
 	$('.sub_menu-label').css("font-size",font_size*4);
 	$('.menu-label').css("font-size",font_size*4);
+	
 }
 function menu_size(){
 	var width = window.innerWidth;
@@ -76,6 +80,7 @@ function menu_size(){
 		$('.header').css('height',height*0.14-5);
 		$('.datepicker').css('width',width*0.6*0.4);
 		$('.bodyCover').css("width",(width*0.6)-10);
+		$('.bodyCover').css('top',$('.header').height()+5);
 		$('.bodyCover').css('height',height*0.79-5);
 		$('.footer').css('top',height*0.93-5);
 	}else{
@@ -86,6 +91,7 @@ function menu_size(){
 		$('.header').css('top','0px');
 		$('.header').css('height',height*0.14);
 		$('.datepicker').css('width',width*0.6);
+		$('.bodyCover').css('top',$('.header').height());
 		$('.bodyCover').css('height',height*0.79);
 		$('.bodyCover').css("width",width);
 		$('.footer').css('top',height*0.93);
@@ -97,7 +103,6 @@ function menu_size(){
 	$('.sub_menus').css('display','inline-block');
 	$('.sub_menu').css('height',$('.header').height()*0.4);
 	$('body').css('box-sizing','border-box');
-	$('.bodyCover').css('top',$('.header').height());
 	$('.body').css("width",$('.bodyCover').width()+18);
 	$('.footer').css('height',height*0.07);
 	$('.footer').css('width',$('.bodyCover').width());
