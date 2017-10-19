@@ -105,8 +105,6 @@ public class DailyController {
 	public String dailyAjax(HttpServletRequest req,HttpSession session) {
 
 		
-		String id = "id1";
-		session.setAttribute("ID", id);
 		DailyVO inVO = new DailyVO();
 		inVO.setId(session.getAttribute("ID").toString());
 		if(req.getParameter("reg_dt") != null){
