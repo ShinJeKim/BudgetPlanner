@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <form id="updateFrm" method="post" >
+	<input type="hidden" name="sessionEmailData" id="sessionEmailData" value="${loginUser.email}">
 	<div>
 		<!-- 아이디  -->
 		<div class="form-group" id="div_id">

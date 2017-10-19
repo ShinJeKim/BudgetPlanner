@@ -10,18 +10,29 @@ $(document).ready(function(){
 	
 	//email 중복체크 누름 여부
 	var emailFlag = 0;
+	var checkUserEmail = $("#email").val();
+	
+	if(checkUserEmail != "" && (checkUserEmail == $("#sessionEmailData").val())){
+		
+		console.log("$(#sessionEmailData).val() : "+$("#sessionEmailData").val());
+		console.log("checkUserEmail : "+checkUserEmail);
+		
+		emailFlag = -1;
+		
+		console.log("emailFlag : "+emailFlag);
+	}
 	
 	//email 중복 체크 버튼
 	$("#checkUserEmail").on("click", function(){
 		
-		var checkUserEmail = $("#email").val();
+		console.log("checkUserEmail");
 		
 		if(checkUserEmail == ""){
 			alert("email을 입력해 주세요");
 			return;
 		}
-
-		if(checkUserEmail != ""){
+		
+		if(checkUserEmail != "" && (checkUserEmail != $("#sessionEmailData").val())){
 			
 			var emailReg = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
 			
@@ -32,36 +43,45 @@ $(document).ready(function(){
 				$("#email").val('');
 				$("#email").focus();
 				return false;
-			} 
+			}  else {
+				
+				console.log("$(#sessionEmailData).val() : "+$("#sessionEmailData").val());
+				console.log("checkUserEmail : "+checkUserEmail);
+				
+				$.ajax({
+					type:"POST",
+					url:"do_check_email.do",
+					dataType:"HTML", //option default : html
+					data: {
+						"email" : checkUserEmail
+					},
+					success: function(data){	//통신이 성공적으로 이루어 졌을 때 받을 함수
+						console.log("data : "+data);
+						var flag = ($.trim(data));
+						if(flag != "0"){
+							alert("다른 email를 입력해 주십시오");
+						} else {
+							emailFlag = 1;
+							alert("사용할 수 있는 email 입니다"); 
+						}
+					},
+					complete: function(data){	//실패 성공 상관없이 무조건 수행
+						
+					}, 
+					error: function(xhr, status, error){
+						
+					}
+				}); //ajax
+			}
 		} 
 		
 		console.log("checkUserEmail : "+checkUserEmail);
 		
-		$.ajax({
-			type:"POST",
-			url:"do_check_email.do",
-			dataType:"HTML", //option default : html
-			data: {
-				"email" : checkUserEmail
-			},
-			success: function(data){	//통신이 성공적으로 이루어 졌을 때 받을 함수
-				console.log("data : "+data);
-				var flag = ($.trim(data));
-				if(flag != "0"){
-					alert("다른 email를 입력해 주십시오");
-				} else {
-					alert("사용할 수 있는 email 입니다"); 
-					emailFlag = 1;
-				}
-			},
-			complete: function(data){	//실패 성공 상관없이 무조건 수행
-				
-			}, 
-			error: function(xhr, status, error){
-				
-			}
-		}); //ajax
+		
 	});//checkUserEmail
+		
+	
+	
 	
 	//
 	//////////////////////////////////////////////////////
@@ -181,6 +201,17 @@ $(document).ready(function(){
 		var fixed_income = $("#fixed_income").val();
 		var balance = $("#balance").val();
 	
+		
+		//PW 중복체크 검사
+		if(emailFlag != 1 ){
+			console.log("emailFlag(2) : "+emailFlag);
+			alert("이메일 중복체크를 해주세요");
+			return;
+		} else if ( emailFlag != -1){
+			console.log("emailFlag(3) : "+emailFlag);
+			alert("이메일 중복체크를 해주세요");
+			return;
+		}
 		
 		//PASSWORD 검사
 		if($("#password").val()==""){
