@@ -119,8 +119,8 @@ function do_excelDown(){
 					}else if(parseInt($('#end_month').val()) == 12){
 						ed_date = (parseInt($('.currentDate').html().toString())+1)+"-01-01";
 					}
-					$('#e_end_month').val(ed_date);
-	
+					$('#e_end_date').val(ed_date.trim());
+					
 					$.ajax({
 						type:"POST",
 						url:"do_searchList.do",

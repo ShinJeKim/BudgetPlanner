@@ -87,7 +87,9 @@
 	                            FINANCE F,
 	                            CATEGORY C
 	                      <include refid="userSearchCondition" />
-	                      AND (F.REG_DT BETWEEN #{start_date} AND #{end_date})
+	                      <![CDATA[    
+	                      AND ((F.REG_DT >= #{start_date}) AND (F.REG_DT < #{end_date}))
+	                      ]]> 
 	                      AND ID=#{id}
                 )T1
 	</select>
