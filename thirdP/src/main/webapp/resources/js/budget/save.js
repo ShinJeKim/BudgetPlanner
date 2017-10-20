@@ -108,6 +108,8 @@ $(document).ready(function(){
 					return;
 				}
 			});
+		}else if($('#workDiv').val() == 'update' && $('#ccate div:first-child').find('.cateSelect').val() == $('#sub_cate').val()){
+			$('#ccate div:first-child').find('.cateSelect').trigger('click');
 		}
         var sub_cate = $(document).find(':input[name=cate]:radio:checked').val();
 		 $('#sub_cate').val(sub_cate);  
