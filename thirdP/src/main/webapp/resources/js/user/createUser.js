@@ -316,6 +316,7 @@
 						  alert("영문,숫자, 특수문자를 혼합하여 입력해주세요");
 						  div_password.removeClass("has-success");
 						  div_password.addClass("has-error");
+						  $("#password").val('');
 						  $("#password").focus();
 						  return false;
 					} else if (num > 0 && eng > 0 && spe > 0){
@@ -356,9 +357,22 @@
 				div_name.addClass("has-error");
 				$("#name").focus();
 				return false;
-			} else {
-				div_name.removeClass("has-error");
-				div_name.addClass("has-success");
+			} else if($("#name").val != ""){
+				
+				var spe = $("#name").val().search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi); //special character
+				
+				if(spe>0){
+					alert("한글 혹은 영어로 입력해 주시기 바랍니다");
+					div_name.removeClass("has-success");
+					div_name.addClass("has-error");
+					$("#name").val('');
+					$("#name").focus();
+					return false;
+				} else {
+					div_name.removeClass("has-error");
+					div_name.addClass("has-success");
+				}
+
 			}
 			
 			//ID 중복체크 검사
