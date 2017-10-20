@@ -53,7 +53,7 @@
 			
 			if(checkUserId != ""){
 				
-				var hangulReg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+				var hangulReg = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
 
 				if(hangulReg.test(checkUserId)){
 					alert("영문과 숫자 조합으로 작성해 주시기 바랍니다.");
@@ -277,7 +277,7 @@
 				$("#id").focus();
 				return false;
 			} else if($("#id").val() != ""){
-				var hangulReg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+				var hangulReg = /[ㄱ-ㅎㅏ-ㅣ가-힣]/;
 
 				if(hangulReg.test(checkUserId)){
 					alert("영문과 숫자 조합으로 작성해 주시기 바랍니다.");
@@ -359,9 +359,9 @@
 				return false;
 			} else if($("#name").val != ""){
 				
-				var spe = $("#name").val().search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi); //special character
-				
-				if(spe>0){
+				var spe = /^[ㄱ-ㅎ가-힣a-zA-Z]+$/;
+
+				if(!$("#name").val().match(spe)){
 					alert("한글 혹은 영어로 입력해 주시기 바랍니다");
 					div_name.removeClass("has-success");
 					div_name.addClass("has-error");
