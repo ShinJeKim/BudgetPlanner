@@ -15,9 +15,10 @@
     background-color: yellow;
     border-radius: 100%;
     border: 2.5px solid;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 #plus>#icon{
-	vertical-align: bottom;
 	display: table-cell;
 	text-align: center;
 }
@@ -89,9 +90,10 @@
 	display: inline-table;
 	margin-top: 5px;
 	box-shadow: 0px 0px 4px 1px steelblue;
+	font-size: 0px;
 }
 .up_del>input{   
-	display: table-cell;
+	display: inline-block;
 	text-align: center;
 	width: 50%;
 	height: 100%;
