@@ -86,6 +86,16 @@ $(document).ready(function(){
 		}
 	});
 	
+	//////////////////////////////////////////////////////
+	/// Alphabet Validation Check
+	//////////////////////////////////////////////////////
+	$(".onlyAlphabetAndHangul").keyup(function(e){
+		if(!(e.keyCode >= 37 && e.keyCode <= 40)){
+			var inputVal = $(this).val();
+			$(this).val($(this).val().replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]/gi,''));
+		}
+	});
+	
 	///////////////////////////////////////////////////
 	/// onlyNumber Validation Check
 	//////////////////////////////////////////////////////
@@ -267,9 +277,22 @@ $(document).ready(function(){
 			div_name.addClass("has-error");
 			$("#name").focus();
 			return false;
-		} else {
-			div_name.removeClass("has-error");
-			div_name.addClass("has-success");
+		} else if($("#name").val != ""){
+			
+			var spe = /^[ㄱ-ㅎ가-힣a-zA-Z]+$/;
+
+			if(!$("#name").val().match(spe)){
+				alert("한글 혹은 영어로 입력해 주시기 바랍니다");
+				div_name.removeClass("has-success");
+				div_name.addClass("has-error");
+				$("#name").val('');
+				$("#name").focus();
+				return false;
+			} else {
+				div_name.removeClass("has-error");
+				div_name.addClass("has-success");
+			}
+
 		}
 		
 		//이메일 검사
