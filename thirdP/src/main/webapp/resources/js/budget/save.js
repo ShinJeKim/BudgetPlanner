@@ -4,7 +4,7 @@ $(document).ready(function(){
 		 lang	: 'ko'
 	});
 	$(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
-	
+	$(document).on("change", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
 	 font_size();
 	 menu_size();
 	 if($('#main_cate').val() == '수입'){
