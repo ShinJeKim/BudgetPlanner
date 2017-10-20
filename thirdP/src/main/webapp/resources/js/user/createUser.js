@@ -33,7 +33,7 @@
 		//ID 중복 체크 버튼
 		$("#checkUserId").on("click", function(){
 			
-			var checkUserId = $("#id").val();
+			var checkUserId = $("#id").val().trim();
 			
 			if(checkUserId == ""){
 				alert("ID를 입력해 주세요");
@@ -41,12 +41,14 @@
 			}
 			
 			if(checkUserId != ""){
-				var hangul = $("#id").val().search(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/); //한글 정규식 체크
-				if(hangul>0){
+				
+				var hangulReg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
+				if(hangulReg.test(checkUserId)){
 					alert("영문과 숫자 조합으로 작성해 주시기 바랍니다.");
 					$("#id").val('');
-					div_id.removeClass("has-success");
-					div_id.addClass("has-error");
+					$("#div_id").removeClass("has-success");
+					$("#div_id").addClass("has-error");
 					$("#id").focus();
 					return false;
 				}
@@ -264,9 +266,11 @@
 				$("#id").focus();
 				return false;
 			} else if($("#id").val() != ""){
-				var hangul = $("#id").val().search(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/); //한글 정규식 체크
-				if(hangul>0){
+				var hangulReg = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+
+				if(hangulReg.test(checkUserId)){
 					alert("영문과 숫자 조합으로 작성해 주시기 바랍니다.");
+					$("#id").val('');
 					div_id.removeClass("has-success");
 					div_id.addClass("has-error");
 					$("#id").focus();
