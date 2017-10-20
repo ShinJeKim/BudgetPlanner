@@ -179,6 +179,8 @@ function menu_size(){
 	$('.body').css("width",$('.bodyCover').width()+18);
 	$(document).find('.input_content>.cates').css('height',$('.input_content').height()*0.5);
 	$(document).find('.input_content>.cates>label').css('height',$('#category_division').height()*0.9*0.5);
+	$('#datepick').css('width',$('#date_division').width()*0.07);
+	$('#datepick').css('height',$('#date_division').height()*0.4);
 	$('.footer').css('height',height*0.07);
 	$('.footer').css('width',$('.bodyCover').width());
 	$('.menu').css('height',$('.footer').height());

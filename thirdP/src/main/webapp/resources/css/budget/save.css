@@ -53,11 +53,9 @@
 		height: 100%;
 	}
 	#datepick{
-		width:2.5rem; 
-		height:2.5rem; 
 		display: inline-block;
 		background-image: url('/apps/resources/files/images/dateSelect.png'); 
-		background-size: contain;
+		background-size: 100% 100%;
 		vertical-align: middle;
 		margin-left: 10px;
 	}
@@ -177,6 +175,8 @@
 #detail{
   border: 2px inset cornsilk;
   box-sizing: border-box;
+  position: relative;
+  top: 3px;
 }
 /*footer 부분*/
 .footer{

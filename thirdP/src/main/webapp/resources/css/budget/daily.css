@@ -15,12 +15,11 @@
     background-color: yellow;
     border-radius: 100%;
     border: 2.5px solid;
-    font-family: sans-serif;
-    font-weight: bold;
 }
 #plus>#icon{
 	display: table-cell;
 	text-align: center;
+	vertical-align: bottom;
 }
 #plus>#icon:hover{
 	cursor: pointer;
