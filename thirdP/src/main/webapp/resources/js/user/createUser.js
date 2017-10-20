@@ -20,6 +20,17 @@
 			}
 		});
 		
+		//////////////////////////////////////////////////////
+		/// Alphabet Validation Check
+		//////////////////////////////////////////////////////
+		$(".onlyAlphabetAndHangul").keyup(function(e){
+			if(!(e.keyCode >= 37 && e.keyCode <= 40)){
+				var inputVal = $(this).val();
+				$(this).val($(this).val().replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z]/gi,''));
+			}
+		});
+		
+		
 		///////////////////////////////////////////////////
 		/// onlyNumber Validation Check
 		//////////////////////////////////////////////////////

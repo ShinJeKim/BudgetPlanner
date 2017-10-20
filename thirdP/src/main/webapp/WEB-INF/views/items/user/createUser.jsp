@@ -31,7 +31,7 @@
 		<div class="form-group" id="div_name">
 			<label for="name">이름</label>
 			<div>
-				<input type="text" class="form-control" id="name" name="name" data-rule-required="true" 
+				<input type="text" class="form-control onlyAlphabetAndHangul" id="name" name="name" data-rule-required="true" 
 				placeholder="이름" maxlength="30">
 			</div>
 		</div>
