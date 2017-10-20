@@ -1,7 +1,5 @@
 @CHARSET "UTF-8";
-#whole_div{
-	height: 100%;
-}
+
 /*검색 조건 및 엑셀 다운  */
 	#search_div{ 
 		height: 10%;
@@ -14,16 +12,17 @@
 	}
 	/*카테고리선택  */
 		#cat_select{
-			display: inline-table;
+			display: table-cell;
 		    width: 55%;
 		    height: 100%;
 		    font-size: 0px;
 		    vertical-align: middle;
 		}
 		#cat_select>div{
-			display: table-cell;
+			display: inline-block;
 			vertical-align: middle;
 			padding-left: 2%;
+			box-sizing: border-box;
 		}
 		#cat_select>div>label{
 			font-size: 3rem;
@@ -45,10 +44,11 @@
 	
 	/*월 선택 및 엑셀다운 버튼  */
 		#month_select{
-			display: inline-table;
+			display: table-cell;
 		    width: 45%;
 		    height: 100%;
 		    font-size: 0px;
+		    vertical-align: middle;
 		}
 		#month_select>label{
 			display: table-cell;
@@ -56,14 +56,14 @@
 		}
 		#month_select>select{
 			font-size: 2.5rem;
-			display: table-cell;
+			display: inline-block;
 			 vertical-align: middle;
 			 width: 20%;
 			 margin-right: 5%;
 		}
 		#month_select>input{
 			font-size: 3rem;
-			display: table-cell;
+			display: inline-block;
 			 vertical-align: middle;
 			 width: 25%;
 			 background-color: #ecdd84;
@@ -75,10 +75,10 @@
 		    box-shadow: inset 0px 0px 20px cornsilk;
 		}
 		#month_select>#do_excelDown{
-			width: 12%;
-		    height: 35%;
+			width: 11%;
 		    vertical-align: middle;
-		    margin-left: 6%;
+		    display: inline-block;
+		    margin-left: 4%;
 		}
 		#month_select>#do_excelDown:hover{
 			cursor: pointer;

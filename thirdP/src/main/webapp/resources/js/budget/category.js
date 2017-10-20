@@ -22,9 +22,17 @@ function do_excelDown(){
 		
 		$('#whole_div').css('width',$('.bodyCover').width()*0.98);
 		$('#whole_div').css('margin-left',$('.bodyCover').width()*0.01);
+		$('#whole_div').css('height',$('.bodyCover').height());
+		$('#search_div').css('height',$('#whole_div')*0.1);
+		$('#table').css('height',$('#whole_div')*0.9);
+		$('#paging_div').css('height',$('#whole_div')*0.1);
 	$(window).resize(function(){
 		$('#whole_div').css('width',$('.bodyCover').width()*0.98);
 		$('#whole_div').css('margin-left',$('.bodyCover').width()*0.01);
+		$('#whole_div').css('height',$('.bodyCover').height());
+		$('#search_div').css('height',$('#whole_div')*0.1);
+		$('#table').css('height',$('#whole_div')*0.9);
+		$('#paging_div').css('height',$('#whole_div')*0.1);
 	});
 		// datePicker
 		 $('#date').datepicker({
